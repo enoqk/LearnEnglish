@@ -15,7 +15,7 @@
 - JavaScript
 
 • Live Demo
-(сложи линка от GitHub Pages тук)
+https://enoqk.github.io/LearnEnglish
 
 • Автор
 Енес Мюмюн Азиз
