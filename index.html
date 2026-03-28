@@ -574,7 +574,7 @@ footer {
   <div style="padding:24px 28px; display:flex; flex-direction:column; gap:16px;">
 
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;">
-      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;">📖 Граматика и езикови ресурси</div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;" data-i18n-src="src_grammar">📖 Граматика и езикови ресурси</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
           <span style="background:var(--light-blue);color:var(--blue);font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;flex-shrink:0;">WEB</span>
@@ -592,7 +592,7 @@ footer {
     </div>
 
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;">
-      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;">💻 Технически ресурси</div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;" data-i18n-src="src_tech">💻 Технически ресурси</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
           <span style="background:var(--light-green);color:var(--green);font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;flex-shrink:0;">DOC</span>
@@ -610,7 +610,7 @@ footer {
     </div>
 
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;">
-      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;">🏫 Учебни материали</div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;" data-i18n-src="src_edu">🏫 Учебни материали</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
           <span style="background:var(--light-amber);color:var(--amber);font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;flex-shrink:0;">BOOK</span>
@@ -685,46 +685,129 @@ const LangModule = (function() {
   // Речник с преводи BG → EN
   const translations = {
     bg: {
+      // Navbar
       nav_home: '🏠 Начало', nav_lessons: '📖 Уроци', nav_quiz: '✏️ Тестове',
       nav_progress: '📊 Прогрес', nav_criteria: '🏆 Критерии',
       nav_about: 'ℹ️ За проекта', nav_sources: '📚 Източници',
+      // Hero
       hero_title: 'Научи английски от A1 до C2',
       hero_sub: 'Уроци по всички нива на CEFR — от абсолютен начинаещ до майстор на езика.',
       hero_btn: 'Избери ниво →',
       stat_levels: 'Нива A1–C2', stat_lessons: 'Урока', stat_questions: 'Въпроса', stat_free: 'Безплатно',
       lv_a1: 'Начинаещ', lv_a2: 'Елементарно', lv_b1: 'Средно',
       lv_b2: 'Средно напреднало', lv_c1: 'Напреднало', lv_c2: 'Майсторско',
-      ph_header: 'Уроци', ph_sub: 'Избери ниво и тема',
-      quiz_header: 'Тест', quiz_sub: 'Избери ниво и провери знанията си',
-      prog_header: 'Твоят прогрес', prog_sub: 'Следи напредъка си по всички нива',
-      prog_read: 'Прочетени урока', prog_correct: 'Верни отговора', prog_pct: 'Точност',
-      lang_btn: '🌐 EN', dark_btn_dark: '🌙 Тъмен режим', dark_btn_light: '☀️ Светъл режим',
-      all_levels: 'Всички', all_levels_quiz: 'Всички нива',
+      lv_a1_desc: 'Азбука, поздрави, числа, семейство, основни изречения.',
+      lv_a2_desc: 'Present Simple, Past Simple, ежедневна лексика и описания.',
+      lv_b1_desc: 'Present Perfect, модални глаголи, условни изречения тип 1.',
+      lv_b2_desc: 'Passive voice, reported speech, условни изречения тип 2 и 3.',
+      lv_c1_desc: 'Inversion, cleft sentences, напреднала лексика и стилистика.',
+      lv_c2_desc: 'Идиоми, нюанси, академично писане, перфектен контрол.',
+      // Lessons page
+      lessons_header: 'Уроци', lessons_sub: 'Избери ниво и тема',
+      all_levels: 'Всички', grammar: 'Граматика', vocab: 'Речник',
       back: '← Назад към уроците',
+      // Quiz page
+      quiz_header: 'Тест', quiz_sub: 'Избери ниво и провери знанията си',
+      all_levels_quiz: 'Всички нива',
+      question_of: 'Въпрос', of: 'от',
       next_q: 'Следващ въпрос →', see_result: 'Виж резултата →', retry: 'Опитай пак →',
       correct_msg: '✓ Правилно!', wrong_prefix: '✗ Грешно. Правилният отговор е: ',
-      grammar: 'Граматика', vocab: 'Речник',
+      result_correct: 'верни', result_excellent: '🏆 Отличен!', result_good: '👍 Много добре!',
+      result_ok: '📚 Продължавай!', result_practice: '💪 Нужна е повече практика!',
+      // Progress page
+      prog_header: 'Твоят прогрес', prog_sub: 'Следи напредъка си по всички нива',
+      prog_read: 'Прочетени урока', prog_correct: 'Верни отговора', prog_accuracy: 'Точност',
+      prog_by_level: 'Напредък по ниво',
+      // Buttons
+      lang_btn: '🌐 EN', dark_btn_dark: '🌙 Тъмен режим', dark_btn_light: '☀️ Светъл режим',
+      // About page
+      about_header: 'За проекта', about_sub: 'Информация за турнира и автора',
+      about_platform: 'Интерактивна образователна платформа за учене на английски език',
+      about_tournament: 'Турнир', about_date: 'Дата', about_category: 'Категория', about_org: 'Организатор',
+      about_tournament_val: 'Провеждане на турнир 2025', about_date_val: '26 април 2025 г.',
+      about_category_val: 'Интернет приложения', about_org_val: 'ВТУ „Св. св. Кирил и Методий"',
+      about_desc_title: 'За турнира',
+      about_desc: 'Проектът е разработен за участие в националния ИТ турнир на Великотърновски университет. Турнирът дава шанс на ученици от 8 до 12 клас да покажат своите умения в областта на информационните технологии.',
+      about_author: '👤 Автор', about_role: 'Разработчик',
+      // Sources page
+      sources_header: 'Цитирани източници', sources_sub: 'Всички материали, използвани при разработката',
+      src_grammar: '📖 Граматика и езикови ресурси', src_tech: '💻 Технически ресурси', src_edu: '🏫 Учебни материали',
+      src_bc_desc: 'Граматически правила и примери за всички нива',
+      src_cam_desc: 'Речникови дефиниции и примерни изречения',
+      src_ox_desc: 'Академична лексика, идиоми и фразеологизми',
+      src_mdn_desc: 'HTML5, CSS3 и JavaScript документация',
+      src_w3_desc: 'Уеб стандарти, примери и упражнения',
+      src_gf_desc: 'Шрифтове Nunito и Playfair Display',
+      src_book_pub: 'Cambridge University Press, 4-то издание',
+      src_cefr_desc: 'Нивата A1–C2 и техните дескриптори',
+      // Criteria page
+      criteria_header: 'Критерии 2025', criteria_sub: 'Оценъчни критерии за категория "Интернет приложения"',
+      criteria_basic: 'Основни критерии', criteria_extra: 'Допълнителни критерии',
+      criteria_points: 'точки', criteria_legend_done: 'Изпълнен', criteria_legend_partial: 'Частично',
+      criteria_legend_pres: 'Зависи от представянето', criteria_legend_no: 'Не е изпълнен',
     },
     en: {
+      // Navbar
       nav_home: '🏠 Home', nav_lessons: '📖 Lessons', nav_quiz: '✏️ Quizzes',
       nav_progress: '📊 Progress', nav_criteria: '🏆 Criteria',
       nav_about: 'ℹ️ About', nav_sources: '📚 Sources',
+      // Hero
       hero_title: 'Learn English from A1 to C2',
       hero_sub: 'Lessons for all CEFR levels — from absolute beginner to master.',
       hero_btn: 'Choose a level →',
       stat_levels: 'Levels A1–C2', stat_lessons: 'Lessons', stat_questions: 'Questions', stat_free: 'Free',
       lv_a1: 'Beginner', lv_a2: 'Elementary', lv_b1: 'Intermediate',
       lv_b2: 'Upper Intermediate', lv_c1: 'Advanced', lv_c2: 'Mastery',
-      ph_header: 'Lessons', ph_sub: 'Choose a level and topic',
-      quiz_header: 'Quiz', quiz_sub: 'Choose a level and test your knowledge',
-      prog_header: 'Your Progress', prog_sub: 'Track your progress across all levels',
-      prog_read: 'Lessons read', prog_correct: 'Correct answers', prog_pct: 'Accuracy',
-      lang_btn: '🌐 BG', dark_btn_dark: '🌙 Dark mode', dark_btn_light: '☀️ Light mode',
-      all_levels: 'All', all_levels_quiz: 'All levels',
+      lv_a1_desc: 'Alphabet, greetings, numbers, family, basic sentences.',
+      lv_a2_desc: 'Present Simple, Past Simple, everyday vocabulary and descriptions.',
+      lv_b1_desc: 'Present Perfect, modal verbs, type 1 conditional sentences.',
+      lv_b2_desc: 'Passive voice, reported speech, type 2 and 3 conditionals.',
+      lv_c1_desc: 'Inversion, cleft sentences, advanced vocabulary and style.',
+      lv_c2_desc: 'Idioms, nuances, academic writing, perfect control.',
+      // Lessons page
+      lessons_header: 'Lessons', lessons_sub: 'Choose a level and topic',
+      all_levels: 'All', grammar: 'Grammar', vocab: 'Vocabulary',
       back: '← Back to lessons',
+      // Quiz page
+      quiz_header: 'Quiz', quiz_sub: 'Choose a level and test your knowledge',
+      all_levels_quiz: 'All levels',
+      question_of: 'Question', of: 'of',
       next_q: 'Next question →', see_result: 'See result →', retry: 'Try again →',
       correct_msg: '✓ Correct!', wrong_prefix: '✗ Wrong. The correct answer is: ',
-      grammar: 'Grammar', vocab: 'Vocabulary',
+      result_correct: 'correct', result_excellent: '🏆 Excellent!', result_good: '👍 Very good!',
+      result_ok: '📚 Keep going!', result_practice: '💪 More practice needed!',
+      // Progress page
+      prog_header: 'Your Progress', prog_sub: 'Track your progress across all levels',
+      prog_read: 'Lessons read', prog_correct: 'Correct answers', prog_accuracy: 'Accuracy',
+      prog_by_level: 'Progress by level',
+      // Buttons
+      lang_btn: '🌐 BG', dark_btn_dark: '🌙 Dark mode', dark_btn_light: '☀️ Light mode',
+      // About page
+      about_header: 'About', about_sub: 'Information about the tournament and author',
+      about_platform: 'Interactive educational platform for learning English',
+      about_tournament: 'Tournament', about_date: 'Date', about_category: 'Category', about_org: 'Organizer',
+      about_tournament_val: 'IT Tournament 2025', about_date_val: 'April 26, 2025',
+      about_category_val: 'Internet Applications', about_org_val: 'VTU "St. Cyril and St. Methodius"',
+      about_desc_title: 'About the tournament',
+      about_desc: 'This project was developed for the national IT tournament at Veliko Tarnovo University. The tournament gives students from grades 8–12 the chance to showcase their IT skills.',
+      about_author: '👤 Author', about_role: 'Developer',
+      // Sources page
+      sources_header: 'Cited Sources', sources_sub: 'All materials used in the development of this project',
+      src_grammar: '📖 Grammar & language resources', src_tech: '💻 Technical resources', src_edu: '🏫 Educational materials',
+      src_bc_desc: 'Grammar rules and examples for all levels',
+      src_cam_desc: 'Dictionary definitions and example sentences',
+      src_ox_desc: 'Academic vocabulary, idioms and phraseology',
+      src_mdn_desc: 'HTML5, CSS3 and JavaScript documentation',
+      src_w3_desc: 'Web standards, examples and exercises',
+      src_gf_desc: 'Nunito and Playfair Display fonts',
+      src_book_pub: 'Cambridge University Press, 4th edition',
+      src_cefr_desc: 'A1–C2 levels and their descriptors',
+      // Criteria page
+      criteria_header: 'Criteria 2025', criteria_sub: 'Evaluation criteria for "Internet Applications" category',
+      criteria_basic: 'Basic criteria', criteria_extra: 'Additional criteria',
+      criteria_points: 'points', criteria_legend_done: 'Fulfilled',
+      criteria_legend_partial: 'Partially fulfilled', criteria_legend_pres: 'Depends on presentation',
+      criteria_legend_no: 'Not fulfilled',
     }
   };
 
@@ -735,59 +818,97 @@ const LangModule = (function() {
   }
 
   function applyLang() {
-    // Navbar
+    // ── Navbar ──
     const navBtns = document.querySelectorAll('.nav-btn');
-    const keys = ['nav_home','nav_lessons','nav_quiz','nav_progress','nav_criteria','nav_about','nav_sources'];
-    navBtns.forEach((btn, i) => { if(keys[i]) btn.textContent = t(keys[i]); });
-
-    // Lang button
+    const navKeys = ['nav_home','nav_lessons','nav_quiz','nav_progress','nav_criteria','nav_about','nav_sources'];
+    navBtns.forEach((btn, i) => { if(navKeys[i]) btn.textContent = t(navKeys[i]); });
     const lb = document.getElementById('lang-btn');
     if(lb) lb.textContent = t('lang_btn');
-
-    // Dark btn
     const db = document.getElementById('dark-btn');
-    if(db) {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      db.textContent = isDark ? t('dark_btn_light') : t('dark_btn_dark');
-    }
+    if(db) { const isDark = document.documentElement.getAttribute('data-theme')==='dark'; db.textContent = isDark ? t('dark_btn_light') : t('dark_btn_dark'); }
 
-    // Hero
+    // ── HOME ──
     const h1 = document.querySelector('.hero h1');
     const hp = document.querySelector('.hero > p');
     const hb = document.querySelector('.hero-btn');
     if(h1) h1.textContent = t('hero_title');
     if(hp) hp.textContent = t('hero_sub');
     if(hb) hb.textContent = t('hero_btn');
-
-    // Stats
-    const statLbls = document.querySelectorAll('.stat-lbl');
-    const statKeys = ['stat_levels','stat_lessons','stat_questions','stat_free'];
-    statLbls.forEach((el,i) => { if(statKeys[i]) el.textContent = t(statKeys[i]); });
-
-    // Level card names
-    const lvCards = document.querySelectorAll('.level-card h3');
-    const lvKeys = ['lv_a1','lv_a2','lv_b1','lv_b2','lv_c1','lv_c2'];
-    lvCards.forEach((el,i) => { if(lvKeys[i]) el.textContent = t(lvKeys[i]); });
-
-    // Page headers
-    const headers = document.querySelectorAll('.page-header');
-    const hKeys = [['ph_header','ph_sub'],['quiz_header','quiz_sub'],['prog_header','prog_sub']];
-    [document.querySelector('#lessons .page-header'),
-     document.querySelector('#quiz .page-header'),
-     document.querySelector('#progress .page-header')].forEach((el,i) => {
-      if(!el) return;
-      const h = el.querySelector('h2'), p = el.querySelector('p');
-      if(h) h.textContent = t(hKeys[i][0]);
-      if(p) p.textContent = t(hKeys[i][1]);
+    document.querySelectorAll('.stat-lbl').forEach((el,i) => {
+      const k = ['stat_levels','stat_lessons','stat_questions','stat_free'][i];
+      if(k) el.textContent = t(k);
+    });
+    const lvCards = document.querySelectorAll('.level-card');
+    const lvKeys = ['a1','a2','b1','b2','c1','c2'];
+    lvCards.forEach((card, i) => {
+      const h3 = card.querySelector('h3'), p = card.querySelector('p');
+      if(h3) h3.textContent = t('lv_'+lvKeys[i]);
+      if(p) p.textContent = t('lv_'+lvKeys[i]+'_desc');
     });
 
-    // Progress labels
-    const progLbls = document.querySelectorAll('.prog-lbl');
-    const pKeys = ['prog_read','prog_correct','prog_pct'];
-    progLbls.forEach((el,i) => { if(pKeys[i]) el.textContent = t(pKeys[i]); });
-
-    // Re-render dynamic content
+    // ── LESSONS ──
+    const lesHeader = document.querySelector('#lessons .page-header h2');
+    const lesSub = document.querySelector('#lessons .page-header p');
+    if(lesHeader) lesHeader.textContent = t('lessons_header');
+    if(lesSub) lesSub.textContent = t('lessons_sub');
+    const backBtn = document.querySelector('.back-btn');
+    if(backBtn) backBtn.textContent = t('back');
     NavModule.showLessonList();
+
+    // ── QUIZ ──
+    const qHeader = document.querySelector('#quiz .page-header h2');
+    const qSub = document.querySelector('#quiz .page-header p');
+    if(qHeader) qHeader.textContent = t('quiz_header');
+    if(qSub) qSub.textContent = t('quiz_sub');
+    QuizModule.buildTabs();
+
+    // ── PROGRESS ──
+    const prHeader = document.querySelector('#progress .page-header h2');
+    const prSub = document.querySelector('#progress .page-header p');
+    if(prHeader) prHeader.textContent = t('prog_header');
+    if(prSub) prSub.textContent = t('prog_sub');
+    document.querySelectorAll('.prog-lbl').forEach((el,i) => {
+      const k = ['prog_read','prog_correct','prog_accuracy'][i];
+      if(k) el.textContent = t(k);
+    });
+    const pbTitle = document.querySelector('#progress .prog-section h3');
+    if(pbTitle) pbTitle.textContent = t('prog_by_level');
+
+    // ── ABOUT ──
+    const abHeader = document.querySelector('#about .page-header h2');
+    const abSub = document.querySelector('#about .page-header p');
+    if(abHeader) abHeader.textContent = t('about_header');
+    if(abSub) abSub.textContent = t('about_sub');
+    const abPlatform = document.querySelector('.about-header-text p');
+    if(abPlatform) abPlatform.textContent = t('about_platform');
+    const infoLabels = document.querySelectorAll('.about-info-card .info-label');
+    const infoVals = document.querySelectorAll('.about-info-card .info-value');
+    const infoLabelKeys = ['about_tournament','about_date','about_category','about_org'];
+    const infoValKeys = ['about_tournament_val','about_date_val','about_category_val','about_org_val'];
+    infoLabels.forEach((el,i) => { if(infoLabelKeys[i]) el.textContent = t(infoLabelKeys[i]); });
+    infoVals.forEach((el,i) => { if(infoValKeys[i]) el.textContent = t(infoValKeys[i]); });
+    const compTitle = document.querySelector('.comp-title');
+    if(compTitle) compTitle.textContent = t('about_desc_title');
+    const compDesc = document.querySelector('.about-competition p');
+    if(compDesc) compDesc.textContent = t('about_desc');
+    const teamTitle = document.querySelector('.about-team h3');
+    if(teamTitle) teamTitle.textContent = t('about_author');
+    const teamRole = document.querySelector('.team-role');
+    if(teamRole) teamRole.textContent = t('about_role');
+
+    // ── SOURCES ──
+    const srcHeader = document.querySelector('#sources .page-header h2');
+    const srcSub = document.querySelector('#sources .page-header p');
+    if(srcHeader) srcHeader.textContent = t('sources_header');
+    if(srcSub) srcSub.textContent = t('sources_sub');
+    const srcCats = document.querySelectorAll('#sources [data-i18n-src]');
+    srcCats.forEach(el => { const k = el.getAttribute('data-i18n-src'); if(k) el.textContent = t(k); });
+
+    // ── CRITERIA ──
+    const crHeader = document.querySelector('#criteria .page-header h2');
+    const crSub = document.querySelector('#criteria .page-header p');
+    if(crHeader) crHeader.textContent = t('criteria_header');
+    if(crSub) crSub.textContent = t('criteria_sub');
   }
 
   function toggle() {
@@ -1042,10 +1163,10 @@ const QuizModule = (function() {
       if(currentQ >= filteredQ.length) {
         StateModule.addQuizResult(activeLevel, score, filteredQ.length);
         const pct = Math.round(score/filteredQ.length*100);
-        const msg = pct>=90?'🏆 Отличен!':pct>=70?'👍 Много добре!':pct>=50?'📚 Продължавай!':'💪 Нужна е повече практика!';
+        const msg = pct>=90?t('result_excellent'):pct>=70?t('result_good'):pct>=50?t('result_ok'):t('result_practice');
         body.innerHTML=`<div class="quiz-result">
           <div class="result-score">${score}</div>
-          <div class="result-total">от ${filteredQ.length} верни</div>
+          <div class="result-total">${t('of')} ${filteredQ.length} ${t('result_correct')}</div>
           <div class="result-msg">${msg}</div>
           <button class="result-btn" onclick="QuizModule.start('${activeLevel}',null)">${t('retry')}</button>
         </div>`;
@@ -1056,7 +1177,7 @@ const QuizModule = (function() {
       const pct = Math.round(currentQ/filteredQ.length*100);
       body.innerHTML=`
         <div class="quiz-meta">
-          <span class="quiz-progress-text">Въпрос ${currentQ+1} от ${filteredQ.length}</span>
+          <span class="quiz-progress-text">${t('question_of')} ${currentQ+1} ${t('of')} ${filteredQ.length}</span>
           <div style="display:flex;gap:6px">
             <span class="lesson-badge badge-${q.level.toLowerCase()}">${q.level}</span>
             <span class="quiz-topic">${q.topic}</span>
