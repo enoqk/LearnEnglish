@@ -279,7 +279,7 @@ footer {
     <div class="stats-row">
       <div class="stat-item"><div class="stat-num">6</div><div class="stat-lbl">Нива A1–C2</div></div>
       <div class="stat-item"><div class="stat-num">36</div><div class="stat-lbl">Урока</div></div>
-      <div class="stat-item"><div class="stat-num">60+</div><div class="stat-lbl">Въпроса</div></div>
+      <div class="stat-item"><div class="stat-num">90+</div><div class="stat-lbl">Въпроса</div></div>
       <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Безплатно</div></div>
     </div>
   </div>
@@ -308,9 +308,17 @@ footer {
 
 <!-- ═══ QUIZ ═══ -->
 <div id="quiz" class="page">
-  <div class="page-header"><h2>Тест</h2><p>Избери ниво и провери знанията си</p></div>
-  <div class="quiz-level-filter" id="quiz-level-tabs"></div>
-  <div class="quiz-container"><div class="quiz-card"><div id="quiz-body"></div></div></div>
+  <!-- LIST VIEW -->
+  <div id="quiz-list-view">
+    <div class="page-header"><h2 id="quiz-header-title">Тестове</h2><p id="quiz-header-sub">Избери тест и провери знанията си</p></div>
+    <div class="quiz-level-filter" id="quiz-level-tabs"></div>
+    <div class="lessons-list" id="quiz-list"></div>
+  </div>
+  <!-- DETAIL VIEW -->
+  <div id="quiz-detail-view" style="display:none; padding:24px 28px;">
+    <button class="back-btn" id="quiz-back-btn" onclick="QuizModule.showList()">← Назад към тестовете</button>
+    <div class="quiz-container" style="padding:0"><div class="quiz-card"><div id="quiz-body"></div></div></div>
+  </div>
 </div>
 
 <!-- ═══ PROGRESS ═══ -->
@@ -369,7 +377,7 @@ footer {
           <h3>👤 Автор</h3>
           <div class="team-cards">
             <div class="team-card">
-              <div class="team-avatar">ЕМА</div>
+              <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD//gA8Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2ODApLCBxdWFsaXR5ID0gMTAwCv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIASwBLAMBEQACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AP8AP/oAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgDr/AAj4I8X/ABB8R6X4R8BeGfEPjPxVrlz9m0jw54X0i+13XdTuSflis9I0uO6vpZOckRxvgAvkKCQEurZN3trrulfpZ21fWyWltdkfrr8IP+CS9/pSWmvfta/Ee2+GccyiYfBv4cHSvHfxkuME5tPEV4JP+EH+GxbIG7VtT1vWhkj/AIR0EZX2aGV6p45uPl17u7b9b2b8meFiM7jqsBab2Td7LdaJJN9LXtoneLvp+mnw98NfA34IaPd+HPgp+z98L/DmjajbHT9d1b4geHtH+MvjrxrpV2c3ll4u8ReO9PvFXTb/AJH9k+F9L0LQxxgYwK9Sh/seqSu/Lfzb6/nfqeTX+u4zTMPVJbXe9umvV/8AAPnP4s/sH/sh/HE3V94bstT/AGVfH90T/wATLwfa3njH4K6rcsVLnVfA95ft4q8JOVG1G8FajLoaZLL4d3VxVcFg8S04vla6rZP0/RLfXudNHMcdhrKd5Jd3Z2bu/eSbvZNe8pJLptb8if2jv2Dv2jP2abZvEfirwva+L/hhNdNBpfxi+GN3/wAJn8NLwZO1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U7tJ633Xn18Cp3cVZvW3R3e8fu218n0Xqf7Zvhqz8V+Cfh18Y/DU1tq2maZB/wAIHrWp2N211bXFhd3Wp+IPCF4DuAjDFvEdhI20szW8QOAua6Mbunfuvm3o/k9vUwwGnuyumlonfSWsWrW0b0bemsVfpb83K4z1woAKACgAoA6jwd4U1fxz4r8N+DtChN1rPinWtN0XTYV6td6ndpaRZyQMB2DN/sjjJxQB+t3xh+NvgX4G6TaeE9HNvr2p+G9F0nwx4X8Pw3ZIGl6FpI0a01nWSAWsjfm1GqbQGckjALHn0qtX6q+WO/r8v+ArLXZefgUMO8b7zva+smrru73er6tX7N23Pyc8aeOPEnj/AF678R+KL99R1K7JwQSttawKfltbO2LYs7NMnZGoAxzySxPmnuxpqOi2evn0s277LpdJa313OMoKCgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgAoAKACgD1Pwf8AE/xP4O0HxZ4StZoNT8I+NdMbSvEfhjVU+2aTcNHILrT9WtUJzYa5o99BFf6ZqlkRLDKvJZSUY9o9F0adlZd0rWsrNuSTTtZ6eZi6KbvZKW6kld3T00b102vZprdqx5ZQbBQAUAFABQB6Z8PPiT4g+GWp6jrfhRrC18Q3WjXukafrs9p9o1Hw/Fqtm9lqN94fchBp+tNaSS2C6kFLxxyThDmRnCflo++5hWpKdubZXbW17vS7vsm3qk3HW3Y4G8vLvULia+v7me7u7udpru6nuDcXFxOTkyO7EuW54LE4yADgKtM3KNABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQAUAFABQB//9k=" alt="Енес Мюмюн Азиз" style="width:72px;height:72px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block;border:2px solid var(--border);">
               <div class="team-name">Енес Мюмюн Азиз</div>
               <div class="team-role">Разработчик</div>
             </div>
@@ -384,7 +392,7 @@ footer {
             <div style="font-size:12px; color:var(--muted); margin-top:2px;">Урока</div>
           </div>
           <div style="padding:14px; background:var(--bg); border-radius:var(--radius-sm); border:1px solid var(--border);">
-            <div style="font-size:22px; font-weight:700; color:#3b6d11;">60+</div>
+            <div style="font-size:22px; font-weight:700; color:#3b6d11;">90+</div>
             <div style="font-size:12px; color:var(--muted); margin-top:2px;">Въпроса</div>
           </div>
           <div style="padding:14px; background:var(--bg); border-radius:var(--radius-sm); border:1px solid var(--border);">
@@ -707,7 +715,8 @@ const LangModule = (function() {
       all_levels: 'Всички', grammar: 'Граматика', vocab: 'Речник',
       back: '← Назад към уроците',
       // Quiz page
-      quiz_header: 'Тест', quiz_sub: 'Избери ниво и провери знанията си',
+      quiz_header: 'Тестове', quiz_sub: 'Избери тест и провери знанията си',
+      quiz_back: '← Назад към тестовете', quiz_start: 'Започни теста',
       all_levels_quiz: 'Всички нива',
       question_of: 'Въпрос', of: 'от',
       next_q: 'Следващ въпрос →', see_result: 'Виж резултата →', retry: 'Опитай пак →',
@@ -769,7 +778,8 @@ const LangModule = (function() {
       all_levels: 'All', grammar: 'Grammar', vocab: 'Vocabulary',
       back: '← Back to lessons',
       // Quiz page
-      quiz_header: 'Quiz', quiz_sub: 'Choose a level and test your knowledge',
+      quiz_header: 'Quizzes', quiz_sub: 'Choose a quiz and test your knowledge',
+      quiz_back: '← Back to quizzes', quiz_start: 'Start quiz',
       all_levels_quiz: 'All levels',
       question_of: 'Question', of: 'of',
       next_q: 'Next question →', see_result: 'See result →', retry: 'Try again →',
@@ -856,11 +866,15 @@ const LangModule = (function() {
     NavModule.showLessonList();
 
     // ── QUIZ ──
-    const qHeader = document.querySelector('#quiz .page-header h2');
-    const qSub = document.querySelector('#quiz .page-header p');
-    if(qHeader) qHeader.textContent = t('quiz_header');
-    if(qSub) qSub.textContent = t('quiz_sub');
-    QuizModule.buildTabs();
+    const qhTitle = document.getElementById('quiz-header-title');
+    const qhSub = document.getElementById('quiz-header-sub');
+    if(qhTitle) qhTitle.textContent = t('quiz_header');
+    if(qhSub) qhSub.textContent = t('quiz_sub');
+    const qBackBtn = document.getElementById('quiz-back-btn');
+    if(qBackBtn) qBackBtn.textContent = t('quiz_back');
+    if(document.getElementById('quiz-list-view') && document.getElementById('quiz-list-view').style.display !== 'none') {
+      QuizModule.showList();
+    }
 
     // ── PROGRESS ──
     const prHeader = document.querySelector('#progress .page-header h2');
@@ -1053,7 +1067,7 @@ const NavModule = (function() {
       if(!page) throw new Error(`Страница "${id}" не е намерена.`);
       page.classList.add('active');
       if(btn) btn.classList.add('active');
-      if(id==='quiz') { QuizModule.buildTabs(); QuizModule.start('all',null); }
+      if(id==='quiz') { QuizModule.showList(); }
       if(id==='progress') updateProgress();
       if(id==='lessons') showLessonList();
     } catch(e) {
@@ -1079,11 +1093,15 @@ const NavModule = (function() {
     document.querySelectorAll('#level-tabs .tab-btn').forEach(b=>b.classList.remove('active'));
     if(btn) btn.classList.add('active');
     const filtered = lv==='all' ? lessons : lessons.filter(l=>l.level===lv);
+    const isEn = LangModule.current() === 'en';
     const t = LangModule.t;
     document.getElementById('lessons-list').innerHTML = filtered.map((l,i)=>`
       <div class="lesson-item" onclick="NavModule.openLesson(${l.id})">
         <div class="lesson-num">${i+1}</div>
-        <div class="lesson-info"><h4>${l.title}</h4><p>${l.desc}</p></div>
+        <div class="lesson-info">
+          <h4>${isEn && l.title_en ? l.title_en : l.title}</h4>
+          <p>${isEn && l.desc_en ? l.desc_en : l.desc}</p>
+        </div>
         <div class="lesson-meta">
           <span class="lesson-badge badge-${l.level.toLowerCase()}">${l.level}</span>
           <span style="font-size:11px;color:var(--muted)">${l.cat==='grammar'?t('grammar'):t('vocab')}</span>
@@ -1100,7 +1118,8 @@ const NavModule = (function() {
       document.getElementById('lesson-detail-view').classList.add('active');
       const backBtn = document.querySelector('.back-btn');
       if(backBtn) backBtn.textContent = LangModule.t('back');
-      document.getElementById('lesson-content-body').innerHTML = lesson.content;
+      const isEn = LangModule.current() === 'en';
+      document.getElementById('lesson-content-body').innerHTML = isEn && lesson.content_en ? lesson.content_en : lesson.content;
     } catch(e) {
       console.error('NavModule.openLesson:', e.message);
     }
@@ -1135,24 +1154,146 @@ const NavModule = (function() {
 
 /**
  * QuizModule — управлява теста
+ * Поддържа списък с тестове и детайлен изглед (като уроци)
  */
 const QuizModule = (function() {
-  let currentQ=0, score=0, answered=false, activeLevel='all', filteredQ=[];
+  let currentQ=0, score=0, answered=false, activeLevel='all', filteredQ=[], activeQuizId=null;
+
+  // ── Named quiz sets ──
+  const quizSets = [
+    // A1
+    {id:'a1-tobe',    level:'A1', topic:'To Be',         title:'To Be — A1',          title_en:'To Be — A1',          desc:'am / is / are',                        desc_en:'am / is / are'},
+    {id:'a1-basics',  level:'A1', topic:'Basics',        title:'Основи — A1',         title_en:'Basics — A1',         desc:'Числа, цветове, животни, въпроси',     desc_en:'Numbers, colours, animals, questions'},
+    {id:'a1-vocab',   level:'A1', topic:'Vocabulary',    title:'Речник — A1',         title_en:'Vocabulary — A1',     desc:'Семейство, поздрави, притежание',      desc_en:'Family, greetings, possessives'},
+    // A2
+    {id:'a2-tenses',  level:'A2', topic:'Tenses',        title:'Времена — A2',        title_en:'Tenses — A2',         desc:'Present Simple, Past Simple, Continuous', desc_en:'Present Simple, Past Simple, Continuous'},
+    {id:'a2-vocab',   level:'A2', topic:'Vocabulary',    title:'Речник — A2',         title_en:'Vocabulary — A2',     desc:'Храна, работа, сезони, дни',           desc_en:'Food, jobs, seasons, days'},
+    {id:'a2-future',  level:'A2', topic:'Future',        title:'Бъдеще — A2',         title_en:'Future — A2',         desc:'will / going to',                      desc_en:'will / going to'},
+    // B1
+    {id:'b1-perf',    level:'B1', topic:'Present Perfect', title:'Present Perfect — B1', title_en:'Present Perfect — B1', desc:'have/has + 3rd form',                desc_en:'have/has + 3rd form'},
+    {id:"b1-modals",  level:"B1", topic:"Modal Verbs",   title:"Модални глаголи — B1", title_en:"Modal Verbs — B1",   desc:"should, must, mustn't, have to",      desc_en:"should, must, mustn't, have to"},
+    {id:'b1-mixed',   level:'B1', topic:'Mixed',         title:'Смесен тест — B1',    title_en:'Mixed Quiz — B1',     desc:'Conditionals, past continuous, travel', desc_en:'Conditionals, past continuous, travel'},
+    // B2
+    {id:'b2-passive', level:'B2', topic:'Passive Voice', title:'Пасив — B2',          title_en:'Passive Voice — B2',  desc:'Пасивни конструкции',                  desc_en:'Passive constructions'},
+    {id:'b2-reported',level:'B2', topic:'Reported Speech', title:'Indirect Speech — B2', title_en:'Reported Speech — B2', desc:'Преразказна реч',                  desc_en:'Reported speech'},
+    {id:'b2-vocab',   level:'B2', topic:'Vocabulary',    title:'Речник & Идиоми — B2', title_en:'Vocabulary & Idioms — B2', desc:'Академична лексика, идиоми',    desc_en:'Academic vocabulary, idioms'},
+    // C1
+    {id:'c1-advanced',level:'C1', topic:'Advanced Grammar', title:'Напреднала граматика — C1', title_en:'Advanced Grammar — C1', desc:'Inversion, cleft sentences, subjunctive', desc_en:'Inversion, cleft sentences, subjunctive'},
+    {id:'c1-vocab',   level:'C1', topic:'Vocabulary',    title:'Речник & Идиоми — C1', title_en:'Vocabulary & Idioms — C1', desc:'Дискурс маркери, идиоми C1',    desc_en:'Discourse markers, idioms C1'},
+    // C2
+    {id:'c2-master',  level:'C2', topic:'Mastery',       title:'Майсторски тест — C2', title_en:'Mastery Quiz — C2',  desc:'Mixed conditionals, nuance, rhetoric', desc_en:'Mixed conditionals, nuance, rhetoric'},
+    {id:'c2-vocab',   level:'C2', topic:'Vocabulary',    title:'Идиоми & Реторика — C2', title_en:'Idioms & Rhetoric — C2', desc:'Идиоми C2, реторика, елипсис',  desc_en:'Idioms C2, rhetoric, ellipsis'},
+    // Special
+    {id:'all-vocab',  level:'ALL', topic:'Vocabulary',   title:'Само речник — всички нива', title_en:'Vocabulary only — all levels', desc:'Всички речникови въпроси',  desc_en:'All vocabulary questions'},
+    {id:'all-mixed',  level:'ALL', topic:'Mixed',        title:'Голям смесен тест',   title_en:'Big mixed quiz',      desc:'Всички въпроси от всички нива',        desc_en:'All questions from all levels'},
+  ];
+
+  // Map each question to a quiz set id
+  const topicToSet = {
+    'To Be':          'a1-tobe',
+    'Nouns':          'a1-basics',
+    'There is/are':   'a1-basics',
+    'Numbers':        'a1-basics',
+    'Colours':        'a1-vocab',
+    'Animals':        'a1-basics',
+    'Questions':      'a1-basics',
+    'Greetings':      'a1-vocab',
+    'Family':         'a1-vocab',
+    'Possessives':    'a1-vocab',
+    'Present Simple': 'a2-tenses',
+    'Past Simple':    'a2-tenses',
+    'Present Continuous': 'a2-tenses',
+    'Food':           'a2-vocab',
+    'Jobs':           'a2-vocab',
+    'Seasons':        'a2-vocab',
+    'Days':           'a2-vocab',
+    'Future':         'a2-future',
+    'Present Perfect':'b1-perf',
+    'Comparatives':   'b1-modals',
+    'Modal Verbs':    'b1-modals',
+    'Conditional 1':  'b1-mixed',
+    'Past Continuous':'b1-mixed',
+    'Travel':         'b1-mixed',
+    'Passive Voice':  'b2-passive',
+    'Reported Speech':'b2-reported',
+    'Conditional 2':  'b2-vocab',
+    'Conditional 3':  'b2-vocab',
+    'Academic Vocab': 'b2-vocab',
+    'Idioms':         'b2-vocab',
+    'Inversion':      'c1-advanced',
+    'Cleft Sentences':'c1-advanced',
+    'Subjunctive':    'c1-advanced',
+    'Discourse Markers':'c1-vocab',
+    'Idioms C1':      'c1-vocab',
+    'Mixed Conditionals':'c2-master',
+    'Nuance':         'c2-master',
+    'Idioms C2':      'c2-vocab',
+    'Rhetoric':       'c2-vocab',
+    'Ellipsis':       'c2-vocab',
+  };
+
+  const vocabTopics = new Set(['Greetings','Family','Possessives','Colours','Animals','Food','Jobs','Seasons','Days','Travel','Idioms','Academic Vocab','Idioms C1','Discourse Markers','Idioms C2','Rhetoric','Nuance','Ellipsis','Numbers','Questions','Nouns']);
+
+  function getQuestionsForSet(setId) {
+    if(setId === 'all-mixed') return [...questions];
+    if(setId === 'all-vocab') return questions.filter(q => vocabTopics.has(q.topic));
+    return questions.filter(q => topicToSet[q.topic] === setId);
+  }
 
   function buildTabs() {
     const levels = ['A1','A2','B1','B2','C1','C2'];
     document.getElementById('quiz-level-tabs').innerHTML =
-      `<button class="tab-btn active" onclick="QuizModule.start('all',this)">${LangModule.t('all_levels_quiz')}</button>` +
-      levels.map(l=>`<button class="tab-btn" onclick="QuizModule.start('${l}',this)">${l}</button>`).join('');
+      `<button class="tab-btn active" onclick="QuizModule.filterList('all',this)">${LangModule.t('all_levels_quiz')}</button>` +
+      levels.map(l=>`<button class="tab-btn" onclick="QuizModule.filterList('${l}',this)">${l}</button>`).join('') +
+      `<button class="tab-btn" onclick="QuizModule.filterList('ALL',this)">★ Special</button>`;
   }
 
-  function start(lv, btn) {
+  function filterList(lv, btn) {
     if(btn){ document.querySelectorAll('#quiz-level-tabs .tab-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
-    activeLevel=lv;
-    filteredQ = lv==='all' ? [...questions] : questions.filter(q=>q.level===lv);
-    currentQ=0; score=0; answered=false;
+    activeLevel = lv;
+    const isEn = LangModule.current() === 'en';
+    const filtered = lv === 'all' ? quizSets : quizSets.filter(s => s.level === lv);
+    document.getElementById('quiz-list').innerHTML = filtered.map((s, i) => {
+      const qCount = getQuestionsForSet(s.id).length;
+      const title = isEn && s.title_en ? s.title_en : s.title;
+      const desc  = isEn && s.desc_en  ? s.desc_en  : s.desc;
+      const lvClass = s.level === 'ALL' ? 'badge-c2' : 'badge-' + s.level.toLowerCase();
+      const lvLabel = s.level === 'ALL' ? '★' : s.level;
+      return `<div class="lesson-item" onclick="QuizModule.startSet('${s.id}')">
+        <div class="lesson-num">${i+1}</div>
+        <div class="lesson-info">
+          <h4>${title}</h4>
+          <p>${desc}</p>
+        </div>
+        <div class="lesson-meta">
+          <span class="lesson-badge ${lvClass}">${lvLabel}</span>
+          <span style="font-size:11px;color:var(--muted)">${qCount} въпроса</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function showList() {
+    document.getElementById('quiz-list-view').style.display = 'block';
+    document.getElementById('quiz-detail-view').style.display = 'none';
+    buildTabs();
+    filterList('all', document.querySelector('#quiz-level-tabs .tab-btn'));
+  }
+
+  function startSet(setId) {
+    activeQuizId = setId;
+    filteredQ = getQuestionsForSet(setId);
+    currentQ = 0; score = 0; answered = false;
+    document.getElementById('quiz-list-view').style.display = 'none';
+    document.getElementById('quiz-detail-view').style.display = 'block';
+    const isEn = LangModule.current() === 'en';
+    const backBtn = document.getElementById('quiz-back-btn');
+    if(backBtn) backBtn.textContent = LangModule.t('quiz_back');
     render();
   }
+
+  // Keep old start() for compatibility (called from showPage)
+  function start(lv, btn) { showList(); }
 
   function render() {
     try {
@@ -1168,13 +1309,18 @@ const QuizModule = (function() {
           <div class="result-score">${score}</div>
           <div class="result-total">${t('of')} ${filteredQ.length} ${t('result_correct')}</div>
           <div class="result-msg">${msg}</div>
-          <button class="result-btn" onclick="QuizModule.start('${activeLevel}',null)">${t('retry')}</button>
+          <button class="result-btn" onclick="QuizModule.startSet('${activeQuizId}')">${t('retry')}</button>
+          <button class="result-btn" style="background:var(--navy);margin-top:10px;" onclick="QuizModule.showList()">← ${t('quiz_back').replace('← ','')}</button>
         </div>`;
         return;
       }
 
       const q = filteredQ[currentQ];
       const pct = Math.round(currentQ/filteredQ.length*100);
+      const isEn = LangModule.current() === 'en';
+      const flipped = isEn && q.flip;
+      const qText = flipped ? q.q_flip : (isEn && q.q_en ? q.q_en : q.q);
+      const qOpts = flipped ? q.opts_flip : (isEn && q.opts_en ? q.opts_en : q.opts);
       body.innerHTML=`
         <div class="quiz-meta">
           <span class="quiz-progress-text">${t('question_of')} ${currentQ+1} ${t('of')} ${filteredQ.length}</span>
@@ -1184,8 +1330,8 @@ const QuizModule = (function() {
           </div>
         </div>
         <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
-        <div class="quiz-question">${q.q}</div>
-        <div class="quiz-options">${q.opts.map((o,i)=>`<button class="quiz-option" onclick="QuizModule.selectAnswer(${i})">${o}</button>`).join('')}</div>
+        <div class="quiz-question">${qText}</div>
+        <div class="quiz-options">${qOpts.map((o,i)=>`<button class="quiz-option" onclick="QuizModule.selectAnswer(${i})">${o}</button>`).join('')}</div>
         <div class="quiz-feedback" id="qfb"></div>
         <button class="quiz-next-btn" id="qnext" onclick="QuizModule.next()">
           ${currentQ+1<filteredQ.length?t('next_q'):t('see_result')}
@@ -1208,15 +1354,19 @@ const QuizModule = (function() {
       if(!fb) throw new Error('Feedback елементът липсва.');
       opts.forEach(o=>o.disabled=true);
       const t = LangModule.t;
-      if(idx===q.ans) {
+      const isEn = LangModule.current() === 'en';
+      const flipped = isEn && q.flip;
+      const correctIdx = flipped && q.ans_flip !== undefined ? q.ans_flip : q.ans;
+      const correctLabel = flipped ? q.opts_flip[correctIdx] : q.opts[q.ans];
+      if(idx===correctIdx) {
         score++;
         opts[idx].classList.add('correct');
         fb.textContent = t('correct_msg');
         fb.className = 'quiz-feedback show correct';
       } else {
         opts[idx].classList.add('wrong');
-        opts[q.ans].classList.add('correct');
-        fb.textContent = t('wrong_prefix') + q.opts[q.ans];
+        opts[correctIdx].classList.add('correct');
+        fb.textContent = t('wrong_prefix') + correctLabel;
         fb.className = 'quiz-feedback show wrong';
       }
       const nextBtn = document.getElementById('qnext');
@@ -1232,13 +1382,14 @@ const QuizModule = (function() {
     render();
   }
 
-  return { buildTabs, start, selectAnswer, next };
+  return { buildTabs, filterList, showList, startSet, start, selectAnswer, next };
 })();
 
 // ══════════════════════════════════════════
 // ГЛОБАЛНИ ФУНКЦИИ (извикват се от HTML)
 // ══════════════════════════════════════════
 function showPage(id, btn) { NavModule.showPage(id, btn); }
+function showLessonList() { NavModule.showLessonList(); }
 function goToLevel(lv) { NavModule.goToLevel(lv); }
 function toggleDark() { ThemeModule.toggle(); }
 function toggleLang() { LangModule.toggle(); }
@@ -1246,78 +1397,529 @@ function toggleLang() { LangModule.toggle(); }
 // ══ DATA ══
 // Масив с всички уроци, организирани по ниво (A1–C2) и категория (grammar/vocab)
 const lessons = [
-  {id:1,level:'A1',cat:'grammar',title:'Глаголът "to be"',desc:'am / is / are — основата на английски',content:`<h3>Глаголът "to be" (съм)</h3><p>Най-важният глагол в английски. Използва се за описание на хора и неща.</p><div class="rule-box"><div class="rule-title">Форми</div><p>I <em>am</em> &nbsp;|&nbsp; He/She/It <em>is</em> &nbsp;|&nbsp; You/We/They <em>are</em></p></div><table class="example-table"><thead><tr><th>Утвърдително</th><th>Отрицателно</th><th>Въпрос</th></tr></thead><tbody><tr><td><em>I am</em> happy.</td><td><em>I am not</em> sad.</td><td><em>Am I</em> late?</td></tr><tr><td><em>She is</em> a teacher.</td><td><em>She isn't</em> old.</td><td><em>Is she</em> here?</td></tr><tr><td><em>They are</em> friends.</td><td><em>They aren't</em> busy.</td><td><em>Are they</em> ready?</td></tr></tbody></table>`},
-  {id:2,level:'A1',cat:'vocab',title:'Поздрави и запознанства',desc:'Hello, my name is...',content:`<h3>Поздрави (Greetings)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>Hello / Hi</em></td><td>Здравей</td></tr><tr><td><em>Good morning</em></td><td>Добро утро</td></tr><tr><td><em>Good afternoon</em></td><td>Добър ден</td></tr><tr><td><em>Good evening</em></td><td>Добър вечер</td></tr><tr><td><em>Goodbye / Bye</em></td><td>Довиждане</td></tr><tr><td><em>How are you?</em></td><td>Как си?</td></tr><tr><td><em>I'm fine, thank you.</em></td><td>Добре съм, благодаря.</td></tr></tbody></table><div class="rule-box"><div class="rule-title">Запознанство</div><p><em>My name is ...</em> — Казвам се ... &nbsp;|&nbsp; <em>Nice to meet you!</em> — Приятно ми е!</p></div>`},
-  {id:3,level:'A1',cat:'vocab',title:'Числа 1–100',desc:'Numbers — основни числа',content:`<h3>Числа (Numbers)</h3><table class="example-table"><thead><tr><th>Число</th><th>Английски</th><th>Число</th><th>Английски</th></tr></thead><tbody><tr><td>1</td><td><em>one</em></td><td>11</td><td><em>eleven</em></td></tr><tr><td>2</td><td><em>two</em></td><td>12</td><td><em>twelve</em></td></tr><tr><td>3</td><td><em>three</em></td><td>13</td><td><em>thirteen</em></td></tr><tr><td>5</td><td><em>five</em></td><td>20</td><td><em>twenty</em></td></tr><tr><td>10</td><td><em>ten</em></td><td>100</td><td><em>one hundred</em></td></tr></tbody></table><div class="rule-box"><div class="rule-title">Числа 21–99</div><p><em>twenty-one</em> (21), <em>thirty-five</em> (35), <em>ninety-nine</em> (99)</p></div>`},
-  {id:4,level:'A1',cat:'vocab',title:'Цветове',desc:'Colours',content:`<h3>Цветове (Colours)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>red</em></td><td>червен</td></tr><tr><td><em>blue</em></td><td>син</td></tr><tr><td><em>green</em></td><td>зелен</td></tr><tr><td><em>yellow</em></td><td>жълт</td></tr><tr><td><em>black</em></td><td>черен</td></tr><tr><td><em>white</em></td><td>бял</td></tr><tr><td><em>orange</em></td><td>оранжев</td></tr><tr><td><em>purple</em></td><td>лилав</td></tr></tbody></table>`},
-  {id:5,level:'A1',cat:'grammar',title:'Притежателни местоимения',desc:'My, your, his, her, our, their',content:`<h3>Притежателни местоимения</h3><div class="rule-box"><div class="rule-title">Форми</div><p>I → <em>my</em> &nbsp;|&nbsp; You → <em>your</em> &nbsp;|&nbsp; He → <em>his</em> &nbsp;|&nbsp; She → <em>her</em> &nbsp;|&nbsp; We → <em>our</em> &nbsp;|&nbsp; They → <em>their</em></p></div><table class="example-table"><thead><tr><th>Пример</th><th>Превод</th></tr></thead><tbody><tr><td><em>my</em> book</td><td>моята книга</td></tr><tr><td><em>her</em> name</td><td>нейното име</td></tr><tr><td><em>their</em> house</td><td>тяхната къща</td></tr></tbody></table>`},
-  {id:6,level:'A1',cat:'vocab',title:'Семейство',desc:'Family members',content:`<h3>Семейство (Family)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>mother / mum</em></td><td>майка</td></tr><tr><td><em>father / dad</em></td><td>баща</td></tr><tr><td><em>brother</em></td><td>брат</td></tr><tr><td><em>sister</em></td><td>сестра</td></tr><tr><td><em>grandmother</em></td><td>баба</td></tr><tr><td><em>grandfather</em></td><td>дядо</td></tr><tr><td><em>uncle</em></td><td>чичо / вуйчо</td></tr><tr><td><em>aunt</em></td><td>леля</td></tr></tbody></table>`},
-  {id:7,level:'A2',cat:'grammar',title:'Present Simple',desc:'Сегашно просто — навици и факти',content:`<h3>Present Simple</h3><p>За <em>навици, ежедневни действия и факти</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>I/You/We/They + <em>глагол</em> &nbsp;|&nbsp; He/She/It + <em>глагол + s/es</em></p></div><table class="example-table"><thead><tr><th>Утвърдително</th><th>Отрицателно</th><th>Въпрос</th></tr></thead><tbody><tr><td>I <em>work</em> here.</td><td>I <em>don't work</em>.</td><td><em>Do</em> I work?</td></tr><tr><td>She <em>works</em> here.</td><td>She <em>doesn't work</em>.</td><td><em>Does</em> she work?</td></tr></tbody></table><p>Сигнали: <em>always, usually, often, sometimes, never, every day</em></p>`},
-  {id:8,level:'A2',cat:'grammar',title:'Past Simple',desc:'Минало просто',content:`<h3>Past Simple</h3><p>За действия, <em>завършили в миналото</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>Правилни: глагол + <em>-ed</em> &nbsp;|&nbsp; Неправилни: отделна форма</p></div><table class="example-table"><thead><tr><th>Глагол</th><th>Past Simple</th><th>Глагол</th><th>Past Simple</th></tr></thead><tbody><tr><td>work</td><td><em>worked</em></td><td>go</td><td><em>went</em></td></tr><tr><td>play</td><td><em>played</em></td><td>eat</td><td><em>ate</em></td></tr></tbody></table><p>Сигнали: <em>yesterday, last week, ago, in 2020</em></p>`},
-  {id:9,level:'A2',cat:'grammar',title:'Present Continuous',desc:'Сегашно продължително',content:`<h3>Present Continuous</h3><p>За действия, случващи се <em>точно сега</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>Subject + <em>am/is/are</em> + глагол + <em>-ing</em></p></div><table class="example-table"><thead><tr><th>Пример</th></tr></thead><tbody><tr><td><em>I am reading</em> now.</td></tr><tr><td><em>She is watching</em> TV.</td></tr></tbody></table>`},
-  {id:10,level:'A2',cat:'grammar',title:'Future: will & going to',desc:'Бъдеще — планове',content:`<h3>Future: will и going to</h3><div class="rule-box"><div class="rule-title">will — спонтанни решения</div><p>I <em>will help</em> you. / It <em>will rain</em> tomorrow.</p></div><div class="rule-box"><div class="rule-title">going to — планове</div><p>I <em>am going to visit</em> my friend this weekend.</p></div>`},
-  {id:11,level:'A2',cat:'vocab',title:'Храна и напитки',desc:'Food and drinks',content:`<h3>Храна и напитки</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>bread</em></td><td>хляб</td></tr><tr><td><em>meat / chicken / fish</em></td><td>месо / пиле / риба</td></tr><tr><td><em>vegetables</em></td><td>зеленчуци</td></tr><tr><td><em>water / juice / coffee / tea</em></td><td>вода / сок / кафе / чай</td></tr></tbody></table>`},
-  {id:12,level:'A2',cat:'vocab',title:'Дни, месеци, сезони',desc:'Days, months, seasons',content:`<h3>Дни, месеци, сезони</h3><table class="example-table"><thead><tr><th>Дни</th><th>Месеци</th><th>Сезони</th></tr></thead><tbody><tr><td><em>Monday</em></td><td><em>January, February, March</em></td><td><em>spring</em> — пролет</td></tr><tr><td><em>Wednesday</em></td><td><em>April, May, June</em></td><td><em>summer</em> — лято</td></tr><tr><td><em>Friday</em></td><td><em>July, August, September</em></td><td><em>autumn</em> — есен</td></tr><tr><td><em>Sunday</em></td><td><em>October, November, December</em></td><td><em>winter</em> — зима</td></tr></tbody></table>`},
-  {id:13,level:'B1',cat:'grammar',title:'Present Perfect',desc:'Сегашно перфектно',content:`<h3>Present Perfect</h3><p>За действия, <em>свързани с настоящето</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>Subject + <em>have/has</em> + past participle</p></div><table class="example-table"><thead><tr><th>Пример</th><th>Значение</th></tr></thead><tbody><tr><td><em>I have visited</em> Paris.</td><td>Бил съм в Париж.</td></tr><tr><td><em>Have you ever eaten</em> sushi?</td><td>Ял ли си суши?</td></tr></tbody></table><p>Сигнали: <em>ever, never, already, yet, just, since, for</em></p>`},
-  {id:14,level:'B1',cat:'grammar',title:'Модални глаголи',desc:'can, must, should, might',content:`<h3>Модални глаголи</h3><table class="example-table"><thead><tr><th>Глагол</th><th>Значение</th><th>Пример</th></tr></thead><tbody><tr><td><em>can</em></td><td>мога</td><td>I <em>can</em> swim.</td></tr><tr><td><em>must</em></td><td>трябва</td><td>You <em>must</em> study.</td></tr><tr><td><em>should</em></td><td>съвет</td><td>You <em>should</em> sleep more.</td></tr><tr><td><em>might</em></td><td>може би</td><td>It <em>might</em> rain.</td></tr></tbody></table>`},
-  {id:15,level:'B1',cat:'grammar',title:'Conditional Type 1',desc:'If + Present, will — реални условия',content:`<h3>Conditional Type 1</h3><div class="rule-box"><div class="rule-title">Структура</div><p><em>If + Present Simple, will + infinitive</em></p></div><table class="example-table"><thead><tr><th>Пример</th></tr></thead><tbody><tr><td><em>If it rains, I will stay</em> home.</td></tr><tr><td><em>If you study, you will pass.</em></td></tr></tbody></table>`},
-  {id:16,level:'B1',cat:'grammar',title:'Past Continuous',desc:'Минало продължително',content:`<h3>Past Continuous</h3><div class="rule-box"><div class="rule-title">Правило</div><p>Subject + <em>was/were</em> + глагол + <em>-ing</em></p></div><table class="example-table"><thead><tr><th>Пример</th></tr></thead><tbody><tr><td><em>I was reading</em> when she called.</td></tr><tr><td><em>They were sleeping</em> at midnight.</td></tr></tbody></table>`},
-  {id:17,level:'B1',cat:'vocab',title:'Пътуване и транспорт',desc:'Travel',content:`<h3>Пътуване (Travel)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>airport / train station</em></td><td>летище / гара</td></tr><tr><td><em>passport / ticket / luggage</em></td><td>паспорт / билет / багаж</td></tr><tr><td><em>flight / departure / arrival</em></td><td>полет / заминаване / пристигане</td></tr></tbody></table>`},
-  {id:18,level:'B1',cat:'vocab',title:'Работа и професии',desc:'Jobs',content:`<h3>Професии (Jobs)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>doctor / nurse</em></td><td>лекар / медицинска сестра</td></tr><tr><td><em>teacher / professor</em></td><td>учител / професор</td></tr><tr><td><em>engineer / programmer</em></td><td>инженер / програмист</td></tr><tr><td><em>lawyer / judge</em></td><td>адвокат / съдия</td></tr></tbody></table>`},
-  {id:19,level:'B2',cat:'grammar',title:'Passive Voice',desc:'Страдателен залог',content:`<h3>Passive Voice</h3><div class="rule-box"><div class="rule-title">Правило</div><p>Subject + <em>to be</em> + <em>past participle</em></p></div><table class="example-table"><thead><tr><th>Active</th><th>Passive</th></tr></thead><tbody><tr><td>They <em>build</em> houses.</td><td>Houses <em>are built</em>.</td></tr><tr><td>She <em>wrote</em> the letter.</td><td>The letter <em>was written</em>.</td></tr></tbody></table>`},
-  {id:20,level:'B2',cat:'grammar',title:'Reported Speech',desc:'Косвена реч',content:`<h3>Reported Speech</h3><table class="example-table"><thead><tr><th>Direct</th><th>Reported</th></tr></thead><tbody><tr><td>"I <em>am</em> tired."</td><td>She said she <em>was</em> tired.</td></tr><tr><td>"I <em>will call</em> you."</td><td>He said he <em>would call</em> me.</td></tr></tbody></table><div class="warning-box"><div class="rule-title">Смяна на времената</div><p>am/is → was &nbsp;|&nbsp; will → would &nbsp;|&nbsp; can → could</p></div>`},
-  {id:21,level:'B2',cat:'grammar',title:'Conditionals Type 2 & 3',desc:'Нереални условия',content:`<h3>Conditionals Type 2 & 3</h3><div class="rule-box"><div class="rule-title">Type 2 — нереални настоящи</div><p><em>If + Past Simple, would + infinitive</em><br>If I <em>had</em> money, I <em>would travel</em>.</p></div><div class="rule-box"><div class="rule-title">Type 3 — нереални минали</div><p><em>If + Past Perfect, would have + p.p.</em><br>If she <em>had studied</em>, she <em>would have passed</em>.</p></div>`},
-  {id:22,level:'B2',cat:'grammar',title:'Герундий и инфинитив',desc:'Gerund vs Infinitive',content:`<h3>Герундий vs Инфинитив</h3><div class="rule-box"><div class="rule-title">Герундий (-ing): enjoy, finish, avoid</div><p><em>I enjoy reading.</em></p></div><div class="rule-box"><div class="rule-title">Инфинитив: want, hope, decide</div><p><em>I want to go.</em></p></div><div class="warning-box"><div class="rule-title">Различно значение!</div><p>I stopped <em>smoking</em>. vs I stopped <em>to smoke</em>.</p></div>`},
-  {id:23,level:'B2',cat:'vocab',title:'Академична лексика',desc:'Formal vocabulary',content:`<h3>Академична лексика</h3><table class="example-table"><thead><tr><th>Разговорно</th><th>Академично</th></tr></thead><tbody><tr><td>show</td><td><em>demonstrate, illustrate</em></td></tr><tr><td>get</td><td><em>obtain, acquire</em></td></tr><tr><td>big</td><td><em>significant, substantial</em></td></tr><tr><td>use</td><td><em>utilize, employ</em></td></tr></tbody></table>`},
-  {id:24,level:'B2',cat:'vocab',title:'Идиоми B2',desc:'Common idioms',content:`<h3>Идиоми — B2</h3><table class="example-table"><thead><tr><th>Идиом</th><th>Значение</th></tr></thead><tbody><tr><td><em>hit the nail on the head</em></td><td>улучи в точката</td></tr><tr><td><em>under the weather</em></td><td>не се чувствам добре</td></tr><tr><td><em>break a leg</em></td><td>успех!</td></tr><tr><td><em>once in a blue moon</em></td><td>много рядко</td></tr></tbody></table>`},
-  {id:25,level:'C1',cat:'grammar',title:'Inversion',desc:'Инверсия за акцент',content:`<h3>Inversion</h3><div class="rule-box"><div class="rule-title">С отрицателни наречия</div><p><em>Never have I seen</em> such beauty.<br><em>Rarely does she complain.</em><br><em>Not only did he lie, but he also stole.</em></p></div><div class="rule-box"><div class="rule-title">С "Only"</div><p><em>Only when I arrived</em> did I understand.</p></div>`},
-  {id:26,level:'C1',cat:'grammar',title:'Cleft sentences',desc:'Разцепени изречения',content:`<h3>Cleft Sentences</h3><div class="rule-box"><div class="rule-title">It is/was ... that/who</div><p>Normal: John broke the window.<br><em>It was John who broke the window.</em></p></div><div class="rule-box"><div class="rule-title">What ... is/was</div><p><em>What I need is a good rest.</em></p></div>`},
-  {id:27,level:'C1',cat:'grammar',title:'Subjunctive Mood',desc:'Конюнктив',content:`<h3>Subjunctive Mood</h3><div class="rule-box"><div class="rule-title">Present Subjunctive</div><p>It is essential that he <em>be</em> on time.<br>She recommended that he <em>resign</em>.</p></div><div class="rule-box"><div class="rule-title">Past Subjunctive (wish)</div><p>I wish I <em>were</em> taller.</p></div>`},
-  {id:28,level:'C1',cat:'vocab',title:'Напреднала лексика',desc:'Advanced vocabulary',content:`<h3>Напреднала лексика</h3><table class="example-table"><thead><tr><th>Дума</th><th>Значение</th></tr></thead><tbody><tr><td><em>ambiguous</em></td><td>двусмислен</td></tr><tr><td><em>meticulous</em></td><td>педантичен</td></tr><tr><td><em>profound</em></td><td>дълбок, значителен</td></tr><tr><td><em>eloquent</em></td><td>красноречив</td></tr><tr><td><em>paramount</em></td><td>от първостепенно значение</td></tr></tbody></table>`},
-  {id:29,level:'C1',cat:'vocab',title:'Академично писане',desc:'Essays and reports',content:`<h3>Академично писане</h3><div class="rule-box"><div class="rule-title">Структура на есе</div><p>1. <em>Introduction</em> — теза<br>2. <em>Body paragraphs</em> — аргументи<br>3. <em>Conclusion</em> — обобщение</p></div><table class="example-table"><thead><tr><th>Функция</th><th>Фрази</th></tr></thead><tbody><tr><td>Добавяне</td><td><em>Furthermore, Moreover, In addition,</em></td></tr><tr><td>Противопоставяне</td><td><em>However, Nevertheless, On the other hand,</em></td></tr><tr><td>Заключение</td><td><em>In conclusion, To summarize,</em></td></tr></tbody></table>`},
-  {id:30,level:'C1',cat:'vocab',title:'Идиоми C1',desc:'Advanced idioms',content:`<h3>Напреднали идиоми — C1</h3><table class="example-table"><thead><tr><th>Идиом</th><th>Значение</th></tr></thead><tbody><tr><td><em>sit on the fence</em></td><td>не заема страна</td></tr><tr><td><em>the elephant in the room</em></td><td>очевиден проблем, за който не се говори</td></tr><tr><td><em>read between the lines</em></td><td>разбирай скритото значение</td></tr><tr><td><em>burn bridges</em></td><td>унищожаване на връзки</td></tr></tbody></table>`},
-  {id:31,level:'C2',cat:'grammar',title:'Mixed Conditionals',desc:'Смесени условни',content:`<h3>Mixed Conditionals</h3><div class="rule-box"><div class="rule-title">Past → Present</div><p><em>If I had studied harder</em>, <em>I would be</em> a doctor now.</p></div><div class="rule-box"><div class="rule-title">Present → Past</div><p><em>If I were braver</em>, <em>I would have spoken</em> to her last night.</p></div>`},
-  {id:32,level:'C2',cat:'grammar',title:'Ellipsis & Substitution',desc:'Изпускане и заместване',content:`<h3>Ellipsis & Substitution</h3><div class="rule-box"><div class="rule-title">Ellipsis</div><p>"Are you coming?" — "I hope <em>so</em>."<br>"She wants to leave, and I do <em>too</em>."</p></div><div class="rule-box"><div class="rule-title">Substitution</div><p>"Which cake?" — "The <em>one</em> with chocolate."</p></div>`},
-  {id:33,level:'C2',cat:'grammar',title:'Discourse Markers',desc:'Напреднали свързващи думи',content:`<h3>Discourse Markers</h3><table class="example-table"><thead><tr><th>Функция</th><th>Маркери</th></tr></thead><tbody><tr><td>Отстъпка</td><td><em>albeit, even so, notwithstanding</em></td></tr><tr><td>Уточняване</td><td><em>in other words, namely</em></td></tr><tr><td>Резултат</td><td><em>consequently, hence, thus</em></td></tr><tr><td>Обобщение</td><td><em>on balance, all things considered</em></td></tr></tbody></table>`},
-  {id:34,level:'C2',cat:'vocab',title:'Нюанси на значението',desc:'Connotation and nuance',content:`<h3>Нюанси на значението</h3><table class="example-table"><thead><tr><th>Неутрална</th><th>Положителна</th><th>Отрицателна</th></tr></thead><tbody><tr><td>thin</td><td><em>slender, slim</em></td><td><em>scrawny, gaunt</em></td></tr><tr><td>confident</td><td><em>self-assured</em></td><td><em>arrogant, cocky</em></td></tr><tr><td>cheap</td><td><em>affordable</em></td><td><em>stingy, miserly</em></td></tr></tbody></table>`},
-  {id:35,level:'C2',cat:'vocab',title:'Идиоми C2',desc:'Complex expressions',content:`<h3>Идиоми — C2</h3><table class="example-table"><thead><tr><th>Израз</th><th>Значение</th></tr></thead><tbody><tr><td><em>gilding the lily</em></td><td>ненужно украсяване</td></tr><tr><td><em>Hobson's choice</em></td><td>привиден избор без реални опции</td></tr><tr><td><em>a double-edged sword</em></td><td>предимства и недостатъци</td></tr><tr><td><em>to pass the buck</em></td><td>прехвърляш отговорността</td></tr></tbody></table>`},
-  {id:36,level:'C2',cat:'vocab',title:'Реторика и убеждаване',desc:'Rhetorical devices',content:`<h3>Реторика</h3><table class="example-table"><thead><tr><th>Похват</th><th>Обяснение</th></tr></thead><tbody><tr><td><em>Anaphora</em></td><td>повторение в началото</td></tr><tr><td><em>Antithesis</em></td><td>противопоставяне</td></tr><tr><td><em>Hyperbole</em></td><td>преувеличение</td></tr><tr><td><em>Euphemism</em></td><td>омекотяване</td></tr></tbody></table>`},
+  // ── A1 ──
+  {id:1,level:'A1',cat:'grammar',
+   title:'Глаголът "to be"',desc:'am / is / are — основата на английски',
+   title_en:'The verb "to be"',desc_en:'am / is / are — the foundation of English',
+   content:`<h3>Глаголът "to be" (съм)</h3><p>Най-важният глагол в английски. Използва се за описание на хора и неща.</p><div class="rule-box"><div class="rule-title">Форми</div><p>I <em>am</em> &nbsp;|&nbsp; He/She/It <em>is</em> &nbsp;|&nbsp; You/We/They <em>are</em></p></div><table class="example-table"><thead><tr><th>Утвърдително</th><th>Отрицателно</th><th>Въпрос</th></tr></thead><tbody><tr><td><em>I am</em> happy.</td><td><em>I am not</em> sad.</td><td><em>Am I</em> late?</td></tr><tr><td><em>She is</em> a teacher.</td><td><em>She isn't</em> old.</td><td><em>Is she</em> here?</td></tr><tr><td><em>They are</em> friends.</td><td><em>They aren't</em> busy.</td><td><em>Are they</em> ready?</td></tr></tbody></table>`,
+   content_en:`<h3>The verb "to be"</h3><p>The most important verb in English. Used to describe people and things.</p><div class="rule-box"><div class="rule-title">Forms</div><p>I <em>am</em> &nbsp;|&nbsp; He/She/It <em>is</em> &nbsp;|&nbsp; You/We/They <em>are</em></p></div><table class="example-table"><thead><tr><th>Affirmative</th><th>Negative</th><th>Question</th></tr></thead><tbody><tr><td><em>I am</em> happy.</td><td><em>I am not</em> sad.</td><td><em>Am I</em> late?</td></tr><tr><td><em>She is</em> a teacher.</td><td><em>She isn't</em> old.</td><td><em>Is she</em> here?</td></tr><tr><td><em>They are</em> friends.</td><td><em>They aren't</em> busy.</td><td><em>Are they</em> ready?</td></tr></tbody></table>`},
+
+  {id:2,level:'A1',cat:'vocab',
+   title:'Поздрави и запознанства',desc:'Hello, my name is...',
+   title_en:'Greetings and introductions',desc_en:'Hello, my name is...',
+   content:`<h3>Поздрави (Greetings)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>Hello / Hi</em></td><td>Здравей</td></tr><tr><td><em>Good morning</em></td><td>Добро утро</td></tr><tr><td><em>Good afternoon</em></td><td>Добър ден</td></tr><tr><td><em>Good evening</em></td><td>Добър вечер</td></tr><tr><td><em>Goodbye / Bye</em></td><td>Довиждане</td></tr><tr><td><em>How are you?</em></td><td>Как си?</td></tr><tr><td><em>I'm fine, thank you.</em></td><td>Добре съм, благодаря.</td></tr></tbody></table><div class="rule-box"><div class="rule-title">Запознанство</div><p><em>My name is ...</em> — Казвам се ... &nbsp;|&nbsp; <em>Nice to meet you!</em> — Приятно ми е!</p></div>`,
+   content_en:`<h3>Greetings</h3><table class="example-table"><thead><tr><th>English</th><th>Bulgarian</th></tr></thead><tbody><tr><td><em>Hello / Hi</em></td><td>Zdravey</td></tr><tr><td><em>Good morning</em></td><td>Dobro utro</td></tr><tr><td><em>Good afternoon</em></td><td>Dobar den</td></tr><tr><td><em>Good evening</em></td><td>Dobar vecher</td></tr><tr><td><em>Goodbye / Bye</em></td><td>Dovizhdane</td></tr><tr><td><em>How are you?</em></td><td>Kak si?</td></tr><tr><td><em>I'm fine, thank you.</em></td><td>Dobre sam, blagodarya.</td></tr></tbody></table><div class="rule-box"><div class="rule-title">Introductions</div><p><em>My name is ...</em> &nbsp;|&nbsp; <em>Nice to meet you!</em></p></div>`},
+
+  {id:3,level:'A1',cat:'vocab',
+   title:'Числа 1–100',desc:'Numbers — основни числа',
+   title_en:'Numbers 1–100',desc_en:'Numbers — the basics',
+   content:`<h3>Числа (Numbers)</h3><table class="example-table"><thead><tr><th>Число</th><th>Английски</th><th>Число</th><th>Английски</th></tr></thead><tbody><tr><td>1</td><td><em>one</em></td><td>11</td><td><em>eleven</em></td></tr><tr><td>2</td><td><em>two</em></td><td>12</td><td><em>twelve</em></td></tr><tr><td>3</td><td><em>three</em></td><td>13</td><td><em>thirteen</em></td></tr><tr><td>5</td><td><em>five</em></td><td>20</td><td><em>twenty</em></td></tr><tr><td>10</td><td><em>ten</em></td><td>100</td><td><em>one hundred</em></td></tr></tbody></table><div class="rule-box"><div class="rule-title">Числа 21–99</div><p><em>twenty-one</em> (21), <em>thirty-five</em> (35), <em>ninety-nine</em> (99)</p></div>`,
+   content_en:`<h3>Numbers</h3><table class="example-table"><thead><tr><th>Number</th><th>English</th><th>Number</th><th>English</th></tr></thead><tbody><tr><td>1</td><td><em>one</em></td><td>11</td><td><em>eleven</em></td></tr><tr><td>2</td><td><em>two</em></td><td>12</td><td><em>twelve</em></td></tr><tr><td>3</td><td><em>three</em></td><td>13</td><td><em>thirteen</em></td></tr><tr><td>5</td><td><em>five</em></td><td>20</td><td><em>twenty</em></td></tr><tr><td>10</td><td><em>ten</em></td><td>100</td><td><em>one hundred</em></td></tr></tbody></table><div class="rule-box"><div class="rule-title">Numbers 21–99</div><p><em>twenty-one</em> (21), <em>thirty-five</em> (35), <em>ninety-nine</em> (99)</p></div>`},
+
+  {id:4,level:'A1',cat:'vocab',
+   title:'Цветове',desc:'Colours',
+   title_en:'Colours',desc_en:'Basic colours in English',
+   content:`<h3>Цветове (Colours)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>red</em></td><td>червен</td></tr><tr><td><em>blue</em></td><td>син</td></tr><tr><td><em>green</em></td><td>зелен</td></tr><tr><td><em>yellow</em></td><td>жълт</td></tr><tr><td><em>black</em></td><td>черен</td></tr><tr><td><em>white</em></td><td>бял</td></tr><tr><td><em>orange</em></td><td>оранжев</td></tr><tr><td><em>purple</em></td><td>лилав</td></tr></tbody></table>`,
+   content_en:`<h3>Colours</h3><table class="example-table"><thead><tr><th>English</th><th>Bulgarian</th></tr></thead><tbody><tr><td><em>red</em></td><td>cherven</td></tr><tr><td><em>blue</em></td><td>sin</td></tr><tr><td><em>green</em></td><td>zelen</td></tr><tr><td><em>yellow</em></td><td>zhalt</td></tr><tr><td><em>black</em></td><td>cheren</td></tr><tr><td><em>white</em></td><td>byal</td></tr><tr><td><em>orange</em></td><td>oranzhev</td></tr><tr><td><em>purple</em></td><td>lilav</td></tr></tbody></table><p>Example: <em>The sky is blue. The grass is green.</em></p>`},
+
+  {id:5,level:'A1',cat:'grammar',
+   title:'Притежателни местоимения',desc:'My, your, his, her, our, their',
+   title_en:'Possessive pronouns',desc_en:'My, your, his, her, our, their',
+   content:`<h3>Притежателни местоимения</h3><div class="rule-box"><div class="rule-title">Форми</div><p>I → <em>my</em> &nbsp;|&nbsp; You → <em>your</em> &nbsp;|&nbsp; He → <em>his</em> &nbsp;|&nbsp; She → <em>her</em> &nbsp;|&nbsp; We → <em>our</em> &nbsp;|&nbsp; They → <em>their</em></p></div><table class="example-table"><thead><tr><th>Пример</th><th>Превод</th></tr></thead><tbody><tr><td><em>my</em> book</td><td>моята книга</td></tr><tr><td><em>her</em> name</td><td>нейното име</td></tr><tr><td><em>their</em> house</td><td>тяхната къща</td></tr></tbody></table>`,
+   content_en:`<h3>Possessive Pronouns</h3><div class="rule-box"><div class="rule-title">Forms</div><p>I → <em>my</em> &nbsp;|&nbsp; You → <em>your</em> &nbsp;|&nbsp; He → <em>his</em> &nbsp;|&nbsp; She → <em>her</em> &nbsp;|&nbsp; We → <em>our</em> &nbsp;|&nbsp; They → <em>their</em></p></div><table class="example-table"><thead><tr><th>Example</th><th>Meaning</th></tr></thead><tbody><tr><td><em>my</em> book</td><td>belongs to me</td></tr><tr><td><em>her</em> name</td><td>belongs to her</td></tr><tr><td><em>their</em> house</td><td>belongs to them</td></tr></tbody></table>`},
+
+  {id:6,level:'A1',cat:'vocab',
+   title:'Семейство',desc:'Family members',
+   title_en:'Family',desc_en:'Family members vocabulary',
+   content:`<h3>Семейство (Family)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>mother / mum</em></td><td>майка</td></tr><tr><td><em>father / dad</em></td><td>баща</td></tr><tr><td><em>brother</em></td><td>брат</td></tr><tr><td><em>sister</em></td><td>сестра</td></tr><tr><td><em>grandmother</em></td><td>баба</td></tr><tr><td><em>grandfather</em></td><td>дядо</td></tr><tr><td><em>uncle</em></td><td>чичо / вуйчо</td></tr><tr><td><em>aunt</em></td><td>леля</td></tr></tbody></table>`,
+   content_en:`<h3>Family Members</h3><table class="example-table"><thead><tr><th>English</th><th>Pronunciation guide</th></tr></thead><tbody><tr><td><em>mother / mum</em></td><td>MUH-ther / mum</td></tr><tr><td><em>father / dad</em></td><td>FAH-ther / dad</td></tr><tr><td><em>brother</em></td><td>BRUH-ther</td></tr><tr><td><em>sister</em></td><td>SIS-ter</td></tr><tr><td><em>grandmother</em></td><td>GRAND-muh-ther</td></tr><tr><td><em>grandfather</em></td><td>GRAND-fah-ther</td></tr><tr><td><em>uncle</em></td><td>UNG-kul</td></tr><tr><td><em>aunt</em></td><td>ant</td></tr></tbody></table><p>Example: <em>My mother's name is Maria. I have one brother.</em></p>`},
+
+  // ── A2 ──
+  {id:7,level:'A2',cat:'grammar',
+   title:'Present Simple',desc:'Сегашно просто — навици и факти',
+   title_en:'Present Simple',desc_en:'Habits, routines and facts',
+   content:`<h3>Present Simple</h3><p>За <em>навици, ежедневни действия и факти</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>I/You/We/They + <em>глагол</em> &nbsp;|&nbsp; He/She/It + <em>глагол + s/es</em></p></div><table class="example-table"><thead><tr><th>Утвърдително</th><th>Отрицателно</th><th>Въпрос</th></tr></thead><tbody><tr><td>I <em>work</em> here.</td><td>I <em>don't work</em>.</td><td><em>Do</em> I work?</td></tr><tr><td>She <em>works</em> here.</td><td>She <em>doesn't work</em>.</td><td><em>Does</em> she work?</td></tr></tbody></table><p>Сигнали: <em>always, usually, often, sometimes, never, every day</em></p>`,
+   content_en:`<h3>Present Simple</h3><p>Used for <em>habits, routines and facts that are always true</em>.</p><div class="rule-box"><div class="rule-title">Rule</div><p>I/You/We/They + <em>verb</em> &nbsp;|&nbsp; He/She/It + <em>verb + s/es</em></p></div><table class="example-table"><thead><tr><th>Affirmative</th><th>Negative</th><th>Question</th></tr></thead><tbody><tr><td>I <em>work</em> here.</td><td>I <em>don't work</em>.</td><td><em>Do</em> I work?</td></tr><tr><td>She <em>works</em> here.</td><td>She <em>doesn't work</em>.</td><td><em>Does</em> she work?</td></tr></tbody></table><p>Signal words: <em>always, usually, often, sometimes, never, every day</em></p>`},
+
+  {id:8,level:'A2',cat:'grammar',
+   title:'Past Simple',desc:'Минало просто',
+   title_en:'Past Simple',desc_en:'Completed actions in the past',
+   content:`<h3>Past Simple</h3><p>За действия, <em>завършили в миналото</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>Правилни: глагол + <em>-ed</em> &nbsp;|&nbsp; Неправилни: отделна форма</p></div><table class="example-table"><thead><tr><th>Глагол</th><th>Past Simple</th><th>Глагол</th><th>Past Simple</th></tr></thead><tbody><tr><td>work</td><td><em>worked</em></td><td>go</td><td><em>went</em></td></tr><tr><td>play</td><td><em>played</em></td><td>eat</td><td><em>ate</em></td></tr></tbody></table><p>Сигнали: <em>yesterday, last week, ago, in 2020</em></p>`,
+   content_en:`<h3>Past Simple</h3><p>Used for actions <em>completed in the past</em>.</p><div class="rule-box"><div class="rule-title">Rule</div><p>Regular verbs: verb + <em>-ed</em> &nbsp;|&nbsp; Irregular verbs: separate form</p></div><table class="example-table"><thead><tr><th>Verb</th><th>Past Simple</th><th>Verb</th><th>Past Simple</th></tr></thead><tbody><tr><td>work</td><td><em>worked</em></td><td>go</td><td><em>went</em></td></tr><tr><td>play</td><td><em>played</em></td><td>eat</td><td><em>ate</em></td></tr></tbody></table><p>Signal words: <em>yesterday, last week, ago, in 2020</em></p>`},
+
+  {id:9,level:'A2',cat:'grammar',
+   title:'Present Continuous',desc:'Сегашно продължително',
+   title_en:'Present Continuous',desc_en:'Actions happening right now',
+   content:`<h3>Present Continuous</h3><p>За действия, случващи се <em>точно сега</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>Subject + <em>am/is/are</em> + глагол + <em>-ing</em></p></div><table class="example-table"><thead><tr><th>Пример</th></tr></thead><tbody><tr><td><em>I am reading</em> now.</td></tr><tr><td><em>She is watching</em> TV.</td></tr></tbody></table>`,
+   content_en:`<h3>Present Continuous</h3><p>Used for actions happening <em>right now</em>.</p><div class="rule-box"><div class="rule-title">Rule</div><p>Subject + <em>am/is/are</em> + verb + <em>-ing</em></p></div><table class="example-table"><thead><tr><th>Example</th><th>Meaning</th></tr></thead><tbody><tr><td><em>I am reading</em> now.</td><td>happening at this moment</td></tr><tr><td><em>She is watching</em> TV.</td><td>happening now</td></tr><tr><td><em>They are playing</em> outside.</td><td>in progress</td></tr></tbody></table>`},
+
+  {id:10,level:'A2',cat:'grammar',
+   title:'Future: will & going to',desc:'Бъдеще — планове',
+   title_en:'Future: will & going to',desc_en:'Plans and predictions',
+   content:`<h3>Future: will и going to</h3><div class="rule-box"><div class="rule-title">will — спонтанни решения</div><p>I <em>will help</em> you. / It <em>will rain</em> tomorrow.</p></div><div class="rule-box"><div class="rule-title">going to — планове</div><p>I <em>am going to visit</em> my friend this weekend.</p></div>`,
+   content_en:`<h3>Future: will and going to</h3><div class="rule-box"><div class="rule-title">will — spontaneous decisions & predictions</div><p>I <em>will help</em> you. / It <em>will rain</em> tomorrow.</p></div><div class="rule-box"><div class="rule-title">going to — plans and intentions</div><p>I <em>am going to visit</em> my friend this weekend.</p></div><table class="example-table"><thead><tr><th>will</th><th>going to</th></tr></thead><tbody><tr><td>I <em>will call</em> you later.</td><td>I <em>am going to study</em> tonight.</td></tr></tbody></table>`},
+
+  {id:11,level:'A2',cat:'vocab',
+   title:'Храна и напитки',desc:'Food and drinks',
+   title_en:'Food and drinks',desc_en:'Essential food vocabulary',
+   content:`<h3>Храна и напитки</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>bread</em></td><td>хляб</td></tr><tr><td><em>meat / chicken / fish</em></td><td>месо / пиле / риба</td></tr><tr><td><em>vegetables</em></td><td>зеленчуци</td></tr><tr><td><em>water / juice / coffee / tea</em></td><td>вода / сок / кафе / чай</td></tr></tbody></table>`,
+   content_en:`<h3>Food and Drinks</h3><table class="example-table"><thead><tr><th>English</th><th>Category</th></tr></thead><tbody><tr><td><em>bread, rice, pasta</em></td><td>carbohydrates</td></tr><tr><td><em>meat, chicken, fish</em></td><td>protein</td></tr><tr><td><em>vegetables, fruit</em></td><td>healthy foods</td></tr><tr><td><em>water, juice, coffee, tea</em></td><td>drinks</td></tr></tbody></table><p>Useful phrases: <em>I'm hungry. / I'm thirsty. / Can I have the menu, please?</em></p>`},
+
+  {id:12,level:'A2',cat:'vocab',
+   title:'Дни, месеци, сезони',desc:'Days, months, seasons',
+   title_en:'Days, months, seasons',desc_en:'Time vocabulary',
+   content:`<h3>Дни, месеци, сезони</h3><table class="example-table"><thead><tr><th>Дни</th><th>Месеци</th><th>Сезони</th></tr></thead><tbody><tr><td><em>Monday</em></td><td><em>January, February, March</em></td><td><em>spring</em> — пролет</td></tr><tr><td><em>Wednesday</em></td><td><em>April, May, June</em></td><td><em>summer</em> — лято</td></tr><tr><td><em>Friday</em></td><td><em>July, August, September</em></td><td><em>autumn</em> — есен</td></tr><tr><td><em>Sunday</em></td><td><em>October, November, December</em></td><td><em>winter</em> — зима</td></tr></tbody></table>`,
+   content_en:`<h3>Days, Months and Seasons</h3><table class="example-table"><thead><tr><th>Days</th><th>Months</th><th>Seasons</th></tr></thead><tbody><tr><td><em>Monday</em></td><td><em>January, February, March</em></td><td><em>spring</em></td></tr><tr><td><em>Wednesday</em></td><td><em>April, May, June</em></td><td><em>summer</em></td></tr><tr><td><em>Friday</em></td><td><em>July, August, September</em></td><td><em>autumn / fall</em></td></tr><tr><td><em>Sunday</em></td><td><em>October, November, December</em></td><td><em>winter</em></td></tr></tbody></table><p>Note: Months and days are always <em>capitalised</em> in English!</p>`},
+
+  // ── B1 ──
+  {id:13,level:'B1',cat:'grammar',
+   title:'Present Perfect',desc:'Сегашно перфектно',
+   title_en:'Present Perfect',desc_en:'Experience and results connected to the present',
+   content:`<h3>Present Perfect</h3><p>За действия, <em>свързани с настоящето</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>Subject + <em>have/has</em> + past participle</p></div><table class="example-table"><thead><tr><th>Пример</th><th>Значение</th></tr></thead><tbody><tr><td><em>I have visited</em> Paris.</td><td>Бил съм в Париж.</td></tr><tr><td><em>Have you ever eaten</em> sushi?</td><td>Ял ли си суши?</td></tr></tbody></table><p>Сигнали: <em>ever, never, already, yet, just, since, for</em></p>`,
+   content_en:`<h3>Present Perfect</h3><p>Used for actions <em>connected to the present</em> — experience, results, recent events.</p><div class="rule-box"><div class="rule-title">Rule</div><p>Subject + <em>have/has</em> + past participle (3rd form)</p></div><table class="example-table"><thead><tr><th>Example</th><th>Meaning</th></tr></thead><tbody><tr><td><em>I have visited</em> Paris.</td><td>experience in my life</td></tr><tr><td><em>She has finished</em> her work.</td><td>result visible now</td></tr><tr><td><em>Have you ever eaten</em> sushi?</td><td>asking about experience</td></tr></tbody></table><p>Signal words: <em>ever, never, already, yet, just, since, for</em></p>`},
+
+  {id:14,level:'B1',cat:'grammar',
+   title:'Модални глаголи',desc:'can, must, should, might',
+   title_en:'Modal verbs',desc_en:'can, must, should, might, have to',
+   content:`<h3>Модални глаголи</h3><table class="example-table"><thead><tr><th>Глагол</th><th>Значение</th><th>Пример</th></tr></thead><tbody><tr><td><em>can</em></td><td>мога</td><td>I <em>can</em> swim.</td></tr><tr><td><em>must</em></td><td>трябва</td><td>You <em>must</em> study.</td></tr><tr><td><em>should</em></td><td>съвет</td><td>You <em>should</em> sleep more.</td></tr><tr><td><em>might</em></td><td>може би</td><td>It <em>might</em> rain.</td></tr></tbody></table>`,
+   content_en:`<h3>Modal Verbs</h3><table class="example-table"><thead><tr><th>Modal</th><th>Meaning</th><th>Example</th></tr></thead><tbody><tr><td><em>can</em></td><td>ability / possibility</td><td>I <em>can</em> swim.</td></tr><tr><td><em>must</em></td><td>obligation (strong)</td><td>You <em>must</em> study.</td></tr><tr><td><em>should</em></td><td>advice</td><td>You <em>should</em> sleep more.</td></tr><tr><td><em>might</em></td><td>possibility (weak)</td><td>It <em>might</em> rain.</td></tr><tr><td><em>have to</em></td><td>necessity (external)</td><td>I <em>have to</em> go now.</td></tr></tbody></table><div class="rule-box"><div class="rule-title">Important rule</div><p>After a modal verb → base form of verb (no "to"): She <em>can swim</em>, not "can to swim".</p></div>`},
+
+  {id:15,level:'B1',cat:'grammar',
+   title:'Conditional Type 1',desc:'If + Present, will — реални условия',
+   title_en:'Conditional Type 1',desc_en:'Real and possible future conditions',
+   content:`<h3>Conditional Type 1</h3><div class="rule-box"><div class="rule-title">Структура</div><p><em>If + Present Simple, will + infinitive</em></p></div><table class="example-table"><thead><tr><th>Пример</th></tr></thead><tbody><tr><td><em>If it rains, I will stay</em> home.</td></tr><tr><td><em>If you study, you will pass.</em></td></tr></tbody></table>`,
+   content_en:`<h3>Conditional Type 1</h3><p>Used for situations that are <em>possible in the future</em>.</p><div class="rule-box"><div class="rule-title">Structure</div><p><em>If + Present Simple, will + infinitive</em></p></div><table class="example-table"><thead><tr><th>Example</th><th>Meaning</th></tr></thead><tbody><tr><td><em>If it rains, I will stay</em> home.</td><td>It might rain — real possibility</td></tr><tr><td><em>If you study, you will pass.</em></td><td>studying is possible</td></tr></tbody></table><p>The <em>if</em> clause can also come second: I <em>will help</em> you <em>if you ask</em>.</p>`},
+
+  {id:16,level:'B1',cat:'grammar',
+   title:'Past Continuous',desc:'Минало продължително',
+   title_en:'Past Continuous',desc_en:'Actions in progress at a past moment',
+   content:`<h3>Past Continuous</h3><div class="rule-box"><div class="rule-title">Правило</div><p>Subject + <em>was/were</em> + глагол + <em>-ing</em></p></div><table class="example-table"><thead><tr><th>Пример</th></tr></thead><tbody><tr><td><em>I was reading</em> when she called.</td></tr><tr><td><em>They were sleeping</em> at midnight.</td></tr></tbody></table>`,
+   content_en:`<h3>Past Continuous</h3><p>Used for an action <em>in progress at a specific past moment</em>.</p><div class="rule-box"><div class="rule-title">Rule</div><p>Subject + <em>was/were</em> + verb + <em>-ing</em></p></div><table class="example-table"><thead><tr><th>Example</th><th>Meaning</th></tr></thead><tbody><tr><td><em>I was reading</em> when she called.</td><td>reading was interrupted</td></tr><tr><td><em>They were sleeping</em> at midnight.</td><td>in progress at midnight</td></tr></tbody></table><p>Often combined with Past Simple: one action interrupts another.</p>`},
+
+  {id:17,level:'B1',cat:'vocab',
+   title:'Пътуване и транспорт',desc:'Travel',
+   title_en:'Travel and transport',desc_en:'Essential travel vocabulary',
+   content:`<h3>Пътуване (Travel)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>airport / train station</em></td><td>летище / гара</td></tr><tr><td><em>passport / ticket / luggage</em></td><td>паспорт / билет / багаж</td></tr><tr><td><em>flight / departure / arrival</em></td><td>полет / заминаване / пристигане</td></tr></tbody></table>`,
+   content_en:`<h3>Travel and Transport</h3><table class="example-table"><thead><tr><th>English</th><th>Context</th></tr></thead><tbody><tr><td><em>airport / train station</em></td><td>where you travel from</td></tr><tr><td><em>passport / ticket / luggage</em></td><td>what you need to travel</td></tr><tr><td><em>flight / departure / arrival</em></td><td>the journey itself</td></tr><tr><td><em>hotel / hostel / reservation</em></td><td>where you stay</td></tr></tbody></table><p>Useful phrase: <em>Can I have a return ticket to London, please?</em></p>`},
+
+  {id:18,level:'B1',cat:'vocab',
+   title:'Работа и професии',desc:'Jobs',
+   title_en:'Jobs and professions',desc_en:'Workplace vocabulary',
+   content:`<h3>Професии (Jobs)</h3><table class="example-table"><thead><tr><th>Английски</th><th>Български</th></tr></thead><tbody><tr><td><em>doctor / nurse</em></td><td>лекар / медицинска сестра</td></tr><tr><td><em>teacher / professor</em></td><td>учител / професор</td></tr><tr><td><em>engineer / programmer</em></td><td>инженер / програмист</td></tr><tr><td><em>lawyer / judge</em></td><td>адвокат / съдия</td></tr></tbody></table>`,
+   content_en:`<h3>Jobs and Professions</h3><table class="example-table"><thead><tr><th>English</th><th>Field</th></tr></thead><tbody><tr><td><em>doctor / nurse</em></td><td>medicine</td></tr><tr><td><em>teacher / professor</em></td><td>education</td></tr><tr><td><em>engineer / programmer</em></td><td>technology</td></tr><tr><td><em>lawyer / judge</em></td><td>law</td></tr></tbody></table><p>Key question: <em>What do you do for a living?</em></p>`},
+
+  // ── B2 ──
+  {id:19,level:'B2',cat:'grammar',
+   title:'Passive Voice',desc:'Страдателен залог',
+   title_en:'Passive Voice',desc_en:'When the action is more important than the doer',
+   content:`<h3>Passive Voice</h3><div class="rule-box"><div class="rule-title">Правило</div><p>Subject + <em>to be</em> + <em>past participle</em></p></div><table class="example-table"><thead><tr><th>Active</th><th>Passive</th></tr></thead><tbody><tr><td>They <em>build</em> houses.</td><td>Houses <em>are built</em>.</td></tr><tr><td>She <em>wrote</em> the letter.</td><td>The letter <em>was written</em>.</td></tr></tbody></table>`,
+   content_en:`<h3>Passive Voice</h3><p>Used when the <em>action is more important than who does it</em>.</p><div class="rule-box"><div class="rule-title">Rule</div><p>Subject + <em>to be</em> (correct tense) + <em>past participle</em></p></div><table class="example-table"><thead><tr><th>Active</th><th>Passive</th></tr></thead><tbody><tr><td>They <em>build</em> houses. (Present)</td><td>Houses <em>are built</em>.</td></tr><tr><td>She <em>wrote</em> the letter. (Past)</td><td>The letter <em>was written</em>.</td></tr><tr><td>They <em>will finish</em> it. (Future)</td><td>It <em>will be finished</em>.</td></tr></tbody></table>`},
+
+  {id:20,level:'B2',cat:'grammar',
+   title:'Reported Speech',desc:'Косвена реч',
+   title_en:'Reported Speech',desc_en:'Reporting what someone said',
+   content:`<h3>Reported Speech</h3><table class="example-table"><thead><tr><th>Direct</th><th>Reported</th></tr></thead><tbody><tr><td>"I <em>am</em> tired."</td><td>She said she <em>was</em> tired.</td></tr><tr><td>"I <em>will call</em> you."</td><td>He said he <em>would call</em> me.</td></tr></tbody></table><div class="warning-box"><div class="rule-title">Смяна на времената</div><p>am/is → was &nbsp;|&nbsp; will → would &nbsp;|&nbsp; can → could</p></div>`,
+   content_en:`<h3>Reported Speech</h3><p>When we report what someone said <em>indirectly</em>, tenses shift back.</p><table class="example-table"><thead><tr><th>Direct speech</th><th>Reported speech</th></tr></thead><tbody><tr><td>"I <em>am</em> tired."</td><td>She said she <em>was</em> tired.</td></tr><tr><td>"I <em>will call</em> you."</td><td>He said he <em>would call</em> me.</td></tr><tr><td>"I <em>have finished</em>."</td><td>She said she <em>had finished</em>.</td></tr></tbody></table><div class="warning-box"><div class="rule-title">Tense shifts</div><p>am/is → was &nbsp;|&nbsp; will → would &nbsp;|&nbsp; can → could &nbsp;|&nbsp; have → had</p></div>`},
+
+  {id:21,level:'B2',cat:'grammar',
+   title:'Conditionals Type 2 & 3',desc:'Нереални условия',
+   title_en:'Conditionals Type 2 & 3',desc_en:'Unreal and hypothetical situations',
+   content:`<h3>Conditionals Type 2 & 3</h3><div class="rule-box"><div class="rule-title">Type 2 — нереални настоящи</div><p><em>If + Past Simple, would + infinitive</em><br>If I <em>had</em> money, I <em>would travel</em>.</p></div><div class="rule-box"><div class="rule-title">Type 3 — нереални минали</div><p><em>If + Past Perfect, would have + p.p.</em><br>If she <em>had studied</em>, she <em>would have passed</em>.</p></div>`,
+   content_en:`<h3>Conditionals Type 2 & 3</h3><div class="rule-box"><div class="rule-title">Type 2 — unreal present situations</div><p><em>If + Past Simple, would + infinitive</em><br>If I <em>had</em> money, I <em>would travel</em> the world. (I don't have money)</p></div><div class="rule-box"><div class="rule-title">Type 3 — unreal past situations</div><p><em>If + Past Perfect, would have + past participle</em><br>If she <em>had studied</em>, she <em>would have passed</em>. (She didn't study)</p></div><p>Type 3 often expresses regret about the past.</p>`},
+
+  {id:22,level:'B2',cat:'grammar',
+   title:'Герундий и инфинитив',desc:'Gerund vs Infinitive',
+   title_en:'Gerund vs Infinitive',desc_en:'When to use -ing vs to + verb',
+   content:`<h3>Герундий vs Инфинитив</h3><div class="rule-box"><div class="rule-title">Герундий (-ing): enjoy, finish, avoid</div><p><em>I enjoy reading.</em></p></div><div class="rule-box"><div class="rule-title">Инфинитив: want, hope, decide</div><p><em>I want to go.</em></p></div><div class="warning-box"><div class="rule-title">Различно значение!</div><p>I stopped <em>smoking</em>. vs I stopped <em>to smoke</em>.</p></div>`,
+   content_en:`<h3>Gerund vs Infinitive</h3><div class="rule-box"><div class="rule-title">Gerund (-ing) after: enjoy, finish, mind, avoid, suggest</div><p><em>I enjoy reading. / She finished working. / Avoid making mistakes.</em></p></div><div class="rule-box"><div class="rule-title">Infinitive (to + verb) after: want, hope, decide, plan, refuse</div><p><em>I want to go. / She decided to leave. / He refused to help.</em></p></div><div class="warning-box"><div class="rule-title">Different meaning — same verb!</div><p>I stopped <em>smoking</em>. (I quit smoking)<br>I stopped <em>to smoke</em>. (I paused in order to smoke)</p></div>`},
+
+  {id:23,level:'B2',cat:'vocab',
+   title:'Академична лексика',desc:'Formal vocabulary',
+   title_en:'Academic vocabulary',desc_en:'Formal and academic word choices',
+   content:`<h3>Академична лексика</h3><table class="example-table"><thead><tr><th>Разговорно</th><th>Академично</th></tr></thead><tbody><tr><td>show</td><td><em>demonstrate, illustrate</em></td></tr><tr><td>get</td><td><em>obtain, acquire</em></td></tr><tr><td>big</td><td><em>significant, substantial</em></td></tr><tr><td>use</td><td><em>utilize, employ</em></td></tr></tbody></table>`,
+   content_en:`<h3>Academic Vocabulary</h3><table class="example-table"><thead><tr><th>Informal</th><th>Academic / Formal</th></tr></thead><tbody><tr><td>show</td><td><em>demonstrate, illustrate</em></td></tr><tr><td>get</td><td><em>obtain, acquire, receive</em></td></tr><tr><td>big</td><td><em>significant, substantial, considerable</em></td></tr><tr><td>think</td><td><em>consider, argue, suggest</em></td></tr><tr><td>use</td><td><em>utilize, employ, apply</em></td></tr></tbody></table><p>Tip: Academic writing avoids contractions (don't → <em>do not</em>) and informal phrases.</p>`},
+
+  {id:24,level:'B2',cat:'vocab',
+   title:'Идиоми B2',desc:'Common idioms',
+   title_en:'Idioms B2',desc_en:'Common English idioms and their meanings',
+   content:`<h3>Идиоми — B2</h3><table class="example-table"><thead><tr><th>Идиом</th><th>Значение</th></tr></thead><tbody><tr><td><em>hit the nail on the head</em></td><td>улучи в точката</td></tr><tr><td><em>under the weather</em></td><td>не се чувствам добре</td></tr><tr><td><em>break a leg</em></td><td>успех!</td></tr><tr><td><em>once in a blue moon</em></td><td>много рядко</td></tr></tbody></table>`,
+   content_en:`<h3>Idioms — B2</h3><table class="example-table"><thead><tr><th>Idiom</th><th>Meaning</th><th>Example</th></tr></thead><tbody><tr><td><em>hit the nail on the head</em></td><td>to be exactly right</td><td>You've <em>hit the nail on the head</em>.</td></tr><tr><td><em>under the weather</em></td><td>feeling ill</td><td>I'm feeling a bit <em>under the weather</em>.</td></tr><tr><td><em>break a leg</em></td><td>good luck!</td><td><em>Break a leg</em> at your presentation!</td></tr><tr><td><em>once in a blue moon</em></td><td>very rarely</td><td>I only eat fast food <em>once in a blue moon</em>.</td></tr></tbody></table>`},
+
+  // ── C1 ──
+  {id:25,level:'C1',cat:'grammar',
+   title:'Inversion',desc:'Инверсия за акцент',
+   title_en:'Inversion',desc_en:'Verb-subject inversion for emphasis and formality',
+   content:`<h3>Inversion</h3><div class="rule-box"><div class="rule-title">С отрицателни наречия</div><p><em>Never have I seen</em> such beauty.<br><em>Rarely does she complain.</em><br><em>Not only did he lie, but he also stole.</em></p></div><div class="rule-box"><div class="rule-title">С "Only"</div><p><em>Only when I arrived</em> did I understand.</p></div>`,
+   content_en:`<h3>Inversion</h3><p>Inversion places the <em>verb before the subject</em> for dramatic effect and formality.</p><div class="rule-box"><div class="rule-title">With negative adverbs</div><p><em>Never have I seen</em> such beauty.<br><em>Rarely does she complain.</em><br><em>Not only did he lie, but he also stole.</em></p></div><div class="rule-box"><div class="rule-title">With "Only"</div><p><em>Only when I arrived</em> did I understand the problem.<br><em>Only then</em> did she realise the truth.</p></div>`},
+
+  {id:26,level:'C1',cat:'grammar',
+   title:'Cleft sentences',desc:'Разцепени изречения',
+   title_en:'Cleft sentences',desc_en:'Emphasising specific information',
+   content:`<h3>Cleft Sentences</h3><div class="rule-box"><div class="rule-title">It is/was ... that/who</div><p>Normal: John broke the window.<br><em>It was John who broke the window.</em></p></div><div class="rule-box"><div class="rule-title">What ... is/was</div><p><em>What I need is a good rest.</em></p></div>`,
+   content_en:`<h3>Cleft Sentences</h3><p>Used to <em>emphasise a specific piece of information</em>.</p><div class="rule-box"><div class="rule-title">It is/was ... that/who</div><p>Normal: John broke the window.<br><em>It was John who broke the window.</em> (emphasis on John)<br><em>It was the window that John broke.</em> (emphasis on window)</p></div><div class="rule-box"><div class="rule-title">What ... is/was</div><p><em>What I need is a good rest.</em><br><em>What surprised me was his reaction.</em></p></div>`},
+
+  {id:27,level:'C1',cat:'grammar',
+   title:'Subjunctive Mood',desc:'Конюнктив',
+   title_en:'Subjunctive Mood',desc_en:'Wishes, recommendations and hypotheticals',
+   content:`<h3>Subjunctive Mood</h3><div class="rule-box"><div class="rule-title">Present Subjunctive</div><p>It is essential that he <em>be</em> on time.<br>She recommended that he <em>resign</em>.</p></div><div class="rule-box"><div class="rule-title">Past Subjunctive (wish)</div><p>I wish I <em>were</em> taller.</p></div>`,
+   content_en:`<h3>Subjunctive Mood</h3><p>Used after verbs of suggestion, recommendation and requirement.</p><div class="rule-box"><div class="rule-title">Present Subjunctive — after suggest, recommend, require, essential that</div><p>It is essential that he <em>be</em> on time. (not "is")<br>The committee recommended that she <em>resign</em>.</p></div><div class="rule-box"><div class="rule-title">Past Subjunctive — with wish and if only</div><p>I wish I <em>were</em> taller. (not "was" in formal English)<br>If only she <em>knew</em> the answer.</p></div>`},
+
+  {id:28,level:'C1',cat:'vocab',
+   title:'Напреднала лексика',desc:'Advanced vocabulary',
+   title_en:'Advanced vocabulary',desc_en:'High-level words in context',
+   content:`<h3>Напреднала лексика</h3><table class="example-table"><thead><tr><th>Дума</th><th>Значение</th></tr></thead><tbody><tr><td><em>ambiguous</em></td><td>двусмислен</td></tr><tr><td><em>meticulous</em></td><td>педантичен</td></tr><tr><td><em>profound</em></td><td>дълбок, значителен</td></tr><tr><td><em>eloquent</em></td><td>красноречив</td></tr><tr><td><em>paramount</em></td><td>от първостепенно значение</td></tr></tbody></table>`,
+   content_en:`<h3>Advanced Vocabulary</h3><table class="example-table"><thead><tr><th>Word</th><th>Meaning</th><th>Example sentence</th></tr></thead><tbody><tr><td><em>ambiguous</em></td><td>having more than one meaning</td><td>The instructions were <em>ambiguous</em>.</td></tr><tr><td><em>meticulous</em></td><td>extremely careful and precise</td><td>She is <em>meticulous</em> about details.</td></tr><tr><td><em>profound</em></td><td>very great or intense</td><td>A <em>profound</em> impact on society.</td></tr><tr><td><em>eloquent</em></td><td>fluent and persuasive in speech</td><td>An <em>eloquent</em> speaker.</td></tr><tr><td><em>paramount</em></td><td>of supreme importance</td><td>Safety is <em>paramount</em>.</td></tr></tbody></table>`},
+
+  {id:29,level:'C1',cat:'vocab',
+   title:'Академично писане',desc:'Essays and reports',
+   title_en:'Academic writing',desc_en:'Essay structure and linking phrases',
+   content:`<h3>Академично писане</h3><div class="rule-box"><div class="rule-title">Структура на есе</div><p>1. <em>Introduction</em> — теза<br>2. <em>Body paragraphs</em> — аргументи<br>3. <em>Conclusion</em> — обобщение</p></div><table class="example-table"><thead><tr><th>Функция</th><th>Фрази</th></tr></thead><tbody><tr><td>Добавяне</td><td><em>Furthermore, Moreover, In addition,</em></td></tr><tr><td>Противопоставяне</td><td><em>However, Nevertheless, On the other hand,</em></td></tr><tr><td>Заключение</td><td><em>In conclusion, To summarize,</em></td></tr></tbody></table>`,
+   content_en:`<h3>Academic Writing</h3><div class="rule-box"><div class="rule-title">Essay structure</div><p>1. <em>Introduction</em> — thesis and context<br>2. <em>Body paragraphs</em> — arguments with evidence<br>3. <em>Conclusion</em> — summary and recommendations</p></div><table class="example-table"><thead><tr><th>Function</th><th>Phrases</th></tr></thead><tbody><tr><td>Introduction</td><td><em>This essay argues that... / It is widely acknowledged...</em></td></tr><tr><td>Adding</td><td><em>Furthermore, / Moreover, / In addition,</em></td></tr><tr><td>Contrasting</td><td><em>However, / Nevertheless, / On the other hand,</em></td></tr><tr><td>Concluding</td><td><em>In conclusion, / To summarize, / Overall,</em></td></tr></tbody></table>`},
+
+  {id:30,level:'C1',cat:'vocab',
+   title:'Идиоми C1',desc:'Advanced idioms',
+   title_en:'Idioms C1',desc_en:'Advanced idioms for fluent speakers',
+   content:`<h3>Напреднали идиоми — C1</h3><table class="example-table"><thead><tr><th>Идиом</th><th>Значение</th></tr></thead><tbody><tr><td><em>sit on the fence</em></td><td>не заема страна</td></tr><tr><td><em>the elephant in the room</em></td><td>очевиден проблем, за който не се говори</td></tr><tr><td><em>read between the lines</em></td><td>разбирай скритото значение</td></tr><tr><td><em>burn bridges</em></td><td>унищожаване на връзки</td></tr></tbody></table>`,
+   content_en:`<h3>Advanced Idioms — C1</h3><table class="example-table"><thead><tr><th>Idiom</th><th>Meaning</th><th>Example</th></tr></thead><tbody><tr><td><em>sit on the fence</em></td><td>avoid taking sides</td><td>Politicians often <em>sit on the fence</em>.</td></tr><tr><td><em>the elephant in the room</em></td><td>obvious problem nobody mentions</td><td>The budget issue was <em>the elephant in the room</em>.</td></tr><tr><td><em>read between the lines</em></td><td>understand hidden meaning</td><td>You need to <em>read between the lines</em> in his letter.</td></tr><tr><td><em>burn bridges</em></td><td>permanently damage a relationship</td><td>Don't <em>burn your bridges</em> when you resign.</td></tr></tbody></table>`},
+
+  // ── C2 ──
+  {id:31,level:'C2',cat:'grammar',
+   title:'Mixed Conditionals',desc:'Смесени условни',
+   title_en:'Mixed Conditionals',desc_en:'Combining past and present in conditionals',
+   content:`<h3>Mixed Conditionals</h3><div class="rule-box"><div class="rule-title">Past → Present</div><p><em>If I had studied harder</em>, <em>I would be</em> a doctor now.</p></div><div class="rule-box"><div class="rule-title">Present → Past</div><p><em>If I were braver</em>, <em>I would have spoken</em> to her last night.</p></div>`,
+   content_en:`<h3>Mixed Conditionals</h3><p>These combine different time frames in one sentence.</p><div class="rule-box"><div class="rule-title">Past condition → Present result (Type 3+2)</div><p><em>If I had studied harder</em> (in the past), <em>I would be</em> a doctor now.<br>Meaning: I didn't study, so I'm not a doctor.</p></div><div class="rule-box"><div class="rule-title">Present condition → Past result (Type 2+3)</div><p><em>If I were braver</em> (now), <em>I would have spoken</em> to her last night.<br>Meaning: I'm not brave, so I didn't speak to her.</p></div>`},
+
+  {id:32,level:'C2',cat:'grammar',
+   title:'Ellipsis & Substitution',desc:'Изпускане и заместване',
+   title_en:'Ellipsis & Substitution',desc_en:'Avoiding repetition like a native speaker',
+   content:`<h3>Ellipsis & Substitution</h3><div class="rule-box"><div class="rule-title">Ellipsis</div><p>"Are you coming?" — "I hope <em>so</em>."<br>"She wants to leave, and I do <em>too</em>."</p></div><div class="rule-box"><div class="rule-title">Substitution</div><p>"Which cake?" — "The <em>one</em> with chocolate."</p></div>`,
+   content_en:`<h3>Ellipsis & Substitution</h3><p>Advanced speakers avoid repetition using these techniques.</p><div class="rule-box"><div class="rule-title">Ellipsis — omitting words already understood</div><p>"Are you coming?" — "I hope <em>so</em>." (= I hope I am coming)<br>"She wants to leave, and I do <em>too</em>." (= I also want to leave)</p></div><div class="rule-box"><div class="rule-title">Substitution — replacing with a shorter form</div><p>"Which cake do you want?" — "I'll have the <em>one</em> with chocolate."<br>"I forgot my book." — "Use <em>mine</em>." (= my book)</p></div>`},
+
+  {id:33,level:'C2',cat:'grammar',
+   title:'Discourse Markers',desc:'Напреднали свързващи думи',
+   title_en:'Discourse Markers',desc_en:'Advanced linking words for cohesion',
+   content:`<h3>Discourse Markers</h3><table class="example-table"><thead><tr><th>Функция</th><th>Маркери</th></tr></thead><tbody><tr><td>Отстъпка</td><td><em>albeit, even so, notwithstanding</em></td></tr><tr><td>Уточняване</td><td><em>in other words, namely</em></td></tr><tr><td>Резултат</td><td><em>consequently, hence, thus</em></td></tr><tr><td>Обобщение</td><td><em>on balance, all things considered</em></td></tr></tbody></table>`,
+   content_en:`<h3>Discourse Markers</h3><table class="example-table"><thead><tr><th>Function</th><th>Markers</th><th>Example</th></tr></thead><tbody><tr><td>Concession</td><td><em>albeit, even so, notwithstanding</em></td><td>The plan worked, <em>albeit</em> slowly.</td></tr><tr><td>Clarification</td><td><em>in other words, namely, that is</em></td><td><em>Namely</em>, three core issues remain.</td></tr><tr><td>Result</td><td><em>consequently, hence, thus, therefore</em></td><td><em>Consequently</em>, sales declined.</td></tr><tr><td>Summary</td><td><em>on balance, all things considered</em></td><td><em>On balance</em>, it was a success.</td></tr></tbody></table>`},
+
+  {id:34,level:'C2',cat:'vocab',
+   title:'Нюанси на значението',desc:'Connotation and nuance',
+   title_en:'Nuance and connotation',desc_en:'The hidden emotional meaning of words',
+   content:`<h3>Нюанси на значението</h3><table class="example-table"><thead><tr><th>Неутрална</th><th>Положителна</th><th>Отрицателна</th></tr></thead><tbody><tr><td>thin</td><td><em>slender, slim</em></td><td><em>scrawny, gaunt</em></td></tr><tr><td>confident</td><td><em>self-assured</em></td><td><em>arrogant, cocky</em></td></tr><tr><td>cheap</td><td><em>affordable</em></td><td><em>stingy, miserly</em></td></tr></tbody></table>`,
+   content_en:`<h3>Nuance and Connotation</h3><p>At C2 level, choosing the right word is crucial — each carries emotional weight.</p><table class="example-table"><thead><tr><th>Neutral</th><th>Positive connotation</th><th>Negative connotation</th></tr></thead><tbody><tr><td>thin</td><td><em>slender, slim</em></td><td><em>scrawny, gaunt</em></td></tr><tr><td>confident</td><td><em>self-assured</em></td><td><em>arrogant, cocky</em></td></tr><tr><td>cheap</td><td><em>affordable, economical</em></td><td><em>stingy, miserly</em></td></tr><tr><td>old</td><td><em>mature, experienced</em></td><td><em>decrepit, ancient</em></td></tr></tbody></table>`},
+
+  {id:35,level:'C2',cat:'vocab',
+   title:'Идиоми C2',desc:'Complex expressions',
+   title_en:'Idioms C2',desc_en:'Mastering the most complex expressions',
+   content:`<h3>Идиоми — C2</h3><table class="example-table"><thead><tr><th>Израз</th><th>Значение</th></tr></thead><tbody><tr><td><em>gilding the lily</em></td><td>ненужно украсяване</td></tr><tr><td><em>Hobson's choice</em></td><td>привиден избор без реални опции</td></tr><tr><td><em>a double-edged sword</em></td><td>предимства и недостатъци</td></tr><tr><td><em>to pass the buck</em></td><td>прехвърляш отговорността</td></tr></tbody></table>`,
+   content_en:`<h3>Idioms — C2</h3><table class="example-table"><thead><tr><th>Expression</th><th>Meaning</th><th>Example</th></tr></thead><tbody><tr><td><em>gilding the lily</em></td><td>adding unnecessary ornamentation</td><td>Adding more graphics would be <em>gilding the lily</em>.</td></tr><tr><td><em>Hobson's choice</em></td><td>apparent choice with no real options</td><td>Accept the deal or leave — it's <em>Hobson's choice</em>.</td></tr><tr><td><em>a double-edged sword</em></td><td>something with both benefits and drawbacks</td><td>Social media is <em>a double-edged sword</em>.</td></tr><tr><td><em>to pass the buck</em></td><td>to shift responsibility to someone else</td><td>Stop <em>passing the buck</em> and take responsibility!</td></tr></tbody></table>`},
+
+  {id:36,level:'C2',cat:'vocab',
+   title:'Реторика и убеждаване',desc:'Rhetorical devices',
+   title_en:'Rhetoric and persuasion',desc_en:'Rhetorical devices used by great speakers',
+   content:`<h3>Реторика</h3><table class="example-table"><thead><tr><th>Похват</th><th>Обяснение</th></tr></thead><tbody><tr><td><em>Anaphora</em></td><td>повторение в началото</td></tr><tr><td><em>Antithesis</em></td><td>противопоставяне</td></tr><tr><td><em>Hyperbole</em></td><td>преувеличение</td></tr><tr><td><em>Euphemism</em></td><td>омекотяване</td></tr></tbody></table>`,
+   content_en:`<h3>Rhetoric and Persuasion</h3><table class="example-table"><thead><tr><th>Device</th><th>Explanation</th><th>Example</th></tr></thead><tbody><tr><td><em>Anaphora</em></td><td>repetition at the start of clauses</td><td>"We shall fight... we shall never surrender."</td></tr><tr><td><em>Antithesis</em></td><td>contrasting ideas in parallel</td><td>"Ask not what your country can do for you..."</td></tr><tr><td><em>Hyperbole</em></td><td>deliberate exaggeration</td><td>"I've told you a million times."</td></tr><tr><td><em>Euphemism</em></td><td>softening a difficult reality</td><td>"passed away" instead of "died"</td></tr></tbody></table>`},
 ];
 
 const questions = [
-  {q:'Кое е правилно?', opts:['I am happy.','I is happy.','I are happy.','Am I happy.'], ans:0, level:'A1', topic:'To Be'},
-  {q:'Попълни: She ___ a student.', opts:['am','are','is','be'], ans:2, level:'A1', topic:'To Be'},
-  {q:'Как е "добро утро" на английски?', opts:['Good night','Good morning','Good evening','Hello night'], ans:1, level:'A1', topic:'Greetings'},
-  {q:'Как се казва "баба" на английски?', opts:['aunt','sister','grandmother','mother'], ans:2, level:'A1', topic:'Family'},
-  {q:'Кое число е "twenty"?', opts:['12','20','200','2'], ans:1, level:'A1', topic:'Numbers'},
-  {q:'Попълни: This is ___ book.', opts:['I','my','me','mine book'], ans:1, level:'A1', topic:'Possessives'},
-  {q:'Как е "зелен" на английски?', opts:['blue','red','yellow','green'], ans:3, level:'A1', topic:'Colours'},
-  {q:'Попълни: She ___ to school every day.', opts:['go','goes','is going','went'], ans:1, level:'A2', topic:'Present Simple'},
-  {q:'Кое е Past Simple на "go"?', opts:['goed','gone','goes','went'], ans:3, level:'A2', topic:'Past Simple'},
-  {q:'Попълни: They ___ football right now.', opts:['play','plays','are playing','played'], ans:2, level:'A2', topic:'Present Continuous'},
-  {q:'Как се казва "хляб" на английски?', opts:['meat','bread','water','juice'], ans:1, level:'A2', topic:'Food'},
-  {q:'Спонтанно решение за бъдещето?', opts:['going to','will','am','was'], ans:1, level:'A2', topic:'Future'},
-  {q:'Кой е петият ден от седмицата?', opts:['Monday','Wednesday','Friday','Sunday'], ans:2, level:'A2', topic:'Days'},
-  {q:'Попълни: I ___ never ___ sushi.', opts:['have / eaten','has / eaten','had / eaten','have / eat'], ans:0, level:'B1', topic:'Present Perfect'},
-  {q:'Кое е правилно?', opts:['You should to sleep more.','You should sleeping.','You should sleep more.','You should slept.'], ans:2, level:'B1', topic:'Modal Verbs'},
-  {q:'Попълни: If it rains, I ___ stay home.', opts:['would','will','should','going to'], ans:1, level:'B1', topic:'Conditional 1'},
-  {q:'Попълни: She ___ when I called.', opts:['read','reads','was reading','has read'], ans:2, level:'B1', topic:'Past Continuous'},
-  {q:'Как е "летище" на английски?', opts:['train station','airport','bus stop','harbour'], ans:1, level:'B1', topic:'Travel'},
-  {q:'Кое е пасивното изречение?', opts:['She wrote the letter.','The letter was written by her.','She has written.','She was writing.'], ans:1, level:'B2', topic:'Passive Voice'},
-  {q:'"I am tired." → She said she ___ tired.', opts:['is','was','were','has been'], ans:1, level:'B2', topic:'Reported Speech'},
-  {q:'Type 2: If I ___ rich, I would travel.', opts:['am','was','were','had been'], ans:2, level:'B2', topic:'Conditional 2'},
-  {q:'Кое е формалното на "show"?', opts:['give','demonstrate','tell','say'], ans:1, level:'B2', topic:'Academic Vocab'},
-  {q:'Какво означава "under the weather"?', opts:['навън при лошо време','не се чувствам добре','уморен съм','загубен съм'], ans:1, level:'B2', topic:'Idioms'},
-  {q:'Попълни с инверсия: ___ had I arrived when it started.', opts:['Rarely','Never','Hardly','Seldom'], ans:2, level:'C1', topic:'Inversion'},
-  {q:'Cleft sentence: ___ was John who broke the window.', opts:['That','It','What','This'], ans:1, level:'C1', topic:'Cleft Sentences'},
-  {q:'Попълни: It is essential that he ___ on time.', opts:['is','be','was','were'], ans:1, level:'C1', topic:'Subjunctive'},
-  {q:'Какво означава "the elephant in the room"?', opts:['голям проблем','очевиден проблем, за който не се говори','нещо скъпо','забавен факт'], ans:1, level:'C1', topic:'Idioms C1'},
-  {q:'Кой маркер изразява отстъпка?', opts:['furthermore','consequently','albeit','namely'], ans:2, level:'C1', topic:'Discourse Markers'},
-  {q:'Mixed conditional: If I ___ harder, I would be a doctor now.', opts:['study','studied','had studied','have studied'], ans:2, level:'C2', topic:'Mixed Conditionals'},
-  {q:'Коя дума има ОТРИЦАТЕЛНА конотация?', opts:['slender','slim','scrawny','thin'], ans:2, level:'C2', topic:'Nuance'},
-  {q:"Какво е \"Hobson's choice\"?", opts:['труден избор','привиден избор без реални опции','мъдро решение','щастлив случай'], ans:1, level:'C2', topic:'Idioms C2'},
-  {q:'"We shall fight..." — кой реторичен похват е?', opts:['Antithesis','Hyperbole','Anaphora','Euphemism'], ans:2, level:'C2', topic:'Rhetoric'},
-  {q:'Ellipsis: "Are you coming?" — "I hope ___."', opts:['it','so','that','yes'], ans:1, level:'C2', topic:'Ellipsis'},
+  {q:'Кое е правилно?', opts:['I am happy.','I is happy.','I are happy.','Am I happy.'], ans:0, level:'A1', topic:'To Be',
+   q_en:'Which sentence is correct?', opts_en:['I am happy.','I is happy.','I are happy.','Am I happy.']},
+  {q:'Попълни: She ___ a student.', opts:['am','are','is','be'], ans:2, level:'A1', topic:'To Be',
+   q_en:'Fill in: She ___ a student.', opts_en:['am','are','is','be']},
+  {q:'Как е "добро утро" на английски?', opts:['Good night','Good morning','Good evening','Hello night'], ans:1, level:'A1', topic:'Greetings',
+   q_en:'How do you say "добро утро" in English?', opts_en:['Good night','Good morning','Good evening','Hello night'],
+   flip:true, q_flip:'What is the Bulgarian translation of "Good morning"?', opts_flip:['Лека нощ','Добро утро','Добър вечер','Здравей нощ'], ans_flip:1},
+  {q:'Как се казва "баба" на английски?', opts:['aunt','sister','grandmother','mother'], ans:2, level:'A1', topic:'Family',
+   q_en:'What is the English word for "баба" (grandmother)?', opts_en:['aunt','sister','grandmother','mother'],
+   flip:true, q_flip:'What is the Bulgarian word for "grandmother"?', opts_flip:['леля','сестра','баба','майка'], ans_flip:2},
+  {q:'Кое число е "twenty"?', opts:['12','20','200','2'], ans:1, level:'A1', topic:'Numbers',
+   q_en:'Which number is "twenty"?', opts_en:['12','20','200','2']},
+  {q:'Попълни: This is ___ book.', opts:['I','my','me','mine book'], ans:1, level:'A1', topic:'Possessives',
+   q_en:'Fill in: This is ___ book.', opts_en:['I','my','me','mine book']},
+  {q:'Как е "зелен" на английски?', opts:['blue','red','yellow','green'], ans:3, level:'A1', topic:'Colours',
+   q_en:'Which colour is "зелен" (green)?', opts_en:['blue','red','yellow','green'],
+   flip:true, q_flip:'What is the Bulgarian word for "green"?', opts_flip:['синьо','червено','жълто','зелено'], ans_flip:3},
+  {q:'Попълни: She ___ to school every day.', opts:['go','goes','is going','went'], ans:1, level:'A2', topic:'Present Simple',
+   q_en:'Fill in: She ___ to school every day.', opts_en:['go','goes','is going','went']},
+  {q:'Кое е Past Simple на "go"?', opts:['goed','gone','goes','went'], ans:3, level:'A2', topic:'Past Simple',
+   q_en:'What is the Past Simple of "go"?', opts_en:['goed','gone','goes','went']},
+  {q:'Попълни: They ___ football right now.', opts:['play','plays','are playing','played'], ans:2, level:'A2', topic:'Present Continuous',
+   q_en:'Fill in: They ___ football right now.', opts_en:['play','plays','are playing','played']},
+  {q:'Как се казва "хляб" на английски?', opts:['meat','bread','water','juice'], ans:1, level:'A2', topic:'Food',
+   q_en:'What is the English word for "хляб" (bread)?', opts_en:['meat','bread','water','juice'],
+   flip:true, q_flip:'What is the Bulgarian word for "bread"?', opts_flip:['месо','хляб','вода','сок'], ans_flip:1},
+  {q:'Спонтанно решение за бъдещето?', opts:['going to','will','am','was'], ans:1, level:'A2', topic:'Future',
+   q_en:'Which form expresses a spontaneous decision about the future?', opts_en:['going to','will','am','was']},
+  {q:'Кой е петият ден от седмицата?', opts:['Monday','Wednesday','Friday','Sunday'], ans:2, level:'A2', topic:'Days',
+   q_en:'Which is the fifth day of the week?', opts_en:['Monday','Wednesday','Friday','Sunday']},
+  {q:'Попълни: I ___ never ___ sushi.', opts:['have / eaten','has / eaten','had / eaten','have / eat'], ans:0, level:'B1', topic:'Present Perfect',
+   q_en:'Fill in: I ___ never ___ sushi.', opts_en:['have / eaten','has / eaten','had / eaten','have / eat']},
+  {q:'Кое е правилно?', opts:['You should to sleep more.','You should sleeping.','You should sleep more.','You should slept.'], ans:2, level:'B1', topic:'Modal Verbs',
+   q_en:'Which sentence is correct?', opts_en:['You should to sleep more.','You should sleeping.','You should sleep more.','You should slept.']},
+  {q:'Попълни: If it rains, I ___ stay home.', opts:['would','will','should','going to'], ans:1, level:'B1', topic:'Conditional 1',
+   q_en:'Fill in: If it rains, I ___ stay home.', opts_en:['would','will','should','going to']},
+  {q:'Попълни: She ___ when I called.', opts:['read','reads','was reading','has read'], ans:2, level:'B1', topic:'Past Continuous',
+   q_en:'Fill in: She ___ when I called.', opts_en:['read','reads','was reading','has read']},
+  {q:'Как е "летище" на английски?', opts:['train station','airport','bus stop','harbour'], ans:1, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "летище" (airport)?', opts_en:['train station','airport','bus stop','harbour'],
+   flip:true, q_flip:'What is the Bulgarian word for "airport"?', opts_flip:['жп гара','летище','автобусна спирка','пристанище'], ans_flip:1},
+  {q:'Кое е пасивното изречение?', opts:['She wrote the letter.','The letter was written by her.','She has written.','She was writing.'], ans:1, level:'B2', topic:'Passive Voice',
+   q_en:'Which sentence is in the passive voice?', opts_en:['She wrote the letter.','The letter was written by her.','She has written.','She was writing.']},
+  {q:'"I am tired." → She said she ___ tired.', opts:['is','was','were','has been'], ans:1, level:'B2', topic:'Reported Speech',
+   q_en:'"I am tired." → She said she ___ tired.', opts_en:['is','was','were','has been']},
+  {q:'Type 2: If I ___ rich, I would travel.', opts:['am','was','were','had been'], ans:2, level:'B2', topic:'Conditional 2',
+   q_en:'Type 2 Conditional: If I ___ rich, I would travel.', opts_en:['am','was','were','had been']},
+  {q:'Кое е формалното на "show"?', opts:['give','demonstrate','tell','say'], ans:1, level:'B2', topic:'Academic Vocab',
+   q_en:'Which is the formal / academic word for "show"?', opts_en:['give','demonstrate','tell','say']},
+  {q:'Какво означава "under the weather"?', opts:['навън при лошо време','не се чувствам добре','уморен съм','загубен съм'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "under the weather" mean?', opts_en:['outside in bad weather','feeling ill','feeling tired','feeling lost'],
+   flip:true, q_flip:'Which Bulgarian phrase means "feeling ill"?', opts_flip:['навън при лошо време','не се чувствам добре','уморен съм','загубен съм'], ans_flip:1},
+  {q:'Попълни с инверсия: ___ had I arrived when it started.', opts:['Rarely','Never','Hardly','Seldom'], ans:2, level:'C1', topic:'Inversion',
+   q_en:'Fill in with inversion: ___ had I arrived when it started.', opts_en:['Rarely','Never','Hardly','Seldom']},
+  {q:'Cleft sentence: ___ was John who broke the window.', opts:['That','It','What','This'], ans:1, level:'C1', topic:'Cleft Sentences',
+   q_en:'Complete the cleft sentence: ___ was John who broke the window.', opts_en:['That','It','What','This']},
+  {q:'Попълни: It is essential that he ___ on time.', opts:['is','be','was','were'], ans:1, level:'C1', topic:'Subjunctive',
+   q_en:'Fill in: It is essential that he ___ on time. (subjunctive)', opts_en:['is','be','was','were']},
+  {q:'Какво означава "the elephant in the room"?', opts:['голям проблем','очевиден проблем, за който не се говори','нещо скъпо','забавен факт'], ans:1, level:'C1', topic:'Idioms C1',
+   q_en:'What does "the elephant in the room" mean?', opts_en:['a big problem','an obvious problem nobody talks about','something expensive','a funny fact'],
+   flip:true, q_flip:'Which Bulgarian phrase means "an obvious problem nobody talks about"?', opts_flip:['голям проблем','очевиден проблем, за който не се говори','нещо скъпо','забавен факт'], ans_flip:1},
+  {q:'Кой маркер изразява отстъпка?', opts:['furthermore','consequently','albeit','namely'], ans:2, level:'C1', topic:'Discourse Markers',
+   q_en:'Which discourse marker expresses concession?', opts_en:['furthermore','consequently','albeit','namely']},
+  {q:'Mixed conditional: If I ___ harder, I would be a doctor now.', opts:['study','studied','had studied','have studied'], ans:2, level:'C2', topic:'Mixed Conditionals',
+   q_en:'Mixed conditional: If I ___ harder, I would be a doctor now.', opts_en:['study','studied','had studied','have studied']},
+  {q:'Коя дума има ОТРИЦАТЕЛНА конотация?', opts:['slender','slim','scrawny','thin'], ans:2, level:'C2', topic:'Nuance',
+   q_en:'Which word has a NEGATIVE connotation?', opts_en:['slender','slim','scrawny','thin']},
+  {q:"Какво е \"Hobson's choice\"?", opts:['труден избор','привиден избор без реални опции','мъдро решение','щастлив случай'], ans:1, level:'C2', topic:'Idioms C2',
+   q_en:"What is \"Hobson's choice\"?", opts_en:['a difficult choice','an apparent choice with no real options','a wise decision','a lucky chance'],
+   flip:true, q_flip:'Which Bulgarian phrase means "an apparent choice with no real options"?', opts_flip:['труден избор','привиден избор без реални опции','мъдро решение','щастлив случай'], ans_flip:1},
+  {q:'"We shall fight..." — кой реторичен похват е?', opts:['Antithesis','Hyperbole','Anaphora','Euphemism'], ans:2, level:'C2', topic:'Rhetoric',
+   q_en:'"We shall fight..." — which rhetorical device is this?', opts_en:['Antithesis','Hyperbole','Anaphora','Euphemism']},
+  {q:'Ellipsis: "Are you coming?" — "I hope ___."', opts:['it','so','that','yes'], ans:1, level:'C2', topic:'Ellipsis',
+   q_en:'Ellipsis: "Are you coming?" — "I hope ___."', opts_en:['it','so','that','yes']},
+
+  /* ── A1 extra ── */
+  {q:'Кое е правилното множествено число на "child"?', opts:['childs','childen','children','child'], ans:2, level:'A1', topic:'Nouns',
+   q_en:'What is the correct plural of "child"?', opts_en:['childs','childen','children','child']},
+  {q:'Попълни: ___ is a cat on the table.', opts:['This','There','These','It'], ans:1, level:'A1', topic:'There is/are',
+   q_en:'Fill in: ___ is a cat on the table.', opts_en:['This','There','These','It']},
+  {q:'Как е "котка" на английски?', opts:['dog','bird','cat','fish'], ans:2, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "котка" (cat)?', opts_en:['dog','bird','cat','fish'],
+   flip:true, q_flip:'What is the Bulgarian word for "cat"?', opts_flip:['куче','птица','котка','риба'], ans_flip:2},
+  {q:'Кое число е "fifteen"?', opts:['5','50','15','55'], ans:2, level:'A1', topic:'Numbers',
+   q_en:'Which number is "fifteen"?', opts_en:['5','50','15','55']},
+  {q:'Попълни: ___ your name?', opts:['What is','Who is','How is','Where is'], ans:0, level:'A1', topic:'Questions',
+   q_en:'Fill in: ___ your name?', opts_en:['What is','Who is','How is','Where is']},
+
+  /* ── A2 extra ── */
+  {q:'Попълни: I ___ TV last night.', opts:['watch','am watching','watched','have watched'], ans:2, level:'A2', topic:'Past Simple',
+   q_en:'Fill in: I ___ TV last night.', opts_en:['watch','am watching','watched','have watched']},
+  {q:'Как е "лекар" на английски?', opts:['teacher','driver','doctor','nurse'], ans:2, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "лекар" (doctor)?', opts_en:['teacher','driver','doctor','nurse'],
+   flip:true, q_flip:'What is the Bulgarian word for "doctor"?', opts_flip:['учител','шофьор','лекар','медицинска сестра'], ans_flip:2},
+  {q:'Попълни: There ___ many people in the park.', opts:['is','am','are','be'], ans:2, level:'A2', topic:'There is/are',
+   q_en:'Fill in: There ___ many people in the park.', opts_en:['is','am','are','be']},
+  {q:'Как се казва "зима" на английски?', opts:['spring','summer','autumn','winter'], ans:3, level:'A2', topic:'Seasons',
+   q_en:'What is the English word for "зима" (winter)?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is the Bulgarian word for "winter"?', opts_flip:['пролет','лято','есен','зима'], ans_flip:3},
+  {q:'Попълни: ___ going to rain tomorrow.', opts:["It's","Its","There's","Is"], ans:0, level:'A2', topic:'Future',
+   q_en:"Fill in: ___ going to rain tomorrow.", opts_en:["It's","Its","There's","Is"]},
+
+  /* ── B1 extra ── */
+  {q:'Попълни: She ___ in London for three years.', opts:['live','lives','has lived','is living'], ans:2, level:'B1', topic:'Present Perfect',
+   q_en:'Fill in: She ___ in London for three years.', opts_en:['live','lives','has lived','is living']},
+  {q:'Кое е правилното сравнение: "good"?', opts:['gooder','more good','better','best'], ans:2, level:'B1', topic:'Comparatives',
+   q_en:'What is the correct comparative form of "good"?', opts_en:['gooder','more good','better','best']},
+  {q:'Попълни: You ___ smoke here — it\'s forbidden.', opts:["mustn't","don't have to","couldn't","wouldn't"], ans:0, level:'B1', topic:'Modal Verbs',
+   q_en:"Fill in: You ___ smoke here — it's forbidden.", opts_en:["mustn't","don't have to","couldn't","wouldn't"]},
+  {q:'Попълни: While I ___, the phone rang.', opts:['cook','cooked','was cooking','am cooking'], ans:2, level:'B1', topic:'Past Continuous',
+   q_en:'Fill in: While I ___, the phone rang.', opts_en:['cook','cooked','was cooking','am cooking']},
+  {q:'Как е "паспорт" на английски?', opts:['ticket','luggage','passport','boarding pass'], ans:2, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "паспорт" (passport)?', opts_en:['ticket','luggage','passport','boarding pass'],
+   flip:true, q_flip:'What is the Bulgarian word for "passport"?', opts_flip:['билет','багаж','паспорт','boarding pass'], ans_flip:2},
+
+  /* ── B2 extra ── */
+  {q:'Попълни: If I had studied more, I ___ the exam.', opts:['would pass','will pass','would have passed','had passed'], ans:2, level:'B2', topic:'Conditional 3',
+   q_en:'Fill in: If I had studied more, I ___ the exam.', opts_en:['would pass','will pass','would have passed','had passed']},
+  {q:'Пасив: "They are building a new road." →', opts:['A new road built.','A new road is being built.','A new road has been built.','A new road will build.'], ans:1, level:'B2', topic:'Passive Voice',
+   q_en:'Passive: "They are building a new road." →', opts_en:['A new road built.','A new road is being built.','A new road has been built.','A new road will build.']},
+  {q:'Кое е академичното на "use"?', opts:['employ','make','take','put'], ans:0, level:'B2', topic:'Academic Vocab',
+   q_en:'Which is the formal/academic word for "use"?', opts_en:['employ','make','take','put']},
+  {q:'"He said: I will come." → He said he ___ come.', opts:['will','would','shall','could'], ans:1, level:'B2', topic:'Reported Speech',
+   q_en:'"He said: I will come." → He said he ___ come.', opts_en:['will','would','shall','could']},
+  {q:'Какво означава "once in a blue moon"?', opts:['много скоро','много рядко','веднъж месечно','по лунно осветление'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "once in a blue moon" mean?', opts_en:['very soon','very rarely','once a month','by moonlight'],
+   flip:true, q_flip:'Which Bulgarian phrase means "very rarely"?', opts_flip:['много скоро','много рядко','веднъж месечно','по лунно осветление'], ans_flip:1},
+
+  /* ── C1 extra ── */
+  {q:'Попълни с инверсия: ___ have I seen such beauty.', opts:['Rarely','Always','Often','Usually'], ans:0, level:'C1', topic:'Inversion',
+   q_en:'Fill in with inversion: ___ have I seen such beauty.', opts_en:['Rarely','Always','Often','Usually']},
+  {q:'Кой маркер изразява добавяне?', opts:['however','moreover','nevertheless','whereas'], ans:1, level:'C1', topic:'Discourse Markers',
+   q_en:'Which discourse marker expresses addition?', opts_en:['however','moreover','nevertheless','whereas']},
+  {q:'Попълни: It is vital that she ___ the truth.', opts:['knows','know','knew','has known'], ans:1, level:'C1', topic:'Subjunctive',
+   q_en:'Fill in: It is vital that she ___ the truth. (subjunctive)', opts_en:['knows','know','knew','has known']},
+  {q:'Какво означава "to burn bridges"?', opts:['да пътуваш много','да унищожиш отношенията си','да вземеш лошо решение','да се откажеш от нещо'], ans:1, level:'C1', topic:'Idioms C1',
+   q_en:'What does "to burn bridges" mean?', opts_en:['to travel a lot','to permanently damage a relationship','to make a bad decision','to give something up'],
+   flip:true, q_flip:'Which Bulgarian phrase means "to permanently damage a relationship"?', opts_flip:['да пътуваш много','да унищожиш отношенията си','да вземеш лошо решение','да се откажеш от нещо'], ans_flip:1},
+  {q:'Cleft sentence: ___ I want is a good rest.', opts:['It','That','What','This'], ans:2, level:'C1', topic:'Cleft Sentences',
+   q_en:'Complete the cleft sentence: ___ I want is a good rest.', opts_en:['It','That','What','This']},
+
+  /* ── C2 extra ── */
+  {q:'Коя дума има ПОЛОЖИТЕЛНА конотация в сравнение с останалите?', opts:['cheap','inexpensive','stingy','miserly'], ans:1, level:'C2', topic:'Nuance',
+   q_en:'Which word has a POSITIVE connotation compared to the others?', opts_en:['cheap','inexpensive','stingy','miserly']},
+  {q:'Mixed conditional: If I ___ there, I would know the answer now.', opts:['was','were','had been','have been'], ans:2, level:'C2', topic:'Mixed Conditionals',
+   q_en:'Mixed conditional: If I ___ there, I would know the answer now.', opts_en:['was','were','had been','have been']},
+  {q:'Какво означава "gilding the lily"?', opts:['украсяваш нещо, което вече е красиво','правиш нещо безполезно','работиш много усилено','разпиляваш ресурси'], ans:0, level:'C2', topic:'Idioms C2',
+   q_en:'What does "gilding the lily" mean?', opts_en:['over-decorating something already beautiful','doing something useless','working very hard','wasting resources'],
+   flip:true, q_flip:'Which Bulgarian phrase means "over-decorating something already beautiful"?', opts_flip:['украсяваш нещо, което вече е красиво','правиш нещо безполезно','работиш много усилено','разпиляваш ресурси'], ans_flip:0},
+  {q:'"Ask not what your country can do..." — кой похват е?', opts:['Anaphora','Antithesis','Hyperbole','Euphemism'], ans:1, level:'C2', topic:'Rhetoric',
+   q_en:'"Ask not what your country can do..." — which rhetorical device is this?', opts_en:['Anaphora','Antithesis','Hyperbole','Euphemism']},
+  {q:'Ellipsis: "Can you drive?" — "Yes, I ___."', opts:['can do','can','do','am'], ans:1, level:'C2', topic:'Ellipsis',
+   q_en:'Ellipsis: "Can you drive?" — "Yes, I ___."', opts_en:['can do','can','do','am']},
+  /* ── A1 — To Be extra ── */
+  {q:'Попълни: We ___ friends.', opts:['am','is','are','be'], ans:2, level:'A1', topic:'To Be',
+   q_en:'Fill in: We ___ friends.', opts_en:['am','is','are','be']},
+  {q:'Попълни: ___ he a teacher?', opts:['Am','Is','Are','Be'], ans:1, level:'A1', topic:'To Be',
+   q_en:'Fill in: ___ he a teacher?', opts_en:['Am','Is','Are','Be']},
+  {q:'Попълни: They ___ not happy.', opts:['am','is','are','be'], ans:2, level:'A1', topic:'To Be',
+   q_en:'Fill in: They ___ not happy.', opts_en:['am','is','are','be']},
+  {q:'Попълни: I ___ from Bulgaria.', opts:['am','is','are','be'], ans:0, level:'A1', topic:'To Be',
+   q_en:'Fill in: I ___ from Bulgaria.', opts_en:['am','is','are','be']},
+
+  /* ── A1 — Basics extra ── */
+  {q:'Как е "куче" на английски?', opts:['cat','dog','fish','bird'], ans:1, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "куче" (dog)?', opts_en:['cat','dog','fish','bird'],
+   flip:true, q_flip:'What is the Bulgarian word for "dog"?', opts_flip:['котка','куче','риба','птица'], ans_flip:1},
+  {q:'Кое число е "thirty"?', opts:['3','13','30','300'], ans:2, level:'A1', topic:'Numbers',
+   q_en:'Which number is "thirty"?', opts_en:['3','13','30','300']},
+  {q:'Попълни: ___ are two cats here.', opts:['This','There','These','It'], ans:1, level:'A1', topic:'There is/are',
+   q_en:'Fill in: ___ are two cats here.', opts_en:['This','There','These','It']},
+  {q:'Как е "птица" на английски?', opts:['fish','dog','bird','cat'], ans:2, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "птица" (bird)?', opts_en:['fish','dog','bird','cat'],
+   flip:true, q_flip:'What is the Bulgarian word for "bird"?', opts_flip:['риба','куче','птица','котка'], ans_flip:2},
+
+  /* ── A1 — Vocab extra ── */
+  {q:'Как се казва "чичо" на английски?', opts:['brother','uncle','father','cousin'], ans:1, level:'A1', topic:'Family',
+   q_en:'What is the English word for "чичо" (uncle)?', opts_en:['brother','uncle','father','cousin'],
+   flip:true, q_flip:'What is the Bulgarian word for "uncle"?', opts_flip:['брат','чичо','баща','братовчед'], ans_flip:1},
+  {q:'Как е "довиждане" на английски?', opts:['Hello','Good morning','Goodbye','Thank you'], ans:2, level:'A1', topic:'Greetings',
+   q_en:'How do you say "довиждане" in English?', opts_en:['Hello','Good morning','Goodbye','Thank you'],
+   flip:true, q_flip:'What is the Bulgarian word for "Goodbye"?', opts_flip:['Здравей','Добро утро','Довиждане','Благодаря'], ans_flip:2},
+  {q:'Попълни: That is ___ pen.', opts:['I','my','me','mine pen'], ans:1, level:'A1', topic:'Possessives',
+   q_en:'Fill in: That is ___ pen.', opts_en:['I','my','me','mine pen']},
+  {q:'Как е "червен" на английски?', opts:['blue','red','green','yellow'], ans:1, level:'A1', topic:'Colours',
+   q_en:'What is the English word for "червен" (red)?', opts_en:['blue','red','green','yellow'],
+   flip:true, q_flip:'What is the Bulgarian word for "red"?', opts_flip:['синьо','червено','зелено','жълто'], ans_flip:1},
+
+  /* ── A2 — Tenses extra ── */
+  {q:'Попълни: He ___ every morning.', opts:['run','runs','is running','ran'], ans:1, level:'A2', topic:'Present Simple',
+   q_en:'Fill in: He ___ every morning.', opts_en:['run','runs','is running','ran']},
+  {q:'Попълни: We ___ the movie yesterday.', opts:['watch','watches','are watching','watched'], ans:3, level:'A2', topic:'Past Simple',
+   q_en:'Fill in: We ___ the movie yesterday.', opts_en:['watch','watches','are watching','watched']},
+  {q:'Попълни: Look! She ___ in the pool.', opts:['swim','swims','is swimming','swam'], ans:2, level:'A2', topic:'Present Continuous',
+   q_en:'Fill in: Look! She ___ in the pool.', opts_en:['swim','swims','is swimming','swam']},
+  {q:'Кое е Past Simple на "eat"?', opts:['eated','eaten','ate','eats'], ans:2, level:'A2', topic:'Past Simple',
+   q_en:'What is the Past Simple of "eat"?', opts_en:['eated','eaten','ate','eats']},
+  {q:'Кое е Past Simple на "have"?', opts:['haved','have','has','had'], ans:3, level:'A2', topic:'Past Simple',
+   q_en:'What is the Past Simple of "have"?', opts_en:['haved','have','has','had']},
+
+  /* ── A2 — Vocab extra ── */
+  {q:'Как е "учител" на английски?', opts:['doctor','driver','teacher','nurse'], ans:2, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "учител" (teacher)?', opts_en:['doctor','driver','teacher','nurse'],
+   flip:true, q_flip:'What is the Bulgarian word for "teacher"?', opts_flip:['лекар','шофьор','учител','медицинска сестра'], ans_flip:2},
+  {q:'Как е "пролет" на английски?', opts:['winter','summer','spring','autumn'], ans:2, level:'A2', topic:'Seasons',
+   q_en:'What is the English word for "пролет" (spring)?', opts_en:['winter','summer','spring','autumn'],
+   flip:true, q_flip:'What is the Bulgarian word for "spring"?', opts_flip:['зима','лято','пролет','есен'], ans_flip:2},
+  {q:'Как е "вода" на английски?', opts:['juice','milk','water','tea'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "вода" (water)?', opts_en:['juice','milk','water','tea'],
+   flip:true, q_flip:'What is the Bulgarian word for "water"?', opts_flip:['сок','мляко','вода','чай'], ans_flip:2},
+  {q:'Кой е вторият ден от седмицата?', opts:['Sunday','Monday','Tuesday','Wednesday'], ans:2, level:'A2', topic:'Days',
+   q_en:'Which is the second day of the week?', opts_en:['Sunday','Monday','Tuesday','Wednesday']},
+
+  /* ── A2 — Future extra ── */
+  {q:'Попълни: I think it ___ be a great day.', opts:['goes to','am going to','will','going'], ans:2, level:'A2', topic:'Future',
+   q_en:'Fill in: I think it ___ be a great day.', opts_en:['goes to','am going to','will','going']},
+  {q:'Попълни: We ___ visit Paris next summer.', opts:["will","are going to","goes to","going"], ans:1, level:'A2', topic:'Future',
+   q_en:'Fill in: We ___ visit Paris next summer. (plan)', opts_en:["will","are going to","goes to","going"]},
+
+  /* ── B1 — Present Perfect extra ── */
+  {q:'Попълни: He ___ already ___ his homework.', opts:['has/done','have/done','has/did','have/did'], ans:0, level:'B1', topic:'Present Perfect',
+   q_en:'Fill in: He ___ already ___ his homework.', opts_en:['has/done','have/done','has/did','have/did']},
+  {q:'Попълни: ___ you ever ___ to Japan?', opts:['Have/been','Has/been','Have/went','Has/went'], ans:0, level:'B1', topic:'Present Perfect',
+   q_en:'Fill in: ___ you ever ___ to Japan?', opts_en:['Have/been','Has/been','Have/went','Has/went']},
+  {q:'Попълни: They ___ just ___ the test.', opts:['have/finished','has/finished','have/finish','had/finished'], ans:0, level:'B1', topic:'Present Perfect',
+   q_en:'Fill in: They ___ just ___ the test.', opts_en:['have/finished','has/finished','have/finish','had/finished']},
+
+  /* ── B1 — Modals extra ── */
+  {q:"Попълни: You ___ eat vegetables — it's good for you.", opts:["mustn't",'should',"can't","won't"], ans:1, level:'B1', topic:'Modal Verbs',
+   q_en:"Fill in: You ___ eat vegetables — it's good for you.", opts_en:["mustn't",'should',"can't","won't"]},
+  {q:'Попълни: She ___ speak three languages.', opts:['should','must','can','have to'], ans:2, level:'B1', topic:'Modal Verbs',
+   q_en:'Fill in: She ___ speak three languages.', opts_en:['should','must','can','have to']},
+  {q:'Кое е правилното сравнение на "bad"?', opts:['badder','more bad','worse','worst'], ans:2, level:'B1', topic:'Comparatives',
+   q_en:'What is the correct comparative form of "bad"?', opts_en:['badder','more bad','worse','worst']},
+  {q:'Кое е правилното суперлативно на "big"?', opts:['most big','bigest','biggest','more big'], ans:2, level:'B1', topic:'Comparatives',
+   q_en:'What is the correct superlative form of "big"?', opts_en:['most big','bigest','biggest','more big']},
+
+  /* ── B1 — Mixed extra ── */
+  {q:'Попълни: If she studies, she ___ pass.', opts:['would','will','should','going to'], ans:1, level:'B1', topic:'Conditional 1',
+   q_en:'Fill in: If she studies, she ___ pass.', opts_en:['would','will','should','going to']},
+  {q:'Попълни: I ___ dinner when he arrived.', opts:['cook','cooked','was cooking','am cooking'], ans:2, level:'B1', topic:'Past Continuous',
+   q_en:'Fill in: I ___ dinner when he arrived.', opts_en:['cook','cooked','was cooking','am cooking']},
+  {q:'Как е "влак" на английски?', opts:['bus','plane','train','car'], ans:2, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "влак" (train)?', opts_en:['bus','plane','train','car'],
+   flip:true, q_flip:'What is the Bulgarian word for "train"?', opts_flip:['автобус','самолет','влак','кола'], ans_flip:2},
+
+  /* ── B2 — Passive extra ── */
+  {q:'Попълни: The cake ___ by my mother.', opts:['made','was made','is making','makes'], ans:1, level:'B2', topic:'Passive Voice',
+   q_en:'Fill in: The cake ___ by my mother.', opts_en:['made','was made','is making','makes']},
+  {q:'Попълни: English ___ all over the world.', opts:['speaks','is spoken','was speaking','spoken'], ans:1, level:'B2', topic:'Passive Voice',
+   q_en:'Fill in: English ___ all over the world.', opts_en:['speaks','is spoken','was speaking','spoken']},
+  {q:'Попълни: The report ___ by Friday.', opts:['will finish','will be finished','is finishing','finishes'], ans:1, level:'B2', topic:'Passive Voice',
+   q_en:'Fill in: The report ___ by Friday.', opts_en:['will finish','will be finished','is finishing','finishes']},
+
+  /* ── B2 — Reported Speech extra ── */
+  {q:'"I live in Sofia." → She said she ___ in Sofia.', opts:['live','lives','lived','has lived'], ans:2, level:'B2', topic:'Reported Speech',
+   q_en:'"I live in Sofia." → She said she ___ in Sofia.', opts_en:['live','lives','lived','has lived']},
+  {q:'"Don\'t open the door!" → He told me ___ the door.', opts:['not open','to not open','not to open','don\'t open'], ans:2, level:'B2', topic:'Reported Speech',
+   q_en:'"Don\'t open the door!" → He told me ___ the door.', opts_en:['not open','to not open','not to open','don\'t open']},
+  {q:'"Are you coming?" → She asked ___ I was coming.', opts:['that','if','whether or','what'], ans:1, level:'B2', topic:'Reported Speech',
+   q_en:'"Are you coming?" → She asked ___ I was coming.', opts_en:['that','if','whether or','what']},
+
+  /* ── B2 — Vocab extra ── */
+  {q:'Кое е академичното на "start"?', opts:['begin','initiate','commence','launch'], ans:1, level:'B2', topic:'Academic Vocab',
+   q_en:'Which is the most formal/academic word for "start"?', opts_en:['begin','initiate','commence','launch']},
+  {q:'Type 3: If she had left earlier, she ___ the bus.', opts:['would catch','would have caught','had caught','catches'], ans:1, level:'B2', topic:'Conditional 3',
+   q_en:'Type 3 Conditional: If she had left earlier, she ___ the bus.', opts_en:['would catch','would have caught','had caught','catches']},
+
+  /* ── C1 — Advanced Grammar extra ── */
+  {q:'Инверсия: ___ did I realize my mistake.', opts:['Only then','Only when','Just','Rarely'], ans:0, level:'C1', topic:'Inversion',
+   q_en:'Inversion: ___ did I realize my mistake.', opts_en:['Only then','Only when','Just','Rarely']},
+  {q:'Попълни: It is imperative that the CEO ___ the decision.', opts:['makes','make','made','has made'], ans:1, level:'C1', topic:'Subjunctive',
+   q_en:'Fill in: It is imperative that the CEO ___ the decision.', opts_en:['makes','make','made','has made']},
+  {q:'Cleft: ___ was the noise that woke everyone up.', opts:['What','It','That','This'], ans:1, level:'C1', topic:'Cleft Sentences',
+   q_en:'Cleft: ___ was the noise that woke everyone up.', opts_en:['What','It','That','This']},
+
+  /* ── C1 — Vocab extra ── */
+  {q:'Кой маркер изразява противопоставяне?', opts:['furthermore','consequently','however','namely'], ans:2, level:'C1', topic:'Discourse Markers',
+   q_en:'Which discourse marker expresses contrast?', opts_en:['furthermore','consequently','however','namely']},
+  {q:'Кой маркер изразява резултат?', opts:['moreover','therefore','although','besides'], ans:1, level:'C1', topic:'Discourse Markers',
+   q_en:'Which discourse marker expresses result?', opts_en:['moreover','therefore','although','besides']},
+  {q:'Какво означава "to bite the bullet"?', opts:['да се храниш лошо','да търпиш трудна ситуация','да се биеш','да бягаш бързо'], ans:1, level:'C1', topic:'Idioms C1',
+   q_en:'What does "to bite the bullet" mean?', opts_en:['to eat badly','to endure a painful situation','to fight','to run fast'],
+   flip:true, q_flip:'Which Bulgarian phrase means "to endure a painful situation"?', opts_flip:['да се храниш лошо','да търпиш трудна ситуация','да се биеш','да бягаш бързо'], ans_flip:1},
+
+  /* ── C2 — Mastery extra ── */
+  {q:'Mixed conditional: If he ___ harder, he would have the job now.', opts:['works','worked','had worked','has worked'], ans:1, level:'C2', topic:'Mixed Conditionals',
+   q_en:'Mixed conditional: If he ___ harder, he would have the job now.', opts_en:['works','worked','had worked','has worked']},
+  {q:'Коя двойка думи е ПРАВИЛНА (connotation)?', opts:['childish / childlike','stingy / economical','cowardly / cautious','arrogant / confident'], ans:3, level:'C2', topic:'Nuance',
+   q_en:'Which word pair shows CORRECT connotation contrast (negative / positive)?', opts_en:['childish / childlike','stingy / economical','cowardly / cautious','arrogant / confident']},
+
+  /* ── C2 — Idioms & Rhetoric extra ── */
+  {q:'Какво означава "a double-edged sword"?', opts:['опасно оръжие','нещо с предимства и недостатъци','труден избор','невъзможна задача'], ans:1, level:'C2', topic:'Idioms C2',
+   q_en:'What does "a double-edged sword" mean?', opts_en:['a dangerous weapon','something with pros and cons','a difficult choice','an impossible task'],
+   flip:true, q_flip:'Which Bulgarian phrase means "something with both advantages and drawbacks"?', opts_flip:['опасно оръжие','нещо с предимства и недостатъци','труден избор','невъзможна задача'], ans_flip:1},
+  {q:'"I have a dream..." — повторението в началото е?', opts:['Antithesis','Euphemism','Anaphora','Hyperbole'], ans:2, level:'C2', topic:'Rhetoric',
+   q_en:'"I have a dream..." — the repetition at the start of clauses is called?', opts_en:['Antithesis','Euphemism','Anaphora','Hyperbole']},
+  {q:'Ellipsis: "She can swim and so ___ I."', opts:['do','can','am','have'], ans:1, level:'C2', topic:'Ellipsis',
+   q_en:'Ellipsis: "She can swim and so ___ I."', opts_en:['do','can','am','have']},
 ];
 
 // ══════════════════════════════════════════
