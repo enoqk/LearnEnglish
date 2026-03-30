@@ -2,11 +2,110 @@
 <html lang="bg" data-theme="light">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="LearnEnglish — интерактивна образователна платформа за английски език A1–C2">
+<meta property="og:title" content="LearnEnglish — A1 до C2">
+<meta property="og:description" content="Интерактивни уроци и тестове по английски за всички нива на CEFR">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="bg_BG">
+<meta name="theme-color" content="#1a3a5c">
+<meta name="author" content="Енес Мюмюн Азиз">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LearnEnglish</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── PRINT STYLESHEET ── */
+@media print {
+  nav, footer, .hero-btn, .back-btn, .quiz-next-btn, .result-btn,
+  .dark-toggle, #lang-btn, .quiz-level-filter, #level-tabs { display: none !important; }
+  body { background: #fff !important; color: #000 !important; font-size: 12pt; }
+  .page { display: block !important; }
+  .lesson-content, .quiz-card, .about-section { border: 1px solid #ccc !important; page-break-inside: avoid; }
+  .example-table th { background: #333 !important; color: #fff !important; -webkit-print-color-adjust: exact; }
+  a { color: #000; text-decoration: underline; }
+}
+
+/* ── HAMBURGER MENU ── */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 6px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: #fff; border-radius: 2px; transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── TIMER ── */
+.quiz-timer {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700; color: var(--muted);
+}
+.timer-ring { position: relative; width: 36px; height: 36px; flex-shrink: 0; }
+.timer-ring svg { transform: rotate(-90deg); }
+.timer-ring circle { fill: none; stroke-width: 3; }
+.timer-track { stroke: var(--border); }
+.timer-fill { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.3s; }
+.timer-text {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--text);
+}
+.timer-fill.warn { stroke: #ef9f27; }
+.timer-fill.danger { stroke: #e24b4a; }
+
+/* ── CONFETTI ── */
+.confetti-piece {
+  position: fixed; width: 10px; height: 10px; top: -10px;
+  border-radius: 2px; animation: confetti-fall linear forwards;
+  pointer-events: none; z-index: 9999;
+}
+@keyframes confetti-fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── SCORE HISTORY ── */
+.history-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.history-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 14px;
+}
+.history-badge { font-size: 18px; font-weight: 700; min-width: 36px; text-align: center; }
+.history-info { flex: 1; }
+.history-title { font-size: 13px; font-weight: 700; color: var(--text); }
+.history-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.history-pct { font-size: 15px; font-weight: 700; }
+
+@media (max-width: 700px) {
+  .hamburger { display: flex; }
+  .nav-center {
+    display: none; flex-direction: column; gap: 4px;
+    position: absolute; top: 60px; left: 0; right: 0;
+    background: var(--nav-bg); padding: 12px 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 99;
+  }
+  .nav-center.open { display: flex; }
+  .nav-btn { text-align: left; padding: 10px 14px; border-radius: 8px; }
+  .level-cards { grid-template-columns: 1fr 1fr !important; }
+  .stats-row { grid-template-columns: 1fr 1fr !important; }
+  .about-grid { grid-template-columns: 1fr !important; }
+  .team-cards { flex-direction: column; }
+  .quiz-card { padding: 16px; }
+  .lesson-content { padding: 16px; }
+}
+@media (max-width: 420px) {
+  .level-cards { grid-template-columns: 1fr !important; }
+  .logo { font-size: 18px; }
+}
 
 /* ── LIGHT THEME ── */
 :root {
@@ -255,13 +354,17 @@ footer {
 <!-- NAVBAR -->
 <nav>
   <div class="logo">Learn<span>English</span></div>
-  <div class="nav-center">
+  <button class="hamburger" id="hamburger-btn" onclick="toggleMenu()" aria-label="Меню">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-center" id="nav-center">
     <button class="nav-btn active" onclick="showPage('home',this)">🏠 Начало</button>
     <button class="nav-btn" onclick="showPage('lessons',this)">📖 Уроци</button>
     <button class="nav-btn" onclick="showPage('quiz',this)">✏️ Тестове</button>
     <button class="nav-btn" onclick="showPage('progress',this)">📊 Прогрес</button>
-    <button class="nav-btn" onclick="showPage('criteria',this)">🏆 Критерии</button>
     <button class="nav-btn" onclick="showPage('about',this)">ℹ️ За проекта</button>
+    <button class="nav-btn" onclick="showPage('uml',this)">🗂 UML</button>
+    <button class="nav-btn" onclick="showPage('api',this)">⚙️ API</button>
     <button class="nav-btn" onclick="showPage('sources',this)">📚 Източници</button>
   </div>
   <div class="nav-right">
@@ -279,7 +382,7 @@ footer {
     <div class="stats-row">
       <div class="stat-item"><div class="stat-num">6</div><div class="stat-lbl">Нива A1–C2</div></div>
       <div class="stat-item"><div class="stat-num">36</div><div class="stat-lbl">Урока</div></div>
-      <div class="stat-item"><div class="stat-num">90+</div><div class="stat-lbl">Въпроса</div></div>
+      <div class="stat-item"><div class="stat-num">110+</div><div class="stat-lbl">Въпроса</div></div>
       <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Безплатно</div></div>
     </div>
   </div>
@@ -331,6 +434,10 @@ footer {
       <div class="prog-card"><div class="prog-num amber" id="prog-pct">0%</div><div class="prog-lbl">Точност</div></div>
     </div>
     <div class="prog-section"><h3>Напредък по ниво</h3><div id="level-progress-bars"></div></div>
+    <div class="prog-section" style="margin-top:20px;">
+      <h3>🕓 Последни резултати</h3>
+      <div id="score-history" class="history-list"><p style="color:var(--muted);font-size:13px;margin-top:8px;">Все още няма резултати.</p></div>
+    </div>
   </div>
 </div>
 
@@ -350,11 +457,11 @@ footer {
         <div class="about-grid">
           <div class="about-info-card">
             <div class="info-label">Турнир</div>
-            <div class="info-value highlight">Провеждане на турнир 2025</div>
+            <div class="info-value highlight">Провеждане на турнир 2026</div>
           </div>
           <div class="about-info-card">
             <div class="info-label">Дата</div>
-            <div class="info-value">26 април 2025 г.</div>
+            <div class="info-value">26 април 2026 г.</div>
           </div>
           <div class="about-info-card">
             <div class="info-label">Категория</div>
@@ -386,13 +493,33 @@ footer {
 
         <hr class="about-divider">
 
+        <div class="about-team" style="margin-bottom:20px;">
+          <h3>📋 Версии (Version Control)</h3>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border);">
+              <span style="background:#1a3a5c;color:#5bbcff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">v2.1</span>
+              <div><div style="font-size:13px;font-weight:700;color:var(--text);">Финална версия 2026</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">UML диаграми, API спецификация, security meta tags, 110+ въпроса, flip-въпроси в EN режим, именувани тест-сетове</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border);">
+              <span style="background:#2176ae;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">v2.0</span>
+              <div><div style="font-size:13px;font-weight:700;color:var(--text);">Мултиезичност & тъмен режим</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">LangModule BG/EN, ThemeModule dark/light, CacheModule localStorage, 36 урока, прогрес по нива</div></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);border:1px solid var(--border);">
+              <span style="background:#3b6d11;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">v1.0</span>
+              <div><div style="font-size:13px;font-weight:700;color:var(--text);">Начална версия</div><div style="font-size:11px;color:var(--muted);margin-top:2px;">Основна структура: навигация, уроци A1–C2, тест с въпроси, страница за прогрес</div></div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="about-divider">
+
         <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; text-align:center;">
           <div style="padding:14px; background:var(--bg); border-radius:var(--radius-sm); border:1px solid var(--border);">
             <div style="font-size:22px; font-weight:700; color:var(--blue);">36</div>
             <div style="font-size:12px; color:var(--muted); margin-top:2px;">Урока</div>
           </div>
           <div style="padding:14px; background:var(--bg); border-radius:var(--radius-sm); border:1px solid var(--border);">
-            <div style="font-size:22px; font-weight:700; color:#3b6d11;">90+</div>
+            <div style="font-size:22px; font-weight:700; color:#3b6d11;">110+</div>
             <div style="font-size:12px; color:var(--muted); margin-top:2px;">Въпроса</div>
           </div>
           <div style="padding:14px; background:var(--bg); border-radius:var(--radius-sm); border:1px solid var(--border);">
@@ -407,7 +534,7 @@ footer {
 
 <!-- ═══ CRITERIA ═══ -->
 <div id="criteria" class="page">
-  <div class="page-header"><h2>Критерии 2025</h2><p>Оценъчни критерии за категория "Интернет приложения" — ВТУ турнир 2025</p></div>
+  <div class="page-header"><h2>Критерии 2026</h2><p>Оценъчни критерии за категория "Интернет приложения" — ВТУ турнир 2026</p></div>
   <div style="padding:24px 28px; display:flex; flex-direction:column; gap:16px;">
 
     <!-- Score banner -->
@@ -634,10 +761,325 @@ footer {
   </div>
 </div>
 
-<footer>LearnEnglish &copy; 2025 &nbsp;·&nbsp; Проект за ИТ турнир — ВТУ „Св. св. Кирил и Методий" &nbsp;·&nbsp; Енес Мюмюн Азиз</footer>
+
+<!-- ═══ UML ═══ -->
+<div id="uml" class="page">
+  <div class="page-header"><h2>UML — Архитектура на системата</h2><p>Module Pattern диаграма на LearnEnglish</p></div>
+  <div style="padding:24px 28px; display:flex; flex-direction:column; gap:20px;">
+
+    <!-- Module diagram -->
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
+      <div style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:18px;">📐 Module Pattern — Class Diagram</div>
+      <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:860px;display:block;margin:0 auto;font-family:Nunito,sans-serif;">
+        <defs>
+          <marker id="arr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#2176ae"/>
+          </marker>
+        </defs>
+        <!-- App core box -->
+        <rect x="330" y="10" width="200" height="54" rx="8" fill="#1a3a5c" stroke="#5bbcff" stroke-width="2"/>
+        <text x="430" y="32" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">«App Core»</text>
+        <text x="430" y="52" text-anchor="middle" fill="#5bbcff" font-size="11">LearnEnglish v2.0</text>
+
+        <!-- ThemeModule -->
+        <rect x="20" y="120" width="160" height="90" rx="8" fill="var(--card-bg,#fff)" stroke="#2176ae" stroke-width="1.5"/>
+        <rect x="20" y="120" width="160" height="26" rx="8" fill="#2176ae"/>
+        <rect x="20" y="134" width="160" height="12" rx="0" fill="#2176ae"/>
+        <text x="100" y="137" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">ThemeModule</text>
+        <line x1="20" y1="146" x2="180" y2="146" stroke="#2176ae" stroke-width="1"/>
+        <text x="30" y="162" fill="#1a2535" font-size="10">+ toggle()</text>
+        <text x="30" y="176" fill="#1a2535" font-size="10">+ init()</text>
+        <text x="30" y="190" fill="#6b7a8d" font-size="9">localStorage: theme</text>
+
+        <!-- LangModule -->
+        <rect x="200" y="120" width="160" height="104" rx="8" fill="var(--card-bg,#fff)" stroke="#2176ae" stroke-width="1.5"/>
+        <rect x="200" y="120" width="160" height="26" rx="8" fill="#2176ae"/>
+        <rect x="200" y="134" width="160" height="12" rx="0" fill="#2176ae"/>
+        <text x="280" y="137" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">LangModule</text>
+        <line x1="200" y1="146" x2="360" y2="146" stroke="#2176ae" stroke-width="1"/>
+        <text x="210" y="162" fill="#1a2535" font-size="10">+ toggle()</text>
+        <text x="210" y="176" fill="#1a2535" font-size="10">+ init()</text>
+        <text x="210" y="190" fill="#1a2535" font-size="10">+ t(key): string</text>
+        <text x="210" y="204" fill="#1a2535" font-size="10">+ current(): string</text>
+        <text x="210" y="216" fill="#6b7a8d" font-size="9">localStorage: lang</text>
+
+        <!-- CacheModule -->
+        <rect x="380" y="120" width="160" height="104" rx="8" fill="var(--card-bg,#fff)" stroke="#3b6d11" stroke-width="1.5"/>
+        <rect x="380" y="120" width="160" height="26" rx="8" fill="#3b6d11"/>
+        <rect x="380" y="134" width="160" height="12" rx="0" fill="#3b6d11"/>
+        <text x="460" y="137" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">CacheModule</text>
+        <line x1="380" y1="146" x2="540" y2="146" stroke="#3b6d11" stroke-width="1"/>
+        <text x="390" y="162" fill="#1a2535" font-size="10">+ save(data)</text>
+        <text x="390" y="176" fill="#1a2535" font-size="10">+ load(): object</text>
+        <text x="390" y="190" fill="#1a2535" font-size="10">+ clear()</text>
+        <text x="390" y="204" fill="#6b7a8d" font-size="9">KEY: learnenglish_progress</text>
+        <text x="390" y="216" fill="#6b7a8d" font-size="9">localStorage: JSON</text>
+
+        <!-- StateModule -->
+        <rect x="560" y="120" width="160" height="118" rx="8" fill="var(--card-bg,#fff)" stroke="#854f0b" stroke-width="1.5"/>
+        <rect x="560" y="120" width="160" height="26" rx="8" fill="#854f0b"/>
+        <rect x="560" y="134" width="160" height="12" rx="0" fill="#854f0b"/>
+        <text x="640" y="137" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">StateModule</text>
+        <line x1="560" y1="146" x2="720" y2="146" stroke="#854f0b" stroke-width="1"/>
+        <text x="570" y="162" fill="#1a2535" font-size="10">+ init()</text>
+        <text x="570" y="176" fill="#1a2535" font-size="10">+ addLesson(id)</text>
+        <text x="570" y="190" fill="#1a2535" font-size="10">+ addQuizResult(lv,s,t)</text>
+        <text x="570" y="204" fill="#1a2535" font-size="10">+ getLessonsRead()</text>
+        <text x="570" y="218" fill="#1a2535" font-size="10">+ getQuizCorrect()</text>
+        <text x="570" y="230" fill="#6b7a8d" font-size="9">uses: CacheModule</text>
+
+        <!-- NavModule -->
+        <rect x="200" y="300" width="180" height="132" rx="8" fill="var(--card-bg,#fff)" stroke="#534ab7" stroke-width="1.5"/>
+        <rect x="200" y="300" width="180" height="26" rx="8" fill="#534ab7"/>
+        <rect x="200" y="314" width="180" height="12" rx="0" fill="#534ab7"/>
+        <text x="290" y="317" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">NavModule</text>
+        <line x1="200" y1="326" x2="380" y2="326" stroke="#534ab7" stroke-width="1"/>
+        <text x="210" y="342" fill="#1a2535" font-size="10">+ showPage(id, btn)</text>
+        <text x="210" y="356" fill="#1a2535" font-size="10">+ goToLevel(lv)</text>
+        <text x="210" y="370" fill="#1a2535" font-size="10">+ openLesson(id)</text>
+        <text x="210" y="384" fill="#1a2535" font-size="10">+ showLessonList()</text>
+        <text x="210" y="398" fill="#1a2535" font-size="10">+ filterLessons(lv)</text>
+        <text x="210" y="412" fill="#6b7a8d" font-size="9">uses: LangModule, StateModule</text>
+
+        <!-- QuizModule -->
+        <rect x="420" y="300" width="180" height="146" rx="8" fill="var(--card-bg,#fff)" stroke="#a32d2d" stroke-width="1.5"/>
+        <rect x="420" y="300" width="180" height="26" rx="8" fill="#a32d2d"/>
+        <rect x="420" y="314" width="180" height="12" rx="0" fill="#a32d2d"/>
+        <text x="510" y="317" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">QuizModule</text>
+        <line x1="420" y1="326" x2="600" y2="326" stroke="#a32d2d" stroke-width="1"/>
+        <text x="430" y="342" fill="#1a2535" font-size="10">+ showList()</text>
+        <text x="430" y="356" fill="#1a2535" font-size="10">+ startSet(id)</text>
+        <text x="430" y="370" fill="#1a2535" font-size="10">+ selectAnswer(idx)</text>
+        <text x="430" y="384" fill="#1a2535" font-size="10">+ render()</text>
+        <text x="430" y="398" fill="#1a2535" font-size="10">+ next()</text>
+        <text x="430" y="412" fill="#1a2535" font-size="10">+ filterList(lv)</text>
+        <text x="430" y="428" fill="#6b7a8d" font-size="9">uses: LangModule, StateModule</text>
+
+        <!-- Data stores -->
+        <rect x="30" y="310" width="140" height="60" rx="8" fill="var(--card-bg,#fff)" stroke="#6b7a8d" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="100" y="335" text-anchor="middle" fill="#6b7a8d" font-size="11" font-weight="700">«data»</text>
+        <text x="100" y="351" text-anchor="middle" fill="#6b7a8d" font-size="10">lessons[ ] — 36 items</text>
+        <text x="100" y="363" text-anchor="middle" fill="#6b7a8d" font-size="10">questions[ ] — 110+ items</text>
+
+        <!-- localStorage -->
+        <rect x="660" y="310" width="150" height="60" rx="8" fill="var(--card-bg,#fff)" stroke="#6b7a8d" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="735" y="335" text-anchor="middle" fill="#6b7a8d" font-size="11" font-weight="700">«storage»</text>
+        <text x="735" y="351" text-anchor="middle" fill="#6b7a8d" font-size="10">localStorage</text>
+        <text x="735" y="363" text-anchor="middle" fill="#6b7a8d" font-size="10">theme | lang | progress</text>
+
+        <!-- Arrows from App Core -->
+        <line x1="430" y1="64" x2="100" y2="120" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+        <line x1="430" y1="64" x2="280" y2="120" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+        <line x1="430" y1="64" x2="460" y2="120" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+        <line x1="430" y1="64" x2="640" y2="120" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+        <line x1="430" y1="64" x2="290" y2="300" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+        <line x1="430" y1="64" x2="510" y2="300" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,2"/>
+
+        <!-- StateModule uses CacheModule -->
+        <line x1="560" y1="200" x2="540" y2="190" stroke="#3b6d11" stroke-width="1.2" marker-end="url(#arr)"/>
+
+        <!-- NavModule uses data -->
+        <line x1="200" y1="366" x2="170" y2="355" stroke="#6b7a8d" stroke-width="1.2" marker-end="url(#arr)"/>
+
+        <!-- CacheModule uses localStorage -->
+        <line x1="640" y1="224" x2="710" y2="310" stroke="#6b7a8d" stroke-width="1.2" marker-end="url(#arr)"/>
+      </svg>
+    </div>
+
+    <!-- Data flow diagram -->
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
+      <div style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:18px;">🔄 Data Flow — Quiz Sequence</div>
+      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto;font-family:Nunito,sans-serif;">
+        <defs>
+          <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#2176ae"/>
+          </marker>
+        </defs>
+        <!-- Nodes -->
+        <rect x="10" y="80" width="100" height="36" rx="6" fill="#1a3a5c"/><text x="60" y="103" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">User</text>
+        <rect x="150" y="80" width="110" height="36" rx="6" fill="#2176ae"/><text x="205" y="103" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">QuizModule</text>
+        <rect x="305" y="80" width="110" height="36" rx="6" fill="#3b6d11"/><text x="360" y="103" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">StateModule</text>
+        <rect x="460" y="80" width="110" height="36" rx="6" fill="#854f0b"/><text x="515" y="103" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">CacheModule</text>
+        <rect x="610" y="80" width="80" height="36" rx="6" fill="#534ab7"/><text x="650" y="103" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Storage</text>
+        <!-- Arrows -->
+        <line x1="110" y1="98" x2="148" y2="98" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <text x="129" y="92" text-anchor="middle" fill="#6b7a8d" font-size="9">answer</text>
+        <line x1="260" y1="98" x2="303" y2="98" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <text x="282" y="92" text-anchor="middle" fill="#6b7a8d" font-size="9">score</text>
+        <line x1="415" y1="98" x2="458" y2="98" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <text x="437" y="92" text-anchor="middle" fill="#6b7a8d" font-size="9">save()</text>
+        <line x1="570" y1="98" x2="608" y2="98" stroke="#2176ae" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <text x="589" y="92" text-anchor="middle" fill="#6b7a8d" font-size="9">JSON</text>
+        <!-- Return arrow -->
+        <path d="M 650 116 Q 650 160 360 160 Q 70 160 60 116" fill="none" stroke="#5bbcff" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr2)"/>
+        <text x="360" y="175" text-anchor="middle" fill="#5bbcff" font-size="9">progress loaded on next visit</text>
+      </svg>
+    </div>
+
+    <!-- Module responsibilities table -->
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+      <div style="padding:14px 22px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text);">📋 Module Responsibilities</div>
+      <table class="example-table" style="margin:0;">
+        <thead><tr><th>Module</th><th>Responsibility</th><th>Pattern</th></tr></thead>
+        <tbody>
+          <tr><td><em>ThemeModule</em></td><td>Dark/light mode toggle, localStorage persistence</td><td>Singleton</td></tr>
+          <tr><td><em>LangModule</em></td><td>BG/EN translation dictionary, language switching</td><td>Singleton + Strategy</td></tr>
+          <tr><td><em>CacheModule</em></td><td>localStorage read/write/clear for progress data</td><td>Repository</td></tr>
+          <tr><td><em>StateModule</em></td><td>Centralised app state, quiz scores, lessons read</td><td>Singleton + Observer</td></tr>
+          <tr><td><em>NavModule</em></td><td>Page routing, lesson list/detail, progress rendering</td><td>Facade</td></tr>
+          <tr><td><em>QuizModule</em></td><td>Quiz sets, question rendering, answer checking, flip logic</td><td>State Machine</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ API SPEC ═══ -->
+<div id="api" class="page">
+  <div class="page-header"><h2>API Спецификация</h2><p>Вътрешни структури от данни и интерфейси на модулите</p></div>
+  <div style="padding:24px 28px; display:flex; flex-direction:column; gap:16px;">
+
+    <!-- Lesson object -->
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+      <div style="padding:14px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:14px;font-weight:700;color:var(--text);">📘 Lesson Object</span>
+        <span style="background:var(--light-blue);color:var(--blue);font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;">lessons[ ]</span>
+      </div>
+      <div style="padding:16px 22px;">
+        <pre style="background:var(--bg);border-radius:8px;padding:16px;font-size:12px;color:var(--text);overflow-x:auto;line-height:1.7;">{
+  id:       <span style="color:#2176ae">number</span>,       <span style="color:#6b7a8d">// unique lesson identifier (1–36)</span>
+  level:    <span style="color:#2176ae">string</span>,       <span style="color:#6b7a8d">// CEFR level: "A1" | "A2" | "B1" | "B2" | "C1" | "C2"</span>
+  cat:      <span style="color:#2176ae">string</span>,       <span style="color:#6b7a8d">// category: "grammar" | "vocab"</span>
+  title:    <span style="color:#2176ae">string</span>,       <span style="color:#6b7a8d">// Bulgarian title</span>
+  title_en: <span style="color:#2176ae">string</span>,       <span style="color:#6b7a8d">// English title</span>
+  desc:     <span style="color:#2176ae">string</span>,       <span style="color:#6b7a8d">// Bulgarian short description</span>
+  desc_en:  <span style="color:#2176ae">string</span>,       <span style="color:#6b7a8d">// English short description</span>
+  content:  <span style="color:#2176ae">HTML string</span>,  <span style="color:#6b7a8d">// Bulgarian lesson body (HTML)</span>
+  content_en:<span style="color:#2176ae">HTML string</span>, <span style="color:#6b7a8d">// English lesson body (HTML)</span>
+}</pre>
+      </div>
+    </div>
+
+    <!-- Question object -->
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+      <div style="padding:14px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:14px;font-weight:700;color:var(--text);">❓ Question Object</span>
+        <span style="background:var(--light-blue);color:var(--blue);font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;">questions[ ]</span>
+      </div>
+      <div style="padding:16px 22px;">
+        <pre style="background:var(--bg);border-radius:8px;padding:16px;font-size:12px;color:var(--text);overflow-x:auto;line-height:1.7;">{
+  q:         <span style="color:#2176ae">string</span>,    <span style="color:#6b7a8d">// Bulgarian question text</span>
+  q_en:      <span style="color:#2176ae">string</span>,    <span style="color:#6b7a8d">// English question text</span>
+  opts:      <span style="color:#2176ae">string[]</span>,  <span style="color:#6b7a8d">// Bulgarian answer options [4]</span>
+  opts_en:   <span style="color:#2176ae">string[]</span>,  <span style="color:#6b7a8d">// English answer options [4]</span>
+  ans:       <span style="color:#2176ae">number</span>,    <span style="color:#6b7a8d">// correct answer index (0–3)</span>
+  level:     <span style="color:#2176ae">string</span>,    <span style="color:#6b7a8d">// CEFR level: "A1"–"C2"</span>
+  topic:     <span style="color:#2176ae">string</span>,    <span style="color:#6b7a8d">// topic tag (maps to quiz set)</span>
+  <span style="color:#3b6d11">// Optional flip fields (translation questions only):</span>
+  flip:      <span style="color:#2176ae">boolean</span>,   <span style="color:#6b7a8d">// true = reverse question in EN mode</span>
+  q_flip:    <span style="color:#2176ae">string</span>,    <span style="color:#6b7a8d">// EN mode: asks for BG word</span>
+  opts_flip: <span style="color:#2176ae">string[]</span>,  <span style="color:#6b7a8d">// Bulgarian options shown in EN mode</span>
+  ans_flip:  <span style="color:#2176ae">number</span>,    <span style="color:#6b7a8d">// correct index for flipped version</span>
+}</pre>
+      </div>
+    </div>
+
+    <!-- Module public APIs -->
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+      <div style="padding:14px 22px;border-bottom:1px solid var(--border);font-size:14px;font-weight:700;color:var(--text);">⚙️ Module Public Interfaces</div>
+      <table class="example-table" style="margin:0;">
+        <thead><tr><th>Module</th><th>Method</th><th>Returns</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>ThemeModule</td><td>toggle()</td><td>void</td><td>Switches light/dark theme and saves to localStorage</td></tr>
+          <tr><td>ThemeModule</td><td>init()</td><td>void</td><td>Loads saved theme on page load</td></tr>
+          <tr><td>LangModule</td><td>toggle()</td><td>void</td><td>Switches BG/EN and re-renders all UI text</td></tr>
+          <tr><td>LangModule</td><td>t(key)</td><td>string</td><td>Returns translated string for given key</td></tr>
+          <tr><td>LangModule</td><td>current()</td><td>"bg"|"en"</td><td>Returns active language code</td></tr>
+          <tr><td>CacheModule</td><td>save(data)</td><td>void</td><td>Serialises progress object to localStorage as JSON</td></tr>
+          <tr><td>CacheModule</td><td>load()</td><td>object|null</td><td>Deserialises and returns saved progress or null</td></tr>
+          <tr><td>CacheModule</td><td>clear()</td><td>void</td><td>Removes progress data from localStorage</td></tr>
+          <tr><td>StateModule</td><td>addLesson(id)</td><td>void</td><td>Marks lesson as read, saves state</td></tr>
+          <tr><td>StateModule</td><td>addQuizResult(lv,s,t)</td><td>void</td><td>Records quiz score per level, saves state</td></tr>
+          <tr><td>NavModule</td><td>showPage(id,btn)</td><td>void</td><td>Activates page by id, highlights nav button</td></tr>
+          <tr><td>NavModule</td><td>openLesson(id)</td><td>void</td><td>Shows lesson detail view for given lesson id</td></tr>
+          <tr><td>QuizModule</td><td>startSet(id)</td><td>void</td><td>Loads questions for named quiz set and begins quiz</td></tr>
+          <tr><td>QuizModule</td><td>selectAnswer(idx)</td><td>void</td><td>Checks answer, shows feedback, handles flip logic</td></tr>
+          <tr><td>QuizModule</td><td>showList()</td><td>void</td><td>Returns to quiz selection list view</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- State schema -->
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
+      <div style="padding:14px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:14px;font-weight:700;color:var(--text);">💾 localStorage Schema</span>
+        <span style="background:var(--light-green);color:var(--green);font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;">CacheModule</span>
+      </div>
+      <div style="padding:16px 22px;">
+        <pre style="background:var(--bg);border-radius:8px;padding:16px;font-size:12px;color:var(--text);overflow-x:auto;line-height:1.7;"><span style="color:#6b7a8d">// Key: "learnenglish_progress"</span>
+{
+  lessonsRead:  <span style="color:#2176ae">number[]</span>,         <span style="color:#6b7a8d">// array of lesson ids read</span>
+  quizCorrect:  <span style="color:#2176ae">number</span>,           <span style="color:#6b7a8d">// total correct answers all-time</span>
+  quizTotal:    <span style="color:#2176ae">number</span>,           <span style="color:#6b7a8d">// total questions answered</span>
+  levelCorrect: <span style="color:#2176ae">Record&lt;string,number&gt;</span>, <span style="color:#6b7a8d">// correct per level {"A1":3,"B2":5,...}</span>
+  levelTotal:   <span style="color:#2176ae">Record&lt;string,number&gt;</span>  <span style="color:#6b7a8d">// total per level</span>
+}
+
+<span style="color:#6b7a8d">// Key: "theme"  → "light" | "dark"</span>
+<span style="color:#6b7a8d">// Key: "lang"   → "bg" | "en"</span></pre>
+      </div>
+    </div>
+
+  </div>
+</div>
+<footer>LearnEnglish &copy; 2026 &nbsp;·&nbsp; Проект за ИТ турнир — ВТУ „Св. св. Кирил и Методий" &nbsp;·&nbsp; Енес Мюмюн Азиз</footer>
 
 <script>
 'use strict';
+
+/**
+ * SecurityModule — санитизация на входни данни срещу XSS
+ * Предотвратява инжектиране на нежелан HTML/JS код
+ */
+const SecurityModule = (function() {
+  /**
+   * Sanitize a string — escapes HTML special characters
+   * @param {string} str - raw input string
+   * @returns {string} - sanitized string safe for innerHTML
+   */
+  function sanitize(str) {
+    if (typeof str !== 'string') return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+  }
+
+  /**
+   * Validate level string — only allows known CEFR levels
+   * @param {string} lv - level input
+   * @returns {string} - validated level or 'all'
+   */
+  function validateLevel(lv) {
+    const allowed = ['all','ALL','A1','A2','B1','B2','C1','C2'];
+    return allowed.includes(lv) ? lv : 'all';
+  }
+
+  /**
+   * Validate a quiz set ID — only allows alphanumeric + hyphens
+   * @param {string} id - quiz set id input
+   * @returns {string} - safe id string
+   */
+  function validateId(id) {
+    if (typeof id !== 'string') return '';
+    return id.replace(/[^a-z0-9-]/g, '');
+  }
+
+  return { sanitize, validateLevel, validateId };
+})();
 
 /**
  * LearnEnglish — Образователен сайт за английски език
@@ -652,8 +1094,10 @@ footer {
 // ══════════════════════════════════════════
 
 /**
- * ThemeModule — управлява светъл/тъмен режим
- * Кешира предпочитанието в localStorage
+ * @module ThemeModule
+ * @description Управлява светъл/тъмен режим (Design Pattern: Singleton)
+ * Кешира предпочитанието в localStorage чрез ключ 'theme'
+ * @pattern Singleton — единствена инстанция, достъпна глобално
  */
 const ThemeModule = (function() {
   function toggle() {
@@ -686,8 +1130,10 @@ const ThemeModule = (function() {
 })();
 
 /**
- * LangModule — управлява мултиезичността (BG/EN)
- * Кешира езика в localStorage
+ * @module LangModule
+ * @description Управлява мултиезичността BG/EN (Design Pattern: Singleton + Strategy)
+ * Съдържа речник с всички UI преводи и превключва езика динамично
+ * @pattern Strategy — превключва стратегия за превод без промяна на структурата
  */
 const LangModule = (function() {
   // Речник с преводи BG → EN
@@ -695,8 +1141,8 @@ const LangModule = (function() {
     bg: {
       // Navbar
       nav_home: '🏠 Начало', nav_lessons: '📖 Уроци', nav_quiz: '✏️ Тестове',
-      nav_progress: '📊 Прогрес', nav_criteria: '🏆 Критерии',
-      nav_about: 'ℹ️ За проекта', nav_sources: '📚 Източници',
+      nav_progress: '📊 Прогрес', nav_about: 'ℹ️ За проекта',
+      nav_uml: '🗂 UML', nav_api: '⚙️ API', nav_sources: '📚 Източници',
       // Hero
       hero_title: 'Научи английски от A1 до C2',
       hero_sub: 'Уроци по всички нива на CEFR — от абсолютен начинаещ до майстор на езика.',
@@ -733,7 +1179,7 @@ const LangModule = (function() {
       about_header: 'За проекта', about_sub: 'Информация за турнира и автора',
       about_platform: 'Интерактивна образователна платформа за учене на английски език',
       about_tournament: 'Турнир', about_date: 'Дата', about_category: 'Категория', about_org: 'Организатор',
-      about_tournament_val: 'Провеждане на турнир 2025', about_date_val: '26 април 2025 г.',
+      about_tournament_val: 'Провеждане на турнир 2026', about_date_val: '26 април 2026 г.',
       about_category_val: 'Интернет приложения', about_org_val: 'ВТУ „Св. св. Кирил и Методий"',
       about_desc_title: 'За турнира',
       about_desc: 'Проектът е разработен за участие в националния ИТ турнир на Великотърновски университет. Турнирът дава шанс на ученици от 8 до 12 клас да покажат своите умения в областта на информационните технологии.',
@@ -750,7 +1196,7 @@ const LangModule = (function() {
       src_book_pub: 'Cambridge University Press, 4-то издание',
       src_cefr_desc: 'Нивата A1–C2 и техните дескриптори',
       // Criteria page
-      criteria_header: 'Критерии 2025', criteria_sub: 'Оценъчни критерии за категория "Интернет приложения"',
+      criteria_header: 'Критерии 2026', criteria_sub: 'Оценъчни критерии за категория "Интернет приложения"',
       criteria_basic: 'Основни критерии', criteria_extra: 'Допълнителни критерии',
       criteria_points: 'точки', criteria_legend_done: 'Изпълнен', criteria_legend_partial: 'Частично',
       criteria_legend_pres: 'Зависи от представянето', criteria_legend_no: 'Не е изпълнен',
@@ -758,8 +1204,8 @@ const LangModule = (function() {
     en: {
       // Navbar
       nav_home: '🏠 Home', nav_lessons: '📖 Lessons', nav_quiz: '✏️ Quizzes',
-      nav_progress: '📊 Progress', nav_criteria: '🏆 Criteria',
-      nav_about: 'ℹ️ About', nav_sources: '📚 Sources',
+      nav_progress: '📊 Progress', nav_about: 'ℹ️ About',
+      nav_uml: '🗂 UML', nav_api: '⚙️ API', nav_sources: '📚 Sources',
       // Hero
       hero_title: 'Learn English from A1 to C2',
       hero_sub: 'Lessons for all CEFR levels — from absolute beginner to master.',
@@ -796,7 +1242,7 @@ const LangModule = (function() {
       about_header: 'About', about_sub: 'Information about the tournament and author',
       about_platform: 'Interactive educational platform for learning English',
       about_tournament: 'Tournament', about_date: 'Date', about_category: 'Category', about_org: 'Organizer',
-      about_tournament_val: 'IT Tournament 2025', about_date_val: 'April 26, 2025',
+      about_tournament_val: 'IT Tournament 2026', about_date_val: 'April 26, 2026',
       about_category_val: 'Internet Applications', about_org_val: 'VTU "St. Cyril and St. Methodius"',
       about_desc_title: 'About the tournament',
       about_desc: 'This project was developed for the national IT tournament at Veliko Tarnovo University. The tournament gives students from grades 8–12 the chance to showcase their IT skills.',
@@ -813,7 +1259,7 @@ const LangModule = (function() {
       src_book_pub: 'Cambridge University Press, 4th edition',
       src_cefr_desc: 'A1–C2 levels and their descriptors',
       // Criteria page
-      criteria_header: 'Criteria 2025', criteria_sub: 'Evaluation criteria for "Internet Applications" category',
+      criteria_header: 'Criteria 2026', criteria_sub: 'Evaluation criteria for "Internet Applications" category',
       criteria_basic: 'Basic criteria', criteria_extra: 'Additional criteria',
       criteria_points: 'points', criteria_legend_done: 'Fulfilled',
       criteria_legend_partial: 'Partially fulfilled', criteria_legend_pres: 'Depends on presentation',
@@ -830,7 +1276,7 @@ const LangModule = (function() {
   function applyLang() {
     // ── Navbar ──
     const navBtns = document.querySelectorAll('.nav-btn');
-    const navKeys = ['nav_home','nav_lessons','nav_quiz','nav_progress','nav_criteria','nav_about','nav_sources'];
+    const navKeys = ['nav_home','nav_lessons','nav_quiz','nav_progress','nav_about','nav_uml','nav_api','nav_sources'];
     navBtns.forEach((btn, i) => { if(navKeys[i]) btn.textContent = t(navKeys[i]); });
     const lb = document.getElementById('lang-btn');
     if(lb) lb.textContent = t('lang_btn');
@@ -918,11 +1364,7 @@ const LangModule = (function() {
     const srcCats = document.querySelectorAll('#sources [data-i18n-src]');
     srcCats.forEach(el => { const k = el.getAttribute('data-i18n-src'); if(k) el.textContent = t(k); });
 
-    // ── CRITERIA ──
-    const crHeader = document.querySelector('#criteria .page-header h2');
-    const crSub = document.querySelector('#criteria .page-header p');
-    if(crHeader) crHeader.textContent = t('criteria_header');
-    if(crSub) crSub.textContent = t('criteria_sub');
+    // ── UML / API pages have static content, no translation needed ──
   }
 
   function toggle() {
@@ -946,8 +1388,10 @@ const LangModule = (function() {
 })();
 
 /**
- * CacheModule — localStorage кеширане на прогреса
- * Запазва и зарежда данни между сесии
+ * @module CacheModule
+ * @description localStorage кеширане на прогреса (Design Pattern: Repository)
+ * Абстрахира достъпа до localStorage — централизирано save/load/clear
+ * @pattern Repository — единна точка за достъп до хранилището
  */
 const CacheModule = (function() {
   const KEY = 'learnenglish_progress';
@@ -978,8 +1422,10 @@ const CacheModule = (function() {
 })();
 
 /**
- * StateModule — централизирано управление на състоянието
- * Зарежда от кеш при стартиране, запазва при промяна
+ * @module StateModule
+ * @description Централизирано управление на app state (Design Pattern: Singleton)
+ * Съхранява прочетени уроци, резултати от тестове и прогрес по нива
+ * @pattern Singleton + Observer — единно глобално състояние, известява при промяна
  */
 const StateModule = (function() {
   const levels = ['A1','A2','B1','B2','C1','C2'];
@@ -1153,8 +1599,10 @@ const NavModule = (function() {
 })();
 
 /**
- * QuizModule — управлява теста
- * Поддържа списък с тестове и детайлен изглед (като уроци)
+ * @module QuizModule
+ * @description Управлява тестовете (Design Pattern: State Machine)
+ * Имплементира именувани тест-сетове, flip-въпроси и BG/EN режим
+ * @pattern State Machine — въпрос → отговор → следващ въпрос → резултат
  */
 const QuizModule = (function() {
   let currentQ=0, score=0, answered=false, activeLevel='all', filteredQ=[], activeQuizId=null;
@@ -1171,6 +1619,7 @@ const QuizModule = (function() {
     {id:'a2-future',  level:'A2', topic:'Future',        title:'Бъдеще — A2',         title_en:'Future — A2',         desc:'will / going to',                      desc_en:'will / going to'},
     // B1
     {id:'b1-perf',    level:'B1', topic:'Present Perfect', title:'Present Perfect — B1', title_en:'Present Perfect — B1', desc:'have/has + 3rd form',                desc_en:'have/has + 3rd form'},
+    {id:"b1-comparatives", level:"B1", topic:"Comparatives", title:"Сравнения — B1", title_en:"Comparatives — B1", desc:"Сравнителна и превъзходна степен", desc_en:"Comparative and superlative forms"},
     {id:"b1-modals",  level:"B1", topic:"Modal Verbs",   title:"Модални глаголи — B1", title_en:"Modal Verbs — B1",   desc:"should, must, mustn't, have to",      desc_en:"should, must, mustn't, have to"},
     {id:'b1-mixed',   level:'B1', topic:'Mixed',         title:'Смесен тест — B1',    title_en:'Mixed Quiz — B1',     desc:'Conditionals, past continuous, travel', desc_en:'Conditionals, past continuous, travel'},
     // B2
@@ -1186,50 +1635,96 @@ const QuizModule = (function() {
     // Special
     {id:'all-vocab',  level:'ALL', topic:'Vocabulary',   title:'Само речник — всички нива', title_en:'Vocabulary only — all levels', desc:'Всички речникови въпроси',  desc_en:'All vocabulary questions'},
     {id:'all-mixed',  level:'ALL', topic:'Mixed',        title:'Голям смесен тест',   title_en:'Big mixed quiz',      desc:'Всички въпроси от всички нива',        desc_en:'All questions from all levels'},
+
+    // ── A1 new sets ──
+    {id:'a1-tobe2',    level:'A1', topic:'To Be 2',       title:'To Be — Допълнителен', title_en:'To Be — Extra',        desc:'We/They are, въпроси с Is/Are',        desc_en:'We/They are, questions with Is/Are'},
+    {id:'a1-numbers',  level:'A1', topic:'Numbers',       title:'Числа — A1',           title_en:'Numbers — A1',         desc:'Числа на английски: 1–100',            desc_en:'Numbers in English: 1–100'},
+    {id:'a1-animals',  level:'A1', topic:'Animals',       title:'Животни — A1',         title_en:'Animals — A1',         desc:'Животните на английски',               desc_en:'Animals in English'},
+    {id:'a1-colours',  level:'A1', topic:'Colours',       title:'Цветове — A1',         title_en:'Colours — A1',         desc:'Цветовете на английски',               desc_en:'Colours in English'},
+    {id:'a1-greetings',level:'A1', topic:'Greetings',     title:'Поздрави — A1',        title_en:'Greetings — A1',       desc:'Добро утро, довиждане и др.',          desc_en:'Good morning, goodbye and more'},
+    {id:'a1-family',   level:'A1', topic:'Family',        title:'Семейство — A1',       title_en:'Family — A1',          desc:'Членовете на семейството',             desc_en:'Family members in English'},
+
+    // ── A2 new sets ──
+    {id:'a2-past',     level:'A2', topic:'Past Simple',   title:'Past Simple — A2',     title_en:'Past Simple — A2',     desc:'Неправилни глаголи и минало просто',   desc_en:'Irregular verbs and past simple'},
+    {id:'a2-present',  level:'A2', topic:'Present Simple',title:'Present Simple — A2',  title_en:'Present Simple — A2', desc:'Навици и ежедневни действия',          desc_en:'Habits and daily routines'},
+    {id:'a2-food',     level:'A2', topic:'Food',          title:'Храна — A2',            title_en:'Food — A2',            desc:'Храна и напитки на английски',         desc_en:'Food and drinks in English'},
+    {id:'a2-jobs',     level:'A2', topic:'Jobs',          title:'Професии — A2',         title_en:'Jobs — A2',            desc:'Професии на английски',               desc_en:'Jobs and professions in English'},
+    {id:'a2-days',     level:'A2', topic:'Days',          title:'Дни и сезони — A2',     title_en:'Days & Seasons — A2', desc:'Дните от седмицата и сезоните',        desc_en:'Days of the week and seasons'},
+
+    // ── B1 new sets ──
+    {id:'b1-conditionals', level:'B1', topic:'Conditional 1', title:'Условни изречения тип 1 — B1', title_en:'Type 1 Conditionals — B1', desc:'If + Present Simple, will',       desc_en:'If + Present Simple, will'},
+    {id:'b1-pastcont',level:'B1', topic:'Past Continuous', title:'Past Continuous — B1', title_en:'Past Continuous — B1', desc:'Минало продължително време',          desc_en:'Past continuous tense'},
+    {id:'b1-travel',   level:'B1', topic:'Travel',        title:'Пътуване — B1',         title_en:'Travel — B1',          desc:'Речник за пътуване и транспорт',      desc_en:'Travel and transport vocabulary'},
+    {id:'b1-comparatives', level:'B1', topic:'Comparatives', title:'Сравнения — B1',     title_en:'Comparatives — B1',    desc:'Сравнителна и превъзходна степен',    desc_en:'Comparative and superlative forms'},
+
+    // ── B2 new sets ──
+    {id:'b2-cond23',   level:'B2', topic:'Conditional 3', title:'Условни изречения тип 2&3 — B2', title_en:'Type 2 & 3 Conditionals — B2', desc:'Would/would have + past perfect', desc_en:'Would/would have + past perfect'},
+    {id:'b2-academic', level:'B2', topic:'Academic Vocab', title:'Академичен речник — B2', title_en:'Academic Vocabulary — B2', desc:'Формална и академична лексика',    desc_en:'Formal and academic vocabulary'},
+    {id:'b2-idioms',   level:'B2', topic:'Idioms',        title:'Идиоми — B2',           title_en:'Idioms — B2',           desc:'Английски идиоми и изрази',           desc_en:'English idioms and expressions'},
+
+    // ── C1 new sets ──
+    {id:'c1-inversion',level:'C1', topic:'Inversion',     title:'Инверсия — C1',         title_en:'Inversion — C1',       desc:'Hardly, Only then, Never — инверсия', desc_en:'Hardly, Only then, Never — inversion'},
+    {id:'c1-subjunctive', level:'C1', topic:'Subjunctive', title:'Подчинително наклонение — C1', title_en:'Subjunctive — C1', desc:'It is essential that he be...',      desc_en:'It is essential that he be...'},
+    {id:'c1-cleft',    level:'C1', topic:'Cleft Sentences', title:'Cleft изречения — C1', title_en:'Cleft Sentences — C1', desc:'It was John who... / What I want is...', desc_en:'It was John who... / What I want is...'},
+    {id:'c1-discourse',level:'C1', topic:'Discourse Markers', title:'Дискурс маркери — C1', title_en:'Discourse Markers — C1', desc:'however, moreover, albeit, therefore', desc_en:'however, moreover, albeit, therefore'},
+
+    // ── C2 new sets ──
+    {id:'c2-conditionals', level:'C2', topic:'Mixed Conditionals', title:'Mixed Conditionals — C2', title_en:'Mixed Conditionals — C2', desc:'Смесени условни изречения',     desc_en:'Mixed conditional sentences'},
+    {id:'c2-nuance',   level:'C2', topic:'Nuance',        title:'Нюанс & Конотация — C2', title_en:'Nuance & Connotation — C2', desc:'Positive vs negative connotation', desc_en:'Positive vs negative word connotation'},
+    {id:'c2-rhetoric', level:'C2', topic:'Rhetoric',      title:'Реторика — C2',          title_en:'Rhetoric — C2',         desc:'Anaphora, antithesis, hyperbole',     desc_en:'Anaphora, antithesis, hyperbole'},
+    {id:'c2-ellipsis', level:'C2', topic:'Ellipsis',      title:'Елипсис — C2',           title_en:'Ellipsis — C2',         desc:'Съкратени изречения и елипсис',       desc_en:'Elliptical sentences'},
+    {id:'c2-idioms2',  level:'C2', topic:'Idioms C2',     title:'Идиоми C2 — Допълнителни', title_en:'Idioms C2 — Extra',   desc:'gilding the lily, double-edged sword', desc_en:'gilding the lily, double-edged sword'},
   ];
 
   // Map each question to a quiz set id
   const topicToSet = {
-    'To Be':          'a1-tobe',
-    'Nouns':          'a1-basics',
-    'There is/are':   'a1-basics',
-    'Numbers':        'a1-basics',
-    'Colours':        'a1-vocab',
-    'Animals':        'a1-basics',
-    'Questions':      'a1-basics',
-    'Greetings':      'a1-vocab',
-    'Family':         'a1-vocab',
-    'Possessives':    'a1-vocab',
-    'Present Simple': 'a2-tenses',
-    'Past Simple':    'a2-tenses',
-    'Present Continuous': 'a2-tenses',
-    'Food':           'a2-vocab',
-    'Jobs':           'a2-vocab',
-    'Seasons':        'a2-vocab',
-    'Days':           'a2-vocab',
-    'Future':         'a2-future',
-    'Present Perfect':'b1-perf',
-    'Comparatives':   'b1-modals',
-    'Modal Verbs':    'b1-modals',
-    'Conditional 1':  'b1-mixed',
-    'Past Continuous':'b1-mixed',
-    'Travel':         'b1-mixed',
-    'Passive Voice':  'b2-passive',
-    'Reported Speech':'b2-reported',
-    'Conditional 2':  'b2-vocab',
-    'Conditional 3':  'b2-vocab',
-    'Academic Vocab': 'b2-vocab',
-    'Idioms':         'b2-vocab',
-    'Inversion':      'c1-advanced',
-    'Cleft Sentences':'c1-advanced',
-    'Subjunctive':    'c1-advanced',
-    'Discourse Markers':'c1-vocab',
-    'Idioms C1':      'c1-vocab',
-    'Mixed Conditionals':'c2-master',
-    'Nuance':         'c2-master',
-    'Idioms C2':      'c2-vocab',
-    'Rhetoric':       'c2-vocab',
-    'Ellipsis':       'c2-vocab',
+    // A1
+    'To Be':            'a1-tobe',
+    'To Be 2':          'a1-tobe2',
+    'Nouns':            'a1-basics',
+    'There is/are':     'a1-basics',
+    'Questions':        'a1-basics',
+    'Numbers':          'a1-numbers',
+    'Colours':          'a1-colours',
+    'Animals':          'a1-animals',
+    'Greetings':        'a1-greetings',
+    'Family':           'a1-family',
+    'Possessives':      'a1-vocab',
+    // A2
+    'Present Simple':   'a2-present',
+    'Past Simple':      'a2-past',
+    'Present Continuous':'a2-tenses',
+    'Food':             'a2-food',
+    'Jobs':             'a2-jobs',
+    'Seasons':          'a2-days',
+    'Days':             'a2-days',
+    'Future':           'a2-future',
+    // B1
+    'Present Perfect':  'b1-perf',
+    'Comparatives':     'b1-comparatives',
+    'Modal Verbs':      'b1-modals',
+    'Conditional 1':    'b1-conditionals',
+    'Past Continuous':  'b1-pastcont',
+    'Travel':           'b1-travel',
+    // B2
+    'Passive Voice':    'b2-passive',
+    'Reported Speech':  'b2-reported',
+    'Conditional 2':    'b2-cond23',
+    'Conditional 3':    'b2-cond23',
+    'Academic Vocab':   'b2-academic',
+    'Idioms':           'b2-idioms',
+    // C1
+    'Inversion':        'c1-inversion',
+    'Cleft Sentences':  'c1-cleft',
+    'Subjunctive':      'c1-subjunctive',
+    'Discourse Markers':'c1-discourse',
+    'Idioms C1':        'c1-vocab',
+    // C2
+    'Mixed Conditionals':'c2-conditionals',
+    'Nuance':           'c2-nuance',
+    'Idioms C2':        'c2-idioms2',
+    'Rhetoric':         'c2-rhetoric',
+    'Ellipsis':         'c2-ellipsis',
   };
 
   const vocabTopics = new Set(['Greetings','Family','Possessives','Colours','Animals','Food','Jobs','Seasons','Days','Travel','Idioms','Academic Vocab','Idioms C1','Discourse Markers','Idioms C2','Rhetoric','Nuance','Ellipsis','Numbers','Questions','Nouns']);
@@ -1249,6 +1744,7 @@ const QuizModule = (function() {
   }
 
   function filterList(lv, btn) {
+    lv = SecurityModule.validateLevel(lv);
     if(btn){ document.querySelectorAll('#quiz-level-tabs .tab-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
     activeLevel = lv;
     const isEn = LangModule.current() === 'en';
@@ -1281,6 +1777,7 @@ const QuizModule = (function() {
   }
 
   function startSet(setId) {
+    setId = SecurityModule.validateId(setId);
     activeQuizId = setId;
     filteredQ = getQuestionsForSet(setId);
     currentQ = 0; score = 0; answered = false;
@@ -1289,6 +1786,10 @@ const QuizModule = (function() {
     const isEn = LangModule.current() === 'en';
     const backBtn = document.getElementById('quiz-back-btn');
     if(backBtn) backBtn.textContent = LangModule.t('quiz_back');
+    if(filteredQ.length === 0) {
+      document.getElementById('quiz-body').innerHTML = '<div style="padding:30px;text-align:center;color:var(--muted)">📭 Няма въпроси за този тест.</div>';
+      return;
+    }
     render();
   }
 
@@ -1303,12 +1804,17 @@ const QuizModule = (function() {
 
       if(currentQ >= filteredQ.length) {
         StateModule.addQuizResult(activeLevel, score, filteredQ.length);
+        stopTimer();
         const pct = Math.round(score/filteredQ.length*100);
         const msg = pct>=90?t('result_excellent'):pct>=70?t('result_good'):pct>=50?t('result_ok'):t('result_practice');
+        const setTitle = (quizSets.find(s=>s.id===activeQuizId)||{}).title || activeQuizId;
+        addToHistory(setTitle, score, filteredQ.length);
+        if(pct===100) setTimeout(launchConfetti, 200);
         body.innerHTML=`<div class="quiz-result">
           <div class="result-score">${score}</div>
           <div class="result-total">${t('of')} ${filteredQ.length} ${t('result_correct')}</div>
           <div class="result-msg">${msg}</div>
+          ${pct===100?'<div style="font-size:28px;margin:8px 0;">🎉🏆🎉</div>':''}
           <button class="result-btn" onclick="QuizModule.startSet('${activeQuizId}')">${t('retry')}</button>
           <button class="result-btn" style="background:var(--navy);margin-top:10px;" onclick="QuizModule.showList()">← ${t('quiz_back').replace('← ','')}</button>
         </div>`;
@@ -1321,12 +1827,22 @@ const QuizModule = (function() {
       const flipped = isEn && q.flip;
       const qText = flipped ? q.q_flip : (isEn && q.q_en ? q.q_en : q.q);
       const qOpts = flipped ? q.opts_flip : (isEn && q.opts_en ? q.opts_en : q.opts);
+      const r=15, circ=2*Math.PI*r;
       body.innerHTML=`
         <div class="quiz-meta">
           <span class="quiz-progress-text">${t('question_of')} ${currentQ+1} ${t('of')} ${filteredQ.length}</span>
-          <div style="display:flex;gap:6px">
+          <div style="display:flex;gap:6px;align-items:center">
             <span class="lesson-badge badge-${q.level.toLowerCase()}">${q.level}</span>
             <span class="quiz-topic">${q.topic}</span>
+            <div class="quiz-timer">
+              <div class="timer-ring">
+                <svg width="36" height="36" viewBox="0 0 36 36">
+                  <circle class="timer-track" cx="18" cy="18" r="${r}"/>
+                  <circle class="timer-fill" id="q-timer-fill" cx="18" cy="18" r="${r}" style="stroke-dasharray:${circ};stroke-dashoffset:0"/>
+                </svg>
+                <div class="timer-text" id="q-timer-text">20</div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
@@ -1336,6 +1852,7 @@ const QuizModule = (function() {
         <button class="quiz-next-btn" id="qnext" onclick="QuizModule.next()">
           ${currentQ+1<filteredQ.length?t('next_q'):t('see_result')}
         </button>`;
+      startTimer();
     } catch(e) {
       console.error('QuizModule.render:', e.message);
       const body = document.getElementById('quiz-body');
@@ -1346,6 +1863,7 @@ const QuizModule = (function() {
   function selectAnswer(idx) {
     if(answered) return;
     answered=true;
+    stopTimer();
     try {
       const q = filteredQ[currentQ];
       if(!q) throw new Error('Въпросът не е намерен.');
@@ -1382,7 +1900,98 @@ const QuizModule = (function() {
     render();
   }
 
-  return { buildTabs, filterList, showList, startSet, start, selectAnswer, next };
+
+  // ── TIMER ──
+  let timerInterval = null;
+  let timeLeft = 20;
+  const TIMER_MAX = 20;
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    timeLeft = TIMER_MAX;
+    updateTimerUI();
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      updateTimerUI();
+      if(timeLeft <= 0) {
+        clearInterval(timerInterval);
+        if(!answered) autoExpire();
+      }
+    }, 1000);
+  }
+
+  function stopTimer() { clearInterval(timerInterval); }
+
+  function updateTimerUI() {
+    const el = document.getElementById('q-timer-fill');
+    const txt = document.getElementById('q-timer-text');
+    if(!el || !txt) return;
+    const r = 15;
+    const circ = 2 * Math.PI * r;
+    const offset = circ * (1 - timeLeft / TIMER_MAX);
+    el.style.strokeDasharray = circ;
+    el.style.strokeDashoffset = offset;
+    txt.textContent = timeLeft;
+    el.setAttribute('class', 'timer-fill' + (timeLeft <= 5 ? ' danger' : timeLeft <= 10 ? ' warn' : ''));
+  }
+
+  function autoExpire() {
+    if(answered) return;
+    answered = true;
+    try {
+      const q = filteredQ[currentQ];
+      const opts = document.querySelectorAll('.quiz-option');
+      const fb = document.getElementById('qfb');
+      opts.forEach(o => o.disabled = true);
+      const isEn = LangModule.current() === 'en';
+      const flipped = isEn && q.flip;
+      const correctIdx = flipped && q.ans_flip !== undefined ? q.ans_flip : q.ans;
+      opts[correctIdx].classList.add('correct');
+      if(fb) { fb.textContent = '⏱ ' + (isEn ? 'Time is up! Correct answer: ' : 'Времето изтече! Правилният отговор е: ') + (flipped ? q.opts_flip[correctIdx] : q.opts[q.ans]); fb.className = 'quiz-feedback show wrong'; }
+      const nextBtn = document.getElementById('qnext');
+      if(nextBtn) nextBtn.classList.add('show');
+    } catch(e) {}
+  }
+
+  // ── CONFETTI ──
+  function launchConfetti() {
+    const colors = ['#5bbcff','#ef9f27','#3b6d11','#534ab7','#e24b4a','#fff'];
+    for(let i = 0; i < 80; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.cssText = `left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*0.5}s;border-radius:${Math.random()>0.5?'50%':'2px'}`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }
+  }
+
+  // ── SCORE HISTORY ──
+  const scoreHistory = [];
+  function addToHistory(title, score, total) {
+    const pct = Math.round(score/total*100);
+    scoreHistory.unshift({ title, score, total, pct, time: new Date().toLocaleTimeString('bg-BG',{hour:'2-digit',minute:'2-digit'}) });
+    if(scoreHistory.length > 5) scoreHistory.pop();
+    renderHistory();
+  }
+  function renderHistory() {
+    const el = document.getElementById('score-history');
+    if(!el) return;
+    if(!scoreHistory.length) { el.innerHTML='<p style="color:var(--muted);font-size:13px;margin-top:8px;">Все още няма резултати.</p>'; return; }
+    el.innerHTML = scoreHistory.map(h => {
+      const emoji = h.pct>=90?'🏆':h.pct>=70?'👍':h.pct>=50?'📚':'💪';
+      const color = h.pct>=90?'var(--green)':h.pct>=70?'var(--blue)':h.pct>=50?'var(--amber)':'var(--red)';
+      return `<div class="history-item">
+        <div class="history-badge">${emoji}</div>
+        <div class="history-info">
+          <div class="history-title">${h.title}</div>
+          <div class="history-sub">${h.score}/${h.total} верни · ${h.time}</div>
+        </div>
+        <div class="history-pct" style="color:${color}">${h.pct}%</div>
+      </div>`;
+    }).join('');
+  }
+
+  return { buildTabs, filterList, showList, startSet, start, selectAnswer, next, renderHistory };
 })();
 
 // ══════════════════════════════════════════
@@ -1393,6 +2002,31 @@ function showLessonList() { NavModule.showLessonList(); }
 function goToLevel(lv) { NavModule.goToLevel(lv); }
 function toggleDark() { ThemeModule.toggle(); }
 function toggleLang() { LangModule.toggle(); }
+function toggleMenu() {
+  const btn = document.getElementById('hamburger-btn');
+  const nav = document.getElementById('nav-center');
+  btn.classList.toggle('open');
+  nav.classList.toggle('open');
+}
+
+// ── Keyboard navigation for quiz ──
+document.addEventListener('keydown', function(e) {
+  try {
+    const keys = {'1':0,'2':1,'3':2,'4':3,'Digit1':0,'Digit2':1,'Digit3':2,'Digit4':3};
+    const idx = keys[e.key] !== undefined ? keys[e.key] : keys[e.code];
+    if(idx !== undefined) {
+      const opts = document.querySelectorAll('.quiz-option:not(:disabled)');
+      if(opts.length === 4) QuizModule.selectAnswer(idx);
+    }
+    if((e.key === 'Enter' || e.key === ' ') && e.target.id === 'qnext') {
+      QuizModule.next();
+    }
+    if(e.key === 'ArrowRight') {
+      const nextBtn = document.getElementById('qnext');
+      if(nextBtn && nextBtn.classList.contains('show')) QuizModule.next();
+    }
+  } catch(err) {}
+});
 
 // ══ DATA ══
 // Масив с всички уроци, организирани по ниво (A1–C2) и категория (grammar/vocab)
@@ -1929,6 +2563,33 @@ ThemeModule.init();
 StateModule.init();
 LangModule.init();
 NavModule.showLessonList();
+
+// ── Animated stat counters ──
+function animateCounter(el, target, suffix, duration) {
+  let start = 0;
+  const step = Math.ceil(target / (duration / 16));
+  const timer = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = start + suffix;
+    if(start >= target) clearInterval(timer);
+  }, 16);
+}
+document.querySelectorAll('.stat-num').forEach(el => {
+  const raw = el.textContent.replace('+','').replace('%','');
+  const num = parseInt(raw);
+  const suffix = el.textContent.includes('+') ? '+' : el.textContent.includes('%') ? '%' : '';
+  if(!isNaN(num)) animateCounter(el, num, suffix, 1200);
+});
+
+// ── Close mobile menu on nav click ──
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const nav = document.getElementById('nav-center');
+    const hbtn = document.getElementById('hamburger-btn');
+    if(nav) nav.classList.remove('open');
+    if(hbtn) hbtn.classList.remove('open');
+  });
+});
 </script>
 </body>
 </html>
