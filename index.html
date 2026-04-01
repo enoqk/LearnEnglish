@@ -1620,7 +1620,7 @@ const QuizModule = (function() {
     // B1
     {id:'b1-perf',    level:'B1', topic:'Present Perfect', title:'Present Perfect — B1', title_en:'Present Perfect — B1', desc:'have/has + 3rd form',                desc_en:'have/has + 3rd form'},
     {id:"b1-comparatives", level:"B1", topic:"Comparatives", title:"Сравнения — B1", title_en:"Comparatives — B1", desc:"Сравнителна и превъзходна степен", desc_en:"Comparative and superlative forms"},
-    {id:"b1-modals",  level:"B1", topic:"Modal Verbs",   title:"Модални глаголи — B1", title_en:"Modal Verbs — B1",   desc:"should, must, mustn't, have to",      desc_en:"should, must, mustn't, have to"},
+    {id:"b1-modals",  level:"B1", topic:"Modal Verbs",   title:"Модални глаголи — B1", title_en:"Modal Verbs — B1",   desc:"should, must, must not, have to",      desc_en:"should, must, must not, have to"},
     {id:'b1-mixed',   level:'B1', topic:'Mixed',         title:'Смесен тест — B1',    title_en:'Mixed Quiz — B1',     desc:'Conditionals, past continuous, travel', desc_en:'Conditionals, past continuous, travel'},
     // B2
     {id:'b2-passive', level:'B2', topic:'Passive Voice', title:'Пасив — B2',          title_en:'Passive Voice — B2',  desc:'Пасивни конструкции',                  desc_en:'Passive constructions'},
@@ -1725,6 +1725,14 @@ const QuizModule = (function() {
     'Idioms C2':        'c2-idioms2',
     'Rhetoric':         'c2-rhetoric',
     'Ellipsis':         'c2-ellipsis',
+    // Orphaned/misc topics — map to nearest set
+    'Tenses':           'a2-tenses',
+    'Basics':           'a1-basics',
+    'Advanced Grammar': 'c1-advanced',
+    'Mastery':          'c2-master',
+    'Conditional 2':    'b2-cond23',
+    'Mixed':            'b1-mixed',
+    'Vocabulary':       'a2-vocab',
   };
 
   const vocabTopics = new Set(['Greetings','Family','Possessives','Colours','Animals','Food','Jobs','Seasons','Days','Travel','Idioms','Academic Vocab','Idioms C1','Discourse Markers','Idioms C2','Rhetoric','Nuance','Ellipsis','Numbers','Questions','Nouns']);
@@ -2035,8 +2043,8 @@ const lessons = [
   {id:1,level:'A1',cat:'grammar',
    title:'Глаголът "to be"',desc:'am / is / are — основата на английски',
    title_en:'The verb "to be"',desc_en:'am / is / are — the foundation of English',
-   content:`<h3>Глаголът "to be" (съм)</h3><p>Най-важният глагол в английски. Използва се за описание на хора и неща.</p><div class="rule-box"><div class="rule-title">Форми</div><p>I <em>am</em> &nbsp;|&nbsp; He/She/It <em>is</em> &nbsp;|&nbsp; You/We/They <em>are</em></p></div><table class="example-table"><thead><tr><th>Утвърдително</th><th>Отрицателно</th><th>Въпрос</th></tr></thead><tbody><tr><td><em>I am</em> happy.</td><td><em>I am not</em> sad.</td><td><em>Am I</em> late?</td></tr><tr><td><em>She is</em> a teacher.</td><td><em>She isn't</em> old.</td><td><em>Is she</em> here?</td></tr><tr><td><em>They are</em> friends.</td><td><em>They aren't</em> busy.</td><td><em>Are they</em> ready?</td></tr></tbody></table>`,
-   content_en:`<h3>The verb "to be"</h3><p>The most important verb in English. Used to describe people and things.</p><div class="rule-box"><div class="rule-title">Forms</div><p>I <em>am</em> &nbsp;|&nbsp; He/She/It <em>is</em> &nbsp;|&nbsp; You/We/They <em>are</em></p></div><table class="example-table"><thead><tr><th>Affirmative</th><th>Negative</th><th>Question</th></tr></thead><tbody><tr><td><em>I am</em> happy.</td><td><em>I am not</em> sad.</td><td><em>Am I</em> late?</td></tr><tr><td><em>She is</em> a teacher.</td><td><em>She isn't</em> old.</td><td><em>Is she</em> here?</td></tr><tr><td><em>They are</em> friends.</td><td><em>They aren't</em> busy.</td><td><em>Are they</em> ready?</td></tr></tbody></table>`},
+   content:`<h3>Глаголът "to be" (съм)</h3><p>Най-важният глагол в английски. Използва се за описание на хора и неща.</p><div class="rule-box"><div class="rule-title">Форми</div><p>I <em>am</em> &nbsp;|&nbsp; He/She/It <em>is</em> &nbsp;|&nbsp; You/We/They <em>are</em></p></div><table class="example-table"><thead><tr><th>Утвърдително</th><th>Отрицателно</th><th>Въпрос</th></tr></thead><tbody><tr><td><em>I am</em> happy.</td><td><em>I am not</em> sad.</td><td><em>Am I</em> late?</td></tr><tr><td><em>She is</em> a teacher.</td><td><em>She is not</em> old.</td><td><em>Is she</em> here?</td></tr><tr><td><em>They are</em> friends.</td><td><em>They are not</em> busy.</td><td><em>Are they</em> ready?</td></tr></tbody></table>`,
+   content_en:`<h3>The verb "to be"</h3><p>The most important verb in English. Used to describe people and things.</p><div class="rule-box"><div class="rule-title">Forms</div><p>I <em>am</em> &nbsp;|&nbsp; He/She/It <em>is</em> &nbsp;|&nbsp; You/We/They <em>are</em></p></div><table class="example-table"><thead><tr><th>Affirmative</th><th>Negative</th><th>Question</th></tr></thead><tbody><tr><td><em>I am</em> happy.</td><td><em>I am not</em> sad.</td><td><em>Am I</em> late?</td></tr><tr><td><em>She is</em> a teacher.</td><td><em>She is not</em> old.</td><td><em>Is she</em> here?</td></tr><tr><td><em>They are</em> friends.</td><td><em>They are not</em> busy.</td><td><em>Are they</em> ready?</td></tr></tbody></table>`},
 
   {id:2,level:'A1',cat:'vocab',
    title:'Поздрави и запознанства',desc:'Hello, my name is...',
@@ -2072,8 +2080,8 @@ const lessons = [
   {id:7,level:'A2',cat:'grammar',
    title:'Present Simple',desc:'Сегашно просто — навици и факти',
    title_en:'Present Simple',desc_en:'Habits, routines and facts',
-   content:`<h3>Present Simple</h3><p>За <em>навици, ежедневни действия и факти</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>I/You/We/They + <em>глагол</em> &nbsp;|&nbsp; He/She/It + <em>глагол + s/es</em></p></div><table class="example-table"><thead><tr><th>Утвърдително</th><th>Отрицателно</th><th>Въпрос</th></tr></thead><tbody><tr><td>I <em>work</em> here.</td><td>I <em>don't work</em>.</td><td><em>Do</em> I work?</td></tr><tr><td>She <em>works</em> here.</td><td>She <em>doesn't work</em>.</td><td><em>Does</em> she work?</td></tr></tbody></table><p>Сигнали: <em>always, usually, often, sometimes, never, every day</em></p>`,
-   content_en:`<h3>Present Simple</h3><p>Used for <em>habits, routines and facts that are always true</em>.</p><div class="rule-box"><div class="rule-title">Rule</div><p>I/You/We/They + <em>verb</em> &nbsp;|&nbsp; He/She/It + <em>verb + s/es</em></p></div><table class="example-table"><thead><tr><th>Affirmative</th><th>Negative</th><th>Question</th></tr></thead><tbody><tr><td>I <em>work</em> here.</td><td>I <em>don't work</em>.</td><td><em>Do</em> I work?</td></tr><tr><td>She <em>works</em> here.</td><td>She <em>doesn't work</em>.</td><td><em>Does</em> she work?</td></tr></tbody></table><p>Signal words: <em>always, usually, often, sometimes, never, every day</em></p>`},
+   content:`<h3>Present Simple</h3><p>За <em>навици, ежедневни действия и факти</em>.</p><div class="rule-box"><div class="rule-title">Правило</div><p>I/You/We/They + <em>глагол</em> &nbsp;|&nbsp; He/She/It + <em>глагол + s/es</em></p></div><table class="example-table"><thead><tr><th>Утвърдително</th><th>Отрицателно</th><th>Въпрос</th></tr></thead><tbody><tr><td>I <em>work</em> here.</td><td>I <em>don't work</em>.</td><td><em>Do</em> I work?</td></tr><tr><td>She <em>works</em> here.</td><td>She <em>does not work</em>.</td><td><em>Does</em> she work?</td></tr></tbody></table><p>Сигнали: <em>always, usually, often, sometimes, never, every day</em></p>`,
+   content_en:`<h3>Present Simple</h3><p>Used for <em>habits, routines and facts that are always true</em>.</p><div class="rule-box"><div class="rule-title">Rule</div><p>I/You/We/They + <em>verb</em> &nbsp;|&nbsp; He/She/It + <em>verb + s/es</em></p></div><table class="example-table"><thead><tr><th>Affirmative</th><th>Negative</th><th>Question</th></tr></thead><tbody><tr><td>I <em>work</em> here.</td><td>I <em>don't work</em>.</td><td><em>Do</em> I work?</td></tr><tr><td>She <em>works</em> here.</td><td>She <em>does not work</em>.</td><td><em>Does</em> she work?</td></tr></tbody></table><p>Signal words: <em>always, usually, often, sometimes, never, every day</em></p>`},
 
   {id:8,level:'A2',cat:'grammar',
    title:'Past Simple',desc:'Минало просто',
@@ -2159,7 +2167,7 @@ const lessons = [
    title:'Conditionals Type 2 & 3',desc:'Нереални условия',
    title_en:'Conditionals Type 2 & 3',desc_en:'Unreal and hypothetical situations',
    content:`<h3>Conditionals Type 2 & 3</h3><div class="rule-box"><div class="rule-title">Type 2 — нереални настоящи</div><p><em>If + Past Simple, would + infinitive</em><br>If I <em>had</em> money, I <em>would travel</em>.</p></div><div class="rule-box"><div class="rule-title">Type 3 — нереални минали</div><p><em>If + Past Perfect, would have + p.p.</em><br>If she <em>had studied</em>, she <em>would have passed</em>.</p></div>`,
-   content_en:`<h3>Conditionals Type 2 & 3</h3><div class="rule-box"><div class="rule-title">Type 2 — unreal present situations</div><p><em>If + Past Simple, would + infinitive</em><br>If I <em>had</em> money, I <em>would travel</em> the world. (I don't have money)</p></div><div class="rule-box"><div class="rule-title">Type 3 — unreal past situations</div><p><em>If + Past Perfect, would have + past participle</em><br>If she <em>had studied</em>, she <em>would have passed</em>. (She didn't study)</p></div><p>Type 3 often expresses regret about the past.</p>`},
+   content_en:`<h3>Conditionals Type 2 & 3</h3><div class="rule-box"><div class="rule-title">Type 2 — unreal present situations</div><p><em>If + Past Simple, would + infinitive</em><br>If I <em>had</em> money, I <em>would travel</em> the world. (I don't have money)</p></div><div class="rule-box"><div class="rule-title">Type 3 — unreal past situations</div><p><em>If + Past Perfect, would have + past participle</em><br>If she <em>had studied</em>, she <em>would have passed</em>. (She did not study)</p></div><p>Type 3 often expresses regret about the past.</p>`},
 
   {id:22,level:'B2',cat:'grammar',
    title:'Герундий и инфинитив',desc:'Gerund vs Infinitive',
@@ -2221,13 +2229,13 @@ const lessons = [
    title:'Mixed Conditionals',desc:'Смесени условни',
    title_en:'Mixed Conditionals',desc_en:'Combining past and present in conditionals',
    content:`<h3>Mixed Conditionals</h3><div class="rule-box"><div class="rule-title">Past → Present</div><p><em>If I had studied harder</em>, <em>I would be</em> a doctor now.</p></div><div class="rule-box"><div class="rule-title">Present → Past</div><p><em>If I were braver</em>, <em>I would have spoken</em> to her last night.</p></div>`,
-   content_en:`<h3>Mixed Conditionals</h3><p>These combine different time frames in one sentence.</p><div class="rule-box"><div class="rule-title">Past condition → Present result (Type 3+2)</div><p><em>If I had studied harder</em> (in the past), <em>I would be</em> a doctor now.<br>Meaning: I didn't study, so I'm not a doctor.</p></div><div class="rule-box"><div class="rule-title">Present condition → Past result (Type 2+3)</div><p><em>If I were braver</em> (now), <em>I would have spoken</em> to her last night.<br>Meaning: I'm not brave, so I didn't speak to her.</p></div>`},
+   content_en:`<h3>Mixed Conditionals</h3><p>These combine different time frames in one sentence.</p><div class="rule-box"><div class="rule-title">Past condition → Present result (Type 3+2)</div><p><em>If I had studied harder</em> (in the past), <em>I would be</em> a doctor now.<br>Meaning: I did not study, so I'm not a doctor.</p></div><div class="rule-box"><div class="rule-title">Present condition → Past result (Type 2+3)</div><p><em>If I were braver</em> (now), <em>I would have spoken</em> to her last night.<br>Meaning: I'm not brave, so I did not speak to her.</p></div>`},
 
   {id:32,level:'C2',cat:'grammar',
    title:'Ellipsis & Substitution',desc:'Изпускане и заместване',
    title_en:'Ellipsis & Substitution',desc_en:'Avoiding repetition like a native speaker',
    content:`<h3>Ellipsis & Substitution</h3><div class="rule-box"><div class="rule-title">Ellipsis</div><p>"Are you coming?" — "I hope <em>so</em>."<br>"She wants to leave, and I do <em>too</em>."</p></div><div class="rule-box"><div class="rule-title">Substitution</div><p>"Which cake?" — "The <em>one</em> with chocolate."</p></div>`,
-   content_en:`<h3>Ellipsis & Substitution</h3><p>Advanced speakers avoid repetition using these techniques.</p><div class="rule-box"><div class="rule-title">Ellipsis — omitting words already understood</div><p>"Are you coming?" — "I hope <em>so</em>." (= I hope I am coming)<br>"She wants to leave, and I do <em>too</em>." (= I also want to leave)</p></div><div class="rule-box"><div class="rule-title">Substitution — replacing with a shorter form</div><p>"Which cake do you want?" — "I'll have the <em>one</em> with chocolate."<br>"I forgot my book." — "Use <em>mine</em>." (= my book)</p></div>`},
+   content_en:`<h3>Ellipsis & Substitution</h3><p>Advanced speakers avoid repetition using these techniques.</p><div class="rule-box"><div class="rule-title">Ellipsis — omitting words already understood</div><p>"Are you coming?" — "I hope <em>so</em>." (= I hope I am coming)<br>"She wants to leave, and I do <em>too</em>." (= I also want to leave)</p></div><div class="rule-box"><div class="rule-title">Substitution — replacing with a shorter form</div><p>"Which cake do you want?" — "I will have the <em>one</em> with chocolate."<br>"I forgot my book." — "Use <em>mine</em>." (= my book)</p></div>`},
 
   {id:33,level:'C2',cat:'grammar',
    title:'Discourse Markers',desc:'Напреднали свързващи думи',
@@ -2245,13 +2253,13 @@ const lessons = [
    title:'Идиоми C2',desc:'Complex expressions',
    title_en:'Idioms C2',desc_en:'Mastering the most complex expressions',
    content:`<h3>Идиоми — C2</h3><table class="example-table"><thead><tr><th>Израз</th><th>Значение</th></tr></thead><tbody><tr><td><em>gilding the lily</em></td><td>ненужно украсяване</td></tr><tr><td><em>Hobson's choice</em></td><td>привиден избор без реални опции</td></tr><tr><td><em>a double-edged sword</em></td><td>предимства и недостатъци</td></tr><tr><td><em>to pass the buck</em></td><td>прехвърляш отговорността</td></tr></tbody></table>`,
-   content_en:`<h3>Idioms — C2</h3><table class="example-table"><thead><tr><th>Expression</th><th>Meaning</th><th>Example</th></tr></thead><tbody><tr><td><em>gilding the lily</em></td><td>adding unnecessary ornamentation</td><td>Adding more graphics would be <em>gilding the lily</em>.</td></tr><tr><td><em>Hobson's choice</em></td><td>apparent choice with no real options</td><td>Accept the deal or leave — it's <em>Hobson's choice</em>.</td></tr><tr><td><em>a double-edged sword</em></td><td>something with both benefits and drawbacks</td><td>Social media is <em>a double-edged sword</em>.</td></tr><tr><td><em>to pass the buck</em></td><td>to shift responsibility to someone else</td><td>Stop <em>passing the buck</em> and take responsibility!</td></tr></tbody></table>`},
+   content_en:`<h3>Idioms — C2</h3><table class="example-table"><thead><tr><th>Expression</th><th>Meaning</th><th>Example</th></tr></thead><tbody><tr><td><em>gilding the lily</em></td><td>adding unnecessary ornamentation</td><td>Adding more graphics would be <em>gilding the lily</em>.</td></tr><tr><td><em>Hobson's choice</em></td><td>apparent choice with no real options</td><td>Accept the deal or leave — it is <em>Hobson's choice</em>.</td></tr><tr><td><em>a double-edged sword</em></td><td>something with both benefits and drawbacks</td><td>Social media is <em>a double-edged sword</em>.</td></tr><tr><td><em>to pass the buck</em></td><td>to shift responsibility to someone else</td><td>Stop <em>passing the buck</em> and take responsibility!</td></tr></tbody></table>`},
 
   {id:36,level:'C2',cat:'vocab',
    title:'Реторика и убеждаване',desc:'Rhetorical devices',
    title_en:'Rhetoric and persuasion',desc_en:'Rhetorical devices used by great speakers',
    content:`<h3>Реторика</h3><table class="example-table"><thead><tr><th>Похват</th><th>Обяснение</th></tr></thead><tbody><tr><td><em>Anaphora</em></td><td>повторение в началото</td></tr><tr><td><em>Antithesis</em></td><td>противопоставяне</td></tr><tr><td><em>Hyperbole</em></td><td>преувеличение</td></tr><tr><td><em>Euphemism</em></td><td>омекотяване</td></tr></tbody></table>`,
-   content_en:`<h3>Rhetoric and Persuasion</h3><table class="example-table"><thead><tr><th>Device</th><th>Explanation</th><th>Example</th></tr></thead><tbody><tr><td><em>Anaphora</em></td><td>repetition at the start of clauses</td><td>"We shall fight... we shall never surrender."</td></tr><tr><td><em>Antithesis</em></td><td>contrasting ideas in parallel</td><td>"Ask not what your country can do for you..."</td></tr><tr><td><em>Hyperbole</em></td><td>deliberate exaggeration</td><td>"I've told you a million times."</td></tr><tr><td><em>Euphemism</em></td><td>softening a difficult reality</td><td>"passed away" instead of "died"</td></tr></tbody></table>`},
+   content_en:`<h3>Rhetoric and Persuasion</h3><table class="example-table"><thead><tr><th>Device</th><th>Explanation</th><th>Example</th></tr></thead><tbody><tr><td><em>Anaphora</em></td><td>repetition at the start of clauses</td><td>"We shall fight... we shall never surrender."</td></tr><tr><td><em>Antithesis</em></td><td>contrasting ideas in parallel</td><td>"Ask not what your country can do for you..."</td></tr><tr><td><em>Hyperbole</em></td><td>deliberate exaggeration</td><td>"I have told you a million times."</td></tr><tr><td><em>Euphemism</em></td><td>softening a difficult reality</td><td>"passed away" instead of "died"</td></tr></tbody></table>`},
 ];
 
 const questions = [
@@ -2362,8 +2370,8 @@ const questions = [
    q_en:'Fill in: She ___ in London for three years.', opts_en:['live','lives','has lived','is living']},
   {q:'Кое е правилното сравнение: "good"?', opts:['gooder','more good','better','best'], ans:2, level:'B1', topic:'Comparatives',
    q_en:'What is the correct comparative form of "good"?', opts_en:['gooder','more good','better','best']},
-  {q:'Попълни: You ___ smoke here — it\'s forbidden.', opts:["mustn't","don't have to","couldn't","wouldn't"], ans:0, level:'B1', topic:'Modal Verbs',
-   q_en:"Fill in: You ___ smoke here — it's forbidden.", opts_en:["mustn't","don't have to","couldn't","wouldn't"]},
+  {q:'Попълни: You ___ smoke here — it\'s forbidden.', opts:["must not","don't have to","could not","wouldn't"], ans:0, level:'B1', topic:'Modal Verbs',
+   q_en:"Fill in: You ___ smoke here — it is forbidden.", opts_en:["must not","don't have to","could not","wouldn't"]},
   {q:'Попълни: While I ___, the phone rang.', opts:['cook','cooked','was cooking','am cooking'], ans:2, level:'B1', topic:'Past Continuous',
    q_en:'Fill in: While I ___, the phone rang.', opts_en:['cook','cooked','was cooking','am cooking']},
   {q:'Как е "паспорт" на английски?', opts:['ticket','luggage','passport','boarding pass'], ans:2, level:'B1', topic:'Travel',
@@ -2483,8 +2491,8 @@ const questions = [
    q_en:'Fill in: They ___ just ___ the test.', opts_en:['have/finished','has/finished','have/finish','had/finished']},
 
   /* ── B1 — Modals extra ── */
-  {q:"Попълни: You ___ eat vegetables — it's good for you.", opts:["mustn't",'should',"can't","won't"], ans:1, level:'B1', topic:'Modal Verbs',
-   q_en:"Fill in: You ___ eat vegetables — it's good for you.", opts_en:["mustn't",'should',"can't","won't"]},
+  {q:"Попълни: You ___ eat vegetables — it is good for you.", opts:["must not",'should',"cannot","will not"], ans:1, level:'B1', topic:'Modal Verbs',
+   q_en:"Fill in: You ___ eat vegetables — it is good for you.", opts_en:["must not",'should',"cannot","will not"]},
   {q:'Попълни: She ___ speak three languages.', opts:['should','must','can','have to'], ans:2, level:'B1', topic:'Modal Verbs',
    q_en:'Fill in: She ___ speak three languages.', opts_en:['should','must','can','have to']},
   {q:'Кое е правилното сравнение на "bad"?', opts:['badder','more bad','worse','worst'], ans:2, level:'B1', topic:'Comparatives',
@@ -2554,6 +2562,527 @@ const questions = [
    q_en:'"I have a dream..." — the repetition at the start of clauses is called?', opts_en:['Antithesis','Euphemism','Anaphora','Hyperbole']},
   {q:'Ellipsis: "She can swim and so ___ I."', opts:['do','can','am','have'], ans:1, level:'C2', topic:'Ellipsis',
    q_en:'Ellipsis: "She can swim and so ___ I."', opts_en:['do','can','am','have']},
+  /* ── To Be 2 extra (a1-tobe2) ── */
+  {q:'Попълни: You and I ___ best friends.', opts:['am','is','are','be'], ans:2, level:'A1', topic:'To Be 2',
+   q_en:'Fill in: You and I ___ best friends.', opts_en:['am','is','are','be']},
+  {q:'Попълни: ___ she at home?', opts:['Am','Is','Are','Be'], ans:1, level:'A1', topic:'To Be 2',
+   q_en:'Fill in: ___ she at home?', opts_en:['Am','Is','Are','Be']},
+  {q:'Попълни: The dogs ___ in the garden.', opts:['am','is','are','be'], ans:2, level:'A1', topic:'To Be 2',
+   q_en:'Fill in: The dogs ___ in the garden.', opts_en:['am','is','are','be']},
+  {q:'Попълни: It ___ cold today.', opts:['am','is','are','be'], ans:1, level:'A1', topic:'To Be 2',
+   q_en:'Fill in: It ___ cold today.', opts_en:['am','is','are','be']},
+
+  /* ── Nouns extra (a1-basics) ── */
+  {q:'Кое е правилното множествено число на "box"?', opts:['boxs','boxes','boxies','box'], ans:1, level:'A1', topic:'Nouns',
+   q_en:'What is the correct plural of "box"?', opts_en:['boxs','boxes','boxies','box']},
+  {q:'Кое е правилното множествено число на "city"?', opts:['citys','cityes','cities','city'], ans:2, level:'A1', topic:'Nouns',
+   q_en:'What is the correct plural of "city"?', opts_en:['citys','cityes','cities','city']},
+  {q:'Кое е правилното множествено число на "man"?', opts:['mans','manes','mens','men'], ans:3, level:'A1', topic:'Nouns',
+   q_en:'What is the correct plural of "man"?', opts_en:['mans','manes','mens','men']},
+
+  /* ── Questions extra (a1-basics) ── */
+  {q:'Попълни: ___ do you live?', opts:['What','Who','Where','When'], ans:2, level:'A1', topic:'Questions',
+   q_en:'Fill in: ___ do you live?', opts_en:['What','Who','Where','When']},
+  {q:'Попълни: ___ old are you?', opts:['What','How','Where','Who'], ans:1, level:'A1', topic:'Questions',
+   q_en:'Fill in: ___ old are you?', opts_en:['What','How','Where','Who']},
+  {q:'Попълни: ___ is your teacher?', opts:['What','Where','How','Who'], ans:3, level:'A1', topic:'Questions',
+   q_en:'Fill in: ___ is your teacher?', opts_en:['What','Where','How','Who']},
+
+  /* ── Present Continuous extra (a2-tenses) ── */
+  {q:'Попълни: He ___ a book right now.', opts:['read','reads','is reading','was reading'], ans:2, level:'A2', topic:'Present Continuous',
+   q_en:'Fill in: He ___ a book right now.', opts_en:['read','reads','is reading','was reading']},
+  {q:'Попълни: We ___ to music at the moment.', opts:['listen','listens','are listening','listened'], ans:2, level:'A2', topic:'Present Continuous',
+   q_en:'Fill in: We ___ to music at the moment.', opts_en:['listen','listens','are listening','listened']},
+  {q:'Попълни: ___ they ___ lunch now?', opts:['Are/having','Is/having','Do/have','Does/have'], ans:0, level:'A2', topic:'Present Continuous',
+   q_en:'Fill in: ___ they ___ lunch now?', opts_en:['Are/having','Is/having','Do/have','Does/have']},
+
+  /* ── Seasons extra (a2-days) ── */
+  {q:'Как е "лято" на английски?', opts:['spring','summer','autumn','winter'], ans:1, level:'A2', topic:'Seasons',
+   q_en:'What is the English word for "лято" (summer)?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is the Bulgarian word for "summer"?', opts_flip:['пролет','лято','есен','зима'], ans_flip:1},
+  {q:'Как е "есен" на английски?', opts:['spring','summer','autumn','winter'], ans:2, level:'A2', topic:'Seasons',
+   q_en:'What is the English word for "есен" (autumn)?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is the Bulgarian word for "autumn"?', opts_flip:['пролет','лято','есен','зима'], ans_flip:2},
+
+  /* ── Possessives extra (a1-vocab) ── */
+  {q:'Попълни: Is this ___ bag?', opts:['you','your','yours bag','her bag'], ans:1, level:'A1', topic:'Possessives',
+   q_en:'Fill in: Is this ___ bag?', opts_en:['you','your','yours bag','her bag']},
+  {q:'Попълни: ___ name is Peter.', opts:['He','His','Him','Himself'], ans:1, level:'A1', topic:'Possessives',
+   q_en:'Fill in: ___ name is Peter.', opts_en:['He','His','Him','Himself']},
+
+  /* ── Conditional 2 extra (b2-cond23) ── */
+  {q:'Попълни: If she ___ harder, she would pass.', opts:['work','works','worked','had worked'], ans:2, level:'B2', topic:'Conditional 2',
+   q_en:'Fill in: If she ___ harder, she would pass.', opts_en:['work','works','worked','had worked']},
+  {q:'Попълни: If they ___ here, they would help us.', opts:['are','were','had been','will be'], ans:1, level:'B2', topic:'Conditional 2',
+   q_en:'Fill in: If they ___ here, they would help us.', opts_en:['are','were','had been','will be']},
+  {q:'Попълни: If I ___ a car, I would drive to work.', opts:['have','had','has','would have'], ans:1, level:'B2', topic:'Conditional 2',
+   q_en:'Fill in: If I ___ a car, I would drive to work.', opts_en:['have','had','has','would have']},
+
+  /* ── Mixed B1 extra (b1-mixed) ── */
+  {q:'Попълни: By the time she arrived, we ___ for an hour.', opts:['waited','were waiting','had been waiting','have waited'], ans:2, level:'B1', topic:'Mixed',
+   q_en:'Fill in: By the time she arrived, we ___ for an hour.', opts_en:['waited','were waiting','had been waiting','have waited']},
+  {q:'Попълни: She is ___ than her sister.', opts:['tall','more tall','taller','tallest'], ans:2, level:'B1', topic:'Mixed',
+   q_en:'Fill in: She is ___ than her sister.', opts_en:['tall','more tall','taller','tallest']},
+
+  /* ── Advanced Grammar C1 extra (c1-advanced) ── */
+  {q:'Попълни: Not only ___ she win the race, but she broke the record.', opts:['did','does','had','was'], ans:0, level:'C1', topic:'Advanced Grammar',
+   q_en:'Fill in: Not only ___ she win the race, but she broke the record.', opts_en:['did','does','had','was']},
+  {q:'Попълни: ___ I known about it, I would have come.', opts:['If','Had','Should','Were'], ans:1, level:'C1', topic:'Advanced Grammar',
+   q_en:'Fill in: ___ I known about it, I would have come.', opts_en:['If','Had','Should','Were']},
+  {q:'Cleft: ___ annoys me most is the noise.', opts:['It','That','What','Which'], ans:2, level:'C1', topic:'Advanced Grammar',
+   q_en:'Fill in the cleft sentence: ___ annoys me most is the noise.', opts_en:['It','That','What','Which']},
+
+  /* ── Mastery C2 extra (c2-master) ── */
+  {q:'Попълни: ___ he been more careful, the accident would not have happened.', opts:['If','Had','Were','Should'], ans:1, level:'C2', topic:'Mastery',
+   q_en:'Fill in: ___ he been more careful, the accident would not have happened.', opts_en:['If','Had','Were','Should']},
+  {q:'Коя форма е граматически правилна?', opts:['I wish I was taller.','I wish I were taller.','I wish I am taller.','I wish I be taller.'], ans:1, level:'C2', topic:'Mastery',
+   q_en:'Which form is grammatically correct?', opts_en:['I wish I was taller.','I wish I were taller.','I wish I am taller.','I wish I be taller.']},
+  {q:'Попълни: Seldom ___ such dedication.', opts:['I have seen','have I seen','I had seen','had I seen'], ans:1, level:'C2', topic:'Mastery',
+   q_en:'Fill in: Seldom ___ such dedication.', opts_en:['I have seen','have I seen','I had seen','had I seen']},
+  {q:'Попълни: ___ it not been for her help, I would have failed.', opts:['If','Had','Were','Should'], ans:1, level:'C2', topic:'Mastery',
+   q_en:'Fill in: ___ it not been for her help, I would have failed.', opts_en:['If','Had','Were','Should']},
+
+,
+  // ── Extra A1 ──
+  {q:'Кое е правилно?', opts:['He are my brother.','He is my brother.','He am my brother.','He be my brother.'], ans:1, level:'A1', topic:'To Be',
+   q_en:'Which is correct?', opts_en:['He are my brother.','He is my brother.','He am my brother.','He be my brother.']},
+  {q:'Попълни: We ___ happy today.', opts:['is','am','are','be'], ans:2, level:'A1', topic:'To Be',
+   q_en:'Fill in: We ___ happy today.', opts_en:['is','am','are','be']},
+  {q:'Как е "довиждане" на английски?', opts:['Hello','Good morning','Goodbye','How are you'], ans:2, level:'A1', topic:'Greetings',
+   q_en:'How do you say "довиждане" in English?', opts_en:['Hello','Good morning','Goodbye','How are you']},
+  {q:'Попълни: ___ name is Anna.', opts:['Her','She','Hers','Him'], ans:0, level:'A1', topic:'Possessives',
+   q_en:'Fill in: ___ name is Anna.', opts_en:['Her','She','Hers','Him']},
+  {q:'Как е "брат" на английски?', opts:['sister','father','uncle','brother'], ans:3, level:'A1', topic:'Family',
+   q_en:'What is the English word for "брат"?', opts_en:['sister','father','uncle','brother']},
+  {q:'Колко е "fifty"?', opts:['15','5','50','500'], ans:2, level:'A1', topic:'Numbers',
+   q_en:'How much is "fifty"?', opts_en:['15','5','50','500']},
+  {q:'Кой цвят е "red"?', opts:['зелен','червен','жълт','син'], ans:1, level:'A1', topic:'Colours',
+   q_en:'Which colour is "red"?', opts_en:['green','red','yellow','blue']},
+  {q:'Попълни: This is ___ car. (за него)', opts:['her','my','his','their'], ans:2, level:'A1', topic:'Possessives',
+   q_en:'Fill in: This is ___ car. (belonging to him)', opts_en:['her','my','his','their']},
+  // ── Extra A2 ──
+  {q:'Попълни: He ___ football every Saturday.', opts:['play','played','plays','playing'], ans:2, level:'A2', topic:'Present Simple',
+   q_en:'Fill in: He ___ football every Saturday.', opts_en:['play','played','plays','playing']},
+  {q:'Кой е правилният въпрос?', opts:['Do she work here?','Does she works here?','Does she work here?','Is she work here?'], ans:2, level:'A2', topic:'Present Simple',
+   q_en:'Which is the correct question?', opts_en:['Do she work here?','Does she works here?','Does she work here?','Is she work here?']},
+  {q:'Попълни: Yesterday I ___ pizza for dinner.', opts:['eat','eating','eats','ate'], ans:3, level:'A2', topic:'Past Simple',
+   q_en:'Fill in: Yesterday I ___ pizza for dinner.', opts_en:['eat','eating','eats','ate']},
+  {q:'Как е "вода" на английски?', opts:['juice','milk','water','tea'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "вода" (water)?', opts_en:['juice','milk','water','tea']},
+  {q:'Кой месец е третият?', opts:['January','February','March','April'], ans:2, level:'A2', topic:'Days',
+   q_en:'Which is the third month?', opts_en:['January','February','March','April']},
+  {q:'Попълни: Look! She ___ a red dress today.', opts:['wear','wears','is wearing','wore'], ans:2, level:'A2', topic:'Present Continuous',
+   q_en:'Fill in: Look! She ___ a red dress today.', opts_en:['wear','wears','is wearing','wore']},
+  {q:'Попълни: I ___ visit Paris next summer. (план)', opts:['will','am going to','was','go'], ans:1, level:'A2', topic:'Future',
+   q_en:'Fill in: I ___ visit Paris next summer. (plan)', opts_en:['will','am going to','was','go']},
+  // ── Extra B1 ──
+  {q:'Попълни: She ___ already ___ her homework.', opts:['has / finished','have / finished','had / finished','is / finishing'], ans:0, level:'B1', topic:'Present Perfect',
+   q_en:'Fill in: She ___ already ___ her homework.', opts_en:['has / finished','have / finished','had / finished','is / finishing']},
+  {q:'Present Perfect сигнална дума?', opts:['yesterday','last week','just','in 2010'], ans:2, level:'B1', topic:'Present Perfect',
+   q_en:'Which is a Present Perfect signal word?', opts_en:['yesterday','last week','just','in 2010']},
+  {q:'Попълни: You ___ wear a seatbelt. (задължително)', opts:['should','might','must','can'], ans:2, level:'B1', topic:'Modal Verbs',
+   q_en:'Fill in: You ___ wear a seatbelt. (obligation)', opts_en:['should','might','must','can']},
+  {q:'Попълни: If you ___ hard, you will succeed.', opts:['work','worked','will work','working'], ans:0, level:'B1', topic:'Conditional 1',
+   q_en:'Fill in: If you ___ hard, you will succeed.', opts_en:['work','worked','will work','working']},
+  {q:'Как е "паспорт" на английски?', opts:['ticket','luggage','passport','boarding pass'], ans:2, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "паспорт" (passport)?', opts_en:['ticket','luggage','passport','boarding pass']},
+  {q:'Попълни: They ___ TV when the power cut off.', opts:['watched','watch','were watching','are watching'], ans:2, level:'B1', topic:'Past Continuous',
+   q_en:'Fill in: They ___ TV when the power cut off.', opts_en:['watched','watch','were watching','are watching']},
+  {q:'Как е "лекар" на английски?', opts:['lawyer','teacher','doctor','engineer'], ans:2, level:'B1', topic:'Jobs',
+   q_en:'What is the English word for "лекар" (doctor)?', opts_en:['lawyer','teacher','doctor','engineer']},
+  // ── Extra B2 ──
+  {q:'Попълни: The bridge ___ in 1889.', opts:['built','was built','has built','is built'], ans:1, level:'B2', topic:'Passive Voice',
+   q_en:'Fill in: The bridge ___ in 1889.', opts_en:['built','was built','has built','is built']},
+  {q:'Попълни: "I can help." → He said he ___ help.', opts:['can','could','would','will'], ans:1, level:'B2', topic:'Reported Speech',
+   q_en:'Fill in: "I can help." → He said he ___ help.', opts_en:['can','could','would','will']},
+  {q:'Попълни: If I ___ you, I would apologise.', opts:['am','was','were','had been'], ans:2, level:'B2', topic:'Conditional 2',
+   q_en:'Fill in: If I ___ you, I would apologise.', opts_en:['am','was','were','had been']},
+  {q:'Кое е академичното на "use"?', opts:['apply','do','make','get'], ans:0, level:'B2', topic:'Academic Vocab',
+   q_en:'Which is the academic/formal word for "use"?', opts_en:['apply','do','make','get']},
+  {q:'Какво означава "break a leg"?', opts:['счупи крака','успех!','бягай!','стой!'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "break a leg" mean?', opts_en:['break your leg','good luck!','run away!','stop!']},
+  {q:'Попълни: The letter ___ by the secretary every morning.', opts:['types','is typed','typed','was typed'], ans:1, level:'B2', topic:'Passive Voice',
+   q_en:'Fill in: The letter ___ by the secretary every morning.', opts_en:['types','is typed','typed','was typed']},
+  {q:'Попълни (reported): "We are leaving." → She said they ___ leaving.', opts:['are','were','have been','had been'], ans:1, level:'B2', topic:'Reported Speech',
+   q_en:'Fill in: "We are leaving." → She said they ___ leaving.', opts_en:['are','were','have been','had been']},
+  // ── Extra C1 ──
+  {q:'Кое е правилно с инверсия?', opts:['Never I have seen this.','Never have seen I this.','Never have I seen this.','Never I seen have this.'], ans:2, level:'C1', topic:'Inversion',
+   q_en:'Which inversion sentence is correct?', opts_en:['Never I have seen this.','Never have seen I this.','Never have I seen this.','Never I seen have this.']},
+  {q:'Попълни: Not only ___ he late, but he also forgot his bag.', opts:['was','is','were','has'], ans:0, level:'C1', topic:'Inversion',
+   q_en:'Fill in: Not only ___ he late, but he also forgot his bag.', opts_en:['was','is','were','has']},
+  {q:'Cleft: Подчертай "the letter" → ___ was the letter ___ John wrote.', opts:['What / that','It / that','It / which','This / who'], ans:1, level:'C1', topic:'Cleft Sentences',
+   q_en:'Cleft (emphasise "the letter"): ___ was the letter ___ John wrote.', opts_en:['What / that','It / that','It / which','This / who']},
+  {q:'Попълни: The doctor suggested that she ___ more water.', opts:['drinks','drink','drank','to drink'], ans:1, level:'C1', topic:'Subjunctive',
+   q_en:'Fill in: The doctor suggested that she ___ more water.', opts_en:['drinks','drink','drank','to drink']},
+  {q:'Какво означава "sit on the fence"?', opts:['седи навън','не заема страна','е уморен','работи усилено'], ans:1, level:'C1', topic:'Idioms C1',
+   q_en:'What does "sit on the fence" mean?', opts_en:['sit outside','avoid taking sides','feel tired','work hard']},
+  {q:'Кой маркер изразява резултат?', opts:['albeit','however','consequently','moreover'], ans:2, level:'C1', topic:'Discourse Markers',
+   q_en:'Which discourse marker expresses a result?', opts_en:['albeit','however','consequently','moreover']},
+  {q:'Кой маркер изразява добавяне?', opts:['nevertheless','furthermore','albeit','thus'], ans:1, level:'C1', topic:'Discourse Markers',
+   q_en:'Which discourse marker expresses addition?', opts_en:['nevertheless','furthermore','albeit','thus']},
+  // ── Extra C2 ──
+  {q:'Mixed conditional: If I ___ the map, I would not be lost now.', opts:['bring','brought','had brought','have brought'], ans:2, level:'C2', topic:'Mixed Conditionals',
+   q_en:'Mixed conditional: If I ___ the map, I would not be lost now.', opts_en:['bring','brought','had brought','have brought']},
+  {q:'Коя дума има ПОЛОЖИТЕЛНА конотация?', opts:['scrawny','gaunt','slender','bony'], ans:2, level:'C2', topic:'Nuance',
+   q_en:'Which word has a POSITIVE connotation?', opts_en:['scrawny','gaunt','slender','bony']},
+  {q:'Какво означава "to pass the buck"?', opts:['дай пари','прехвърли отговорност','спечели бас','смени работа'], ans:1, level:'C2', topic:'Idioms C2',
+   q_en:'What does "to pass the buck" mean?', opts_en:['give money','shift responsibility to others','win a bet','change jobs']},
+  {q:'Ellipsis: "Did you lock the door?" — "I think ___."', opts:['it','that','so','yes'], ans:2, level:'C2', topic:'Ellipsis',
+   q_en:'Ellipsis: "Did you lock the door?" — "I think ___."', opts_en:['it','that','so','yes']},
+  {q:'Кой е реторичният похват: "Ask not what your country can do for you..."?', opts:['Anaphora','Hyperbole','Antithesis','Euphemism'], ans:2, level:'C2', topic:'Rhetoric',
+   q_en:'Which rhetorical device is: "Ask not what your country can do for you..."?', opts_en:['Anaphora','Hyperbole','Antithesis','Euphemism']},
+  {q:'Substitution: "Do you want coffee?" — "No, I prefer ___."', opts:['it','one','that','so'], ans:1, level:'C2', topic:'Ellipsis',
+   q_en:'Substitution: "Do you want coffee?" — "No, I prefer ___."', opts_en:['it','one','that','so']},
+  {q:'Discourse marker за уточняване?', opts:['consequently','albeit','namely','furthermore'], ans:2, level:'C2', topic:'Rhetoric',
+   q_en:'Which is a discourse marker for clarification?', opts_en:['consequently','albeit','namely','furthermore']},
+,
+
+  // ── To Be (need 2 more to reach 10) ──
+  {q:'Попълни: It ___ cold today.', opts:['am','is','are','be'], ans:1, level:'A1', topic:'To Be', q_en:'Fill in: It ___ cold today.', opts_en:['am','is','are','be']},
+  {q:'Попълни: You ___ very tall!', opts:['is','am','are','be'], ans:2, level:'A1', topic:'To Be', q_en:'Fill in: You ___ very tall!', opts_en:['is','am','are','be']},
+
+  // ── To Be 2 (need 6 more) ──
+  {q:'Отрицание: She ___ a doctor.', opts:['is not','are not','am not','not is'], ans:0, level:'A1', topic:'To Be 2', q_en:'Negative: She ___ a doctor.', opts_en:['is not','are not','am not','not is']},
+  {q:'Въпрос: ___ they students?', opts:['Is','Am','Are','Be'], ans:2, level:'A1', topic:'To Be 2', q_en:'Question: ___ they students?', opts_en:['Is','Am','Are','Be']},
+  {q:'Попълни: The cats ___ outside.', opts:['is','am','are','be'], ans:2, level:'A1', topic:'To Be 2', q_en:'Fill in: The cats ___ outside.', opts_en:['is','am','are','be']},
+  {q:'Съкратена форма: I am → ?', opts:["I'm","Im","I am'","Iam"], ans:0, level:'A1', topic:'To Be 2', q_en:"Contracted form: I am → ?", opts_en:["I'm","Im","I am'","Iam"]},
+  {q:'Попълни: ___ he your teacher?', opts:['Are','Am','Is','Be'], ans:2, level:'A1', topic:'To Be 2', q_en:'Fill in: ___ he your teacher?', opts_en:['Are','Am','Is','Be']},
+  {q:'Попълни: We ___ not ready yet.', opts:['is','am','are','be'], ans:2, level:'A1', topic:'To Be 2', q_en:'Fill in: We ___ not ready yet.', opts_en:['is','am','are','be']},
+
+  // ── Greetings (need 7 more) ──
+  {q:'Как отговаряш на "How are you?"?', opts:["I am fine, thank you.","I is fine.","Fine am I.","Me fine."], ans:0, level:'A1', topic:'Greetings', q_en:'How do you answer "How are you?"?', opts_en:["I am fine, thank you.","I is fine.","Fine am I.","Me fine."]},
+  {q:'Как е "добър вечер" на английски?', opts:['Good morning','Good afternoon','Good evening','Good night'], ans:2, level:'A1', topic:'Greetings', q_en:'How do you say "добър вечер" in English?', opts_en:['Good morning','Good afternoon','Good evening','Good night']},
+  {q:'Как е "лека нощ" на английски?', opts:['Good evening','Good morning','Good night','Goodbye'], ans:2, level:'A1', topic:'Greetings', q_en:'How do you say "лека нощ" in English?', opts_en:['Good evening','Good morning','Good night','Goodbye']},
+  {q:'Как е "Как се казваш?" на английски?', opts:['Where are you?','What is your name?','How old are you?','Where do you live?'], ans:1, level:'A1', topic:'Greetings', q_en:'How do you say "Как се казваш?" in English?', opts_en:['Where are you?','What is your name?','How old are you?','Where do you live?']},
+  {q:'Как отговаряш на "Nice to meet you"?', opts:['Thank you.','Nice to meet you too.','I am fine.','Goodbye.'], ans:1, level:'A1', topic:'Greetings', q_en:'How do you reply to "Nice to meet you"?', opts_en:['Thank you.','Nice to meet you too.','I am fine.','Goodbye.']},
+  {q:'Как е "добър ден" (следобед) на английски?', opts:['Good morning','Good afternoon','Good evening','Hello'], ans:1, level:'A1', topic:'Greetings', q_en:'How do you say "добър ден" (afternoon) in English?', opts_en:['Good morning','Good afternoon','Good evening','Hello']},
+  {q:'Попълни: My ___ is Peter.', opts:['age','name','colour','family'], ans:1, level:'A1', topic:'Greetings', q_en:'Fill in: My ___ is Peter.', opts_en:['age','name','colour','family']},
+
+  // ── Numbers (need 6 more) ──
+  {q:'Колко е "twelve"?', opts:['20','2','12','120'], ans:2, level:'A1', topic:'Numbers', q_en:'How much is "twelve"?', opts_en:['20','2','12','120']},
+  {q:'Колко е "one hundred"?', opts:['10','1000','100','1'], ans:2, level:'A1', topic:'Numbers', q_en:'How much is "one hundred"?', opts_en:['10','1000','100','1']},
+  {q:'Как е "33" на английски?', opts:['thirty-two','thirteen','thirty-three','three-thirty'], ans:2, level:'A1', topic:'Numbers', q_en:'How do you say "33" in English?', opts_en:['thirty-two','thirteen','thirty-three','three-thirty']},
+  {q:'Как е "15" на английски?', opts:['fifty','five','fifteen','fiveteen'], ans:2, level:'A1', topic:'Numbers', q_en:'How do you say "15" in English?', opts_en:['fifty','five','fifteen','fiveteen']},
+  {q:'Колко е "seventy"?', opts:['7','17','700','70'], ans:3, level:'A1', topic:'Numbers', q_en:'How much is "seventy"?', opts_en:['7','17','700','70']},
+  {q:'Как е "11" на английски?', opts:['one-one','eleven','onety-one','first'], ans:1, level:'A1', topic:'Numbers', q_en:'How do you say "11" in English?', opts_en:['one-one','eleven','onety-one','first']},
+
+  // ── Possessives (need 4 more) ──
+  {q:'Попълни: ___ book is on the table. (тяхна)', opts:['Our','Their','His','Her'], ans:1, level:'A1', topic:'Possessives', q_en:'Fill in: ___ book is on the table. (belonging to them)', opts_en:['Our','Their','His','Her']},
+  {q:'Попълни: Is this ___ pen? (твоя)', opts:['my','his','your','their'], ans:2, level:'A1', topic:'Possessives', q_en:'Fill in: Is this ___ pen? (belonging to you)', opts_en:['my','his','your','their']},
+  {q:'Попълни: The dog lost ___ collar.', opts:['his','her','its','our'], ans:2, level:'A1', topic:'Possessives', q_en:'Fill in: The dog lost ___ collar.', opts_en:['his','her','its','our']},
+  {q:'Попълни: We love ___ school.', opts:['my','their','his','our'], ans:3, level:'A1', topic:'Possessives', q_en:'Fill in: We love ___ school.', opts_en:['my','their','his','our']},
+
+  // ── Colours (need 7 more) ──
+  {q:'Кой цвят е "blue"?', opts:['зелен','жълт','син','червен'], ans:2, level:'A1', topic:'Colours', q_en:'Which colour is "blue"?', opts_en:['green','yellow','blue','red']},
+  {q:'Кой цвят е "yellow"?', opts:['черен','бял','лилав','жълт'], ans:3, level:'A1', topic:'Colours', q_en:'Which colour is "yellow"?', opts_en:['black','white','purple','yellow']},
+  {q:'Как е "бял" на английски?', opts:['black','grey','brown','white'], ans:3, level:'A1', topic:'Colours', q_en:'What is the English word for "бял" (white)?', opts_en:['black','grey','brown','white']},
+  {q:'Как е "черен" на английски?', opts:['white','brown','black','grey'], ans:2, level:'A1', topic:'Colours', q_en:'What is the English word for "черен" (black)?', opts_en:['white','brown','black','grey']},
+  {q:'Как е "оранжев" на английски?', opts:['purple','orange','pink','grey'], ans:1, level:'A1', topic:'Colours', q_en:'What is the English word for "оранжев" (orange)?', opts_en:['purple','orange','pink','grey']},
+  {q:'Как е "розов" на английски?', opts:['purple','orange','pink','red'], ans:2, level:'A1', topic:'Colours', q_en:'What is the English word for "розов" (pink)?', opts_en:['purple','orange','pink','red']},
+  {q:'Каква е "the sky"?', opts:['red','green','yellow','blue'], ans:3, level:'A1', topic:'Colours', q_en:'What colour is "the sky"?', opts_en:['red','green','yellow','blue']},
+
+  // ── Family (need 7 more) ──
+  {q:'Как е "леля" на английски?', opts:['cousin','niece','aunt','grandmother'], ans:2, level:'A1', topic:'Family', q_en:'What is the English word for "леля" (aunt)?', opts_en:['cousin','niece','aunt','grandmother']},
+  {q:'Как е "чичо" на английски?', opts:['nephew','uncle','brother','grandfather'], ans:1, level:'A1', topic:'Family', q_en:'What is the English word for "чичо" (uncle)?', opts_en:['nephew','uncle','brother','grandfather']},
+  {q:'Как е "сестра" на английски?', opts:['mother','daughter','sister','aunt'], ans:2, level:'A1', topic:'Family', q_en:'What is the English word for "сестра" (sister)?', opts_en:['mother','daughter','sister','aunt']},
+  {q:'Как е "дядо" на английски?', opts:['uncle','father','grandfather','brother'], ans:2, level:'A1', topic:'Family', q_en:'What is the English word for "дядо" (grandfather)?', opts_en:['uncle','father','grandfather','brother']},
+  {q:'Как е "племенник" на английски?', opts:['nephew','niece','cousin','son'], ans:0, level:'A1', topic:'Family', q_en:'What is the English word for "племенник" (nephew)?', opts_en:['nephew','niece','cousin','son']},
+  {q:'Как е "братовчед" на английски?', opts:['brother','nephew','uncle','cousin'], ans:3, level:'A1', topic:'Family', q_en:'What is the English word for "братовчед" (cousin)?', opts_en:['brother','nephew','uncle','cousin']},
+  {q:'Попълни: Майка ти на баща ти е твоята ___', opts:['aunt','grandmother','sister','cousin'], ans:1, level:'A1', topic:'Family', q_en:"Fill in: My father is my grandma, so she is my ___", opts_en:['aunt','grandmother','sister','cousin']},
+
+  // ── Present Simple (need 6 more) ──
+  {q:'Попълни: The sun ___ in the east.', opts:['rise','rising','rises','rose'], ans:2, level:'A2', topic:'Present Simple', q_en:'Fill in: The sun ___ in the east.', opts_en:['rise','rising','rises','rose']},
+  {q:'Попълни: Water ___ at 100 degrees Celsius.', opts:['boil','boils','boiling','boiled'], ans:1, level:'A2', topic:'Present Simple', q_en:'Fill in: Water ___ at 100 degrees Celsius.', opts_en:['boil','boils','boiling','boiled']},
+  {q:'Отрицание: They ___ like coffee.', opts:["does not","are not","don't","is not"], ans:2, level:'A2', topic:'Present Simple', q_en:'Negative: They ___ like coffee.', opts_en:["does not","are not","don't","is not"]},
+  {q:'Въпрос: ___ he speak French?', opts:['Is','Do','Are','Does'], ans:3, level:'A2', topic:'Present Simple', q_en:'Question: ___ he speak French?', opts_en:['Is','Do','Are','Does']},
+  {q:'Коя е сигналната дума за Present Simple?', opts:['now','yesterday','usually','at the moment'], ans:2, level:'A2', topic:'Present Simple', q_en:'Which is a signal word for Present Simple?', opts_en:['now','yesterday','usually','at the moment']},
+  {q:'Попълни: She ___ to the gym every day.', opts:['go','going','goes','gone'], ans:2, level:'A2', topic:'Present Simple', q_en:'Fill in: She ___ to the gym every day.', opts_en:['go','going','goes','gone']},
+
+  // ── Past Simple (need 4 more) ──
+  {q:'Попълни: I ___ a great film last night.', opts:['see','seen','saw','seeing'], ans:2, level:'A2', topic:'Past Simple', q_en:'Fill in: I ___ a great film last night.', opts_en:['see','seen','saw','seeing']},
+  {q:'Отрицание в Past Simple: She ___ come to the party.', opts:["does not","did not","was not","had not"], ans:1, level:'A2', topic:'Past Simple', q_en:'Negative Past Simple: She ___ come to the party.', opts_en:["does not","did not","was not","had not"]},
+  {q:'Past Simple на "eat"?', opts:['eated','eaten','ate','eats'], ans:2, level:'A2', topic:'Past Simple', q_en:'What is the Past Simple of "eat"?', opts_en:['eated','eaten','ate','eats']},
+  {q:'Коя е сигналната дума за Past Simple?', opts:['always','now','tomorrow','yesterday'], ans:3, level:'A2', topic:'Past Simple', q_en:'Which is a Past Simple signal word?', opts_en:['always','now','tomorrow','yesterday']},
+
+  // ── Present Continuous (need 4 more) ──
+  {q:'Попълни: Listen! The birds ___.', opts:['sing','sings','are singing','sang'], ans:2, level:'A2', topic:'Present Continuous', q_en:'Fill in: Listen! The birds ___.', opts_en:['sing','sings','are singing','sang']},
+  {q:'Отрицание: He ___ working right now.', opts:["is not","does not","are not","will not"], ans:0, level:'A2', topic:'Present Continuous', q_en:'Negative: He ___ working right now.', opts_en:["is not","does not","are not","will not"]},
+  {q:'Коя е сигналната дума за Present Continuous?', opts:['every day','yesterday','right now','last week'], ans:2, level:'A2', topic:'Present Continuous', q_en:'Which is a signal word for Present Continuous?', opts_en:['every day','yesterday','right now','last week']},
+  {q:'Попълни: Why ___ you laughing?', opts:['do','are','is','does'], ans:1, level:'A2', topic:'Present Continuous', q_en:'Fill in: Why ___ you laughing?', opts_en:['do','are','is','does']},
+
+  // ── Future (need 5 more) ──
+  {q:'Попълни: I promise I ___ call you.', opts:['am going to','will','would','was'], ans:1, level:'A2', topic:'Future', q_en:'Fill in: I promise I ___ call you.', opts_en:['am going to','will','would','was']},
+  {q:'Отрицание: She ___ come tomorrow.', opts:["will not","does not","is not","was not"], ans:0, level:'A2', topic:'Future', q_en:'Negative future: She ___ come tomorrow.', opts_en:["will not","does not","is not","was not"]},
+  {q:'Попълни: Look at those clouds! It ___ rain.', opts:["will","is going to","would","will not"], ans:1, level:'A2', topic:'Future', q_en:'Fill in: Look at those clouds! It ___ rain.', opts_en:["will","is going to","would","will not"]},
+  {q:'Въпрос с will: ___ you help me?', opts:['Do','Are','Will','Is'], ans:2, level:'A2', topic:'Future', q_en:'Question with will: ___ you help me?', opts_en:['Do','Are','Will','Is']},
+  {q:'Попълни: They ___ get married next June. (plan)', opts:["will","are going to","would","were going to"], ans:1, level:'A2', topic:'Future', q_en:'Fill in: They ___ get married next June. (plan)', opts_en:["will","are going to","would","were going to"]},
+
+  // ── Food (need 7 more) ──
+  {q:'Как е "риба" на английски?', opts:['meat','chicken','fish','bread'], ans:2, level:'A2', topic:'Food', q_en:'What is the English word for "риба" (fish)?', opts_en:['meat','chicken','fish','bread']},
+  {q:'Как е "яйце" на английски?', opts:['cheese','egg','butter','milk'], ans:1, level:'A2', topic:'Food', q_en:'What is the English word for "яйце" (egg)?', opts_en:['cheese','egg','butter','milk']},
+  {q:'Как е "ябълка" на английски?', opts:['orange','banana','apple','grape'], ans:2, level:'A2', topic:'Food', q_en:'What is the English word for "ябълка" (apple)?', opts_en:['orange','banana','apple','grape']},
+  {q:'Как е "мляко" на английски?', opts:['water','juice','milk','tea'], ans:2, level:'A2', topic:'Food', q_en:'What is the English word for "мляко" (milk)?', opts_en:['water','juice','milk','tea']},
+  {q:'Как попиташ за менюто?', opts:['Where is the bill?','Can I have the menu, please?','What is your name?','How much is it?'], ans:1, level:'A2', topic:'Food', q_en:'How do you ask for the menu?', opts_en:['Where is the bill?','Can I have the menu, please?','What is your name?','How much is it?']},
+  {q:'Как е "зеленчуци" на английски?', opts:['fruits','vegetables','grains','dairy'], ans:1, level:'A2', topic:'Food', q_en:'What is the English word for "зеленчуци" (vegetables)?', opts_en:['fruits','vegetables','grains','dairy']},
+  {q:'Как е "захар" на английски?', opts:['salt','pepper','sugar','flour'], ans:2, level:'A2', topic:'Food', q_en:'What is the English word for "захар" (sugar)?', opts_en:['salt','pepper','sugar','flour']},
+
+  // ── Days (need 7 more) ──
+  {q:'Кой е вторият ден от седмицата?', opts:['Monday','Tuesday','Wednesday','Sunday'], ans:1, level:'A2', topic:'Days', q_en:'Which is the second day of the week?', opts_en:['Monday','Tuesday','Wednesday','Sunday']},
+  {q:'Кой е последният ден от седмицата?', opts:['Saturday','Friday','Sunday','Monday'], ans:2, level:'A2', topic:'Days', q_en:'Which is the last day of the week?', opts_en:['Saturday','Friday','Sunday','Monday']},
+  {q:'Как е "месец" на английски?', opts:['week','day','month','year'], ans:2, level:'A2', topic:'Days', q_en:'What is the English word for "месец" (month)?', opts_en:['week','day','month','year']},
+  {q:'Кой месец е дванадесетият?', opts:['October','November','December','September'], ans:2, level:'A2', topic:'Days', q_en:'Which is the twelfth month?', opts_en:['October','November','December','September']},
+  {q:'Кой е четвъртият месец?', opts:['March','May','April','June'], ans:2, level:'A2', topic:'Days', q_en:'Which is the fourth month?', opts_en:['March','May','April','June']},
+  {q:'Как е "пролет" на английски?', opts:['summer','autumn','winter','spring'], ans:3, level:'A2', topic:'Days', q_en:'What is the English word for "пролет" (spring)?', opts_en:['summer','autumn','winter','spring']},
+  {q:'Как е "зима" на английски?', opts:['spring','summer','winter','autumn'], ans:2, level:'A2', topic:'Days', q_en:'What is the English word for "зима" (winter)?', opts_en:['spring','summer','winter','autumn']},
+
+  // ── Present Perfect (need 3 more) ──
+  {q:'Past participle на "write"?', opts:['wrote','writed','written','writing'], ans:2, level:'B1', topic:'Present Perfect', q_en:'Past participle of "write"?', opts_en:['wrote','writed','written','writing']},
+  {q:'Попълни: I ___ lost my keys! I cannot find them.', opts:['have','had','has','am'], ans:0, level:'B1', topic:'Present Perfect', q_en:"Fill in: I ___ lost my keys! I cannot find them.", opts_en:['have','had','has','am']},
+  {q:'Попълни: She ___ been to Japan twice.', opts:['have','has','had','is'], ans:1, level:'B1', topic:'Present Perfect', q_en:'Fill in: She ___ been to Japan twice.', opts_en:['have','has','had','is']},
+
+  // ── Modal Verbs (need 5 more) ──
+  {q:'Попълни: You ___ be tired after that long journey.', opts:['must','should','can','might'], ans:3, level:'B1', topic:'Modal Verbs', q_en:'Fill in: You ___ be tired after that long journey. (possibility)', opts_en:['must','should','can','might']},
+  {q:'Попълни: He ___ swim very fast. (умение)', opts:['must','should','can','might'], ans:2, level:'B1', topic:'Modal Verbs', q_en:'Fill in: He ___ swim very fast. (ability)', opts_en:['must','should','can','might']},
+  {q:'Попълни: You ___ eat more vegetables. (съвет)', opts:['must','should','can','might'], ans:1, level:'B1', topic:'Modal Verbs', q_en:'Fill in: You ___ eat more vegetables. (advice)', opts_en:['must','should','can','might']},
+  {q:'Попълни: Students ___ use phones in class. (забранено)', opts:["must not","should not","could not","might not"], ans:0, level:'B1', topic:'Modal Verbs', q_en:"Fill in: Students ___ use phones in class. (prohibition)", opts_en:["must not","should not","could not","might not"]},
+  {q:'Попълни: I ___ to be at work by 9. (необходимост)', opts:['must','should','have','might'], ans:2, level:'B1', topic:'Modal Verbs', q_en:'Fill in: I ___ to be at work by 9. (necessity)', opts_en:['must','should','have','might']},
+
+  // ── Conditional 1 (need 7 more) ──
+  {q:'Попълни: If she ___ hard, she will pass the exam.', opts:['study','studies','studied','will study'], ans:1, level:'B1', topic:'Conditional 1', q_en:'Fill in: If she ___ hard, she will pass the exam.', opts_en:['study','studies','studied','will study']},
+  {q:'Попълни: If it is sunny, we ___ to the beach.', opts:['go','went','will go','would go'], ans:2, level:'B1', topic:'Conditional 1', q_en:'Fill in: If it is sunny, we ___ to the beach.', opts_en:['go','went','will go','would go']},
+  {q:'Кой тип conditional е: "If I see him, I will tell him"?', opts:['Type 0','Type 1','Type 2','Type 3'], ans:1, level:'B1', topic:'Conditional 1', q_en:'Which conditional type is: "If I see him, I will tell him"?', opts_en:['Type 0','Type 1','Type 2','Type 3']},
+  {q:'Попълни: Unless you hurry, you ___ miss the bus.', opts:['will','would','might not','will not'], ans:0, level:'B1', topic:'Conditional 1', q_en:'Fill in: Unless you hurry, you ___ miss the bus.', opts_en:['will','would','might not','will not']},
+  {q:'Попълни: If they ___ the project, they will win a prize.', opts:['complete','completed','will complete','completing'], ans:0, level:'B1', topic:'Conditional 1', q_en:'Fill in: If they ___ the project, they will win a prize.', opts_en:['complete','completed','will complete','completing']},
+  {q:'Попълни: What will you do if you ___ the job?', opts:['get','got','will get','getting'], ans:0, level:'B1', topic:'Conditional 1', q_en:'Fill in: What will you do if you ___ the job?', opts_en:['get','got','will get','getting']},
+  {q:'Попълни: If I ___ free time, I will read more.', opts:['have','had','will have','having'], ans:0, level:'B1', topic:'Conditional 1', q_en:'Fill in: If I ___ free time, I will read more.', opts_en:['have','had','will have','having']},
+
+  // ── Past Continuous (need 6 more) ──
+  {q:'Попълни: At 8pm last night, I ___ dinner.', opts:['cook','cooked','was cooking','am cooking'], ans:2, level:'B1', topic:'Past Continuous', q_en:'Fill in: At 8pm last night, I ___ dinner.', opts_en:['cook','cooked','was cooking','am cooking']},
+  {q:'Попълни: What ___ you doing at midnight?', opts:['did','were','was','are'], ans:1, level:'B1', topic:'Past Continuous', q_en:'Fill in: What ___ you doing at midnight?', opts_en:['did','were','was','are']},
+  {q:'Попълни: While she ___, the phone rang.', opts:['slept','sleeps','was sleeping','is sleeping'], ans:2, level:'B1', topic:'Past Continuous', q_en:'Fill in: While she ___, the phone rang.', opts_en:['slept','sleeps','was sleeping','is sleeping']},
+  {q:'Отрицание: He ___ working yesterday at noon.', opts:["did not working","was not working","is not working","hasn't working"], ans:1, level:'B1', topic:'Past Continuous', q_en:'Negative: He ___ working yesterday at noon.', opts_en:["did not working","was not working","is not working","hasn't working"]},
+  {q:'Попълни: The children ___ in the garden when it started to rain.', opts:['play','played','were playing','are playing'], ans:2, level:'B1', topic:'Past Continuous', q_en:'Fill in: The children ___ in the garden when it started to rain.', opts_en:['play','played','were playing','are playing']},
+  {q:'Коя е сигналната структура за Past Continuous?', opts:['yesterday','when + Past Simple','every day','last week'], ans:1, level:'B1', topic:'Past Continuous', q_en:'Which is a typical signal structure for Past Continuous?', opts_en:['yesterday','when + Past Simple','every day','last week']},
+
+  // ── Travel (need 6 more) ──
+  {q:'Как е "билет" на английски?', opts:['luggage','passport','ticket','boarding pass'], ans:2, level:'B1', topic:'Travel', q_en:'What is the English word for "билет" (ticket)?', opts_en:['luggage','passport','ticket','boarding pass']},
+  {q:'Как е "заминаване" на английски?', opts:['arrival','departure','delay','gate'], ans:1, level:'B1', topic:'Travel', q_en:'What is the English word for "заминаване" (departure)?', opts_en:['arrival','departure','delay','gate']},
+  {q:'Как е "пристигане" на английски?', opts:['departure','delay','arrival','gate'], ans:2, level:'B1', topic:'Travel', q_en:'What is the English word for "пристигане" (arrival)?', opts_en:['departure','delay','arrival','gate']},
+  {q:'Как е "багаж" на английски?', opts:['passport','ticket','gate','luggage'], ans:3, level:'B1', topic:'Travel', q_en:'What is the English word for "багаж" (luggage)?', opts_en:['passport','ticket','gate','luggage']},
+  {q:'Как попиташ за еднопосочен билет?', opts:['A return ticket please.','A single ticket please.','Two tickets please.','A platform ticket please.'], ans:1, level:'B1', topic:'Travel', q_en:'How do you ask for a one-way ticket?', opts_en:['A return ticket please.','A single ticket please.','Two tickets please.','A platform ticket please.']},
+  {q:'Как е "закъснение" на английски?', opts:['arrival','gate','delay','departure'], ans:2, level:'B1', topic:'Travel', q_en:'What is the English word for "закъснение" (delay)?', opts_en:['arrival','gate','delay','departure']},
+
+  // ── Jobs (need 7 more) ──
+  {q:'Как е "учител" на английски?', opts:['lawyer','teacher','engineer','nurse'], ans:1, level:'B1', topic:'Jobs', q_en:'What is the English word for "учител" (teacher)?', opts_en:['lawyer','teacher','engineer','nurse']},
+  {q:'Как е "медицинска сестра" на английски?', opts:['doctor','nurse','lawyer','engineer'], ans:1, level:'B1', topic:'Jobs', q_en:'What is the English word for "медицинска сестра" (nurse)?', opts_en:['doctor','nurse','lawyer','engineer']},
+  {q:'Как е "адвокат" на английски?', opts:['judge','police officer','lawyer','politician'], ans:2, level:'B1', topic:'Jobs', q_en:'What is the English word for "адвокат" (lawyer)?', opts_en:['judge','police officer','lawyer','politician']},
+  {q:'Как е "пожарникар" на английски?', opts:['police officer','firefighter','soldier','pilot'], ans:1, level:'B1', topic:'Jobs', q_en:'What is the English word for "пожарникар" (firefighter)?', opts_en:['police officer','firefighter','soldier','pilot']},
+  {q:'Как е "пилот" на английски?', opts:['captain','sailor','pilot','driver'], ans:2, level:'B1', topic:'Jobs', q_en:'What is the English word for "пилот" (pilot)?', opts_en:['captain','sailor','pilot','driver']},
+  {q:'Как попиташ "Какво работиш?"?', opts:['Where do you work?','What is your job?','How much do you earn?','When do you work?'], ans:1, level:'B1', topic:'Jobs', q_en:'How do you ask "What is your job?"?', opts_en:['Where do you work?','What is your job?','How much do you earn?','When do you work?']},
+  {q:'Как е "архитект" на английски?', opts:['artist','architect','accountant','actor'], ans:1, level:'B1', topic:'Jobs', q_en:'What is the English word for "архитект" (architect)?', opts_en:['artist','architect','accountant','actor']},
+
+  // ── Passive Voice (need 3 more) ──
+  {q:'Попълни: The cake ___ by my mother. (Yesterday)', opts:['made','was made','is made','makes'], ans:1, level:'B2', topic:'Passive Voice', q_en:'Fill in: The cake ___ by my mother. (Yesterday)', opts_en:['made','was made','is made','makes']},
+  {q:'Попълни: This song ___ all over the world now.', opts:['is hearing','hears','is heard','was heard'], ans:2, level:'B2', topic:'Passive Voice', q_en:'Fill in: This song ___ all over the world now.', opts_en:['is hearing','hears','is heard','was heard']},
+  {q:'Active → Passive: "They will finish the project." →', opts:['The project will finished.','The project will be finished.','The project is finished.','The project was finished.'], ans:1, level:'B2', topic:'Passive Voice', q_en:'Active → Passive: "They will finish the project." →', opts_en:['The project will finished.','The project will be finished.','The project is finished.','The project was finished.']},
+
+  // ── Reported Speech (need 3 more) ──
+  {q:'"I live in London." → He said he ___ in London.', opts:['live','lived','lives','was living'], ans:1, level:'B2', topic:'Reported Speech', q_en:'"I live in London." → He said he ___ in London.', opts_en:['live','lived','lives','was living']},
+  {q:'"I will go." → She said she ___ go.', opts:['will','would','could','should'], ans:1, level:'B2', topic:'Reported Speech', q_en:'"I will go." → She said she ___ go.', opts_en:['will','would','could','should']},
+  {q:'"I have finished." → He said he ___ finished.', opts:['has','have','had','was'], ans:2, level:'B2', topic:'Reported Speech', q_en:'"I have finished." → He said he ___ finished.', opts_en:['has','have','had','was']},
+
+  // ── Conditional 2 (need 5 more) ──
+  {q:'Попълни: If I ___ a million, I would travel the world.', opts:['have','had','has','will have'], ans:1, level:'B2', topic:'Conditional 2', q_en:'Fill in: If I ___ a million dollars, I would travel the world.', opts_en:['have','had','has','will have']},
+  {q:'Попълни: She would be happier if she ___ a different job.', opts:['has','had','have','will have'], ans:1, level:'B2', topic:'Conditional 2', q_en:'Fill in: She would be happier if she ___ a different job.', opts_en:['has','had','have','will have']},
+  {q:'Кой е Conditional Type 2?', opts:['If it rains, I will stay home.','If I were rich, I would buy a yacht.','If she had studied, she would have passed.','If water freezes, it becomes ice.'], ans:1, level:'B2', topic:'Conditional 2', q_en:'Which is a Conditional Type 2 sentence?', opts_en:['If it rains, I will stay home.','If I were rich, I would buy a yacht.','If she had studied, she would have passed.','If water freezes, it becomes ice.']},
+  {q:'Попълни: What ___ you do if you found a wallet?', opts:['will','do','would','should'], ans:2, level:'B2', topic:'Conditional 2', q_en:'Fill in: What ___ you do if you found a wallet?', opts_en:['will','do','would','should']},
+  {q:'Попълни: If I ___ you, I would accept the offer.', opts:['am','was','were','be'], ans:2, level:'B2', topic:'Conditional 2', q_en:'Fill in: If I ___ you, I would accept the offer.', opts_en:['am','was','were','be']},
+
+  // ── Academic Vocab (need 6 more) ──
+  {q:'Академично за "help"?', opts:['assist','make','do','give'], ans:0, level:'B2', topic:'Academic Vocab', q_en:'What is the academic/formal word for "help"?', opts_en:['assist','make','do','give']},
+  {q:'Академично за "find out"?', opts:['look','discover','check','see'], ans:1, level:'B2', topic:'Academic Vocab', q_en:'What is the academic word for "find out"?', opts_en:['look','discover','check','see']},
+  {q:'Академично за "start"?', opts:['go','open','commence','try'], ans:2, level:'B2', topic:'Academic Vocab', q_en:'What is the academic word for "start"?', opts_en:['go','open','commence','try']},
+  {q:'Академично за "end"?', opts:['stop','conclude','finish up','quit'], ans:1, level:'B2', topic:'Academic Vocab', q_en:'What is the academic word for "end"?', opts_en:['stop','conclude','finish up','quit']},
+  {q:'Академично за "need"?', opts:['want','lack','require','wish'], ans:2, level:'B2', topic:'Academic Vocab', q_en:'What is the academic word for "need"?', opts_en:['want','lack','require','wish']},
+  {q:'Академично за "buy"?', opts:['purchase','get','pay','own'], ans:0, level:'B2', topic:'Academic Vocab', q_en:'What is the academic word for "buy"?', opts_en:['purchase','get','pay','own']},
+
+  // ── Idioms B2 (need 7 more) ──
+  {q:'Какво означава "bite the bullet"?', opts:['яж куршума','издържи трудна ситуация','стреляй бързо','избягай'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "bite the bullet" mean?', opts_en:['eat the bullet','endure a difficult situation','shoot quickly','run away']},
+  {q:'Какво означава "cost an arm and a leg"?', opts:['много евтино','много скъпо','болезнено','загуба на работа'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "cost an arm and a leg" mean?', opts_en:['very cheap','very expensive','painful','loss of job']},
+  {q:'Какво означава "once in a blue moon"?', opts:['много скоро','много рядко','всеки ден','на луната'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "once in a blue moon" mean?', opts_en:['very soon','very rarely','every day','on the moon']},
+  {q:'Попълни идиома: "Hit the nail on the ___"', opts:['wall','floor','head','door'], ans:2, level:'B2', topic:'Idioms', q_en:'Complete the idiom: "Hit the nail on the ___"', opts_en:['wall','floor','head','door']},
+  {q:'Какво означава "let the cat out of the bag"?', opts:['пусни котката','разкрий тайна','загуби нещо','излез навън'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "let the cat out of the bag" mean?', opts_en:['release a cat','reveal a secret','lose something','go outside']},
+  {q:'Какво означава "it takes two to tango"?', opts:['само един е виновен','и двамата са отговорни','научи да танцуваш','бъди романтичен'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "it takes two to tango" mean?', opts_en:['only one is guilty','both parties are responsible','learn to dance','be romantic']},
+  {q:'Какво означава "spill the beans"?', opts:['разсипи зеленчук','разкрий тайна','яж здравословно','изненадай някого'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "spill the beans" mean?', opts_en:['spill vegetables','reveal a secret','eat healthily','surprise someone']},
+
+  // ── Inversion C1 (need 5 more) ──
+  {q:'Попълни: Seldom ___ she arrive on time.', opts:['do','does','did','has'], ans:1, level:'C1', topic:'Inversion', q_en:'Fill in: Seldom ___ she arrive on time.', opts_en:['do','does','did','has']},
+  {q:'Попълни: Only after the meeting ___ he understand.', opts:['do','did','does','was'], ans:1, level:'C1', topic:'Inversion', q_en:'Fill in: Only after the meeting ___ he understand.', opts_en:['do','did','does','was']},
+  {q:'Кое е вярно за инверсията?', opts:['Използва се само в въпроси','Използва се за акцент и формалност','Използва се само в миналото','Използва се само с "never"'], ans:1, level:'C1', topic:'Inversion', q_en:'Which is true about inversion?', opts_en:['Only used in questions','Used for emphasis and formality','Only used in the past','Only used with "never"']},
+  {q:'Попълни: No sooner ___ he arrived than it started raining.', opts:['did','does','had','was'], ans:2, level:'C1', topic:'Inversion', q_en:'Fill in: No sooner ___ he arrived than it started raining.', opts_en:['did','does','had','was']},
+  {q:'Попълни: Little ___ they know what was coming.', opts:['do','did','does','have'], ans:1, level:'C1', topic:'Inversion', q_en:'Fill in: Little ___ they know what was coming.', opts_en:['do','did','does','have']},
+
+  // ── Cleft Sentences (need 6 more) ──
+  {q:'Cleft: "John broke the window" — акцент на John:', opts:['What John broke was the window.','It was John who broke the window.','John it was who broke the window.','The window it was John who broke.'], ans:1, level:'C1', topic:'Cleft Sentences', q_en:'Cleft (emphasise John): "John broke the window"', opts_en:['What John broke was the window.','It was John who broke the window.','John it was who broke the window.','The window it was John who broke.']},
+  {q:'Попълни: ___ I really need is a long holiday.', opts:['It','That','What','Which'], ans:2, level:'C1', topic:'Cleft Sentences', q_en:'Fill in: ___ I really need is a long holiday.', opts_en:['It','That','What','Which']},
+  {q:'Попълни: It was ___ that she called, not yesterday.', opts:['tomorrow','today','yesterday','now'], ans:1, level:'C1', topic:'Cleft Sentences', q_en:'Fill in: It was ___ that she called, not yesterday.', opts_en:['tomorrow','today','yesterday','now']},
+  {q:'Кое е cleft изречение?', opts:['She broke the vase.','It was she who broke the vase.','She has broken the vase.','The vase was broken.'], ans:1, level:'C1', topic:'Cleft Sentences', q_en:'Which is a cleft sentence?', opts_en:['She broke the vase.','It was she who broke the vase.','She has broken the vase.','The vase was broken.']},
+  {q:'Попълни: What surprised me ___ his calm reaction.', opts:['is','was','were','had been'], ans:1, level:'C1', topic:'Cleft Sentences', q_en:'Fill in: What surprised me ___ his calm reaction.', opts_en:['is','was','were','had been']},
+  {q:'Cleft — защо го използваме?', opts:['За да скрием информация','За да акцентираме върху конкретна информация','За да задаваме въпроси','За да описваме минали действия'], ans:1, level:'C1', topic:'Cleft Sentences', q_en:'Why do we use cleft sentences?', opts_en:['To hide information','To emphasise specific information','To ask questions','To describe past actions']},
+
+  // ── Subjunctive (need 6 more) ──
+  {q:'Попълни: It is vital that he ___ the form by Friday.', opts:['submits','submit','submitted','will submit'], ans:1, level:'C1', topic:'Subjunctive', q_en:'Fill in: It is vital that he ___ the form by Friday.', opts_en:['submits','submit','submitted','will submit']},
+  {q:'Попълни: I wish I ___ taller.', opts:['am','is','were','was always'], ans:2, level:'C1', topic:'Subjunctive', q_en:'Fill in: I wish I ___ taller.', opts_en:['am','is','were','was always']},
+  {q:'Попълни: If only she ___ listen to me.', opts:['will','would','can','could'], ans:1, level:'C1', topic:'Subjunctive', q_en:'Fill in: If only she ___ listen to me.', opts_en:['will','would','can','could']},
+  {q:'Кога използваме subjunctive?', opts:['За описание на минали факти','След глаголи за предложение и изискване','За бъдещи планове','В директна реч'], ans:1, level:'C1', topic:'Subjunctive', q_en:'When do we use the subjunctive?', opts_en:['To describe past facts','After verbs of suggestion and requirement','For future plans','In direct speech']},
+  {q:'Попълни: The judge ordered that the prisoner ___ released.', opts:['is','be','was','were'], ans:1, level:'C1', topic:'Subjunctive', q_en:'Fill in: The judge ordered that the prisoner ___ released.', opts_en:['is','be','was','were']},
+  {q:'Попълни: We recommend that every student ___ the exam.', opts:['takes','take','took','will take'], ans:1, level:'C1', topic:'Subjunctive', q_en:'Fill in: We recommend that every student ___ the exam.', opts_en:['takes','take','took','will take']},
+
+  // ── Idioms C1 (need 6 more) ──
+  {q:'Какво означава "cut corners"?', opts:['реже ъгли','спестява за сметка на качеството','работи бързо','прави ъглови удари'], ans:1, level:'C1', topic:'Idioms C1', q_en:'What does "cut corners" mean?', opts_en:['cut angles','sacrifice quality to save time/money','work quickly','make corner kicks']},
+  {q:'Какво означава "burn bridges"?', opts:['запали огън','унищожи трайно връзки','пресичай реката','работи усилено'], ans:1, level:'C1', topic:'Idioms C1', q_en:'What does "burn bridges" mean?', opts_en:['start a fire','permanently damage relationships','cross a river','work hard']},
+  {q:'Какво означава "read between the lines"?', opts:['четеш бавно','разбираш скрито значение','пишеш между редовете','четеш бързо'], ans:1, level:'C1', topic:'Idioms C1', q_en:'What does "read between the lines" mean?', opts_en:['read slowly','understand hidden meaning','write between lines','read quickly']},
+  {q:'Попълни: He always ___ on the fence — never gives his opinion.', opts:['stands','sits','lies','jumps'], ans:1, level:'C1', topic:'Idioms C1', q_en:'Fill in: He always ___ on the fence — never gives his opinion.', opts_en:['stands','sits','lies','jumps']},
+  {q:'Какво означава "turn a blind eye"?', opts:['ослепяваш','умишлено игнорираш проблем','гледаш внимателно','обръщаш се'], ans:1, level:'C1', topic:'Idioms C1', q_en:'What does "turn a blind eye" mean?', opts_en:['go blind','deliberately ignore a problem','look carefully','turn around']},
+  {q:'Какво означава "the tip of the iceberg"?', opts:['малка видима част от голям проблем','незначителен проблем','успех','моряшки израз'], ans:0, level:'C1', topic:'Idioms C1', q_en:'What does "the tip of the iceberg" mean?', opts_en:['small visible part of a bigger problem','insignificant issue','success','sailor expression']},
+
+  // ── Discourse Markers (need 6 more) ──
+  {q:'Кой маркер изразява противопоставяне?', opts:['furthermore','consequently','however','namely'], ans:2, level:'C1', topic:'Discourse Markers', q_en:'Which discourse marker expresses contrast?', opts_en:['furthermore','consequently','however','namely']},
+  {q:'Попълни: The plan was risky; ___, it worked.', opts:['furthermore','nevertheless','consequently','namely'], ans:1, level:'C1', topic:'Discourse Markers', q_en:'Fill in: The plan was risky; ___, it worked.', opts_en:['furthermore','nevertheless','consequently','namely']},
+  {q:'Попълни: She studied hard. ___, she passed the exam.', opts:['However','Nevertheless','Consequently','Albeit'], ans:2, level:'C1', topic:'Discourse Markers', q_en:'Fill in: She studied hard. ___, she passed the exam.', opts_en:['However','Nevertheless','Consequently','Albeit']},
+  {q:'Попълни: The task was difficult, ___ achievable.', opts:['furthermore','albeit','namely','consequently'], ans:1, level:'C1', topic:'Discourse Markers', q_en:'Fill in: The task was difficult, ___ achievable.', opts_en:['furthermore','albeit','namely','consequently']},
+  {q:'Какво означава "namely" като дискурсивен маркер?', opts:['противопоставяне','добавяне','уточняване','резултат'], ans:2, level:'C1', topic:'Discourse Markers', q_en:'What does "namely" express as a discourse marker?', opts_en:['contrast','addition','clarification','result']},
+  {q:'Попълни: There are two problems, ___ the budget and the time.', opts:['however','namely','consequently','albeit'], ans:1, level:'C1', topic:'Discourse Markers', q_en:'Fill in: There are two problems, ___ the budget and the time.', opts_en:['however','namely','consequently','albeit']},
+
+  // ── Mixed Conditionals (need 6 more) ──
+  {q:'Mixed: If she ___ medicine, she would be a doctor now.', opts:['study','studies','had studied','was studying'], ans:2, level:'C2', topic:'Mixed Conditionals', q_en:'Mixed: If she ___ medicine, she would be a doctor now.', opts_en:['study','studies','had studied','was studying']},
+  {q:'Mixed: If I ___ more careful, the accident would not have happened.', opts:['am','was','were','had been'], ans:2, level:'C2', topic:'Mixed Conditionals', q_en:'Mixed: If I ___ more careful, the accident would not have happened.', opts_en:['am','was','were','had been']},
+  {q:'Кой е Mixed Conditional?', opts:['If it rains, I will stay.','If I had money, I would buy it.','If she had trained harder, she would be champion now.','If he studies, he will pass.'], ans:2, level:'C2', topic:'Mixed Conditionals', q_en:'Which is a Mixed Conditional?', opts_en:['If it rains, I will stay.','If I had money, I would buy it.','If she had trained harder, she would be champion now.','If he studies, he will pass.']},
+  {q:'Mixed: If he ___ his passport, he would have caught the flight.', opts:['finds','found','had found','was finding'], ans:2, level:'C2', topic:'Mixed Conditionals', q_en:'Mixed: If he ___ his passport, he would have caught the flight.', opts_en:['finds','found','had found','was finding']},
+  {q:'Попълни (mixed): If they ___ better, they would not be in this situation now.', opts:['plan','planned','had planned','were planning'], ans:2, level:'C2', topic:'Mixed Conditionals', q_en:'Fill in (mixed): If they ___ better, they would not be in this situation now.', opts_en:['plan','planned','had planned','were planning']},
+  {q:'Mixed conditional — кои времена комбинира?', opts:['Present + Future','Past Simple + would','Past Perfect + would','Past Perfect + would be'], ans:3, level:'C2', topic:'Mixed Conditionals', q_en:'Mixed conditional — which tenses does it combine?', opts_en:['Present + Future','Past Simple + would','Past Perfect + would','Past Perfect + would be']},
+
+  // ── Nuance (need 6 more) ──
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "old"?', opts:['ancient','decrepit','mature','senile'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word has a POSITIVE connotation for "old"?', opts_en:['ancient','decrepit','mature','senile']},
+  {q:'Коя дума е ОТРИЦАТЕЛНА за "confident"?', opts:['self-assured','assertive','cocky','poised'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word has a NEGATIVE connotation for "confident"?', opts_en:['self-assured','assertive','cocky','poised']},
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "cheap"?', opts:['stingy','miserly','tight-fisted','economical'], ans:3, level:'C2', topic:'Nuance', q_en:'Which word has a POSITIVE connotation for "cheap"?', opts_en:['stingy','miserly','tight-fisted','economical']},
+  {q:'Каква е разликата между "slender" и "scrawny"?', opts:['Няма разлика','Slender е положително, scrawny е отрицателно','Scrawny е положително, slender е отрицателно','И двете са неутрални'], ans:1, level:'C2', topic:'Nuance', q_en:'What is the difference between "slender" and "scrawny"?', opts_en:['No difference','Slender is positive, scrawny is negative','Scrawny is positive, slender is negative','Both are neutral']},
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "persistent"?', opts:['stubborn','obstinate','determined','pig-headed'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word has a POSITIVE connotation for "persistent"?', opts_en:['stubborn','obstinate','determined','pig-headed']},
+  {q:'Какво е "конотация" на думата?', opts:['Официалното значение','Емоционалната/скрита стойност','Произходът на думата','Граматическата функция'], ans:1, level:'C2', topic:'Nuance', q_en:'What is the "connotation" of a word?', opts_en:['The official meaning','The emotional/hidden value','The origin of the word','The grammatical function']},
+
+  // ── Idioms C2 (need 6 more) ──
+  {q:'Какво означава "a double-edged sword"?', opts:['острото оръжие','нещо с предимства и недостатъци','опасна ситуация','изненада'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "a double-edged sword" mean?', opts_en:['a sharp weapon','something with both benefits and drawbacks','a dangerous situation','a surprise']},
+  {q:'Какво означава "gilding the lily"?', opts:['боядисване на цветя','ненужно украсяване на нещо вече добро','скъпа украса','подобрение'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "gilding the lily" mean?', opts_en:['painting flowers','adding unnecessary ornamentation to something already good','expensive decoration','improvement']},
+  {q:'Какво означава "add insult to injury"?', opts:['физическо нараняване','влоши ситуацията допълнително','помири се','извини се'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "add insult to injury" mean?', opts_en:['physical injury','make a bad situation even worse','make peace','apologise']},
+  {q:'Попълни: She always ___ the buck when something goes wrong.', opts:['passes','throws','gives','takes'], ans:0, level:'C2', topic:'Idioms C2', q_en:'Fill in: She always ___ the buck when something goes wrong.', opts_en:['passes','throws','gives','takes']},
+  {q:'Какво означава "the ball is in your court"?', opts:['играй тенис','твой ред е да решиш','ти загуби','играй баскетбол'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "the ball is in your court" mean?', opts_en:['play tennis','it is your turn to decide','you lost','play basketball']},
+  {q:'Какво означава "reinvent the wheel"?', opts:['иновация','губиш усилия за нещо вече съществуващо','ремонт','творческо мислене'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "reinvent the wheel" mean?', opts_en:['innovation','waste effort on something that already exists','repair','creative thinking']},
+
+  // ── Rhetoric (need 5 more) ──
+  {q:'"I have a dream... I have a dream..." — кой похват?', opts:['Antithesis','Euphemism','Anaphora','Hyperbole'], ans:2, level:'C2', topic:'Rhetoric', q_en:'"I have a dream... I have a dream..." — which rhetorical device?', opts_en:['Antithesis','Euphemism','Anaphora','Hyperbole']},
+  {q:'"Passed away" вместо "died" — кой похват?', opts:['Anaphora','Antithesis','Hyperbole','Euphemism'], ans:3, level:'C2', topic:'Rhetoric', q_en:'"Passed away" instead of "died" — which rhetorical device?', opts_en:['Anaphora','Antithesis','Hyperbole','Euphemism']},
+  {q:'"I have told you a million times" — кой похват?', opts:['Euphemism','Anaphora','Hyperbole','Antithesis'], ans:2, level:'C2', topic:'Rhetoric', q_en:'"I have told you a million times" — which rhetorical device?', opts_en:['Euphemism','Anaphora','Hyperbole','Antithesis']},
+  {q:'Antithesis означава:', opts:['повторение в началото','преувеличение','противопоставяне на идеи','омекотяване'], ans:2, level:'C2', topic:'Rhetoric', q_en:'Antithesis means:', opts_en:['repetition at the start','exaggeration','contrasting ideas','softening language']},
+  {q:'Кой е реторичният похват в: "One small step for man, one giant leap for mankind"?', opts:['Anaphora','Antithesis','Hyperbole','Euphemism'], ans:0, level:'C2', topic:'Rhetoric', q_en:'Which rhetorical device is used in: "One small step for man, one giant leap for mankind"?', opts_en:['Anaphora','Antithesis','Hyperbole','Euphemism']},
+
+  // ── Ellipsis C2 (need 5 more) ──
+  {q:'Ellipsis: "Can you swim?" — "Yes, I ___."', opts:['can do','can','swim','do'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: "Can you swim?" — "Yes, I ___."', opts_en:['can do','can','swim','do']},
+  {q:'Substitution: "Which hat do you want?" — "The red ___."', opts:['hat','one','it','that'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Substitution: "Which hat do you want?" — "The red ___."', opts_en:['hat','one','it','that']},
+  {q:'Ellipsis: "She wants to leave and so ___ I."', opts:['do','am','does','will'], ans:0, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: "She wants to leave and so ___ I."', opts_en:['do','am','does','will']},
+  {q:'Защо използваме ellipsis?', opts:['За да добавим информация','За да избегнем повторения','За да акцентираме','За да зададем въпрос'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Why do we use ellipsis?', opts_en:['To add information','To avoid repetition','To emphasise','To ask a question']},
+  {q:'Ellipsis: "Are they coming?" — "I hope ___."', opts:['they are','not','so','it'], ans:2, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: "Are they coming?" — "I hope ___."', opts_en:['they are','not','so','it']},
+
+,
+
+  // ── Nouns (need 6 more) ──
+  {q:'Кое е броимо съществително?', opts:['water','music','apple','advice'], ans:2, level:'A2', topic:'Nouns', q_en:'Which is a countable noun?', opts_en:['water','music','apple','advice']},
+  {q:'Множествено число на "child"?', opts:['childs','childrens','children','childer'], ans:2, level:'A2', topic:'Nouns', q_en:'Plural of "child"?', opts_en:['childs','childrens','children','childer']},
+  {q:'Множествено число на "mouse"?', opts:['mouses','mouse','mice','mices'], ans:2, level:'A2', topic:'Nouns', q_en:'Plural of "mouse"?', opts_en:['mouses','mouse','mice','mices']},
+  {q:'Кое е небромо съществително?', opts:['book','chair','information','car'], ans:2, level:'A2', topic:'Nouns', q_en:'Which is an uncountable noun?', opts_en:['book','chair','information','car']},
+  {q:'Попълни: There are three ___ in the garden.', opts:['leafs','leaves','leaf','leafe'], ans:1, level:'A2', topic:'Nouns', q_en:'Fill in: There are three ___ in the garden.', opts_en:['leafs','leaves','leaf','leafe']},
+  {q:'Множествено число на "foot"?', opts:['foots','feet','feets','foot'], ans:1, level:'A2', topic:'Nouns', q_en:'Plural of "foot"?', opts_en:['foots','feet','feets','foot']},
+
+  // ── Questions (need 6 more) ──
+  {q:'Правилен въпрос: Where ___ she live?', opts:['is','do','does','did'], ans:2, level:'A2', topic:'Questions', q_en:'Correct question: Where ___ she live?', opts_en:['is','do','does','did']},
+  {q:'Правилен въпрос за миналото: What ___ you do yesterday?', opts:['do','does','did','are'], ans:2, level:'A2', topic:'Questions', q_en:'Correct past question: What ___ you do yesterday?', opts_en:['do','does','did','are']},
+  {q:'Попълни tag question: She is happy, ___ she?', opts:["is not","is","does not","was not"], ans:0, level:'A2', topic:'Questions', q_en:"Fill in the tag question: She is happy, ___ she?", opts_en:["is not","is","does not","was not"]},
+  {q:'Попълни: ___ time does the train leave?', opts:['How','What','When','Which'], ans:1, level:'A2', topic:'Questions', q_en:'Fill in: ___ time does the train leave?', opts_en:['How','What','When','Which']},
+  {q:'Попълни: ___ far is the station?', opts:['What','When','How','Which'], ans:2, level:'A2', topic:'Questions', q_en:'Fill in: ___ far is the station?', opts_en:['What','When','How','Which']},
+  {q:'Попълни: ___ did you go on holiday?', opts:['What','How','When','Which'], ans:2, level:'A2', topic:'Questions', q_en:'Fill in: ___ did you go on holiday?', opts_en:['What','How','When','Which']},
+
+  // ── Seasons (need 6 more) ──
+  {q:'Кой сезон е юни, юли, август?', opts:['spring','summer','autumn','winter'], ans:1, level:'A2', topic:'Seasons', q_en:'Which season is June, July, August?', opts_en:['spring','summer','autumn','winter']},
+  {q:'Кой сезон е декември, януари, февруари?', opts:['spring','summer','autumn','winter'], ans:3, level:'A2', topic:'Seasons', q_en:'Which season is December, January, February?', opts_en:['spring','summer','autumn','winter']},
+  {q:'Как е "есен" на английски?', opts:['spring','summer','autumn','winter'], ans:2, level:'A2', topic:'Seasons', q_en:'What is the English word for "есен" (autumn)?', opts_en:['spring','summer','autumn','winter']},
+  {q:'Кой сезон е март, април, май?', opts:['spring','summer','autumn','winter'], ans:0, level:'A2', topic:'Seasons', q_en:'Which season is March, April, May?', opts_en:['spring','summer','autumn','winter']},
+  {q:'Американският вариант на "autumn"?', opts:['spring','fall','winter','summer'], ans:1, level:'A2', topic:'Seasons', q_en:'American English word for "autumn"?', opts_en:['spring','fall','winter','summer']},
+  {q:'В кой сезон е Коледа?', opts:['spring','summer','autumn','winter'], ans:3, level:'A2', topic:'Seasons', q_en:'In which season is Christmas?', opts_en:['spring','summer','autumn','winter']},
+
+  // ── There is/are (need 7 more) ──
+  {q:'Попълни: ___ a cat in the garden.', opts:['There are','There is','There were','It is'], ans:1, level:'A1', topic:'There is/are', q_en:'Fill in: ___ a cat in the garden.', opts_en:['There are','There is','There were','It is']},
+  {q:'Попълни: ___ three books on the table.', opts:['There is','There are','There was','It are'], ans:1, level:'A1', topic:'There is/are', q_en:'Fill in: ___ three books on the table.', opts_en:['There is','There are','There was','It are']},
+  {q:'Отрицание: ___ no milk in the fridge.', opts:['There are','There is','There were','It is'], ans:1, level:'A1', topic:'There is/are', q_en:'Negative: ___ no milk in the fridge.', opts_en:['There are','There is','There were','It is']},
+  {q:'Въпрос: ___ any chairs in the room?', opts:['Is there','Are there','Was there','Were there'], ans:1, level:'A1', topic:'There is/are', q_en:'Question: ___ any chairs in the room?', opts_en:['Is there','Are there','Was there','Were there']},
+  {q:'Попълни: ___ some water in the glass.', opts:['There are','There is','There were','There am'], ans:1, level:'A1', topic:'There is/are', q_en:'Fill in: ___ some water in the glass.', opts_en:['There are','There is','There were','There am']},
+  {q:'Минало: Yesterday ___ a big storm.', opts:['there is','there are','there was','there were'], ans:2, level:'A1', topic:'There is/are', q_en:'Past: Yesterday ___ a big storm.', opts_en:['there is','there are','there was','there were']},
+  {q:'Попълни: ___ many people at the concert last night.', opts:['There is','There are','There was','There were'], ans:3, level:'A1', topic:'There is/are', q_en:'Fill in: ___ many people at the concert last night.', opts_en:['There is','There are','There was','There were']},
+
+  // ── Animals (need 7 more) ──
+  {q:'Как е "куче" на английски?', opts:['cat','dog','horse','bird'], ans:1, level:'A1', topic:'Animals', q_en:'What is the English word for "куче" (dog)?', opts_en:['cat','dog','horse','bird']},
+  {q:'Как е "котка" на английски?', opts:['dog','bird','cat','fish'], ans:2, level:'A1', topic:'Animals', q_en:'What is the English word for "котка" (cat)?', opts_en:['dog','bird','cat','fish']},
+  {q:'Как е "кон" на английски?', opts:['cow','pig','horse','sheep'], ans:2, level:'A1', topic:'Animals', q_en:'What is the English word for "кон" (horse)?', opts_en:['cow','pig','horse','sheep']},
+  {q:'Как е "птица" на английски?', opts:['fish','bird','insect','butterfly'], ans:1, level:'A1', topic:'Animals', q_en:'What is the English word for "птица" (bird)?', opts_en:['fish','bird','insect','butterfly']},
+  {q:'Как е "лъв" на английски?', opts:['tiger','bear','lion','wolf'], ans:2, level:'A1', topic:'Animals', q_en:'What is the English word for "лъв" (lion)?', opts_en:['tiger','bear','lion','wolf']},
+  {q:'Как е "риба" (животно) на английски?', opts:['shark','whale','fish','dolphin'], ans:2, level:'A1', topic:'Animals', q_en:'What is the English word for "риба" (the animal, fish)?', opts_en:['shark','whale','fish','dolphin']},
+  {q:'Как е "слон" на английски?', opts:['elephant','rhinoceros','hippopotamus','giraffe'], ans:0, level:'A1', topic:'Animals', q_en:'What is the English word for "слон" (elephant)?', opts_en:['elephant','rhinoceros','hippopotamus','giraffe']},
+
+  // ── Comparatives (need 7 more) ──
+  {q:'Сравнителна степен на "big"?', opts:['biger','most big','bigger','more big'], ans:2, level:'A2', topic:'Comparatives', q_en:'Comparative form of "big"?', opts_en:['biger','most big','bigger','more big']},
+  {q:'Попълни: She is ___ than her sister.', opts:['more tall','tallest','taller','most tall'], ans:2, level:'A2', topic:'Comparatives', q_en:'Fill in: She is ___ than her sister.', opts_en:['more tall','tallest','taller','most tall']},
+  {q:'Превъзходна степен на "good"?', opts:['goodest','better','most good','the best'], ans:3, level:'A2', topic:'Comparatives', q_en:'Superlative form of "good"?', opts_en:['goodest','better','most good','the best']},
+  {q:'Попълни: This is ___ film I have ever seen.', opts:['the most interesting','more interesting','most interesting','the interestingest'], ans:0, level:'A2', topic:'Comparatives', q_en:'Fill in: This is ___ film I have ever seen.', opts_en:['the most interesting','more interesting','most interesting','the interestingest']},
+  {q:'Сравнителна степен на "bad"?', opts:['badder','more bad','worst','worse'], ans:3, level:'A2', topic:'Comparatives', q_en:'Comparative form of "bad"?', opts_en:['badder','more bad','worst','worse']},
+  {q:'Попълни: Today is ___ than yesterday.', opts:['more cold','most cold','colder','coldest'], ans:2, level:'A2', topic:'Comparatives', q_en:'Fill in: Today is ___ than yesterday.', opts_en:['more cold','most cold','colder','coldest']},
+  {q:'Попълни: He runs ___ than me.', opts:['more fast','faster','fastest','most fast'], ans:1, level:'A2', topic:'Comparatives', q_en:'Fill in: He runs ___ than me.', opts_en:['more fast','faster','fastest','most fast']},
+
+  // ── Advanced Grammar (need 7 more) ──
+  {q:'Conditional Type 3: If she ___ harder, she would have passed.', opts:['studied','had studied','studies','was studying'], ans:1, level:'C1', topic:'Advanced Grammar', q_en:'Conditional Type 3: If she ___ harder, she would have passed.', opts_en:['studied','had studied','studies','was studying']},
+  {q:'Попълни: By the time he arrives, we ___ dinner.', opts:['finish','will finish','will have finished','have finished'], ans:2, level:'C1', topic:'Advanced Grammar', q_en:'Fill in: By the time he arrives, we ___ dinner.', opts_en:['finish','will finish','will have finished','have finished']},
+  {q:'Попълни: She ___ for this company for 10 years by next June.', opts:['works','will work','will have worked','has worked'], ans:2, level:'C1', topic:'Advanced Grammar', q_en:'Fill in: She ___ for this company for 10 years by next June.', opts_en:['works','will work','will have worked','has worked']},
+  {q:'Popylni: I wish I ___ taken that opportunity.', opts:['have','had','has','would'], ans:1, level:'C1', topic:'Advanced Grammar', q_en:'Fill in: I wish I ___ taken that opportunity.', opts_en:['have','had','has','would']},
+  {q:'Future Perfect се образува с:', opts:['will + verb','will + be + -ing','will + have + past participle','have + past participle'], ans:2, level:'C1', topic:'Advanced Grammar', q_en:'Future Perfect is formed with:', opts_en:['will + verb','will + be + -ing','will + have + past participle','have + past participle']},
+  {q:'Попълни: Had I known earlier, I ___ helped.', opts:['will have','would have','could','should'], ans:1, level:'C1', topic:'Advanced Grammar', q_en:'Fill in: Had I known earlier, I ___ helped.', opts_en:['will have','would have','could','should']},
+  {q:'Кое e Past Perfect?', opts:['She was sleeping.','She had slept.','She has slept.','She slept.'], ans:1, level:'C1', topic:'Advanced Grammar', q_en:'Which is the Past Perfect?', opts_en:['She was sleeping.','She had slept.','She has slept.','She slept.']},
+
+  // ── Conditional 3 / Mixed (need 8 more each topic - merge to single topic) ──
+  {q:'Conditional Type 3: He would have won if he ___ harder.', opts:['tries','tried','had tried','was trying'], ans:2, level:'B2', topic:'Conditional 3', q_en:'Conditional Type 3: He would have won if he ___ harder.', opts_en:['tries','tried','had tried','was trying']},
+  {q:'Попълни Type 3: If they ___ the map, they would not have got lost.', opts:['bring','brought','had brought','were bringing'], ans:2, level:'B2', topic:'Conditional 3', q_en:'Fill in Type 3: If they ___ the map, they would not have got lost.', opts_en:['bring','brought','had brought','were bringing']},
+  {q:'Кой е Conditional Type 3?', opts:['If I am rich, I travel.','If I were rich, I would travel.','If I had been rich, I would have travelled.','I will travel if I am rich.'], ans:2, level:'B2', topic:'Conditional 3', q_en:'Which is Conditional Type 3?', opts_en:['If I am rich, I travel.','If I were rich, I would travel.','If I had been rich, I would have travelled.','I will travel if I am rich.']},
+  {q:'Conditional 3 изразява:', opts:['реални бъдещи ситуации','хипотетично настояще','нереално минало и съжаление','обичайни факти'], ans:2, level:'B2', topic:'Conditional 3', q_en:'Conditional 3 expresses:', opts_en:['real future situations','hypothetical present','unreal past and regret','habitual facts']},
+  {q:'Попълни: If she ___ the email, she would have known.', opts:['reads','read','had read','was reading'], ans:2, level:'B2', topic:'Conditional 3', q_en:'Fill in: If she ___ the email, she would have known.', opts_en:['reads','read','had read','was reading']},
+  {q:'Попълни: We would have arrived on time if the train ___ delayed.', opts:["had not been","was not","is not","was not being"], ans:0, level:'B2', topic:'Conditional 3', q_en:'Fill in: We would have arrived on time if the train ___ delayed.', opts_en:['had not been','was not','is not','was not being']},
+  {q:'Попълни: If I ___ you, I would have refused.', opts:['am','was','were','had been'], ans:3, level:'B2', topic:'Conditional 3', q_en:'Fill in: If I ___ you, I would have refused.', opts_en:['am','was','were','had been']},
+  {q:'Попълни: What would you have done if you ___ the lottery?', opts:['win','won','had won','were winning'], ans:2, level:'B2', topic:'Conditional 3', q_en:'Fill in: What would you have done if you ___ the lottery?', opts_en:['win','won','had won','were winning']},
+
+  // ── Mastery C2 (need 6 more) ──
+  {q:'Попълни: ___ he study more, he might pass.', opts:['If','Were','Should','Had'], ans:2, level:'C2', topic:'Mastery', q_en:'Fill in (formal conditional): ___ he study more, he might pass.', opts_en:['If','Were','Should','Had']},
+  {q:'Попълни: ___ I known, I would have acted differently.', opts:['If','Were','Should','Had'], ans:3, level:'C2', topic:'Mastery', q_en:'Fill in (formal conditional): ___ I known, I would have acted differently.', opts_en:['If','Were','Should','Had']},
+  {q:'Кое е правилното C2 изречение?', opts:['Rarely I have seen such talent.','Rarely have I seen such talent.','I rarely have seen such talent.','Such talent rarely I have seen.'], ans:1, level:'C2', topic:'Mastery', q_en:'Which is the correct C2 sentence?', opts_en:['Rarely I have seen such talent.','Rarely have I seen such talent.','I rarely have seen such talent.','Such talent rarely I have seen.']},
+  {q:'Попълни: The report, ___ was submitted late, caused problems.', opts:['that','what','which','who'], ans:2, level:'C2', topic:'Mastery', q_en:'Fill in: The report, ___ was submitted late, caused problems.', opts_en:['that','what','which','who']},
+  {q:'Попълни: It was not until midnight ___ she finished.', opts:['when','that','which','who'], ans:1, level:'C2', topic:'Mastery', q_en:'Fill in: It was not until midnight ___ she finished.', opts_en:['when','that','which','who']},
+  {q:'Попълни: ___ it been a different year, the outcome might have changed.', opts:['If','Were','Should','Had'], ans:3, level:'C2', topic:'Mastery', q_en:'Fill in: ___ it been a different year, the outcome might have changed.', opts_en:['If','Were','Should','Had']},
+
+,
+
+  {q:'Смесен тип: If I ___ taller, I would have made the basketball team.', opts:['am','was','were','had been'], ans:2, level:'C2', topic:'Mixed', q_en:'Mixed type: If I ___ taller, I would have made the basketball team.', opts_en:['am','was','were','had been']},
+  {q:'Смесен тип: If she ___ up earlier, she would not be tired now.', opts:['gets','got','had got','was getting'], ans:2, level:'C2', topic:'Mixed', q_en:'Mixed type: If she ___ up earlier, she would not be tired now.', opts_en:['gets','got','had got','was getting']},
+  {q:'Mixed conditional изразява:', opts:['само настоящо условие','само минало условие','минало условие с настоящ резултат или обратно','бъдещо условие'], ans:2, level:'C2', topic:'Mixed', q_en:'Mixed conditional expresses:', opts_en:['only present condition','only past condition','past condition with present result or vice versa','future condition']},
+  {q:'Попълни (mixed): If I ___ my keys, I would not have been locked out.', opts:['find','found','had found','were finding'], ans:2, level:'C2', topic:'Mixed', q_en:'Fill in (mixed): If I ___ my keys, I would not have been locked out.', opts_en:['find','found','had found','were finding']},
+  {q:'Попълни (mixed): If he ___ more disciplined, he would have won the competition.', opts:['is','was','were','had been'], ans:2, level:'C2', topic:'Mixed', q_en:'Fill in (mixed): If he ___ more disciplined, he would have won the competition.', opts_en:['is','was','were','had been']},
+  {q:'Mixed: Which part uses Past Perfect?', opts:['The result clause','The if clause','Both clauses','Neither'], ans:1, level:'C2', topic:'Mixed', q_en:'Mixed conditional: Which part uses Past Perfect?', opts_en:['The result clause','The if clause','Both clauses','Neither']},
+  {q:'Попълни: If they ___ a bigger office, they would have hired more staff.', opts:['have','had','had had','were having'], ans:2, level:'C2', topic:'Mixed', q_en:'Fill in: If they ___ a bigger office, they would have hired more staff.', opts_en:['have','had','had had','were having']},
+  {q:'Mixed conditional: "If I were you, I would have left" — кои времена?', opts:['Past Simple + would','Past Simple + would have','were + would have','Past Perfect + would'], ans:2, level:'C2', topic:'Mixed', q_en:'Mixed conditional: "If I were you, I would have left" — which tenses?', opts_en:['Past Simple + would','Past Simple + would have','were + would have','Past Perfect + would']},
+
 ];
 
 // ══════════════════════════════════════════
