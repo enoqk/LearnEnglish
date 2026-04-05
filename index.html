@@ -86,6 +86,7 @@
 .history-pct { font-size: 15px; font-weight: 700; }
 
 @media (max-width: 700px) {
+  /* Nav */
   .hamburger { display: flex; }
   .nav-center {
     display: none; flex-direction: column; gap: 4px;
@@ -94,17 +95,90 @@
     box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 99;
   }
   .nav-center.open { display: flex; }
-  .nav-btn { text-align: left; padding: 10px 14px; border-radius: 8px; }
-  .level-cards { grid-template-columns: 1fr 1fr !important; }
+  .nav-btn { text-align: left; padding: 10px 14px; border-radius: 8px; width: 100%; }
+  .nav-right { gap: 4px; }
+  .dark-toggle { padding: 5px 8px; font-size: 12px; }
+
+  /* Home */
+  .hero { padding: 36px 16px 0; }
+  .hero h1 { font-size: 24px; }
+  .hero p { font-size: 14px; }
   .stats-row { grid-template-columns: 1fr 1fr !important; }
-  .about-grid { grid-template-columns: 1fr !important; }
-  .team-cards { flex-direction: column; }
-  .quiz-card { padding: 16px; }
+  .stat-num { font-size: 20px; }
+  .level-cards { grid-template-columns: 1fr 1fr !important; padding: 16px; gap: 10px; }
+  .level-card { padding: 14px; }
+  .level-card p { display: none; }
+
+  /* Lessons */
+  .lesson-tabs, .quiz-level-filter { padding: 12px 16px 0; gap: 6px; overflow-x: auto; flex-wrap: nowrap; }
+  .tab-btn { white-space: nowrap; flex-shrink: 0; }
+  .lessons-list { padding: 12px 16px; }
+  .lesson-item { padding: 12px 14px; gap: 10px; }
+  .lesson-info h4 { font-size: 13px; }
+  .lesson-info p { font-size: 11px; }
+  .lesson-detail { padding: 14px 16px; }
   .lesson-content { padding: 16px; }
+  .lesson-content h3 { font-size: 18px; }
+  .example-table { font-size: 12px; }
+  .example-table th, .example-table td { padding: 7px 8px; }
+
+  /* Quiz */
+  .quiz-container { padding: 12px 16px; }
+  .quiz-card { padding: 16px; }
+  .quiz-question { font-size: 15px; }
+  .quiz-option { padding: 11px 13px; font-size: 13px; }
+  .result-score { font-size: 44px; }
+
+  /* Progress */
+  .progress-page { padding: 16px; }
+  .progress-grid { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .prog-num { font-size: 24px; }
+  .prog-section { padding: 16px; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr !important; }
+  .about-body { padding: 16px; }
+  .about-header { padding: 20px 16px; }
+  .team-cards { flex-direction: column; }
+
+  /* Criteria */
+  .page-header { padding: 16px; }
+  .page-header h2 { font-size: 20px; }
+
+  /* Sources */
+  #sources > div { padding: 14px 16px; }
+
+  /* General */
+  footer { font-size: 11px; padding: 16px; }
+
+  /* Page inner padding */
+  .page-inner-pad { padding: 14px 16px !important; }
+
+  /* UML / API pages */
+  #uml pre, #api pre { font-size: 10px; padding: 10px; }
+  #uml svg, #api svg { font-size: 9px; }
+
+  /* Quiz detail */
+  #quiz-detail-view .quiz-container { padding: 0; }
+
+  /* Criteria banner */
+  #criteria > div > div:first-child { flex-direction: column; gap: 12px; }
+
+  /* Progress page */
+  .prog-card { padding: 14px 10px; }
+  .prog-row-header { font-size: 12px; }
 }
+
 @media (max-width: 420px) {
   .level-cards { grid-template-columns: 1fr !important; }
+  .progress-grid { grid-template-columns: 1fr !important; }
+  .stats-row { grid-template-columns: 1fr 1fr !important; }
   .logo { font-size: 18px; }
+  .hero h1 { font-size: 20px; }
+  .quiz-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .lesson-item { flex-wrap: wrap; }
+  .lesson-meta { margin-left: 0; flex-direction: row; }
+  .about-header { flex-direction: column; text-align: center; }
 }
 
 /* ── LIGHT THEME ── */
@@ -287,6 +361,7 @@ nav {
 .warning-box .rule-title { font-size:11px; font-weight:700; color:var(--amber); margin-bottom:6px; letter-spacing:0.5px; text-transform:uppercase; }
 .warning-box p { font-size:13px; margin-bottom:0; color:var(--text); }
 .example-table { width:100%; border-collapse:collapse; margin:14px 0; font-size:13px; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .example-table th { background:var(--navy); color:#fff; padding:9px 13px; text-align:left; }
 .example-table td { padding:9px 13px; border-bottom:1px solid var(--border); color:var(--text); }
 .example-table tr:last-child td { border-bottom:none; }
@@ -418,9 +493,9 @@ footer {
     <div class="lessons-list" id="quiz-list"></div>
   </div>
   <!-- DETAIL VIEW -->
-  <div id="quiz-detail-view" style="display:none; padding:24px 28px;">
+  <div id="quiz-detail-view" class="page-inner-pad" style="display:none;">
     <button class="back-btn" id="quiz-back-btn" onclick="QuizModule.showList()">← Назад към тестовете</button>
-    <div class="quiz-container" style="padding:0"><div class="quiz-card"><div id="quiz-body"></div></div></div>
+    <div class="quiz-container"><div class="quiz-card"><div id="quiz-body"></div></div></div>
   </div>
 </div>
 
@@ -444,7 +519,7 @@ footer {
 <!-- ═══ ABOUT ═══ -->
 <div id="about" class="page">
   <div class="page-header"><h2>За проекта</h2><p>Информация за турнира и екипа</p></div>
-  <div style="padding:24px 28px;">
+  <div class="page-inner-pad">
     <div class="about-section">
       <div class="about-header">
         <div class="about-icon">🏆</div>
@@ -535,7 +610,7 @@ footer {
 <!-- ═══ CRITERIA ═══ -->
 <div id="criteria" class="page">
   <div class="page-header"><h2>Критерии 2026</h2><p>Оценъчни критерии за категория "Интернет приложения" — ВТУ турнир 2026</p></div>
-  <div style="padding:24px 28px; display:flex; flex-direction:column; gap:16px;">
+  <div class="page-inner-pad" style="display:flex; flex-direction:column; gap:16px;">
 
     <!-- Score banner -->
     <div style="background:linear-gradient(135deg,#1a3a5c,#1557a0);border-radius:var(--radius);padding:24px 28px;display:flex;gap:32px;align-items:center;">
@@ -706,7 +781,7 @@ footer {
     <h2>Цитирани източници</h2>
     <p>Всички материали, използвани при разработката на проекта</p>
   </div>
-  <div style="padding:24px 28px; display:flex; flex-direction:column; gap:16px;">
+  <div class="page-inner-pad" style="display:flex; flex-direction:column; gap:16px;">
 
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;">
       <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;" data-i18n-src="src_grammar">📖 Граматика и езикови ресурси</div>
@@ -765,7 +840,7 @@ footer {
 <!-- ═══ UML ═══ -->
 <div id="uml" class="page">
   <div class="page-header"><h2>UML — Архитектура на системата</h2><p>Module Pattern диаграма на LearnEnglish</p></div>
-  <div style="padding:24px 28px; display:flex; flex-direction:column; gap:20px;">
+  <div class="page-inner-pad" style="display:flex; flex-direction:column; gap:20px;">
 
     <!-- Module diagram -->
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
@@ -938,7 +1013,7 @@ footer {
 <!-- ═══ API SPEC ═══ -->
 <div id="api" class="page">
   <div class="page-header"><h2>API Спецификация</h2><p>Вътрешни структури от данни и интерфейси на модулите</p></div>
-  <div style="padding:24px 28px; display:flex; flex-direction:column; gap:16px;">
+  <div class="page-inner-pad" style="display:flex; flex-direction:column; gap:16px;">
 
     <!-- Lesson object -->
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
@@ -1679,60 +1754,78 @@ const QuizModule = (function() {
   // Map each question to a quiz set id
   const topicToSet = {
     // A1
-    'To Be':            'a1-tobe',
-    'To Be 2':          'a1-tobe2',
-    'Nouns':            'a1-basics',
-    'There is/are':     'a1-basics',
-    'Questions':        'a1-basics',
-    'Numbers':          'a1-numbers',
-    'Colours':          'a1-colours',
-    'Animals':          'a1-animals',
-    'Greetings':        'a1-greetings',
-    'Family':           'a1-family',
-    'Possessives':      'a1-vocab',
+    'To Be':              'a1-tobe',
+    'To Be 2':            'a1-tobe2',
+    'Nouns':              'a1-basics',
+    'There is/are':       'a1-basics',
+    'Questions':          'a1-basics',
+    'Numbers':            'a1-numbers',
+    'Colours':            'a1-colours',
+    'Animals':            'a1-animals',
+    'Greetings':          'a1-greetings',
+    'Family':             'a1-family',
+    'Possessives':        'a1-vocab',
     // A2
-    'Present Simple':   'a2-present',
-    'Past Simple':      'a2-past',
-    'Present Continuous':'a2-tenses',
-    'Food':             'a2-food',
-    'Jobs':             'a2-jobs',
-    'Seasons':          'a2-days',
-    'Days':             'a2-days',
-    'Future':           'a2-future',
+    'Present Simple':     'a2-present',
+    'Past Simple':        'a2-past',
+    'Present Continuous': 'a2-tenses',
+    'Food':               'a2-food',
+    'Jobs':               'a2-jobs',
+    'Seasons':            'a2-days',
+    'Days':               'a2-days',
+    'Future':             'a2-future',
+    'Comparatives':       'b1-comparatives',
     // B1
-    'Present Perfect':  'b1-perf',
-    'Comparatives':     'b1-comparatives',
-    'Modal Verbs':      'b1-modals',
-    'Conditional 1':    'b1-conditionals',
-    'Past Continuous':  'b1-pastcont',
-    'Travel':           'b1-travel',
+    'Present Perfect':    'b1-perf',
+    'Modal Verbs':        'b1-modals',
+    'Conditional 1':      'b1-conditionals',
+    'Past Continuous':    'b1-pastcont',
+    'Travel':             'b1-travel',
+    'Mixed':              'b1-mixed',
     // B2
-    'Passive Voice':    'b2-passive',
-    'Reported Speech':  'b2-reported',
-    'Conditional 2':    'b2-cond23',
-    'Conditional 3':    'b2-cond23',
-    'Academic Vocab':   'b2-academic',
-    'Idioms':           'b2-idioms',
+    'Passive Voice':      'b2-passive',
+    'Reported Speech':    'b2-reported',
+    'Conditional 2':      'b2-cond23',
+    'Conditional 3':      'b2-cond23',
+    'Academic Vocab':     'b2-academic',
+    'Idioms':             'b2-idioms',
+    'Idioms B2':          'b2-idioms',
     // C1
-    'Inversion':        'c1-inversion',
-    'Cleft Sentences':  'c1-cleft',
-    'Subjunctive':      'c1-subjunctive',
-    'Discourse Markers':'c1-discourse',
-    'Idioms C1':        'c1-vocab',
+    'Inversion':          'c1-inversion',
+    'Cleft Sentences':    'c1-cleft',
+    'Subjunctive':        'c1-subjunctive',
+    'Discourse Markers':  'c1-discourse',
+    'Idioms C1':          'c1-vocab',
+    'Idioms C1 Lesson':   'c1-vocab',
+    'Advanced Vocab':     'c1-vocab',
+    'Advanced Grammar':   'c1-advanced',
     // C2
-    'Mixed Conditionals':'c2-conditionals',
-    'Nuance':           'c2-nuance',
-    'Idioms C2':        'c2-idioms2',
-    'Rhetoric':         'c2-rhetoric',
-    'Ellipsis':         'c2-ellipsis',
-    // Orphaned/misc topics — map to nearest set
-    'Tenses':           'a2-tenses',
-    'Basics':           'a1-basics',
-    'Advanced Grammar': 'c1-advanced',
-    'Mastery':          'c2-master',
-    'Conditional 2':    'b2-cond23',
-    'Mixed':            'b1-mixed',
-    'Vocabulary':       'a2-vocab',
+    'Mixed Conditionals': 'c2-conditionals',
+    'Nuance':             'c2-nuance',
+    'Idioms C2':          'c2-idioms2',
+    'Idioms C2 Lesson':   'c2-idioms2',
+    'Rhetoric':           'c2-rhetoric',
+    'Rhetoric C2':        'c2-rhetoric',
+    'Ellipsis':           'c2-ellipsis',
+    'Mastery':            'c2-master',
+    // a2-vocab — Food, Jobs, Seasons redirected from old sets + direct vocab topics
+    // NOTE: Food/Jobs/Seasons/Days have their own sets (a2-food, a2-jobs, a2-days)
+    // a2-vocab gets: Nouns, Questions (already in a1-basics so remap here too)
+    // We add DIRECT entries for a2-vocab, b2-vocab, c2-vocab via new topic names
+    'Vocab A2':           'a2-vocab',
+    'Vocabulary A2':      'a2-vocab',
+    // b2-vocab gets: Academic Vocab + Idioms (already mapped to b2-academic/b2-idioms)
+    // Add aggregate topics  
+    'Vocab B2':           'b2-vocab',
+    'Vocabulary B2':      'b2-vocab',
+    // c2-vocab gets: Nuance, Idioms C2, Rhetoric, Ellipsis (already mapped to individual sets)
+    // Add aggregate topics
+    'Vocab C2':           'c2-vocab',
+    'Vocabulary C2':      'c2-vocab',
+    // Misc
+    'Basics':             'a1-basics',
+    'Vocabulary':         'a2-vocab',
+    'Tenses':             'a2-tenses',
   };
 
   const vocabTopics = new Set(['Greetings','Family','Possessives','Colours','Animals','Food','Jobs','Seasons','Days','Travel','Idioms','Academic Vocab','Idioms C1','Discourse Markers','Idioms C2','Rhetoric','Nuance','Ellipsis','Numbers','Questions','Nouns']);
@@ -2274,7 +2367,8 @@ const questions = [
    q_en:'What is the English word for "баба" (grandmother)?', opts_en:['aunt','sister','grandmother','mother'],
    flip:true, q_flip:'What is the Bulgarian word for "grandmother"?', opts_flip:['леля','сестра','баба','майка'], ans_flip:2},
   {q:'Кое число е "twenty"?', opts:['12','20','200','2'], ans:1, level:'A1', topic:'Numbers',
-   q_en:'Which number is "twenty"?', opts_en:['12','20','200','2']},
+   q_en:'Which number is "twenty"?', opts_en:['12','20','200','2'],
+   flip:true, q_flip:'How do you say "20" in Bulgarian?', opts_flip:['дванадесет','двадесет','двеста','две'], ans_flip:1},
   {q:'Попълни: This is ___ book.', opts:['I','my','me','mine book'], ans:1, level:'A1', topic:'Possessives',
    q_en:'Fill in: This is ___ book.', opts_en:['I','my','me','mine book']},
   {q:'Как е "зелен" на английски?', opts:['blue','red','yellow','green'], ans:3, level:'A1', topic:'Colours',
@@ -2292,7 +2386,8 @@ const questions = [
   {q:'Спонтанно решение за бъдещето?', opts:['going to','will','am','was'], ans:1, level:'A2', topic:'Future',
    q_en:'Which form expresses a spontaneous decision about the future?', opts_en:['going to','will','am','was']},
   {q:'Кой е петият ден от седмицата?', opts:['Monday','Wednesday','Friday','Sunday'], ans:2, level:'A2', topic:'Days',
-   q_en:'Which is the fifth day of the week?', opts_en:['Monday','Wednesday','Friday','Sunday']},
+   q_en:'Which is the fifth day of the week?', opts_en:['Monday','Wednesday','Friday','Sunday'],
+   flip:true, q_flip:'Кой е петият ден от седмицата? (EN→BG: What is Friday in Bulgarian?)', opts_flip:['понеделник','сряда','петък','неделя'], ans_flip:2},
   {q:'Попълни: I ___ never ___ sushi.', opts:['have / eaten','has / eaten','had / eaten','have / eat'], ans:0, level:'B1', topic:'Present Perfect',
    q_en:'Fill in: I ___ never ___ sushi.', opts_en:['have / eaten','has / eaten','had / eaten','have / eat']},
   {q:'Кое е правилно?', opts:['You should to sleep more.','You should sleeping.','You should sleep more.','You should slept.'], ans:2, level:'B1', topic:'Modal Verbs',
@@ -2347,7 +2442,8 @@ const questions = [
    q_en:'What is the English word for "котка" (cat)?', opts_en:['dog','bird','cat','fish'],
    flip:true, q_flip:'What is the Bulgarian word for "cat"?', opts_flip:['куче','птица','котка','риба'], ans_flip:2},
   {q:'Кое число е "fifteen"?', opts:['5','50','15','55'], ans:2, level:'A1', topic:'Numbers',
-   q_en:'Which number is "fifteen"?', opts_en:['5','50','15','55']},
+   q_en:'Which number is "fifteen"?', opts_en:['5','50','15','55'],
+   flip:true, q_flip:'How do you say "15" in Bulgarian?', opts_flip:['пет','петдесет','петнадесет','петдесет и пет'], ans_flip:2},
   {q:'Попълни: ___ your name?', opts:['What is','Who is','How is','Where is'], ans:0, level:'A1', topic:'Questions',
    q_en:'Fill in: ___ your name?', opts_en:['What is','Who is','How is','Where is']},
 
@@ -2431,7 +2527,8 @@ const questions = [
    q_en:'What is the English word for "куче" (dog)?', opts_en:['cat','dog','fish','bird'],
    flip:true, q_flip:'What is the Bulgarian word for "dog"?', opts_flip:['котка','куче','риба','птица'], ans_flip:1},
   {q:'Кое число е "thirty"?', opts:['3','13','30','300'], ans:2, level:'A1', topic:'Numbers',
-   q_en:'Which number is "thirty"?', opts_en:['3','13','30','300']},
+   q_en:'Which number is "thirty"?', opts_en:['3','13','30','300'],
+   flip:true, q_flip:'How do you say "30" in Bulgarian?', opts_flip:['три','тринадесет','тридесет','триста'], ans_flip:2},
   {q:'Попълни: ___ are two cats here.', opts:['This','There','These','It'], ans:1, level:'A1', topic:'There is/are',
    q_en:'Fill in: ___ are two cats here.', opts_en:['This','There','These','It']},
   {q:'Как е "птица" на английски?', opts:['fish','dog','bird','cat'], ans:2, level:'A1', topic:'Animals',
@@ -2474,7 +2571,8 @@ const questions = [
    q_en:'What is the English word for "вода" (water)?', opts_en:['juice','milk','water','tea'],
    flip:true, q_flip:'What is the Bulgarian word for "water"?', opts_flip:['сок','мляко','вода','чай'], ans_flip:2},
   {q:'Кой е вторият ден от седмицата?', opts:['Sunday','Monday','Tuesday','Wednesday'], ans:2, level:'A2', topic:'Days',
-   q_en:'Which is the second day of the week?', opts_en:['Sunday','Monday','Tuesday','Wednesday']},
+   q_en:'Which is the second day of the week?', opts_en:['Sunday','Monday','Tuesday','Wednesday'],
+   flip:true, q_flip:'What is "вторник" in English?', opts_flip:['Sunday','Monday','Tuesday','Wednesday'], ans_flip:2},
 
   /* ── A2 — Future extra ── */
   {q:'Попълни: I think it ___ be a great day.', opts:['goes to','am going to','will','going'], ans:2, level:'A2', topic:'Future',
@@ -2649,15 +2747,19 @@ const questions = [
   {q:'Попълни: We ___ happy today.', opts:['is','am','are','be'], ans:2, level:'A1', topic:'To Be',
    q_en:'Fill in: We ___ happy today.', opts_en:['is','am','are','be']},
   {q:'Как е "довиждане" на английски?', opts:['Hello','Good morning','Goodbye','How are you'], ans:2, level:'A1', topic:'Greetings',
-   q_en:'How do you say "довиждане" in English?', opts_en:['Hello','Good morning','Goodbye','How are you']},
+   q_en:'How do you say "довиждане" in English?', opts_en:['Hello','Good morning','Goodbye','How are you'],
+   flip:true, q_flip:'What is the Bulgarian word for "Goodbye"?', opts_flip:['Здравей','Добро утро','Довиждане','Как си'], ans_flip:2},
   {q:'Попълни: ___ name is Anna.', opts:['Her','She','Hers','Him'], ans:0, level:'A1', topic:'Possessives',
    q_en:'Fill in: ___ name is Anna.', opts_en:['Her','She','Hers','Him']},
   {q:'Как е "брат" на английски?', opts:['sister','father','uncle','brother'], ans:3, level:'A1', topic:'Family',
-   q_en:'What is the English word for "брат"?', opts_en:['sister','father','uncle','brother']},
+   q_en:'What is the English word for "брат"?', opts_en:['sister','father','uncle','brother'],
+   flip:true, q_flip:'What is the Bulgarian word for "brother"?', opts_flip:['сестра','баща','чичо','брат'], ans_flip:3},
   {q:'Колко е "fifty"?', opts:['15','5','50','500'], ans:2, level:'A1', topic:'Numbers',
+   flip:true, q_flip:'How do you say "50" in Bulgarian?',
    q_en:'How much is "fifty"?', opts_en:['15','5','50','500']},
   {q:'Кой цвят е "red"?', opts:['зелен','червен','жълт','син'], ans:1, level:'A1', topic:'Colours',
-   q_en:'Which colour is "red"?', opts_en:['green','red','yellow','blue']},
+   q_en:'What is the English word for "червен"?', opts_en:['green','red','yellow','blue'],
+   flip:true, q_flip:'What is the Bulgarian word for "red"?', opts_flip:['зелен','червен','жълт','син'], ans_flip:1},
   {q:'Попълни: This is ___ car. (за него)', opts:['her','my','his','their'], ans:2, level:'A1', topic:'Possessives',
    q_en:'Fill in: This is ___ car. (belonging to him)', opts_en:['her','my','his','their']},
   // ── Extra A2 ──
@@ -2668,8 +2770,10 @@ const questions = [
   {q:'Попълни: Yesterday I ___ pizza for dinner.', opts:['eat','eating','eats','ate'], ans:3, level:'A2', topic:'Past Simple',
    q_en:'Fill in: Yesterday I ___ pizza for dinner.', opts_en:['eat','eating','eats','ate']},
   {q:'Как е "вода" на английски?', opts:['juice','milk','water','tea'], ans:2, level:'A2', topic:'Food',
-   q_en:'What is the English word for "вода" (water)?', opts_en:['juice','milk','water','tea']},
+   q_en:'What is the English word for "вода" (water)?', opts_en:['juice','milk','water','tea'],
+   flip:true, q_flip:'What is the Bulgarian word for "water"?', opts_flip:['сок','мляко','вода','чай'], ans_flip:2},
   {q:'Кой месец е третият?', opts:['January','February','March','April'], ans:2, level:'A2', topic:'Days',
+   flip:true, q_flip:'Which is the Bulgarian word for "March"?',
    q_en:'Which is the third month?', opts_en:['January','February','March','April']},
   {q:'Попълни: Look! She ___ a red dress today.', opts:['wear','wears','is wearing','wore'], ans:2, level:'A2', topic:'Present Continuous',
    q_en:'Fill in: Look! She ___ a red dress today.', opts_en:['wear','wears','is wearing','wore']},
@@ -2685,11 +2789,13 @@ const questions = [
   {q:'Попълни: If you ___ hard, you will succeed.', opts:['work','worked','will work','working'], ans:0, level:'B1', topic:'Conditional 1',
    q_en:'Fill in: If you ___ hard, you will succeed.', opts_en:['work','worked','will work','working']},
   {q:'Как е "паспорт" на английски?', opts:['ticket','luggage','passport','boarding pass'], ans:2, level:'B1', topic:'Travel',
-   q_en:'What is the English word for "паспорт" (passport)?', opts_en:['ticket','luggage','passport','boarding pass']},
+   q_en:'What is the English word for "паспорт" (passport)?', opts_en:['ticket','luggage','passport','boarding pass'],
+   flip:true, q_flip:'What is the Bulgarian word for "passport"?', opts_flip:['билет','багаж','паспорт','бордна карта'], ans_flip:2},
   {q:'Попълни: They ___ TV when the power cut off.', opts:['watched','watch','were watching','are watching'], ans:2, level:'B1', topic:'Past Continuous',
    q_en:'Fill in: They ___ TV when the power cut off.', opts_en:['watched','watch','were watching','are watching']},
   {q:'Как е "лекар" на английски?', opts:['lawyer','teacher','doctor','engineer'], ans:2, level:'B1', topic:'Jobs',
-   q_en:'What is the English word for "лекар" (doctor)?', opts_en:['lawyer','teacher','doctor','engineer']},
+   q_en:'What is the English word for "лекар" (doctor)?', opts_en:['lawyer','teacher','doctor','engineer'],
+   flip:true, q_flip:'What is the Bulgarian word for "doctor"?', opts_flip:['адвокат','учител','лекар','инженер'], ans_flip:2},
   // ── Extra B2 ──
   {q:'Попълни: The bridge ___ in 1889.', opts:['built','was built','has built','is built'], ans:1, level:'B2', topic:'Passive Voice',
    q_en:'Fill in: The bridge ___ in 1889.', opts_en:['built','was built','has built','is built']},
@@ -2700,7 +2806,8 @@ const questions = [
   {q:'Кое е академичното на "use"?', opts:['apply','do','make','get'], ans:0, level:'B2', topic:'Academic Vocab',
    q_en:'Which is the academic/formal word for "use"?', opts_en:['apply','do','make','get']},
   {q:'Какво означава "break a leg"?', opts:['счупи крака','успех!','бягай!','стой!'], ans:1, level:'B2', topic:'Idioms',
-   q_en:'What does "break a leg" mean?', opts_en:['break your leg','good luck!','run away!','stop!']},
+   q_en:'What does "break a leg" mean?', opts_en:['break your leg','good luck!','run away!','stop!'],
+   flip:true, q_flip:'Which Bulgarian phrase means "good luck" (wishing success)?', opts_flip:['счупи крака','успех!','бягай!','стой!'], ans_flip:1},
   {q:'Попълни: The letter ___ by the secretary every morning.', opts:['types','is typed','typed','was typed'], ans:1, level:'B2', topic:'Passive Voice',
    q_en:'Fill in: The letter ___ by the secretary every morning.', opts_en:['types','is typed','typed','was typed']},
   {q:'Попълни (reported): "We are leaving." → She said they ___ leaving.', opts:['are','were','have been','had been'], ans:1, level:'B2', topic:'Reported Speech',
@@ -2715,7 +2822,8 @@ const questions = [
   {q:'Попълни: The doctor suggested that she ___ more water.', opts:['drinks','drink','drank','to drink'], ans:1, level:'C1', topic:'Subjunctive',
    q_en:'Fill in: The doctor suggested that she ___ more water.', opts_en:['drinks','drink','drank','to drink']},
   {q:'Какво означава "sit on the fence"?', opts:['седи навън','не заема страна','е уморен','работи усилено'], ans:1, level:'C1', topic:'Idioms C1',
-   q_en:'What does "sit on the fence" mean?', opts_en:['sit outside','avoid taking sides','feel tired','work hard']},
+   q_en:'What does "sit on the fence" mean?', opts_en:['sit outside','avoid taking sides','feel tired','work hard'],
+   flip:true, q_flip:'Which Bulgarian phrase means "to avoid taking sides"?', opts_flip:['седи навън','не заема страна','е уморен','работи усилено'], ans_flip:1},
   {q:'Кой маркер изразява резултат?', opts:['albeit','however','consequently','moreover'], ans:2, level:'C1', topic:'Discourse Markers',
    q_en:'Which discourse marker expresses a result?', opts_en:['albeit','however','consequently','moreover']},
   {q:'Кой маркер изразява добавяне?', opts:['nevertheless','furthermore','albeit','thus'], ans:1, level:'C1', topic:'Discourse Markers',
@@ -2726,7 +2834,8 @@ const questions = [
   {q:'Коя дума има ПОЛОЖИТЕЛНА конотация?', opts:['scrawny','gaunt','slender','bony'], ans:2, level:'C2', topic:'Nuance',
    q_en:'Which word has a POSITIVE connotation?', opts_en:['scrawny','gaunt','slender','bony']},
   {q:'Какво означава "to pass the buck"?', opts:['дай пари','прехвърли отговорност','спечели бас','смени работа'], ans:1, level:'C2', topic:'Idioms C2',
-   q_en:'What does "to pass the buck" mean?', opts_en:['give money','shift responsibility to others','win a bet','change jobs']},
+   q_en:'What does "to pass the buck" mean?', opts_en:['give money','shift responsibility to others','win a bet','change jobs'],
+   flip:true, q_flip:'Which Bulgarian phrase means "shift responsibility to someone else"?', opts_flip:['дай пари','прехвърли отговорност','спечели бас','смени работа'], ans_flip:1},
   {q:'Ellipsis: "Did you lock the door?" — "I think ___."', opts:['it','that','so','yes'], ans:2, level:'C2', topic:'Ellipsis',
    q_en:'Ellipsis: "Did you lock the door?" — "I think ___."', opts_en:['it','that','so','yes']},
   {q:'Кой е реторичният похват: "Ask not what your country can do for you..."?', opts:['Anaphora','Hyperbole','Antithesis','Euphemism'], ans:2, level:'C2', topic:'Rhetoric',
@@ -2751,20 +2860,40 @@ const questions = [
 
   // ── Greetings (need 7 more) ──
   {q:'Как отговаряш на "How are you?"?', opts:["I am fine, thank you.","I is fine.","Fine am I.","Me fine."], ans:0, level:'A1', topic:'Greetings', q_en:'How do you answer "How are you?"?', opts_en:["I am fine, thank you.","I is fine.","Fine am I.","Me fine."]},
-  {q:'Как е "добър вечер" на английски?', opts:['Good morning','Good afternoon','Good evening','Good night'], ans:2, level:'A1', topic:'Greetings', q_en:'How do you say "добър вечер" in English?', opts_en:['Good morning','Good afternoon','Good evening','Good night']},
-  {q:'Как е "лека нощ" на английски?', opts:['Good evening','Good morning','Good night','Goodbye'], ans:2, level:'A1', topic:'Greetings', q_en:'How do you say "лека нощ" in English?', opts_en:['Good evening','Good morning','Good night','Goodbye']},
-  {q:'Как е "Как се казваш?" на английски?', opts:['Where are you?','What is your name?','How old are you?','Where do you live?'], ans:1, level:'A1', topic:'Greetings', q_en:'How do you say "Как се казваш?" in English?', opts_en:['Where are you?','What is your name?','How old are you?','Where do you live?']},
+  {q:'Как е "добър вечер" на английски?', opts:['Good morning','Good afternoon','Good evening','Good night'], ans:2, level:'A1', topic:'Greetings',
+   q_en:'What is the English word for "добър вечер"?', opts_en:['Good morning','Good afternoon','Good evening','Good night'],
+   flip:true, q_flip:'What is the Bulgarian for "Good evening"?', opts_flip:['Добро утро','Добър ден','Добър вечер','Лека нощ'], ans_flip:2},
+  {q:'Как е "лека нощ" на английски?', opts:['Good evening','Good morning','Good night','Goodbye'], ans:2, level:'A1', topic:'Greetings',
+   q_en:'What is the English word for "лека нощ"?', opts_en:['Good evening','Good morning','Good night','Goodbye'],
+   flip:true, q_flip:'What is the Bulgarian word for \"Good night\"?', opts_flip:['Добър вечер','Добро утро','Лека нощ','Довиждане'], ans_flip:2},
+  {q:'Как е "Как се казваш?" на английски?', opts:['Where are you?','What is your name?','How old are you?','Where do you live?'], ans:1, level:'A1', topic:'Greetings',
+   q_en:'What is the English word for "Как се казваш?"?', opts_en:['Where are you?','What is your name?','How old are you?','Where do you live?'],
+   flip:true, q_flip:'What is the Bulgarian word for \"What is your name?\"?', opts_flip:['Къде си?','Как се казваш?','На колко години си?','Къде живееш?'], ans_flip:1},
   {q:'Как отговаряш на "Nice to meet you"?', opts:['Thank you.','Nice to meet you too.','I am fine.','Goodbye.'], ans:1, level:'A1', topic:'Greetings', q_en:'How do you reply to "Nice to meet you"?', opts_en:['Thank you.','Nice to meet you too.','I am fine.','Goodbye.']},
-  {q:'Как е "добър ден" (следобед) на английски?', opts:['Good morning','Good afternoon','Good evening','Hello'], ans:1, level:'A1', topic:'Greetings', q_en:'How do you say "добър ден" (afternoon) in English?', opts_en:['Good morning','Good afternoon','Good evening','Hello']},
+  {q:'Как е "добър ден" (следобед) на английски?', opts:['Good morning','Good afternoon','Good evening','Hello'], ans:1, level:'A1', topic:'Greetings',
+   q_en:'What is the English word for "добър ден" (следобед)?', opts_en:['Good morning','Good afternoon','Good evening','Hello'],
+   flip:true, q_flip:'What is the Bulgarian word for \"Good afternoon\"?', opts_flip:['Добро утро','Добър ден','Добър вечер','Здравей'], ans_flip:1},
   {q:'Попълни: My ___ is Peter.', opts:['age','name','colour','family'], ans:1, level:'A1', topic:'Greetings', q_en:'Fill in: My ___ is Peter.', opts_en:['age','name','colour','family']},
 
   // ── Numbers (need 6 more) ──
-  {q:'Колко е "twelve"?', opts:['20','2','12','120'], ans:2, level:'A1', topic:'Numbers', q_en:'How much is "twelve"?', opts_en:['20','2','12','120']},
-  {q:'Колко е "one hundred"?', opts:['10','1000','100','1'], ans:2, level:'A1', topic:'Numbers', q_en:'How much is "one hundred"?', opts_en:['10','1000','100','1']},
-  {q:'Как е "33" на английски?', opts:['thirty-two','thirteen','thirty-three','three-thirty'], ans:2, level:'A1', topic:'Numbers', q_en:'How do you say "33" in English?', opts_en:['thirty-two','thirteen','thirty-three','three-thirty']},
-  {q:'Как е "15" на английски?', opts:['fifty','five','fifteen','fiveteen'], ans:2, level:'A1', topic:'Numbers', q_en:'How do you say "15" in English?', opts_en:['fifty','five','fifteen','fiveteen']},
-  {q:'Колко е "seventy"?', opts:['7','17','700','70'], ans:3, level:'A1', topic:'Numbers', q_en:'How much is "seventy"?', opts_en:['7','17','700','70']},
-  {q:'Как е "11" на английски?', opts:['one-one','eleven','onety-one','first'], ans:1, level:'A1', topic:'Numbers', q_en:'How do you say "11" in English?', opts_en:['one-one','eleven','onety-one','first']},
+  {q:'Колко е "twelve"?', opts:['20','2','12','120'], ans:2, level:'A1', topic:'Numbers',
+   q_en:'How much is "twelve"?', opts_en:['20','2','12','120'],
+   flip:true, q_flip:'How do you say "12" in English?', opts_flip:['twenty','two','twelve','one hundred and twenty'], ans_flip:2},
+  {q:'Колко е "one hundred"?', opts:['10','1000','100','1'], ans:2, level:'A1', topic:'Numbers',
+   q_en:'How much is "one hundred"?', opts_en:['10','1000','100','1'],
+   flip:true, q_flip:'How do you say "100" in English?', opts_flip:['ten','one thousand','one hundred','one'], ans_flip:2},
+  {q:'Как е "33" на английски?', opts:['thirty-two','thirteen','thirty-three','three-thirty'], ans:2, level:'A1', topic:'Numbers',
+   q_en:'What is the English word for "33"?', opts_en:['thirty-two','thirteen','thirty-three','three-thirty'],
+   flip:true, q_flip:'What is the Bulgarian word for \"thirty-three\"?', opts_flip:['тридесет и две','тринадесет','тридесет и три','три тридесет'], ans_flip:2},
+  {q:'Как е "15" на английски?', opts:['fifty','five','fifteen','fiveteen'], ans:2, level:'A1', topic:'Numbers',
+   q_en:'What is the English word for "15"?', opts_en:['fifty','five','fifteen','fiveteen'],
+   flip:true, q_flip:'What is the Bulgarian word for \"fifteen\"?', opts_flip:['петдесет','пет','петнадесет','петнадесет'], ans_flip:2},
+  {q:'Колко е "seventy"?', opts:['7','17','700','70'], ans:3, level:'A1', topic:'Numbers',
+   q_en:'How much is "seventy"?', opts_en:['7','17','700','70'],
+   flip:true, q_flip:'How do you say "70" in English?', opts_flip:['seven','seventeen','seven hundred','seventy'], ans_flip:3},
+  {q:'Как е "11" на английски?', opts:['one-one','eleven','onety-one','first'], ans:1, level:'A1', topic:'Numbers',
+   q_en:'What is the English word for "11"?', opts_en:['one-one','eleven','onety-one','first'],
+   flip:true, q_flip:'What is the Bulgarian word for \"eleven\"?', opts_flip:['едно-едно','единадесет','едно-едно','първи'], ans_flip:1},
 
   // ── Possessives (need 4 more) ──
   {q:'Попълни: ___ book is on the table. (тяхна)', opts:['Our','Their','His','Her'], ans:1, level:'A1', topic:'Possessives', q_en:'Fill in: ___ book is on the table. (belonging to them)', opts_en:['Our','Their','His','Her']},
@@ -2773,21 +2902,47 @@ const questions = [
   {q:'Попълни: We love ___ school.', opts:['my','their','his','our'], ans:3, level:'A1', topic:'Possessives', q_en:'Fill in: We love ___ school.', opts_en:['my','their','his','our']},
 
   // ── Colours (need 7 more) ──
-  {q:'Кой цвят е "blue"?', opts:['зелен','жълт','син','червен'], ans:2, level:'A1', topic:'Colours', q_en:'Which colour is "blue"?', opts_en:['green','yellow','blue','red']},
-  {q:'Кой цвят е "yellow"?', opts:['черен','бял','лилав','жълт'], ans:3, level:'A1', topic:'Colours', q_en:'Which colour is "yellow"?', opts_en:['black','white','purple','yellow']},
-  {q:'Как е "бял" на английски?', opts:['black','grey','brown','white'], ans:3, level:'A1', topic:'Colours', q_en:'What is the English word for "бял" (white)?', opts_en:['black','grey','brown','white']},
-  {q:'Как е "черен" на английски?', opts:['white','brown','black','grey'], ans:2, level:'A1', topic:'Colours', q_en:'What is the English word for "черен" (black)?', opts_en:['white','brown','black','grey']},
-  {q:'Как е "оранжев" на английски?', opts:['purple','orange','pink','grey'], ans:1, level:'A1', topic:'Colours', q_en:'What is the English word for "оранжев" (orange)?', opts_en:['purple','orange','pink','grey']},
-  {q:'Как е "розов" на английски?', opts:['purple','orange','pink','red'], ans:2, level:'A1', topic:'Colours', q_en:'What is the English word for "розов" (pink)?', opts_en:['purple','orange','pink','red']},
-  {q:'Каква е "the sky"?', opts:['red','green','yellow','blue'], ans:3, level:'A1', topic:'Colours', q_en:'What colour is "the sky"?', opts_en:['red','green','yellow','blue']},
+  {q:'Кой цвят е "blue"?', opts:['зелен','жълт','син','червен'], ans:2, level:'A1', topic:'Colours',
+   q_en:'What is the English word for "син" (blue)?', opts_en:['green','yellow','blue','red'],
+   flip:true, q_flip:'What is the Bulgarian word for "blue"?', opts_flip:['зелен','жълт','син','червен'], ans_flip:2},
+  {q:'Кой цвят е "yellow"?', opts:['черен','бял','лилав','жълт'], ans:3, level:'A1', topic:'Colours',
+   q_en:'What is the English word for "жълт" (yellow)?', opts_en:['black','white','purple','yellow'],
+   flip:true, q_flip:'What is the Bulgarian word for "yellow"?', opts_flip:['черен','бял','лилав','жълт'], ans_flip:3},
+  {q:'Как е "бял" на английски?', opts:['black','grey','brown','white'], ans:3, level:'A1', topic:'Colours',
+   q_en:'What is the English word for "бял"?', opts_en:['black','grey','brown','white'],
+   flip:true, q_flip:'What is the Bulgarian word for \"white\"?', opts_flip:['черен','сив','кафяв','бял'], ans_flip:3},
+  {q:'Как е "черен" на английски?', opts:['white','brown','black','grey'], ans:2, level:'A1', topic:'Colours',
+   q_en:'What is the English word for "черен"?', opts_en:['white','brown','black','grey'],
+   flip:true, q_flip:'What is the Bulgarian word for \"black\"?', opts_flip:['бял','кафяв','черен','сив'], ans_flip:2},
+  {q:'Как е "оранжев" на английски?', opts:['purple','orange','pink','grey'], ans:1, level:'A1', topic:'Colours',
+   q_en:'What is the English word for "оранжев"?', opts_en:['purple','orange','pink','grey'],
+   flip:true, q_flip:'What is the Bulgarian word for \"orange\"?', opts_flip:['лилав','портокал','розов','сив'], ans_flip:1},
+  {q:'Как е "розов" на английски?', opts:['purple','orange','pink','red'], ans:2, level:'A1', topic:'Colours',
+   q_en:'What is the English word for "розов"?', opts_en:['purple','orange','pink','red'],
+   flip:true, q_flip:'What is the Bulgarian word for \"pink\"?', opts_flip:['лилав','портокал','розов','червен'], ans_flip:2},
+  {q:'Каква е "the sky"?', opts:['red','green','yellow','blue'], ans:3, level:'A1', topic:'Colours',
+   q_en:'What colour is "the sky"?', opts_en:['red','green','yellow','blue'],
+   flip:true, q_flip:'Какъв цвят е небето? (What colour is the sky?)', opts_flip:['червено','зелено','жълто','синьо'], ans_flip:3},
 
   // ── Family (need 7 more) ──
-  {q:'Как е "леля" на английски?', opts:['cousin','niece','aunt','grandmother'], ans:2, level:'A1', topic:'Family', q_en:'What is the English word for "леля" (aunt)?', opts_en:['cousin','niece','aunt','grandmother']},
-  {q:'Как е "чичо" на английски?', opts:['nephew','uncle','brother','grandfather'], ans:1, level:'A1', topic:'Family', q_en:'What is the English word for "чичо" (uncle)?', opts_en:['nephew','uncle','brother','grandfather']},
-  {q:'Как е "сестра" на английски?', opts:['mother','daughter','sister','aunt'], ans:2, level:'A1', topic:'Family', q_en:'What is the English word for "сестра" (sister)?', opts_en:['mother','daughter','sister','aunt']},
-  {q:'Как е "дядо" на английски?', opts:['uncle','father','grandfather','brother'], ans:2, level:'A1', topic:'Family', q_en:'What is the English word for "дядо" (grandfather)?', opts_en:['uncle','father','grandfather','brother']},
-  {q:'Как е "племенник" на английски?', opts:['nephew','niece','cousin','son'], ans:0, level:'A1', topic:'Family', q_en:'What is the English word for "племенник" (nephew)?', opts_en:['nephew','niece','cousin','son']},
-  {q:'Как е "братовчед" на английски?', opts:['brother','nephew','uncle','cousin'], ans:3, level:'A1', topic:'Family', q_en:'What is the English word for "братовчед" (cousin)?', opts_en:['brother','nephew','uncle','cousin']},
+  {q:'Как е "леля" на английски?', opts:['cousin','niece','aunt','grandmother'], ans:2, level:'A1', topic:'Family',
+   q_en:'What is the English word for "леля"?', opts_en:['cousin','niece','aunt','grandmother'],
+   flip:true, q_flip:'What is the Bulgarian word for \"aunt\"?', opts_flip:['братовчед','племенница','леля','баба'], ans_flip:2},
+  {q:'Как е "чичо" на английски?', opts:['nephew','uncle','brother','grandfather'], ans:1, level:'A1', topic:'Family',
+   q_en:'What is the English word for "чичо"?', opts_en:['nephew','uncle','brother','grandfather'],
+   flip:true, q_flip:'What is the Bulgarian word for \"uncle\"?', opts_flip:['племенник','чичо','брат','дядо'], ans_flip:1},
+  {q:'Как е "сестра" на английски?', opts:['mother','daughter','sister','aunt'], ans:2, level:'A1', topic:'Family',
+   q_en:'What is the English word for "сестра"?', opts_en:['mother','daughter','sister','aunt'],
+   flip:true, q_flip:'What is the Bulgarian word for \"sister\"?', opts_flip:['майка','дъщеря','сестра','леля'], ans_flip:2},
+  {q:'Как е "дядо" на английски?', opts:['uncle','father','grandfather','brother'], ans:2, level:'A1', topic:'Family',
+   q_en:'What is the English word for "дядо"?', opts_en:['uncle','father','grandfather','brother'],
+   flip:true, q_flip:'What is the Bulgarian word for \"grandfather\"?', opts_flip:['чичо','баща','дядо','брат'], ans_flip:2},
+  {q:'Как е "племенник" на английски?', opts:['nephew','niece','cousin','son'], ans:0, level:'A1', topic:'Family',
+   q_en:'What is the English word for "племенник"?', opts_en:['nephew','niece','cousin','son'],
+   flip:true, q_flip:'What is the Bulgarian word for \"nephew\"?', opts_flip:['племенник','племенница','братовчед','син'], ans_flip:0},
+  {q:'Как е "братовчед" на английски?', opts:['brother','nephew','uncle','cousin'], ans:3, level:'A1', topic:'Family',
+   q_en:'What is the English word for "братовчед"?', opts_en:['brother','nephew','uncle','cousin'],
+   flip:true, q_flip:'What is the Bulgarian word for \"cousin\"?', opts_flip:['брат','племенник','чичо','братовчед'], ans_flip:3},
   {q:'Попълни: Майка ти на баща ти е твоята ___', opts:['aunt','grandmother','sister','cousin'], ans:1, level:'A1', topic:'Family', q_en:"Fill in: My father is my grandma, so she is my ___", opts_en:['aunt','grandmother','sister','cousin']},
 
   // ── Present Simple (need 6 more) ──
@@ -2818,22 +2973,44 @@ const questions = [
   {q:'Попълни: They ___ get married next June. (plan)', opts:["will","are going to","would","were going to"], ans:1, level:'A2', topic:'Future', q_en:'Fill in: They ___ get married next June. (plan)', opts_en:["will","are going to","would","were going to"]},
 
   // ── Food (need 7 more) ──
-  {q:'Как е "риба" на английски?', opts:['meat','chicken','fish','bread'], ans:2, level:'A2', topic:'Food', q_en:'What is the English word for "риба" (fish)?', opts_en:['meat','chicken','fish','bread']},
-  {q:'Как е "яйце" на английски?', opts:['cheese','egg','butter','milk'], ans:1, level:'A2', topic:'Food', q_en:'What is the English word for "яйце" (egg)?', opts_en:['cheese','egg','butter','milk']},
-  {q:'Как е "ябълка" на английски?', opts:['orange','banana','apple','grape'], ans:2, level:'A2', topic:'Food', q_en:'What is the English word for "ябълка" (apple)?', opts_en:['orange','banana','apple','grape']},
-  {q:'Как е "мляко" на английски?', opts:['water','juice','milk','tea'], ans:2, level:'A2', topic:'Food', q_en:'What is the English word for "мляко" (milk)?', opts_en:['water','juice','milk','tea']},
+  {q:'Как е "риба" на английски?', opts:['meat','chicken','fish','bread'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "риба"?', opts_en:['meat','chicken','fish','bread'],
+   flip:true, q_flip:'What is the Bulgarian word for \"fish\"?', opts_flip:['месо','пиле','риба','хляб'], ans_flip:2},
+  {q:'Как е "яйце" на английски?', opts:['cheese','egg','butter','milk'], ans:1, level:'A2', topic:'Food',
+   q_en:'What is the English word for "яйце"?', opts_en:['cheese','egg','butter','milk'],
+   flip:true, q_flip:'What is the Bulgarian word for \"egg\"?', opts_flip:['сирене','яйце','масло','мляко'], ans_flip:1},
+  {q:'Как е "ябълка" на английски?', opts:['orange','banana','apple','grape'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "ябълка"?', opts_en:['orange','banana','apple','grape'],
+   flip:true, q_flip:'What is the Bulgarian word for \"apple\"?', opts_flip:['портокал','банан','ябълка','грозде'], ans_flip:2},
+  {q:'Как е "мляко" на английски?', opts:['water','juice','milk','tea'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "мляко"?', opts_en:['water','juice','milk','tea'],
+   flip:true, q_flip:'What is the Bulgarian word for \"milk\"?', opts_flip:['вода','сок','мляко','чай'], ans_flip:2},
   {q:'Как попиташ за менюто?', opts:['Where is the bill?','Can I have the menu, please?','What is your name?','How much is it?'], ans:1, level:'A2', topic:'Food', q_en:'How do you ask for the menu?', opts_en:['Where is the bill?','Can I have the menu, please?','What is your name?','How much is it?']},
-  {q:'Как е "зеленчуци" на английски?', opts:['fruits','vegetables','grains','dairy'], ans:1, level:'A2', topic:'Food', q_en:'What is the English word for "зеленчуци" (vegetables)?', opts_en:['fruits','vegetables','grains','dairy']},
-  {q:'Как е "захар" на английски?', opts:['salt','pepper','sugar','flour'], ans:2, level:'A2', topic:'Food', q_en:'What is the English word for "захар" (sugar)?', opts_en:['salt','pepper','sugar','flour']},
+  {q:'Как е "зеленчуци" на английски?', opts:['fruits','vegetables','grains','dairy'], ans:1, level:'A2', topic:'Food',
+   q_en:'What is the English word for "зеленчуци"?', opts_en:['fruits','vegetables','grains','dairy'],
+   flip:true, q_flip:'What is the Bulgarian word for \"vegetables\"?', opts_flip:['плодове','зеленчуци','зърнени','млечни'], ans_flip:1},
+  {q:'Как е "захар" на английски?', opts:['salt','pepper','sugar','flour'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "захар"?', opts_en:['salt','pepper','sugar','flour'],
+   flip:true, q_flip:'What is the Bulgarian word for \"sugar\"?', opts_flip:['сол','пипер','захар','брашно'], ans_flip:2},
 
   // ── Days (need 7 more) ──
   {q:'Кой е вторият ден от седмицата?', opts:['Monday','Tuesday','Wednesday','Sunday'], ans:1, level:'A2', topic:'Days', q_en:'Which is the second day of the week?', opts_en:['Monday','Tuesday','Wednesday','Sunday']},
   {q:'Кой е последният ден от седмицата?', opts:['Saturday','Friday','Sunday','Monday'], ans:2, level:'A2', topic:'Days', q_en:'Which is the last day of the week?', opts_en:['Saturday','Friday','Sunday','Monday']},
-  {q:'Как е "месец" на английски?', opts:['week','day','month','year'], ans:2, level:'A2', topic:'Days', q_en:'What is the English word for "месец" (month)?', opts_en:['week','day','month','year']},
-  {q:'Кой месец е дванадесетият?', opts:['October','November','December','September'], ans:2, level:'A2', topic:'Days', q_en:'Which is the twelfth month?', opts_en:['October','November','December','September']},
-  {q:'Кой е четвъртият месец?', opts:['March','May','April','June'], ans:2, level:'A2', topic:'Days', q_en:'Which is the fourth month?', opts_en:['March','May','April','June']},
-  {q:'Как е "пролет" на английски?', opts:['summer','autumn','winter','spring'], ans:3, level:'A2', topic:'Days', q_en:'What is the English word for "пролет" (spring)?', opts_en:['summer','autumn','winter','spring']},
-  {q:'Как е "зима" на английски?', opts:['spring','summer','winter','autumn'], ans:2, level:'A2', topic:'Days', q_en:'What is the English word for "зима" (winter)?', opts_en:['spring','summer','winter','autumn']},
+  {q:'Как е "месец" на английски?', opts:['week','day','month','year'], ans:2, level:'A2', topic:'Days',
+   q_en:'What is the English word for "месец"?', opts_en:['week','day','month','year'],
+   flip:true, q_flip:'What is the Bulgarian word for \"month\"?', opts_flip:['седмица','ден','месец','година'], ans_flip:2},
+  {q:'Кой месец е дванадесетият?', opts:['October','November','December','September'], ans:2, level:'A2', topic:'Days',
+   q_en:'Кой месец е дванадесетият?', opts_en:['October','November','December','September'],
+   flip:true, q_flip:'What is the Bulgarian word for \"December\"?', opts_flip:['октомври','ноември','декември','септември'], ans_flip:2},
+  {q:'Кой е четвъртият месец?', opts:['March','May','April','June'], ans:2, level:'A2', topic:'Days',
+   q_en:'Кой е четвъртият месец?', opts_en:['March','May','April','June'],
+   flip:true, q_flip:'What is the Bulgarian word for \"April\"?', opts_flip:['март','май','април','юни'], ans_flip:2},
+  {q:'Как е "пролет" на английски?', opts:['summer','autumn','winter','spring'], ans:3, level:'A2', topic:'Days',
+   q_en:'What is the English word for "пролет"?', opts_en:['summer','autumn','winter','spring'],
+   flip:true, q_flip:'What is the Bulgarian word for \"spring\"?', opts_flip:['лято','есен','зима','пролет'], ans_flip:3},
+  {q:'Как е "зима" на английски?', opts:['spring','summer','winter','autumn'], ans:2, level:'A2', topic:'Days',
+   q_en:'What is the English word for "зима"?', opts_en:['spring','summer','winter','autumn'],
+   flip:true, q_flip:'What is the Bulgarian word for \"winter\"?', opts_flip:['пролет','лято','зима','есен'], ans_flip:2},
 
   // ── Present Perfect (need 3 more) ──
   {q:'Past participle на "write"?', opts:['wrote','writed','written','writing'], ans:2, level:'B1', topic:'Present Perfect', q_en:'Past participle of "write"?', opts_en:['wrote','writed','written','writing']},
@@ -2865,21 +3042,47 @@ const questions = [
   {q:'Коя е сигналната структура за Past Continuous?', opts:['yesterday','when + Past Simple','every day','last week'], ans:1, level:'B1', topic:'Past Continuous', q_en:'Which is a typical signal structure for Past Continuous?', opts_en:['yesterday','when + Past Simple','every day','last week']},
 
   // ── Travel (need 6 more) ──
-  {q:'Как е "билет" на английски?', opts:['luggage','passport','ticket','boarding pass'], ans:2, level:'B1', topic:'Travel', q_en:'What is the English word for "билет" (ticket)?', opts_en:['luggage','passport','ticket','boarding pass']},
-  {q:'Как е "заминаване" на английски?', opts:['arrival','departure','delay','gate'], ans:1, level:'B1', topic:'Travel', q_en:'What is the English word for "заминаване" (departure)?', opts_en:['arrival','departure','delay','gate']},
-  {q:'Как е "пристигане" на английски?', opts:['departure','delay','arrival','gate'], ans:2, level:'B1', topic:'Travel', q_en:'What is the English word for "пристигане" (arrival)?', opts_en:['departure','delay','arrival','gate']},
-  {q:'Как е "багаж" на английски?', opts:['passport','ticket','gate','luggage'], ans:3, level:'B1', topic:'Travel', q_en:'What is the English word for "багаж" (luggage)?', opts_en:['passport','ticket','gate','luggage']},
-  {q:'Как попиташ за еднопосочен билет?', opts:['A return ticket please.','A single ticket please.','Two tickets please.','A platform ticket please.'], ans:1, level:'B1', topic:'Travel', q_en:'How do you ask for a one-way ticket?', opts_en:['A return ticket please.','A single ticket please.','Two tickets please.','A platform ticket please.']},
-  {q:'Как е "закъснение" на английски?', opts:['arrival','gate','delay','departure'], ans:2, level:'B1', topic:'Travel', q_en:'What is the English word for "закъснение" (delay)?', opts_en:['arrival','gate','delay','departure']},
+  {q:'Как е "билет" на английски?', opts:['luggage','passport','ticket','boarding pass'], ans:2, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "билет"?', opts_en:['luggage','passport','ticket','boarding pass'],
+   flip:true, q_flip:'What is the Bulgarian word for \"ticket\"?', opts_flip:['багаж','паспорт','билет','бордна карта'], ans_flip:2},
+  {q:'Как е "заминаване" на английски?', opts:['arrival','departure','delay','gate'], ans:1, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "заминаване"?', opts_en:['arrival','departure','delay','gate'],
+   flip:true, q_flip:'What is the Bulgarian word for \"departure\"?', opts_flip:['пристигане','заминаване','закъснение','изход'], ans_flip:1},
+  {q:'Как е "пристигане" на английски?', opts:['departure','delay','arrival','gate'], ans:2, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "пристигане"?', opts_en:['departure','delay','arrival','gate'],
+   flip:true, q_flip:'What is the Bulgarian word for \"arrival\"?', opts_flip:['заминаване','закъснение','пристигане','изход'], ans_flip:2},
+  {q:'Как е "багаж" на английски?', opts:['passport','ticket','gate','luggage'], ans:3, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "багаж"?', opts_en:['passport','ticket','gate','luggage'],
+   flip:true, q_flip:'What is the Bulgarian word for \"luggage\"?', opts_flip:['паспорт','билет','изход','багаж'], ans_flip:3},
+  {q:'Как попиташ за еднопосочен билет?', opts:['A return ticket please.','A single ticket please.','Two tickets please.','A platform ticket please.'], ans:1, level:'B1', topic:'Travel',
+   q_en:'How do you ask for a one-way ticket?', opts_en:['A return ticket please.','A single ticket please.','Two tickets please.','A platform ticket please.'],
+   flip:true, q_flip:'Which English phrase means "еднопосочен билет, моля"?', opts_flip:['A return ticket please.','A single ticket please.','Two tickets please.','A platform ticket please.'], ans_flip:1},
+  {q:'Как е "закъснение" на английски?', opts:['arrival','gate','delay','departure'], ans:2, level:'B1', topic:'Travel',
+   q_en:'What is the English word for "закъснение"?', opts_en:['arrival','gate','delay','departure'],
+   flip:true, q_flip:'What is the Bulgarian word for \"delay\"?', opts_flip:['пристигане','изход','закъснение','заминаване'], ans_flip:2},
 
   // ── Jobs (need 7 more) ──
-  {q:'Как е "учител" на английски?', opts:['lawyer','teacher','engineer','nurse'], ans:1, level:'B1', topic:'Jobs', q_en:'What is the English word for "учител" (teacher)?', opts_en:['lawyer','teacher','engineer','nurse']},
-  {q:'Как е "медицинска сестра" на английски?', opts:['doctor','nurse','lawyer','engineer'], ans:1, level:'B1', topic:'Jobs', q_en:'What is the English word for "медицинска сестра" (nurse)?', opts_en:['doctor','nurse','lawyer','engineer']},
-  {q:'Как е "адвокат" на английски?', opts:['judge','police officer','lawyer','politician'], ans:2, level:'B1', topic:'Jobs', q_en:'What is the English word for "адвокат" (lawyer)?', opts_en:['judge','police officer','lawyer','politician']},
-  {q:'Как е "пожарникар" на английски?', opts:['police officer','firefighter','soldier','pilot'], ans:1, level:'B1', topic:'Jobs', q_en:'What is the English word for "пожарникар" (firefighter)?', opts_en:['police officer','firefighter','soldier','pilot']},
-  {q:'Как е "пилот" на английски?', opts:['captain','sailor','pilot','driver'], ans:2, level:'B1', topic:'Jobs', q_en:'What is the English word for "пилот" (pilot)?', opts_en:['captain','sailor','pilot','driver']},
-  {q:'Как попиташ "Какво работиш?"?', opts:['Where do you work?','What is your job?','How much do you earn?','When do you work?'], ans:1, level:'B1', topic:'Jobs', q_en:'How do you ask "What is your job?"?', opts_en:['Where do you work?','What is your job?','How much do you earn?','When do you work?']},
-  {q:'Как е "архитект" на английски?', opts:['artist','architect','accountant','actor'], ans:1, level:'B1', topic:'Jobs', q_en:'What is the English word for "архитект" (architect)?', opts_en:['artist','architect','accountant','actor']},
+  {q:'Как е "учител" на английски?', opts:['lawyer','teacher','engineer','nurse'], ans:1, level:'B1', topic:'Jobs',
+   q_en:'What is the English word for "учител"?', opts_en:['lawyer','teacher','engineer','nurse'],
+   flip:true, q_flip:'What is the Bulgarian word for \"teacher\"?', opts_flip:['адвокат','учител','инженер','медицинска сестра'], ans_flip:1},
+  {q:'Как е "медицинска сестра" на английски?', opts:['doctor','nurse','lawyer','engineer'], ans:1, level:'B1', topic:'Jobs',
+   q_en:'What is the English word for "медицинска сестра"?', opts_en:['doctor','nurse','lawyer','engineer'],
+   flip:true, q_flip:'What is the Bulgarian word for \"nurse\"?', opts_flip:['лекар','медицинска сестра','адвокат','инженер'], ans_flip:1},
+  {q:'Как е "адвокат" на английски?', opts:['judge','police officer','lawyer','politician'], ans:2, level:'B1', topic:'Jobs',
+   q_en:'What is the English word for "адвокат"?', opts_en:['judge','police officer','lawyer','politician'],
+   flip:true, q_flip:'What is the Bulgarian word for \"lawyer\"?', opts_flip:['съдия','полицай','адвокат','политик'], ans_flip:2},
+  {q:'Как е "пожарникар" на английски?', opts:['police officer','firefighter','soldier','pilot'], ans:1, level:'B1', topic:'Jobs',
+   q_en:'What is the English word for "пожарникар"?', opts_en:['police officer','firefighter','soldier','pilot'],
+   flip:true, q_flip:'What is the Bulgarian word for \"firefighter\"?', opts_flip:['полицай','пожарникар','войник','пилот'], ans_flip:1},
+  {q:'Как е "пилот" на английски?', opts:['captain','sailor','pilot','driver'], ans:2, level:'B1', topic:'Jobs',
+   q_en:'What is the English word for "пилот"?', opts_en:['captain','sailor','pilot','driver'],
+   flip:true, q_flip:'What is the Bulgarian word for \"pilot\"?', opts_flip:['капитан','матрос','пилот','шофьор'], ans_flip:2},
+  {q:'Как попиташ "Какво работиш?"?', opts:['Where do you work?','What is your job?','How much do you earn?','When do you work?'], ans:1, level:'B1', topic:'Jobs',
+   q_en:'How do you ask "What is your job?"?', opts_en:['Where do you work?','What is your job?','How much do you earn?','When do you work?'],
+   flip:true, q_flip:'Which English phrase asks "Какво работиш?"?', opts_flip:['Where do you work?','What is your job?','How much do you earn?','When do you work?'], ans_flip:1},
+  {q:'Как е "архитект" на английски?', opts:['artist','architect','accountant','actor'], ans:1, level:'B1', topic:'Jobs',
+   q_en:'What is the English word for "архитект"?', opts_en:['artist','architect','accountant','actor'],
+   flip:true, q_flip:'What is the Bulgarian word for \"architect\"?', opts_flip:['артист','архитект','счетоводител','актьор'], ans_flip:1},
 
   // ── Passive Voice (need 3 more) ──
   {q:'Попълни: The cake ___ by my mother. (Yesterday)', opts:['made','was made','is made','makes'], ans:1, level:'B2', topic:'Passive Voice', q_en:'Fill in: The cake ___ by my mother. (Yesterday)', opts_en:['made','was made','is made','makes']},
@@ -2907,13 +3110,25 @@ const questions = [
   {q:'Академично за "buy"?', opts:['purchase','get','pay','own'], ans:0, level:'B2', topic:'Academic Vocab', q_en:'What is the academic word for "buy"?', opts_en:['purchase','get','pay','own']},
 
   // ── Idioms B2 (need 7 more) ──
-  {q:'Какво означава "bite the bullet"?', opts:['яж куршума','издържи трудна ситуация','стреляй бързо','избягай'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "bite the bullet" mean?', opts_en:['eat the bullet','endure a difficult situation','shoot quickly','run away']},
-  {q:'Какво означава "cost an arm and a leg"?', opts:['много евтино','много скъпо','болезнено','загуба на работа'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "cost an arm and a leg" mean?', opts_en:['very cheap','very expensive','painful','loss of job']},
-  {q:'Какво означава "once in a blue moon"?', opts:['много скоро','много рядко','всеки ден','на луната'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "once in a blue moon" mean?', opts_en:['very soon','very rarely','every day','on the moon']},
+  {q:'Какво означава "bite the bullet"?', opts:['яж куршума','издържи трудна ситуация','стреляй бързо','избягай'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "bite the bullet" mean?', opts_en:['eat the bullet','endure a difficult situation','shoot quickly','run away'],
+   flip:true, q_flip:'Which Bulgarian phrase means "endure a difficult situation"?', opts_flip:['яж куршума','издържи трудна ситуация','стреляй бързо','избягай'], ans_flip:1},
+  {q:'Какво означава "cost an arm and a leg"?', opts:['много евтино','много скъпо','болезнено','загуба на работа'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "cost an arm and a leg" mean?', opts_en:['very cheap','very expensive','painful','loss of job'],
+   flip:true, q_flip:'Which Bulgarian phrase means "very expensive"?', opts_flip:['много евтино','много скъпо','болезнено','загуба на работа'], ans_flip:1},
+  {q:'Какво означава "once in a blue moon"?', opts:['много скоро','много рядко','всеки ден','на луната'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "once in a blue moon" mean?', opts_en:['very soon','very rarely','every day','on the moon'],
+   flip:true, q_flip:'Which Bulgarian phrase means "very rarely"?', opts_flip:['много скоро','много рядко','всеки ден','на луната'], ans_flip:1},
   {q:'Попълни идиома: "Hit the nail on the ___"', opts:['wall','floor','head','door'], ans:2, level:'B2', topic:'Idioms', q_en:'Complete the idiom: "Hit the nail on the ___"', opts_en:['wall','floor','head','door']},
-  {q:'Какво означава "let the cat out of the bag"?', opts:['пусни котката','разкрий тайна','загуби нещо','излез навън'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "let the cat out of the bag" mean?', opts_en:['release a cat','reveal a secret','lose something','go outside']},
-  {q:'Какво означава "it takes two to tango"?', opts:['само един е виновен','и двамата са отговорни','научи да танцуваш','бъди романтичен'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "it takes two to tango" mean?', opts_en:['only one is guilty','both parties are responsible','learn to dance','be romantic']},
-  {q:'Какво означава "spill the beans"?', opts:['разсипи зеленчук','разкрий тайна','яж здравословно','изненадай някого'], ans:1, level:'B2', topic:'Idioms', q_en:'What does "spill the beans" mean?', opts_en:['spill vegetables','reveal a secret','eat healthily','surprise someone']},
+  {q:'Какво означава "let the cat out of the bag"?', opts:['пусни котката','разкрий тайна','загуби нещо','излез навън'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "let the cat out of the bag" mean?', opts_en:['release a cat','reveal a secret','lose something','go outside'],
+   flip:true, q_flip:'Which Bulgarian phrase means "reveal a secret accidentally"?', opts_flip:['пусни котката','разкрий тайна','загуби нещо','излез навън'], ans_flip:1},
+  {q:'Какво означава "it takes two to tango"?', opts:['само един е виновен','и двамата са отговорни','научи да танцуваш','бъди романтичен'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "it takes two to tango" mean?', opts_en:['only one is guilty','both parties are responsible','learn to dance','be romantic'],
+   flip:true, q_flip:'Which Bulgarian phrase means "both parties are responsible"?', opts_flip:['само един е виновен','и двамата са отговорни','научи да танцуваш','бъди романтичен'], ans_flip:1},
+  {q:'Какво означава "spill the beans"?', opts:['разсипи зеленчук','разкрий тайна','яж здравословно','изненадай някого'], ans:1, level:'B2', topic:'Idioms',
+   q_en:'What does "spill the beans" mean?', opts_en:['spill vegetables','reveal a secret','eat healthily','surprise someone'],
+   flip:true, q_flip:'Which Bulgarian phrase means "reveal a secret"?', opts_flip:['разсипи зеленчук','разкрий тайна','яж здравословно','изненадай някого'], ans_flip:1},
 
   // ── Inversion C1 (need 5 more) ──
   {q:'Попълни: Seldom ___ she arrive on time.', opts:['do','does','did','has'], ans:1, level:'C1', topic:'Inversion', q_en:'Fill in: Seldom ___ she arrive on time.', opts_en:['do','does','did','has']},
@@ -2939,12 +3154,22 @@ const questions = [
   {q:'Попълни: We recommend that every student ___ the exam.', opts:['takes','take','took','will take'], ans:1, level:'C1', topic:'Subjunctive', q_en:'Fill in: We recommend that every student ___ the exam.', opts_en:['takes','take','took','will take']},
 
   // ── Idioms C1 (need 6 more) ──
-  {q:'Какво означава "cut corners"?', opts:['реже ъгли','спестява за сметка на качеството','работи бързо','прави ъглови удари'], ans:1, level:'C1', topic:'Idioms C1', q_en:'What does "cut corners" mean?', opts_en:['cut angles','sacrifice quality to save time/money','work quickly','make corner kicks']},
-  {q:'Какво означава "burn bridges"?', opts:['запали огън','унищожи трайно връзки','пресичай реката','работи усилено'], ans:1, level:'C1', topic:'Idioms C1', q_en:'What does "burn bridges" mean?', opts_en:['start a fire','permanently damage relationships','cross a river','work hard']},
-  {q:'Какво означава "read between the lines"?', opts:['четеш бавно','разбираш скрито значение','пишеш между редовете','четеш бързо'], ans:1, level:'C1', topic:'Idioms C1', q_en:'What does "read between the lines" mean?', opts_en:['read slowly','understand hidden meaning','write between lines','read quickly']},
+  {q:'Какво означава "cut corners"?', opts:['реже ъгли','спестява за сметка на качеството','работи бързо','прави ъглови удари'], ans:1, level:'C1', topic:'Idioms C1',
+   q_en:'What does "cut corners" mean?', opts_en:['cut angles','sacrifice quality to save time/money','work quickly','make corner kicks'],
+   flip:true, q_flip:'Which Bulgarian phrase means "sacrifice quality to save time/money"?', opts_flip:['реже ъгли','спестява за сметка на качеството','работи бързо','прави ъглови удари'], ans_flip:1},
+  {q:'Какво означава "burn bridges"?', opts:['запали огън','унищожи трайно връзки','пресичай реката','работи усилено'], ans:1, level:'C1', topic:'Idioms C1',
+   q_en:'What does "burn bridges" mean?', opts_en:['start a fire','permanently damage relationships','cross a river','work hard'],
+   flip:true, q_flip:'Which Bulgarian phrase means "permanently damage relationships"?', opts_flip:['запали огън','унищожи трайно връзки','пресичай реката','работи усилено'], ans_flip:1},
+  {q:'Какво означава "read between the lines"?', opts:['четеш бавно','разбираш скрито значение','пишеш между редовете','четеш бързо'], ans:1, level:'C1', topic:'Idioms C1',
+   q_en:'What does "read between the lines" mean?', opts_en:['read slowly','understand hidden meaning','write between lines','read quickly'],
+   flip:true, q_flip:'Which Bulgarian phrase means "understand hidden meaning"?', opts_flip:['четеш бавно','разбираш скрито значение','пишеш между редовете','четеш бързо'], ans_flip:1},
   {q:'Попълни: He always ___ on the fence — never gives his opinion.', opts:['stands','sits','lies','jumps'], ans:1, level:'C1', topic:'Idioms C1', q_en:'Fill in: He always ___ on the fence — never gives his opinion.', opts_en:['stands','sits','lies','jumps']},
-  {q:'Какво означава "turn a blind eye"?', opts:['ослепяваш','умишлено игнорираш проблем','гледаш внимателно','обръщаш се'], ans:1, level:'C1', topic:'Idioms C1', q_en:'What does "turn a blind eye" mean?', opts_en:['go blind','deliberately ignore a problem','look carefully','turn around']},
-  {q:'Какво означава "the tip of the iceberg"?', opts:['малка видима част от голям проблем','незначителен проблем','успех','моряшки израз'], ans:0, level:'C1', topic:'Idioms C1', q_en:'What does "the tip of the iceberg" mean?', opts_en:['small visible part of a bigger problem','insignificant issue','success','sailor expression']},
+  {q:'Какво означава "turn a blind eye"?', opts:['ослепяваш','умишлено игнорираш проблем','гледаш внимателно','обръщаш се'], ans:1, level:'C1', topic:'Idioms C1',
+   q_en:'What does "turn a blind eye" mean?', opts_en:['go blind','deliberately ignore a problem','look carefully','turn around'],
+   flip:true, q_flip:'Which Bulgarian phrase means "deliberately ignore a problem"?', opts_flip:['ослепяваш','умишлено игнорираш проблем','гледаш внимателно','обръщаш се'], ans_flip:1},
+  {q:'Какво означава "the tip of the iceberg"?', opts:['малка видима част от голям проблем','незначителен проблем','успех','моряшки израз'], ans:0, level:'C1', topic:'Idioms C1',
+   q_en:'What does "the tip of the iceberg" mean?', opts_en:['small visible part of a bigger problem','insignificant issue','success','sailor expression'],
+   flip:true, q_flip:'Which Bulgarian phrase means "small visible part of a bigger problem"?', opts_flip:['малка видима част от голям проблем','незначителен проблем','успех','моряшки израз'], ans_flip:0},
 
   // ── Discourse Markers (need 6 more) ──
   {q:'Кой маркер изразява противопоставяне?', opts:['furthermore','consequently','however','namely'], ans:2, level:'C1', topic:'Discourse Markers', q_en:'Which discourse marker expresses contrast?', opts_en:['furthermore','consequently','however','namely']},
@@ -2971,12 +3196,22 @@ const questions = [
   {q:'Какво е "конотация" на думата?', opts:['Официалното значение','Емоционалната/скрита стойност','Произходът на думата','Граматическата функция'], ans:1, level:'C2', topic:'Nuance', q_en:'What is the "connotation" of a word?', opts_en:['The official meaning','The emotional/hidden value','The origin of the word','The grammatical function']},
 
   // ── Idioms C2 (need 6 more) ──
-  {q:'Какво означава "a double-edged sword"?', opts:['острото оръжие','нещо с предимства и недостатъци','опасна ситуация','изненада'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "a double-edged sword" mean?', opts_en:['a sharp weapon','something with both benefits and drawbacks','a dangerous situation','a surprise']},
-  {q:'Какво означава "gilding the lily"?', opts:['боядисване на цветя','ненужно украсяване на нещо вече добро','скъпа украса','подобрение'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "gilding the lily" mean?', opts_en:['painting flowers','adding unnecessary ornamentation to something already good','expensive decoration','improvement']},
-  {q:'Какво означава "add insult to injury"?', opts:['физическо нараняване','влоши ситуацията допълнително','помири се','извини се'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "add insult to injury" mean?', opts_en:['physical injury','make a bad situation even worse','make peace','apologise']},
+  {q:'Какво означава "a double-edged sword"?', opts:['острото оръжие','нещо с предимства и недостатъци','опасна ситуация','изненада'], ans:1, level:'C2', topic:'Idioms C2',
+   q_en:'What does "a double-edged sword" mean?', opts_en:['a sharp weapon','something with both benefits and drawbacks','a dangerous situation','a surprise'],
+   flip:true, q_flip:'Which Bulgarian phrase means "something with both advantages and drawbacks"?', opts_flip:['острото оръжие','нещо с предимства и недостатъци','опасна ситуация','изненада'], ans_flip:1},
+  {q:'Какво означава "gilding the lily"?', opts:['боядисване на цветя','ненужно украсяване на нещо вече добро','скъпа украса','подобрение'], ans:1, level:'C2', topic:'Idioms C2',
+   q_en:'What does "gilding the lily" mean?', opts_en:['painting flowers','adding unnecessary ornamentation to something already good','expensive decoration','improvement'],
+   flip:true, q_flip:'Which Bulgarian phrase means "adding unnecessary ornamentation to something already beautiful"?', opts_flip:['боядисване на цветя','ненужно украсяване на нещо вече добро','скъпа украса','подобрение'], ans_flip:1},
+  {q:'Какво означава "add insult to injury"?', opts:['физическо нараняване','влоши ситуацията допълнително','помири се','извини се'], ans:1, level:'C2', topic:'Idioms C2',
+   q_en:'What does "add insult to injury" mean?', opts_en:['physical injury','make a bad situation even worse','make peace','apologise'],
+   flip:true, q_flip:'Which Bulgarian phrase means "make a bad situation even worse"?', opts_flip:['физическо нараняване','влоши ситуацията допълнително','помири се','извини се'], ans_flip:1},
   {q:'Попълни: She always ___ the buck when something goes wrong.', opts:['passes','throws','gives','takes'], ans:0, level:'C2', topic:'Idioms C2', q_en:'Fill in: She always ___ the buck when something goes wrong.', opts_en:['passes','throws','gives','takes']},
-  {q:'Какво означава "the ball is in your court"?', opts:['играй тенис','твой ред е да решиш','ти загуби','играй баскетбол'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "the ball is in your court" mean?', opts_en:['play tennis','it is your turn to decide','you lost','play basketball']},
-  {q:'Какво означава "reinvent the wheel"?', opts:['иновация','губиш усилия за нещо вече съществуващо','ремонт','творческо мислене'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does "reinvent the wheel" mean?', opts_en:['innovation','waste effort on something that already exists','repair','creative thinking']},
+  {q:'Какво означава "the ball is in your court"?', opts:['играй тенис','твой ред е да решиш','ти загуби','играй баскетбол'], ans:1, level:'C2', topic:'Idioms C2',
+   q_en:'What does "the ball is in your court" mean?', opts_en:['play tennis','it is your turn to decide','you lost','play basketball'],
+   flip:true, q_flip:'Which Bulgarian phrase means "it is your turn to decide"?', opts_flip:['играй тенис','твой ред е да решиш','ти загуби','играй баскетбол'], ans_flip:1},
+  {q:'Какво означава "reinvent the wheel"?', opts:['иновация','губиш усилия за нещо вече съществуващо','ремонт','творческо мислене'], ans:1, level:'C2', topic:'Idioms C2',
+   q_en:'What does "reinvent the wheel" mean?', opts_en:['innovation','waste effort on something that already exists','repair','creative thinking'],
+   flip:true, q_flip:'Which Bulgarian phrase means "waste effort on something that already exists"?', opts_flip:['иновация','губиш усилия за нещо вече съществуващо','ремонт','творческо мислене'], ans_flip:1},
 
   // ── Rhetoric (need 5 more) ──
   {q:'"I have a dream... I have a dream..." — кой похват?', opts:['Antithesis','Euphemism','Anaphora','Hyperbole'], ans:2, level:'C2', topic:'Rhetoric', q_en:'"I have a dream... I have a dream..." — which rhetorical device?', opts_en:['Antithesis','Euphemism','Anaphora','Hyperbole']},
@@ -3011,11 +3246,21 @@ const questions = [
   {q:'Попълни: ___ did you go on holiday?', opts:['What','How','When','Which'], ans:2, level:'A2', topic:'Questions', q_en:'Fill in: ___ did you go on holiday?', opts_en:['What','How','When','Which']},
 
   // ── Seasons (need 6 more) ──
-  {q:'Кой сезон е юни, юли, август?', opts:['spring','summer','autumn','winter'], ans:1, level:'A2', topic:'Seasons', q_en:'Which season is June, July, August?', opts_en:['spring','summer','autumn','winter']},
-  {q:'Кой сезон е декември, януари, февруари?', opts:['spring','summer','autumn','winter'], ans:3, level:'A2', topic:'Seasons', q_en:'Which season is December, January, February?', opts_en:['spring','summer','autumn','winter']},
-  {q:'Как е "есен" на английски?', opts:['spring','summer','autumn','winter'], ans:2, level:'A2', topic:'Seasons', q_en:'What is the English word for "есен" (autumn)?', opts_en:['spring','summer','autumn','winter']},
-  {q:'Кой сезон е март, април, май?', opts:['spring','summer','autumn','winter'], ans:0, level:'A2', topic:'Seasons', q_en:'Which season is March, April, May?', opts_en:['spring','summer','autumn','winter']},
-  {q:'Американският вариант на "autumn"?', opts:['spring','fall','winter','summer'], ans:1, level:'A2', topic:'Seasons', q_en:'American English word for "autumn"?', opts_en:['spring','fall','winter','summer']},
+  {q:'Кой сезон е юни, юли, август?', opts:['spring','summer','autumn','winter'], ans:1, level:'A2', topic:'Seasons',
+   q_en:'Which season is June, July, August?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is "лято" in English?', opts_flip:['spring','summer','autumn','winter'], ans_flip:1},
+  {q:'Кой сезон е декември, януари, февруари?', opts:['spring','summer','autumn','winter'], ans:3, level:'A2', topic:'Seasons',
+   q_en:'Which season is December, January, February?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is "зима" in English?', opts_flip:['spring','summer','autumn','winter'], ans_flip:3},
+  {q:'Как е "есен" на английски?', opts:['spring','summer','autumn','winter'], ans:2, level:'A2', topic:'Seasons',
+   q_en:'What is the English word for "есен"?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is the Bulgarian word for \"autumn\"?', opts_flip:['пролет','лято','есен','зима'], ans_flip:2},
+  {q:'Кой сезон е март, април, май?', opts:['spring','summer','autumn','winter'], ans:0, level:'A2', topic:'Seasons',
+   q_en:'Which season is March, April, May?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is "пролет" in English?', opts_flip:['spring','summer','autumn','winter'], ans_flip:0},
+  {q:'Американският вариант на "autumn"?', opts:['spring','fall','winter','summer'], ans:1, level:'A2', topic:'Seasons',
+   q_en:'Американският вариант на "autumn"?', opts_en:['spring','fall','winter','summer'],
+   flip:true, q_flip:'What is the Bulgarian word for \"fall\"?', opts_flip:['пролет','есен','зима','лято'], ans_flip:1},
   {q:'В кой сезон е Коледа?', opts:['spring','summer','autumn','winter'], ans:3, level:'A2', topic:'Seasons', q_en:'In which season is Christmas?', opts_en:['spring','summer','autumn','winter']},
 
   // ── There is/are (need 7 more) ──
@@ -3028,13 +3273,27 @@ const questions = [
   {q:'Попълни: ___ many people at the concert last night.', opts:['There is','There are','There was','There were'], ans:3, level:'A1', topic:'There is/are', q_en:'Fill in: ___ many people at the concert last night.', opts_en:['There is','There are','There was','There were']},
 
   // ── Animals (need 7 more) ──
-  {q:'Как е "куче" на английски?', opts:['cat','dog','horse','bird'], ans:1, level:'A1', topic:'Animals', q_en:'What is the English word for "куче" (dog)?', opts_en:['cat','dog','horse','bird']},
-  {q:'Как е "котка" на английски?', opts:['dog','bird','cat','fish'], ans:2, level:'A1', topic:'Animals', q_en:'What is the English word for "котка" (cat)?', opts_en:['dog','bird','cat','fish']},
-  {q:'Как е "кон" на английски?', opts:['cow','pig','horse','sheep'], ans:2, level:'A1', topic:'Animals', q_en:'What is the English word for "кон" (horse)?', opts_en:['cow','pig','horse','sheep']},
-  {q:'Как е "птица" на английски?', opts:['fish','bird','insect','butterfly'], ans:1, level:'A1', topic:'Animals', q_en:'What is the English word for "птица" (bird)?', opts_en:['fish','bird','insect','butterfly']},
-  {q:'Как е "лъв" на английски?', opts:['tiger','bear','lion','wolf'], ans:2, level:'A1', topic:'Animals', q_en:'What is the English word for "лъв" (lion)?', opts_en:['tiger','bear','lion','wolf']},
-  {q:'Как е "риба" (животно) на английски?', opts:['shark','whale','fish','dolphin'], ans:2, level:'A1', topic:'Animals', q_en:'What is the English word for "риба" (the animal, fish)?', opts_en:['shark','whale','fish','dolphin']},
-  {q:'Как е "слон" на английски?', opts:['elephant','rhinoceros','hippopotamus','giraffe'], ans:0, level:'A1', topic:'Animals', q_en:'What is the English word for "слон" (elephant)?', opts_en:['elephant','rhinoceros','hippopotamus','giraffe']},
+  {q:'Как е "куче" на английски?', opts:['cat','dog','horse','bird'], ans:1, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "куче"?', opts_en:['cat','dog','horse','bird'],
+   flip:true, q_flip:'What is the Bulgarian word for \"dog\"?', opts_flip:['котка','куче','кон','птица'], ans_flip:1},
+  {q:'Как е "котка" на английски?', opts:['dog','bird','cat','fish'], ans:2, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "котка"?', opts_en:['dog','bird','cat','fish'],
+   flip:true, q_flip:'What is the Bulgarian word for \"cat\"?', opts_flip:['куче','птица','котка','риба'], ans_flip:2},
+  {q:'Как е "кон" на английски?', opts:['cow','pig','horse','sheep'], ans:2, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "кон"?', opts_en:['cow','pig','horse','sheep'],
+   flip:true, q_flip:'What is the Bulgarian word for \"horse\"?', opts_flip:['cow','pig','кон','sheep'], ans_flip:2},
+  {q:'Как е "птица" на английски?', opts:['fish','bird','insect','butterfly'], ans:1, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "птица"?', opts_en:['fish','bird','insect','butterfly'],
+   flip:true, q_flip:'What is the Bulgarian word for \"bird\"?', opts_flip:['риба','птица','insect','butterfly'], ans_flip:1},
+  {q:'Как е "лъв" на английски?', opts:['tiger','bear','lion','wolf'], ans:2, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "лъв"?', opts_en:['tiger','bear','lion','wolf'],
+   flip:true, q_flip:'What is the Bulgarian word for \"lion\"?', opts_flip:['тигър','мечка','лъв','вълк'], ans_flip:2},
+  {q:'Как е "риба" (животно) на английски?', opts:['shark','whale','fish','dolphin'], ans:2, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "риба" (животно)?', opts_en:['shark','whale','fish','dolphin'],
+   flip:true, q_flip:'What is the Bulgarian word for \"fish\"?', opts_flip:['акула','кит','риба','делфин'], ans_flip:2},
+  {q:'Как е "слон" на английски?', opts:['elephant','rhinoceros','hippopotamus','giraffe'], ans:0, level:'A1', topic:'Animals',
+   q_en:'What is the English word for "слон"?', opts_en:['elephant','rhinoceros','hippopotamus','giraffe'],
+   flip:true, q_flip:'What is the Bulgarian word for \"elephant\"?', opts_flip:['слон','rhinoceros','hippopotamus','giraffe'], ans_flip:0},
 
   // ── Comparatives (need 7 more) ──
   {q:'Сравнителна степен на "big"?', opts:['biger','most big','bigger','more big'], ans:2, level:'A2', topic:'Comparatives', q_en:'Comparative form of "big"?', opts_en:['biger','most big','bigger','more big']},
@@ -3082,6 +3341,282 @@ const questions = [
   {q:'Mixed: Which part uses Past Perfect?', opts:['The result clause','The if clause','Both clauses','Neither'], ans:1, level:'C2', topic:'Mixed', q_en:'Mixed conditional: Which part uses Past Perfect?', opts_en:['The result clause','The if clause','Both clauses','Neither']},
   {q:'Попълни: If they ___ a bigger office, they would have hired more staff.', opts:['have','had','had had','were having'], ans:2, level:'C2', topic:'Mixed', q_en:'Fill in: If they ___ a bigger office, they would have hired more staff.', opts_en:['have','had','had had','were having']},
   {q:'Mixed conditional: "If I were you, I would have left" — кои времена?', opts:['Past Simple + would','Past Simple + would have','were + would have','Past Perfect + would'], ans:2, level:'C2', topic:'Mixed', q_en:'Mixed conditional: "If I were you, I would have left" — which tenses?', opts_en:['Past Simple + would','Past Simple + would have','were + would have','Past Perfect + would']},
+
+,
+
+  // ── Идиоми B2 урок (topic match) ──
+  {q:'Какво означава "hit the nail on the head"?', opts:['Удари гвоздей','Улучи в точката','Направи грешка','Изгуби търпение'], ans:1, level:'B2', topic:'Idioms B2', q_en:'What does "hit the nail on the head" mean?', opts_en:['Hit a nail','Be exactly right','Make a mistake','Lose patience']},
+  {q:'Какво означава "under the weather"?', opts:['Навън при лошо време','Не се чувствам добре','Уморен от работа','Загубен съм'], ans:1, level:'B2', topic:'Idioms B2', q_en:'What does "under the weather" mean?', opts_en:['Outside in bad weather','Feeling unwell','Tired from work','Lost']},
+  {q:'Попълни: ___ a leg at your presentation!', opts:['Break','Hit','Cut','Pull'], ans:0, level:'B2', topic:'Idioms B2', q_en:'Fill in: ___ a leg at your presentation!', opts_en:['Break','Hit','Cut','Pull']},
+  {q:'Какво означава "once in a blue moon"?', opts:['На луната','Много рядко','Много скоро','Всеки ден'], ans:1, level:'B2', topic:'Idioms B2', q_en:'What does "once in a blue moon" mean?', opts_en:['On the moon','Very rarely','Very soon','Every day']},
+  {q:'Какво означава "cost an arm and a leg"?', opts:['Много евтино','Много скъпо','Физическа болка','Загуба'], ans:1, level:'B2', topic:'Idioms B2', q_en:'What does "cost an arm and a leg" mean?', opts_en:['Very cheap','Very expensive','Physical pain','A loss']},
+  {q:'Какво означава "let the cat out of the bag"?', opts:['Пусни котката','Разкрий тайна','Загуби нещо','Изненадай'], ans:1, level:'B2', topic:'Idioms B2', q_en:'What does "let the cat out of the bag" mean?', opts_en:['Release a cat','Reveal a secret','Lose something','Surprise someone']},
+  {q:'Какво означава "bite the bullet"?', opts:['Яж куршума','Издържи трудна ситуация','Стреляй бързо','Избягай'], ans:1, level:'B2', topic:'Idioms B2', q_en:'What does "bite the bullet" mean?', opts_en:['Eat a bullet','Endure a tough situation','Shoot quickly','Run away']},
+  {q:'Какво означава "spill the beans"?', opts:['Разсипи зеленчуци','Разкрий тайна','Яж здравословно','Изненадай'], ans:1, level:'B2', topic:'Idioms B2', q_en:'What does "spill the beans" mean?', opts_en:['Spill vegetables','Reveal a secret','Eat healthily','Surprise']},
+  {q:'Какво означава "it takes two to tango"?', opts:['Само един е виновен','И двамата са отговорни','Научи да танцуваш','Бъди романтичен'], ans:1, level:'B2', topic:'Idioms B2', q_en:'What does "it takes two to tango" mean?', opts_en:['Only one is to blame','Both are responsible','Learn to dance','Be romantic']},
+  {q:'Попълни: You have ___ the nail on the head with that comment.', opts:['hit','broken','cut','missed'], ans:0, level:'B2', topic:'Idioms B2', q_en:'Fill in: You have ___ the nail on the head with that comment.', opts_en:['hit','broken','cut','missed']},
+
+  // ── Идиоми C1 урок (topic match) ──
+  {q:'Какво означава "sit on the fence"?', opts:['Седи навън','Не заема страна','Е уморен','Работи усилено'], ans:1, level:'C1', topic:'Idioms C1 Lesson', q_en:'What does "sit on the fence" mean?', opts_en:['Sit outside','Avoid taking sides','Feel tired','Work hard']},
+  {q:'Какво означава "the elephant in the room"?', opts:['Голям проблем','Очевиден проблем, за който не се говори','Нещо скъпо','Забавен факт'], ans:1, level:'C1', topic:'Idioms C1 Lesson', q_en:'What does "the elephant in the room" mean?', opts_en:['A big animal','An obvious problem nobody mentions','Something expensive','A funny fact']},
+  {q:'Какво означава "cut corners"?', opts:['Реже ъгли','Спестява за сметка на качеството','Работи бързо','Прави грешка'], ans:1, level:'C1', topic:'Idioms C1 Lesson', q_en:'What does "cut corners" mean?', opts_en:['Cut angles','Sacrifice quality to save time','Work fast','Make mistakes']},
+  {q:'Какво означава "burn bridges"?', opts:['Запали огън','Унищожи трайно връзки','Пресичай реката','Работи усилено'], ans:1, level:'C1', topic:'Idioms C1 Lesson', q_en:'What does "burn bridges" mean?', opts_en:['Start a fire','Permanently damage relationships','Cross a river','Work hard']},
+  {q:'Какво означава "read between the lines"?', opts:['Четеш бавно','Разбираш скрито значение','Пишеш между редовете','Четеш бързо'], ans:1, level:'C1', topic:'Idioms C1 Lesson', q_en:'What does "read between the lines" mean?', opts_en:['Read slowly','Understand hidden meaning','Write between lines','Read quickly']},
+  {q:'Какво означава "turn a blind eye"?', opts:['Ослепяваш','Умишлено игнорираш проблем','Гледаш внимателно','Обръщаш се'], ans:1, level:'C1', topic:'Idioms C1 Lesson', q_en:'What does "turn a blind eye" mean?', opts_en:['Go blind','Deliberately ignore a problem','Look carefully','Turn around']},
+  {q:'Какво означава "the tip of the iceberg"?', opts:['Малка видима част от голям проблем','Незначителен проблем','Успех','Моряшки израз'], ans:0, level:'C1', topic:'Idioms C1 Lesson', q_en:'What does "the tip of the iceberg" mean?', opts_en:['Small visible part of a bigger problem','Insignificant issue','Success','A sailor expression']},
+  {q:'Попълни: He always ___ on the fence — never shares his opinion.', opts:['stands','sits','lies','jumps'], ans:1, level:'C1', topic:'Idioms C1 Lesson', q_en:'Fill in: He always ___ on the fence — never shares his opinion.', opts_en:['stands','sits','lies','jumps']},
+  {q:'Попълни: The elephant in the ___ is the company debt.', opts:['room','house','garden','office'], ans:0, level:'C1', topic:'Idioms C1 Lesson', q_en:'Fill in: The elephant in the ___ is the company debt.', opts_en:['room','house','garden','office']},
+  {q:'Попълни: Do not ___ bridges — you may need them later.', opts:['build','burn','cross','break'], ans:1, level:'C1', topic:'Idioms C1 Lesson', q_en:'Fill in: Do not ___ bridges — you may need them later.', opts_en:['build','burn','cross','break']},
+
+  // ── Идиоми C2 урок (topic match) ──
+  {q:'Какво означава "gilding the lily"?', opts:['Боядисване на цветя','Ненужно украсяване на нещо вече добро','Скъпа украса','Подобрение'], ans:1, level:'C2', topic:'Idioms C2 Lesson', q_en:'What does "gilding the lily" mean?', opts_en:['Painting flowers','Adding unnecessary ornamentation','Expensive decoration','Improvement']},
+  {q:'Какво е Hobson choice?', opts:['Труден избор','Привиден избор без реални опции','Мъдро решение','Щастлив случай'], ans:1, level:'C2', topic:'Idioms C2 Lesson', q_en:'What is a Hobson choice?', opts_en:['A difficult choice','Apparent choice with no real options','A wise decision','A lucky chance']},
+  {q:'Какво означава "a double-edged sword"?', opts:['Остро оръжие','Нещо с предимства и недостатъци','Опасна ситуация','Изненада'], ans:1, level:'C2', topic:'Idioms C2 Lesson', q_en:'What does "a double-edged sword" mean?', opts_en:['A sharp weapon','Something with both benefits and drawbacks','A dangerous situation','A surprise']},
+  {q:'Какво означава "to pass the buck"?', opts:['Дай пари','Прехвърли отговорност','Спечели бас','Смени работа'], ans:1, level:'C2', topic:'Idioms C2 Lesson', q_en:'What does "to pass the buck" mean?', opts_en:['Give money','Shift responsibility','Win a bet','Change jobs']},
+  {q:'Какво означава "add insult to injury"?', opts:['Физическо нараняване','Влоши ситуацията допълнително','Помири се','Извини се'], ans:1, level:'C2', topic:'Idioms C2 Lesson', q_en:'What does "add insult to injury" mean?', opts_en:['Physical injury','Make a bad situation worse','Make peace','Apologise']},
+  {q:'Какво означава "the ball is in your court"?', opts:['Играй тенис','Твой ред е да решиш','Ти загуби','Играй баскетбол'], ans:1, level:'C2', topic:'Idioms C2 Lesson', q_en:'What does "the ball is in your court" mean?', opts_en:['Play tennis','It is your turn to decide','You lost','Play basketball']},
+  {q:'Какво означава "reinvent the wheel"?', opts:['Иновация','Губиш усилия за нещо вече съществуващо','Ремонт','Творческо мислене'], ans:1, level:'C2', topic:'Idioms C2 Lesson', q_en:'What does "reinvent the wheel" mean?', opts_en:['Innovation','Waste effort on something that already exists','Repair work','Creative thinking']},
+  {q:'Попълни: Stop ___ the buck — take responsibility!', opts:['passing','throwing','giving','taking'], ans:0, level:'C2', topic:'Idioms C2 Lesson', q_en:'Fill in: Stop ___ the buck — take responsibility!', opts_en:['passing','throwing','giving','taking']},
+  {q:'Попълни: More decoration would just be ___ the lily.', opts:['gilding','painting','cutting','breaking'], ans:0, level:'C2', topic:'Idioms C2 Lesson', q_en:'Fill in: More decoration would just be ___ the lily.', opts_en:['gilding','painting','cutting','breaking']},
+  {q:'Попълни: The ball is now in ___ court — your move.', opts:['your','my','their','our'], ans:0, level:'C2', topic:'Idioms C2 Lesson', q_en:'Fill in: The ball is now in ___ court — your move.', opts_en:['your','my','their','our']},
+
+  // ── Реторика C2 (topic match with lesson) ──
+  {q:'"We shall fight... we shall never surrender." — кой похват?', opts:['Antithesis','Euphemism','Anaphora','Hyperbole'], ans:2, level:'C2', topic:'Rhetoric C2', q_en:'"We shall fight... we shall never surrender." — which rhetorical device?', opts_en:['Antithesis','Euphemism','Anaphora','Hyperbole']},
+  {q:'"Passed away" вместо "died" — кой похват?', opts:['Anaphora','Antithesis','Hyperbole','Euphemism'], ans:3, level:'C2', topic:'Rhetoric C2', q_en:'"Passed away" instead of "died" — which device?', opts_en:['Anaphora','Antithesis','Hyperbole','Euphemism']},
+  {q:'"I have told you a million times" — кой похват?', opts:['Euphemism','Anaphora','Hyperbole','Antithesis'], ans:2, level:'C2', topic:'Rhetoric C2', q_en:'"I have told you a million times" — which device?', opts_en:['Euphemism','Anaphora','Hyperbole','Antithesis']},
+  {q:'Anaphora означава:', opts:['Преувеличение','Повторение в началото на изречения','Противопоставяне','Омекотяване'], ans:1, level:'C2', topic:'Rhetoric C2', q_en:'Anaphora means:', opts_en:['Exaggeration','Repetition at the start of sentences','Contrast','Softening language']},
+  {q:'Antithesis означава:', opts:['Повторение','Преувеличение','Противопоставяне на идеи','Омекотяване'], ans:2, level:'C2', topic:'Rhetoric C2', q_en:'Antithesis means:', opts_en:['Repetition','Exaggeration','Contrasting ideas in parallel','Softening language']},
+  {q:'Euphemism означава:', opts:['Преувеличение','Повторение','Противопоставяне','Омекотяване на трудна реалност'], ans:3, level:'C2', topic:'Rhetoric C2', q_en:'Euphemism means:', opts_en:['Exaggeration','Repetition','Contrast','Softening a difficult reality']},
+  {q:'"One small step for man, one giant leap for mankind" — кой похват?', opts:['Hyperbole','Anaphora','Euphemism','Antithesis'], ans:1, level:'C2', topic:'Rhetoric C2', q_en:'"One small step for man, one giant leap for mankind" — which device?', opts_en:['Hyperbole','Anaphora','Euphemism','Antithesis']},
+  {q:'Кой похват преувеличава за ефект?', opts:['Euphemism','Antithesis','Hyperbole','Anaphora'], ans:2, level:'C2', topic:'Rhetoric C2', q_en:'Which device uses deliberate exaggeration for effect?', opts_en:['Euphemism','Antithesis','Hyperbole','Anaphora']},
+  {q:'Защо ораторите използват анафора?', opts:['За да омекотят','За да преувеличат','За да ритъм и акцент','За да противопоставят'], ans:2, level:'C2', topic:'Rhetoric C2', q_en:'Why do speakers use anaphora?', opts_en:['To soften language','To exaggerate','For rhythm and emphasis','To contrast ideas']},
+  {q:'Попълни: "It was the best of times, it was the worst of times" — ___.', opts:['Anaphora','Antithesis','Hyperbole','Euphemism'], ans:0, level:'C2', topic:'Rhetoric C2', q_en:'Fill in: "It was the best of times, it was the worst of times" — ___.', opts_en:['Anaphora','Antithesis','Hyperbole','Euphemism']},
+
+  // ── Напреднала лексика C1 (topic match) ──
+  {q:'Значението на "ambiguous"?', opts:['Ясен','Двусмислен','Значителен','Красноречив'], ans:1, level:'C1', topic:'Advanced Vocab', q_en:'Meaning of "ambiguous"?', opts_en:['Clear','Having more than one meaning','Significant','Eloquent']},
+  {q:'Значението на "meticulous"?', opts:['Небрежен','Педантичен и прецизен','Уморен','Нетърпелив'], ans:1, level:'C1', topic:'Advanced Vocab', q_en:'Meaning of "meticulous"?', opts_en:['Careless','Extremely careful and precise','Tired','Impatient']},
+  {q:'Значението на "paramount"?', opts:['Незначителен','От първостепенно значение','Временен','Скъп'], ans:1, level:'C1', topic:'Advanced Vocab', q_en:'Meaning of "paramount"?', opts_en:['Insignificant','Of supreme importance','Temporary','Expensive']},
+  {q:'Значението на "eloquent"?', opts:['Мълчалив','Красноречив и убедителен','Агресивен','Срамежлив'], ans:1, level:'C1', topic:'Advanced Vocab', q_en:'Meaning of "eloquent"?', opts_en:['Silent','Fluent and persuasive','Aggressive','Shy']},
+  {q:'Значението на "profound"?', opts:['Повърхностен','Дълбок и значителен','Бърз','Лек'], ans:1, level:'C1', topic:'Advanced Vocab', q_en:'Meaning of "profound"?', opts_en:['Superficial','Very deep and intense','Quick','Light']},
+  {q:'Попълни: Safety is ___ — nothing is more important.', opts:['ambiguous','paramount','meticulous','eloquent'], ans:1, level:'C1', topic:'Advanced Vocab', q_en:'Fill in: Safety is ___ — nothing is more important.', opts_en:['ambiguous','paramount','meticulous','eloquent']},
+  {q:'Попълни: Her speech was ___ — everyone was moved.', opts:['meticulous','ambiguous','eloquent','paramount'], ans:2, level:'C1', topic:'Advanced Vocab', q_en:'Fill in: Her speech was ___ — everyone was moved.', opts_en:['meticulous','ambiguous','eloquent','paramount']},
+  {q:'Попълни: The instructions were ___ — nobody understood them.', opts:['eloquent','ambiguous','meticulous','profound'], ans:1, level:'C1', topic:'Advanced Vocab', q_en:'Fill in: The instructions were ___ — nobody understood them.', opts_en:['eloquent','ambiguous','meticulous','profound']},
+  {q:'Попълни: He is ___ about every detail of his work.', opts:['ambiguous','eloquent','meticulous','profound'], ans:2, level:'C1', topic:'Advanced Vocab', q_en:'Fill in: He is ___ about every detail of his work.', opts_en:['ambiguous','eloquent','meticulous','profound']},
+  {q:'Попълни: This book had a ___ impact on my thinking.', opts:['meticulous','eloquent','paramount','profound'], ans:3, level:'C1', topic:'Advanced Vocab', q_en:'Fill in: This book had a ___ impact on my thinking.', opts_en:['meticulous','eloquent','paramount','profound']},
+
+,
+
+  // ── b1-mixed (Смесен тест B1) ──
+  {q:'Попълни: If it ___, we will cancel the trip.', opts:['rain','rains','rained','will rain'], ans:1, level:'B1', topic:'Mixed', q_en:'Fill in: If it ___, we will cancel the trip.', opts_en:['rain','rains','rained','will rain']},
+  {q:'Попълни: I ___ for 2 hours when she finally called.', opts:['waited','was waiting','have waited','am waiting'], ans:1, level:'B1', topic:'Mixed', q_en:'Fill in: I ___ for 2 hours when she finally called.', opts_en:['waited','was waiting','have waited','am waiting']},
+  {q:'Попълни: She ___ already ___ her homework.', opts:['has/finished','have/finished','had/finished','is/finishing'], ans:0, level:'B1', topic:'Mixed', q_en:'Fill in: She ___ already ___ her homework.', opts_en:['has/finished','have/finished','had/finished','is/finishing']},
+  {q:'Попълни: You ___ smoke here. (забранено)', opts:['should','must not','can','might'], ans:1, level:'B1', topic:'Mixed', q_en:'Fill in: You ___ smoke here. (prohibition)', opts_en:['should','must not','can','might']},
+  {q:'Попълни: ___ the train left when you arrived?', opts:['Has','Did','Was','Had'], ans:3, level:'B1', topic:'Mixed', q_en:'Fill in: ___ the train left when you arrived?', opts_en:['Has','Did','Was','Had']},
+  {q:'Как е "заминаване" на английски?', opts:['arrival','departure','delay','gate'], ans:1, level:'B1', topic:'Mixed', q_en:'What is the Bulgarian word for \"departure\"?', opts_en:['пристигане', 'заминаване', 'закъснение', 'изход']},
+  {q:'Попълни: If you ___ hard, you will succeed.', opts:['work','worked','will work','working'], ans:0, level:'B1', topic:'Mixed', q_en:'Fill in: If you ___ hard, you will succeed.', opts_en:['work','worked','will work','working']},
+  {q:'Попълни: She ___ TV when the phone rang.', opts:['watched','watches','was watching','has watched'], ans:2, level:'B1', topic:'Mixed', q_en:'Fill in: She ___ TV when the phone rang.', opts_en:['watched','watches','was watching','has watched']},
+  {q:'Как е "лекар" на английски?', opts:['lawyer','teacher','doctor','nurse'], ans:2, level:'B1', topic:'Mixed', q_en:'What is the Bulgarian word for \"doctor\"?', opts_en:['адвокат', 'учител', 'лекар', 'медицинска сестра']},
+  {q:'Present Perfect сигнал?', opts:['yesterday','last year','just','in 2010'], ans:2, level:'B1', topic:'Mixed', q_en:'Which is a Present Perfect signal word?', opts_en:['yesterday','last year','just','in 2010']},
+
+  // ── a2-food (Храна A2) ──
+  {q:'Как е "пиле" на английски?', opts:['fish','meat','chicken','beef'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "пиле"?', opts_en:['fish','meat','chicken','beef'],
+   flip:true, q_flip:'What is the Bulgarian word for \"chicken\"?', opts_flip:['риба','месо','пиле','говеждо'], ans_flip:2},
+  {q:'Как е "кафе" на английски?', opts:['tea','coffee','juice','milk'], ans:1, level:'A2', topic:'Food',
+   q_en:'What is the English word for "кафе"?', opts_en:['tea','coffee','juice','milk'],
+   flip:true, q_flip:'What is the Bulgarian word for \"coffee\"?', opts_flip:['чай','кафе','сок','мляко'], ans_flip:1},
+  {q:'Как е "захар" на английски?', opts:['salt','flour','sugar','pepper'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "захар"?', opts_en:['salt','flour','sugar','pepper'],
+   flip:true, q_flip:'What is the Bulgarian word for \"sugar\"?', opts_flip:['сол','брашно','захар','пипер'], ans_flip:2},
+  {q:'Как е "яйце" на английски?', opts:['cheese','butter','egg','milk'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "яйце"?', opts_en:['cheese','butter','egg','milk'],
+   flip:true, q_flip:'What is the Bulgarian word for \"egg\"?', opts_flip:['сирене','масло','яйце','мляко'], ans_flip:2},
+  {q:'Как е "ябълка" на английски?', opts:['banana','orange','apple','grape'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "ябълка"?', opts_en:['banana','orange','apple','grape'],
+   flip:true, q_flip:'What is the Bulgarian word for \"apple\"?', opts_flip:['банан','портокал','ябълка','грозде'], ans_flip:2},
+  {q:'Как попиташ за менюто?', opts:['Where is the bill?','Can I have the menu please?','What is your name?','How much is it?'], ans:1, level:'A2', topic:'Food', q_en:'How do you ask for the menu?', opts_en:['Where is the bill?','Can I have the menu please?','What is your name?','How much is it?']},
+  {q:'Как е "зеленчуци" на английски?', opts:['fruits','dairy','vegetables','grains'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "зеленчуци"?', opts_en:['fruits','dairy','vegetables','grains'],
+   flip:true, q_flip:'What is the Bulgarian word for \"vegetables\"?', opts_flip:['плодове','млечни','зеленчуци','зърнени'], ans_flip:2},
+  {q:'Как е "хляб" на английски?', opts:['rice','pasta','bread','flour'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "хляб"?', opts_en:['rice','pasta','bread','flour'],
+   flip:true, q_flip:'What is the Bulgarian word for \"bread\"?', opts_flip:['ориз','паста','хляб','брашно'], ans_flip:2},
+  {q:'Как е "мляко" на английски?', opts:['water','juice','tea','milk'], ans:3, level:'A2', topic:'Food',
+   q_en:'What is the English word for "мляко"?', opts_en:['water','juice','tea','milk'],
+   flip:true, q_flip:'What is the Bulgarian word for \"milk\"?', opts_flip:['вода','сок','чай','мляко'], ans_flip:3},
+  {q:'Как е "риба" (храна) на английски?', opts:['meat','chicken','fish','lamb'], ans:2, level:'A2', topic:'Food',
+   q_en:'What is the English word for "риба" (храна)?', opts_en:['meat','chicken','fish','lamb'],
+   flip:true, q_flip:'What is the Bulgarian word for \"fish\"?', opts_flip:['месо','пиле','риба','агнешко'], ans_flip:2},
+
+  // ── a2-jobs (Професии A2) ──
+  {q:'Как е "учител" на английски?', opts:['lawyer','teacher','engineer','nurse'], ans:1, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "учител"?', opts_en:['lawyer','teacher','engineer','nurse'],
+   flip:true, q_flip:'What is the Bulgarian word for \"teacher\"?', opts_flip:['адвокат','учител','инженер','медицинска сестра'], ans_flip:1},
+  {q:'Как е "лекар" на английски?', opts:['nurse','dentist','doctor','surgeon'], ans:2, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "лекар"?', opts_en:['nurse','dentist','doctor','surgeon'],
+   flip:true, q_flip:'What is the Bulgarian word for \"doctor\"?', opts_flip:['медицинска сестра','зъболекар','лекар','хирург'], ans_flip:2},
+  {q:'Как е "програмист" на английски?', opts:['engineer','programmer','designer','analyst'], ans:1, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "програмист"?', opts_en:['engineer','programmer','designer','analyst'],
+   flip:true, q_flip:'What is the Bulgarian word for \"programmer\"?', opts_flip:['инженер','програмист','дизайнер','анализатор'], ans_flip:1},
+  {q:'Как е "адвокат" на английски?', opts:['judge','police officer','lawyer','politician'], ans:2, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "адвокат"?', opts_en:['judge','police officer','lawyer','politician'],
+   flip:true, q_flip:'What is the Bulgarian word for \"lawyer\"?', opts_flip:['съдия','полицай','адвокат','политик'], ans_flip:2},
+  {q:'Как е "пилот" на английски?', opts:['captain','sailor','pilot','driver'], ans:2, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "пилот"?', opts_en:['captain','sailor','pilot','driver'],
+   flip:true, q_flip:'What is the Bulgarian word for \"pilot\"?', opts_flip:['капитан','матрос','пилот','шофьор'], ans_flip:2},
+  {q:'Как е "пожарникар" на английски?', opts:['police officer','soldier','firefighter','paramedic'], ans:2, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "пожарникар"?', opts_en:['police officer','soldier','firefighter','paramedic'],
+   flip:true, q_flip:'What is the Bulgarian word for \"firefighter\"?', opts_flip:['полицай','войник','пожарникар','парамедик'], ans_flip:2},
+  {q:'Как попиташ "Какво работиш?"?', opts:['Where do you work?','What is your job?','How much do you earn?','When do you work?'], ans:1, level:'A2', topic:'Jobs', q_en:'How do you ask about someones job?', opts_en:['Where do you work?','What is your job?','How much do you earn?','When do you work?']},
+  {q:'Как е "архитект" на английски?', opts:['artist','architect','accountant','actor'], ans:1, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "архитект"?', opts_en:['artist','architect','accountant','actor'],
+   flip:true, q_flip:'What is the Bulgarian word for \"architect\"?', opts_flip:['артист','архитект','счетоводител','актьор'], ans_flip:1},
+  {q:'Как е "медицинска сестра" на английски?', opts:['doctor','nurse','dentist','surgeon'], ans:1, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "медицинска сестра"?', opts_en:['doctor','nurse','dentist','surgeon'],
+   flip:true, q_flip:'What is the Bulgarian word for \"nurse\"?', opts_flip:['лекар','медицинска сестра','зъболекар','хирург'], ans_flip:1},
+  {q:'Как е "готвач" на английски?', opts:['baker','waiter','chef','barista'], ans:2, level:'A2', topic:'Jobs',
+   q_en:'What is the English word for "готвач"?', opts_en:['baker','waiter','chef','barista'],
+   flip:true, q_flip:'What is the Bulgarian word for \"chef\"?', opts_flip:['хлебар','сервитьор','готвач','баристa'], ans_flip:2},
+
+  // ── a2-days (Дни и сезони A2) ──
+  {q:'Кой е вторият ден от седмицата?', opts:['Monday','Tuesday','Wednesday','Sunday'], ans:1, level:'A2', topic:'Seasons', q_en:'Which is the second day of the week?', opts_en:['Monday','Tuesday','Wednesday','Sunday']},
+  {q:'Кой месец е декември?', opts:['10th','11th','12th','9th'], ans:2, level:'A2', topic:'Seasons', q_en:'What number month is December?', opts_en:['10th','11th','12th','9th']},
+  {q:'Как е "есен" на английски?', opts:['spring','summer','winter','autumn'], ans:3, level:'A2', topic:'Seasons',
+   q_en:'What is the English word for "есен"?', opts_en:['spring','summer','winter','autumn'],
+   flip:true, q_flip:'What is the Bulgarian word for \"autumn\"?', opts_flip:['пролет','лято','зима','есен'], ans_flip:3},
+  {q:'Кой сезон е юни, юли, август?', opts:['spring','summer','autumn','winter'], ans:1, level:'A2', topic:'Seasons',
+   q_en:'Which season is June, July, August?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is "лято" in English?', opts_flip:['spring','summer','autumn','winter'], ans_flip:1},
+  {q:'Американски вариант на "autumn"?', opts:['spring','summer','fall','winter'], ans:2, level:'A2', topic:'Seasons',
+   q_en:'Американски вариант на "autumn"?', opts_en:['spring','summer','fall','winter'],
+   flip:true, q_flip:'What is the Bulgarian word for \"fall\"?', opts_flip:['пролет','лято','есен','зима'], ans_flip:2},
+  {q:'Кой е четвъртият месец?', opts:['March','May','April','June'], ans:2, level:'A2', topic:'Seasons',
+   q_en:'Кой е четвъртият месец?', opts_en:['March','May','April','June'],
+   flip:true, q_flip:'What is the Bulgarian word for \"April\"?', opts_flip:['март','май','април','юни'], ans_flip:2},
+  {q:'Кой е последният ден от седмицата?', opts:['Saturday','Friday','Sunday','Monday'], ans:2, level:'A2', topic:'Seasons', q_en:'Which is the last day of the week?', opts_en:['Saturday','Friday','Sunday','Monday']},
+  {q:'Как е "пролет" на английски?', opts:['summer','autumn','winter','spring'], ans:3, level:'A2', topic:'Seasons',
+   q_en:'What is the English word for "пролет"?', opts_en:['summer','autumn','winter','spring'],
+   flip:true, q_flip:'What is the Bulgarian word for \"spring\"?', opts_flip:['лято','есен','зима','пролет'], ans_flip:3},
+  {q:'Кой месец е първи?', opts:['February','March','January','April'], ans:2, level:'A2', topic:'Seasons', q_en:'Which month is first?', opts_en:['February','March','January','April']},
+  {q:'Кой сезон е декември?', opts:['spring','summer','autumn','winter'], ans:3, level:'A2', topic:'Seasons',
+   q_en:'Which season is December in?', opts_en:['spring','summer','autumn','winter'],
+   flip:true, q_flip:'What is "зима" in English?', opts_flip:['spring','summer','autumn','winter'], ans_flip:3},
+
+  // ── b2-academic (Академичен речник B2) ──
+  {q:'Академично за "show"?', opts:['tell','demonstrate','say','give'], ans:1, level:'B2', topic:'Academic Vocab', q_en:'Academic word for show?', opts_en:['tell','demonstrate','say','give']},
+  {q:'Академично за "use"?', opts:['do','make','utilize','have'], ans:2, level:'B2', topic:'Academic Vocab', q_en:'Academic word for use?', opts_en:['do','make','utilize','have']},
+  {q:'Академично за "help"?', opts:['give','assist','do','make'], ans:1, level:'B2', topic:'Academic Vocab', q_en:'Academic word for help?', opts_en:['give','assist','do','make']},
+  {q:'Академично за "find out"?', opts:['look','see','discover','check'], ans:2, level:'B2', topic:'Academic Vocab', q_en:'Academic word for find out?', opts_en:['look','see','discover','check']},
+  {q:'Академично за "start"?', opts:['go','open','commence','try'], ans:2, level:'B2', topic:'Academic Vocab', q_en:'Academic word for start?', opts_en:['go','open','commence','try']},
+  {q:'Академично за "end"?', opts:['stop','conclude','finish up','quit'], ans:1, level:'B2', topic:'Academic Vocab', q_en:'Academic word for end?', opts_en:['stop','conclude','finish up','quit']},
+  {q:'Академично за "buy"?', opts:['get','pay','purchase','own'], ans:2, level:'B2', topic:'Academic Vocab', q_en:'Academic word for buy?', opts_en:['get','pay','purchase','own']},
+  {q:'Академично за "need"?', opts:['want','lack','require','wish'], ans:2, level:'B2', topic:'Academic Vocab', q_en:'Academic word for need?', opts_en:['want','lack','require','wish']},
+  {q:'Академично за "big"?', opts:['large','great','significant','huge'], ans:2, level:'B2', topic:'Academic Vocab', q_en:'Academic word for big?', opts_en:['large','great','significant','huge']},
+  {q:'Академично за "think"?', opts:['believe','consider','feel','guess'], ans:1, level:'B2', topic:'Academic Vocab', q_en:'Academic word for think?', opts_en:['believe','consider','feel','guess']},
+
+  // ── b2-idioms (Идиоми B2) ──
+  {q:'Какво означава "hit the nail on the head"?', opts:['Удари гвоздей','Улучи в точката','Направи грешка','Изгуби търпение'], ans:1, level:'B2', topic:'Idioms', q_en:'What does hit the nail on the head mean?', opts_en:['Hit a nail','Be exactly right','Make a mistake','Lose patience']},
+  {q:'Какво означава "under the weather"?', opts:['Навън в лошо време','Не се чувствам добре','Уморен','Загубен'], ans:1, level:'B2', topic:'Idioms', q_en:'What does under the weather mean?', opts_en:['Outside in bad weather','Feeling unwell','Feeling tired','Feeling lost']},
+  {q:'Попълни: Good luck! ___ a leg!', opts:['Break','Hit','Cut','Pull'], ans:0, level:'B2', topic:'Idioms', q_en:'Fill in: Good luck! ___ a leg!', opts_en:['Break','Hit','Cut','Pull']},
+  {q:'Какво означава "once in a blue moon"?', opts:['На луната','Много рядко','Много скоро','Всеки ден'], ans:1, level:'B2', topic:'Idioms', q_en:'What does once in a blue moon mean?', opts_en:['On the moon','Very rarely','Very soon','Every day']},
+  {q:'Какво означава "cost an arm and a leg"?', opts:['Много евтино','Много скъпо','Физическа болка','Загуба'], ans:1, level:'B2', topic:'Idioms', q_en:'What does cost an arm and a leg mean?', opts_en:['Very cheap','Very expensive','Physical pain','A loss']},
+  {q:'Какво означава "let the cat out of the bag"?', opts:['Пусни котката','Разкрий тайна','Загуби нещо','Изненадай'], ans:1, level:'B2', topic:'Idioms', q_en:'What does let the cat out of the bag mean?', opts_en:['Release a cat','Reveal a secret','Lose something','Surprise someone']},
+  {q:'Какво означава "bite the bullet"?', opts:['Яж куршума','Издържи трудна ситуация','Стреляй бързо','Избягай'], ans:1, level:'B2', topic:'Idioms', q_en:'What does bite the bullet mean?', opts_en:['Eat a bullet','Endure a tough situation','Shoot quickly','Run away']},
+  {q:'Какво означава "spill the beans"?', opts:['Разсипи боб','Разкрий тайна','Яж здравословно','Изненадай'], ans:1, level:'B2', topic:'Idioms', q_en:'What does spill the beans mean?', opts_en:['Spill vegetables','Reveal a secret','Eat healthily','Surprise someone']},
+  {q:'Какво означава "it takes two to tango"?', opts:['Само един е виновен','И двамата са отговорни','Научи да танцуваш','Бъди романтичен'], ans:1, level:'B2', topic:'Idioms', q_en:'What does it takes two to tango mean?', opts_en:['Only one is guilty','Both parties are responsible','Learn to dance','Be romantic']},
+  {q:'Попълни: You have ___ the nail on the head.', opts:['hit','broken','cut','missed'], ans:0, level:'B2', topic:'Idioms', q_en:'Fill in: You have ___ the nail on the head.', opts_en:['hit','broken','cut','missed']},
+
+  // ── c2-nuance ──
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "thin"?', opts:['scrawny','gaunt','slender','bony'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word has a POSITIVE connotation for thin?', opts_en:['scrawny','gaunt','slender','bony']},
+  {q:'Коя дума е ОТРИЦАТЕЛНА за "confident"?', opts:['self-assured','assertive','cocky','poised'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word has a NEGATIVE connotation for confident?', opts_en:['self-assured','assertive','cocky','poised']},
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "cheap"?', opts:['stingy','miserly','tight-fisted','economical'], ans:3, level:'C2', topic:'Nuance', q_en:'Which word has a POSITIVE connotation for cheap?', opts_en:['stingy','miserly','tight-fisted','economical']},
+  {q:'Разлика между "slender" и "scrawny"?', opts:['Няма разлика','Slender е положително, scrawny е отрицателно','Scrawny е положително','И двете са неутрални'], ans:1, level:'C2', topic:'Nuance', q_en:'Difference between slender and scrawny?', opts_en:['No difference','Slender is positive, scrawny is negative','Scrawny is positive','Both are neutral']},
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "old"?', opts:['ancient','decrepit','mature','senile'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word has a POSITIVE connotation for old?', opts_en:['ancient','decrepit','mature','senile']},
+  {q:'Коя дума е ОТРИЦАТЕЛНА за "persistent"?', opts:['determined','resolute','stubborn','committed'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word has a NEGATIVE connotation for persistent?', opts_en:['determined','resolute','stubborn','committed']},
+  {q:'Какво е конотацията на думата?', opts:['Официалното значение','Емоционалната стойност','Произходът','Граматическата функция'], ans:1, level:'C2', topic:'Nuance', q_en:'What is the connotation of a word?', opts_en:['Official meaning','Emotional/implied value','Origin','Grammatical function']},
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "persistent"?', opts:['stubborn','obstinate','determined','pig-headed'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word is POSITIVE for persistent?', opts_en:['stubborn','obstinate','determined','pig-headed']},
+  {q:'Коя дума е ОТРИЦАТЕЛНА за "thin"?', opts:['slim','slender','petite','scrawny'], ans:3, level:'C2', topic:'Nuance', q_en:'Which word is NEGATIVE for thin?', opts_en:['slim','slender','petite','scrawny']},
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "confident"?', opts:['arrogant','cocky','self-assured','pushy'], ans:2, level:'C2', topic:'Nuance', q_en:'Which word is POSITIVE for confident?', opts_en:['arrogant','cocky','self-assured','pushy']},
+
+  // ── c2-rhetoric ──
+  {q:'"We shall fight... we shall never surrender." — кой похват?', opts:['Antithesis','Euphemism','Anaphora','Hyperbole'], ans:2, level:'C2', topic:'Rhetoric', q_en:'Which rhetorical device: We shall fight... we shall never surrender?', opts_en:['Antithesis','Euphemism','Anaphora','Hyperbole']},
+  {q:'"Passed away" вместо "died" — кой похват?', opts:['Anaphora','Antithesis','Hyperbole','Euphemism'], ans:3, level:'C2', topic:'Rhetoric', q_en:'Passed away instead of died — which device?', opts_en:['Anaphora','Antithesis','Hyperbole','Euphemism']},
+  {q:'"I have told you a million times" — кой похват?', opts:['Euphemism','Anaphora','Hyperbole','Antithesis'], ans:2, level:'C2', topic:'Rhetoric', q_en:'I have told you a million times — which device?', opts_en:['Euphemism','Anaphora','Hyperbole','Antithesis']},
+  {q:'Anaphora означава?', opts:['Преувеличение','Повторение в началото','Противопоставяне','Омекотяване'], ans:1, level:'C2', topic:'Rhetoric', q_en:'Anaphora means?', opts_en:['Exaggeration','Repetition at start of sentences','Contrast','Softening language']},
+  {q:'Antithesis означава?', opts:['Повторение','Преувеличение','Противопоставяне на идеи','Омекотяване'], ans:2, level:'C2', topic:'Rhetoric', q_en:'Antithesis means?', opts_en:['Repetition','Exaggeration','Contrasting ideas','Softening language']},
+  {q:'Euphemism означава?', opts:['Преувеличение','Повторение','Противопоставяне','Омекотяване на трудна реалност'], ans:3, level:'C2', topic:'Rhetoric', q_en:'Euphemism means?', opts_en:['Exaggeration','Repetition','Contrast','Softening a difficult reality']},
+  {q:'"One small step for man, one giant leap for mankind" — кой похват?', opts:['Hyperbole','Anaphora','Euphemism','Antithesis'], ans:1, level:'C2', topic:'Rhetoric', q_en:'One small step for man, one giant leap for mankind — which device?', opts_en:['Hyperbole','Anaphora','Euphemism','Antithesis']},
+  {q:'Кой похват преувеличава за ефект?', opts:['Euphemism','Antithesis','Hyperbole','Anaphora'], ans:2, level:'C2', topic:'Rhetoric', q_en:'Which device uses deliberate exaggeration?', opts_en:['Euphemism','Antithesis','Hyperbole','Anaphora']},
+  {q:'Защо ораторите използват анафора?', opts:['За да омекотят','За да преувеличат','За ритъм и акцент','За да противопоставят'], ans:2, level:'C2', topic:'Rhetoric', q_en:'Why do speakers use anaphora?', opts_en:['To soften','To exaggerate','For rhythm and emphasis','To contrast']},
+  {q:'"It was the best of times, it was the worst of times" — кой похват?', opts:['Anaphora','Antithesis','Hyperbole','Euphemism'], ans:0, level:'C2', topic:'Rhetoric', q_en:'It was the best of times, it was the worst of times — which device?', opts_en:['Anaphora','Antithesis','Hyperbole','Euphemism']},
+
+  // ── c2-ellipsis ──
+  {q:'Ellipsis: "Are you coming?" — "I hope ___."', opts:['it','so','that','yes'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: Are you coming? — I hope ___.', opts_en:['it','so','that','yes']},
+  {q:'Substitution: "Which hat?" — "The red ___."', opts:['hat','one','it','that'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Substitution: Which hat? — The red ___.', opts_en:['hat','one','it','that']},
+  {q:'Ellipsis: "She wants to leave and so ___ I."', opts:['do','am','does','will'], ans:0, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: She wants to leave and so ___ I.', opts_en:['do','am','does','will']},
+  {q:'Защо използваме ellipsis?', opts:['За да добавим информация','За да избегнем повторения','За да акцентираме','За да зададем въпрос'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Why do we use ellipsis?', opts_en:['To add information','To avoid repetition','To emphasise','To ask a question']},
+  {q:'Ellipsis: "Can you swim?" — "Yes, I ___."', opts:['can do','can','swim','do'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: Can you swim? — Yes, I ___.', opts_en:['can do','can','swim','do']},
+  {q:'Ellipsis: "Did you lock the door?" — "I think ___."', opts:['it','that','so','yes'], ans:2, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: Did you lock the door? — I think ___.', opts_en:['it','that','so','yes']},
+  {q:'Substitution: "Do you want coffee?" — "No, I prefer ___."', opts:['it','one','that','so'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Substitution: Do you want coffee? — No, I prefer ___.', opts_en:['it','one','that','so']},
+  {q:'Ellipsis: "Are they coming?" — "I hope ___."', opts:['they are','not','so','it'], ans:2, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: Are they coming? — I hope ___.', opts_en:['they are','not','so','it']},
+  {q:'Какво е substitution?', opts:['Изпускане на думи','Заместване с по-кратка форма','Повторение','Инверсия'], ans:1, level:'C2', topic:'Ellipsis', q_en:'What is substitution?', opts_en:['Omitting words','Replacing with a shorter form','Repetition','Inversion']},
+  {q:'Ellipsis: "I can swim and she can ___."', opts:['swim too','too','also','can too'], ans:1, level:'C2', topic:'Ellipsis', q_en:'Ellipsis: I can swim and she can ___.', opts_en:['swim too','too','also','can too']},
+
+  // ── c2-idioms2 (Идиоми C2) ──
+  {q:'Какво означава "gilding the lily"?', opts:['Боядисване на цветя','Ненужно украсяване на нещо вече добро','Скъпа украса','Подобрение'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does gilding the lily mean?', opts_en:['Painting flowers','Adding unnecessary ornamentation to something already good','Expensive decoration','Improvement']},
+  {q:'Какво е Hobson choice?', opts:['Труден избор','Привиден избор без реални опции','Мъдро решение','Щастлив случай'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What is a Hobson choice?', opts_en:['A difficult choice','Apparent choice with no real options','A wise decision','A lucky chance']},
+  {q:'Какво означава "a double-edged sword"?', opts:['Острo оръжие','Нещо с предимства и недостатъци','Опасна ситуация','Изненада'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does a double-edged sword mean?', opts_en:['A sharp weapon','Something with both benefits and drawbacks','A dangerous situation','A surprise']},
+  {q:'Какво означава "to pass the buck"?', opts:['Дай пари','Прехвърли отговорност','Спечели бас','Смени работа'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does to pass the buck mean?', opts_en:['Give money','Shift responsibility to others','Win a bet','Change jobs']},
+  {q:'Какво означава "add insult to injury"?', opts:['Физическо нараняване','Влоши ситуацията допълнително','Помири се','Извини се'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does add insult to injury mean?', opts_en:['Physical injury','Make a bad situation even worse','Make peace','Apologise']},
+  {q:'Какво означава "the ball is in your court"?', opts:['Играй тенис','Твой ред е да решиш','Ти загуби','Играй баскетбол'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does the ball is in your court mean?', opts_en:['Play tennis','It is your turn to decide','You lost','Play basketball']},
+  {q:'Какво означава "reinvent the wheel"?', opts:['Иновация','Губиш усилия за нещо вече съществуващо','Ремонт','Творческо мислене'], ans:1, level:'C2', topic:'Idioms C2', q_en:'What does reinvent the wheel mean?', opts_en:['Innovation','Waste effort on something that exists','Repair work','Creative thinking']},
+  {q:'Попълни: Stop ___ the buck — take responsibility!', opts:['passing','throwing','giving','taking'], ans:0, level:'C2', topic:'Idioms C2', q_en:'Fill in: Stop ___ the buck — take responsibility!', opts_en:['passing','throwing','giving','taking']},
+  {q:'Попълни: More decoration would just be ___ the lily.', opts:['gilding','painting','cutting','breaking'], ans:0, level:'C2', topic:'Idioms C2', q_en:'Fill in: More decoration would just be ___ the lily.', opts_en:['gilding','painting','cutting','breaking']},
+  {q:'Попълни: The ball is now in ___ court.', opts:['your','my','their','our'], ans:0, level:'C2', topic:'Idioms C2', q_en:'Fill in: The ball is now in ___ court.', opts_en:['your','my','their','our']},
+
+,
+
+  // ── a2-vocab (Речник A2) — direct topic mapping ──
+  {q:'Как е "пиле" на английски?', opts:['fish','beef','chicken','lamb'], ans:2, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"chicken\"?', opts_en:['риба', 'говеждо', 'пиле', 'агнешко']},
+  {q:'Как е "учител" на английски?', opts:['lawyer','teacher','nurse','doctor'], ans:1, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"teacher\"?', opts_en:['адвокат', 'учител', 'медицинска сестра', 'лекар']},
+  {q:'Как е "есен" на английски?', opts:['spring','summer','winter','autumn'], ans:3, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"autumn\"?', opts_en:['пролет', 'лято', 'зима', 'есен']},
+  {q:'Как е "яйце" на английски?', opts:['cheese','butter','egg','milk'], ans:2, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"egg\"?', opts_en:['сирене', 'масло', 'яйце', 'мляко']},
+  {q:'Как е "пилот" на английски?', opts:['captain','sailor','pilot','driver'], ans:2, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"pilot\"?', opts_en:['капитан', 'матрос', 'пилот', 'шофьор']},
+  {q:'Кой сезон е юни, юли, август?', opts:['spring','summer','autumn','winter'], ans:1, level:'A2', topic:'Vocab A2', q_en:'Which season is June, July, August?', opts_en:['spring','summer','autumn','winter']},
+  {q:'Как е "захар" на английски?', opts:['salt','flour','sugar','pepper'], ans:2, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"sugar\"?', opts_en:['сол', 'брашно', 'захар', 'пипер']},
+  {q:'Как е "адвокат" на английски?', opts:['judge','lawyer','nurse','engineer'], ans:1, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"lawyer\"?', opts_en:['съдия', 'адвокат', 'медицинска сестра', 'инженер']},
+  {q:'Кой е третият месец?', opts:['January','February','March','April'], ans:2, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"March\"?', opts_en:['януари', 'февруари', 'март', 'април']},
+  {q:'Как е "мляко" на английски?', opts:['water','juice','milk','tea'], ans:2, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"milk\"?', opts_en:['вода', 'сок', 'мляко', 'чай']},
+  {q:'Как е "зима" на английски?', opts:['spring','summer','autumn','winter'], ans:3, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"winter\"?', opts_en:['пролет', 'лято', 'есен', 'зима']},
+  {q:'Как е "готвач" на английски?', opts:['baker','waiter','chef','barista'], ans:2, level:'A2', topic:'Vocab A2', q_en:'What is the Bulgarian word for \"chef\"?', opts_en:['хлебар', 'сервитьор', 'готвач', 'баристa']},
+
+  // ── b2-vocab (Речник и Идиоми B2) — direct topic mapping ──
+  {q:'Академично за "show"?', opts:['tell','demonstrate','say','give'], ans:1, level:'B2', topic:'Vocab B2', q_en:'Academic word for show?', opts_en:['tell','demonstrate','say','give']},
+  {q:'Какво означава "under the weather"?', opts:['Навън при лошо време','Не се чувствам добре','Уморен','Загубен'], ans:1, level:'B2', topic:'Vocab B2', q_en:'What does under the weather mean?', opts_en:['Outside in bad weather','Feeling unwell','Feeling tired','Feeling lost']},
+  {q:'Академично за "use"?', opts:['do','make','utilize','have'], ans:2, level:'B2', topic:'Vocab B2', q_en:'Academic word for use?', opts_en:['do','make','utilize','have']},
+  {q:'Какво означава "bite the bullet"?', opts:['Яж куршума','Издържи трудна ситуация','Стреляй бързо','Избягай'], ans:1, level:'B2', topic:'Vocab B2', q_en:'What does bite the bullet mean?', opts_en:['Eat a bullet','Endure a tough situation','Shoot quickly','Run away']},
+  {q:'Академично за "help"?', opts:['give','assist','do','make'], ans:1, level:'B2', topic:'Vocab B2', q_en:'Academic word for help?', opts_en:['give','assist','do','make']},
+  {q:'Какво означава "once in a blue moon"?', opts:['На луната','Много рядко','Много скоро','Всеки ден'], ans:1, level:'B2', topic:'Vocab B2', q_en:'What does once in a blue moon mean?', opts_en:['On the moon','Very rarely','Very soon','Every day']},
+  {q:'Академично за "big"?', opts:['large','great','significant','huge'], ans:2, level:'B2', topic:'Vocab B2', q_en:'Academic word for big?', opts_en:['large','great','significant','huge']},
+  {q:'Какво означава "cost an arm and a leg"?', opts:['Много евтино','Много скъпо','Физическа болка','Загуба'], ans:1, level:'B2', topic:'Vocab B2', q_en:'What does cost an arm and a leg mean?', opts_en:['Very cheap','Very expensive','Physical pain','A loss']},
+  {q:'Академично за "start"?', opts:['go','open','commence','try'], ans:2, level:'B2', topic:'Vocab B2', q_en:'Academic word for start?', opts_en:['go','open','commence','try']},
+  {q:'Какво означава "hit the nail on the head"?', opts:['Удари гвоздей','Улучи в точката','Направи грешка','Изгуби търпение'], ans:1, level:'B2', topic:'Vocab B2', q_en:'What does hit the nail on the head mean?', opts_en:['Hit a nail','Be exactly right','Make a mistake','Lose patience']},
+  {q:'Академично за "buy"?', opts:['get','pay','purchase','own'], ans:2, level:'B2', topic:'Vocab B2', q_en:'Academic word for buy?', opts_en:['get','pay','purchase','own']},
+  {q:'Какво означава "let the cat out of the bag"?', opts:['Пусни котката','Разкрий тайна','Загуби нещо','Изненадай'], ans:1, level:'B2', topic:'Vocab B2', q_en:'What does let the cat out of the bag mean?', opts_en:['Release a cat','Reveal a secret','Lose something','Surprise someone']},
+
+  // ── c2-vocab (Идиоми и Реторика C2) — direct topic mapping ──
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "thin"?', opts:['scrawny','gaunt','slender','bony'], ans:2, level:'C2', topic:'Vocab C2', q_en:'Which is POSITIVE for thin?', opts_en:['scrawny','gaunt','slender','bony']},
+  {q:'"Passed away" вместо "died" — кой похват?', opts:['Anaphora','Antithesis','Hyperbole','Euphemism'], ans:3, level:'C2', topic:'Vocab C2', q_en:'Passed away instead of died — which device?', opts_en:['Anaphora','Antithesis','Hyperbole','Euphemism']},
+  {q:'Какво означава "a double-edged sword"?', opts:['Острo оръжие','Предимства и недостатъци','Опасна ситуация','Изненада'], ans:1, level:'C2', topic:'Vocab C2', q_en:'What does a double-edged sword mean?', opts_en:['A sharp weapon','Both benefits and drawbacks','A dangerous situation','A surprise']},
+  {q:'Ellipsis: "Can you swim?" — "Yes, I ___."', opts:['can do','can','swim','do'], ans:1, level:'C2', topic:'Vocab C2', q_en:'Ellipsis: Can you swim? — Yes, I ___.', opts_en:['can do','can','swim','do']},
+  {q:'Коя дума е ОТРИЦАТЕЛНА за "confident"?', opts:['self-assured','assertive','cocky','poised'], ans:2, level:'C2', topic:'Vocab C2', q_en:'Which is NEGATIVE for confident?', opts_en:['self-assured','assertive','cocky','poised']},
+  {q:'"We shall fight... we shall never surrender." — кой похват?', opts:['Antithesis','Euphemism','Anaphora','Hyperbole'], ans:2, level:'C2', topic:'Vocab C2', q_en:'We shall fight — which rhetorical device?', opts_en:['Antithesis','Euphemism','Anaphora','Hyperbole']},
+  {q:'Какво означава "gilding the lily"?', opts:['Боядисване','Ненужно украсяване на нещо вече добро','Скъпа украса','Подобрение'], ans:1, level:'C2', topic:'Vocab C2', q_en:'What does gilding the lily mean?', opts_en:['Painting','Adding unnecessary ornamentation','Expensive decoration','Improvement']},
+  {q:'Ellipsis: "Are you coming?" — "I hope ___."', opts:['it','so','that','yes'], ans:1, level:'C2', topic:'Vocab C2', q_en:'Ellipsis: Are you coming? — I hope ___.', opts_en:['it','so','that','yes']},
+  {q:'Коя дума е ПОЛОЖИТЕЛНА за "old"?', opts:['ancient','decrepit','mature','senile'], ans:2, level:'C2', topic:'Vocab C2', q_en:'Which is POSITIVE for old?', opts_en:['ancient','decrepit','mature','senile']},
+  {q:'Какво означава "to pass the buck"?', opts:['Дай пари','Прехвърли отговорност','Спечели бас','Смени работа'], ans:1, level:'C2', topic:'Vocab C2', q_en:'What does to pass the buck mean?', opts_en:['Give money','Shift responsibility','Win a bet','Change jobs']},
+  {q:'Anaphora означава?', opts:['Преувеличение','Повторение в началото','Противопоставяне','Омекотяване'], ans:1, level:'C2', topic:'Vocab C2', q_en:'Anaphora means?', opts_en:['Exaggeration','Repetition at start','Contrast','Softening']},
+  {q:'Какво означава "the ball is in your court"?', opts:['Играй тенис','Твой ред е да решиш','Ти загуби','Играй баскетбол'], ans:1, level:'C2', topic:'Vocab C2', q_en:'What does the ball is in your court mean?', opts_en:['Play tennis','Your turn to decide','You lost','Play basketball']},
 
 ];
 
