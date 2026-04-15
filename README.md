@@ -1,4 +1,5 @@
 # LearnEnglish 📚
+<img width="541" height="59" alt="image" src="https://github.com/user-attachments/assets/3fb7fc56-1b97-440e-afc5-e0dd33690c63" />
 
 Интерактивно уеб приложение за учене на английски език по всички нива на CEFR (A1–C2), създадено за турнира по Интернет приложения на ВТУ „Св. св. Кирил и Методий" 2025.
 
