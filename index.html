@@ -847,7 +847,8 @@ footer {
     <!-- Module diagram -->
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
       <div style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:18px;">📐 Module Pattern — Class Diagram</div>
-      <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:860px;display:block;margin:0 auto;font-family:Nunito,sans-serif;">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <svg viewBox="0 0 860 520" xmlns="http://www.w3.org/2000/svg" style="min-width:600px;width:100%;max-width:860px;display:block;margin:0 auto;font-family:Nunito,sans-serif;">
         <defs>
           <marker id="arr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
             <polygon points="0 0, 10 3.5, 0 7" fill="#2176ae"/>
@@ -961,12 +962,14 @@ footer {
         <!-- CacheModule uses localStorage -->
         <line x1="640" y1="224" x2="710" y2="310" stroke="#6b7a8d" stroke-width="1.2" marker-end="url(#arr)"/>
       </svg>
+      </div>
     </div>
 
     <!-- Data flow diagram -->
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;">
       <div style="font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:18px;">🔄 Data Flow — Quiz Sequence</div>
-      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto;font-family:Nunito,sans-serif;">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="min-width:500px;width:100%;max-width:700px;display:block;margin:0 auto;font-family:Nunito,sans-serif;">
         <defs>
           <marker id="arr2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
             <polygon points="0 0, 8 3, 0 6" fill="#2176ae"/>
@@ -991,6 +994,7 @@ footer {
         <path d="M 650 116 Q 650 160 360 160 Q 70 160 60 116" fill="none" stroke="#5bbcff" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr2)"/>
         <text x="360" y="175" text-anchor="middle" fill="#5bbcff" font-size="9">progress loaded on next visit</text>
       </svg>
+      </div>
     </div>
 
     <!-- Module responsibilities table -->
