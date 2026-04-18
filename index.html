@@ -1717,10 +1717,11 @@ const NavModule = (function() {
     document.getElementById('prog-correct').textContent = correct;
     document.getElementById('prog-pct').textContent = pct+'%';
     document.getElementById('level-progress-bars').innerHTML = levels.map(lv => {
-      const t = StateModule.getLevelTotal(lv), c = StateModule.getLevelCorrect(lv);
-      const p = t>0 ? Math.round(c/t*100) : 0;
+      const totalInLevel = questions.filter(q => q.level === lv).length;
+      const c = StateModule.getLevelCorrect(lv);
+      const p = totalInLevel > 0 ? Math.min(100, Math.round(c / totalInLevel * 100)) : 0;
       return `<div class="prog-row">
-        <div class="prog-row-header"><span>${lv}</span><span>${p}%</span></div>
+        <div class="prog-row-header"><span>${lv}</span><span>${c} / ${totalInLevel} (${p}%)</span></div>
         <div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${p}%;background:${lvColors[lv]}"></div></div>
       </div>`;
     }).join('');
@@ -1960,7 +1961,7 @@ const QuizModule = (function() {
       const t = LangModule.t;
 
       if(currentQ >= filteredQ.length) {
-        StateModule.addQuizResult(activeLevel, score, filteredQ.length);
+        const activeSet = quizSets.find(s=>s.id===activeQuizId); const recordLevel = (activeSet && activeSet.level !== "ALL") ? activeSet.level : activeLevel; StateModule.addQuizResult(recordLevel, score, filteredQ.length);
         stopTimer();
         const pct = Math.round(score/filteredQ.length*100);
         const msg = pct>=90?t('result_excellent'):pct>=70?t('result_good'):pct>=50?t('result_ok'):t('result_practice');
@@ -1979,7 +1980,7 @@ const QuizModule = (function() {
       }
 
       const q = filteredQ[currentQ];
-      const pct = Math.round(currentQ/filteredQ.length*100);
+      const pct = Math.round((currentQ+1)/filteredQ.length*100);
       const isEn = LangModule.current() === 'en';
       const flipped = isEn && q.flip;
       const qText = flipped ? q.q_flip : (isEn && q.q_en ? q.q_en : q.q);
