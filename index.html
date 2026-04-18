@@ -992,23 +992,23 @@ footer {
         <text x="589" y="92" text-anchor="middle" fill="var(--muted)" font-size="9">JSON</text>
         <!-- Return arrow -->
         <path d="M 650 116 Q 650 160 360 160 Q 70 160 60 116" fill="none" stroke="#5bbcff" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr2)"/>
-        <text x="360" y="175" text-anchor="middle" fill="#5bbcff" font-size="9">progress loaded on next visit</text>
+        <text id="uml-progress-text" x="360" y="175" text-anchor="middle" fill="#5bbcff" font-size="9">progress loaded on next visit</text>
       </svg>
       </div>
     </div>
 
     <!-- Module responsibilities table -->
     <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;">
-      <div style="padding:14px 22px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text);">📋 Module Responsibilities</div>
+      <div style="padding:14px 22px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text);">📋 <span class="t-responsibilities">Module Responsibilities</span></div>
       <table class="example-table" style="margin:0;">
-        <thead><tr><th>Module</th><th>Responsibility</th><th>Pattern</th></tr></thead>
+        <thead><tr><th><span class="t-module">Module</span></th><th><span class="t-responsibility">Responsibility</span></th><th><span class="t-pattern">Pattern</span></th></tr></thead>
         <tbody>
-          <tr><td><em>ThemeModule</em></td><td>Dark/light mode toggle, localStorage persistence</td><td>Singleton</td></tr>
-          <tr><td><em>LangModule</em></td><td>BG/EN translation dictionary, language switching</td><td>Singleton + Strategy</td></tr>
-          <tr><td><em>CacheModule</em></td><td>localStorage read/write/clear for progress data</td><td>Repository</td></tr>
-          <tr><td><em>StateModule</em></td><td>Centralised app state, quiz scores, lessons read</td><td>Singleton + Observer</td></tr>
-          <tr><td><em>NavModule</em></td><td>Page routing, lesson list/detail, progress rendering</td><td>Facade</td></tr>
-          <tr><td><em>QuizModule</em></td><td>Quiz sets, question rendering, answer checking, flip logic</td><td>State Machine</td></tr>
+          <tr><td><em>ThemeModule</em></td><td><span class="t-theme-desc">Dark/light mode toggle, localStorage persistence</span></td><td>Singleton</td></tr>
+          <tr><td><em>LangModule</em></td><td><span class="t-lang-desc">BG/EN translation dictionary, language switching</span></td><td>Singleton + Strategy</td></tr>
+          <tr><td><em>CacheModule</em></td><td><span class="t-cache-desc">localStorage read/write/clear for progress data</span></td><td>Repository</td></tr>
+          <tr><td><em>StateModule</em></td><td><span class="t-state-desc">Centralised app state, quiz scores, lessons read</span></td><td>Singleton + Observer</td></tr>
+          <tr><td><em>NavModule</em></td><td><span class="t-nav-desc">Page routing, lesson list/detail, progress rendering</span></td><td>Facade</td></tr>
+          <tr><td><em>QuizModule</em></td><td><span class="t-quiz-desc">Quiz sets, question rendering, answer checking, flip logic</span></td><td>State Machine</td></tr>
         </tbody>
       </table>
     </div>
@@ -1281,6 +1281,15 @@ const LangModule = (function() {
       criteria_basic: 'Основни критерии', criteria_extra: 'Допълнителни критерии',
       criteria_points: 'точки', criteria_legend_done: 'Изпълнен', criteria_legend_partial: 'Частично',
       criteria_legend_pres: 'Зависи от представянето', criteria_legend_no: 'Не е изпълнен',
+      // UML responsibilities
+      uml_responsibilities: 'Отговорности на модулите', uml_module: 'Модул', uml_responsibility: 'Отговорност', uml_pattern: 'Шаблон',
+      theme_desc: 'Превключване dark/light режим, запазване в localStorage',
+      lang_desc: 'Речник за BG/EN превод, превключване на езика',
+      cache_desc: 'Четене/запис/изчистване на localStorage за прогрес',
+      state_desc: 'Централизирано състояние, quiz резултати, прочетени уроци',
+      nav_desc: 'Навигация между страници, списък с уроци, прогрес',
+      quiz_module_desc: 'Quiz сетове, рендериране на въпроси, проверка на отговори',
+      uml_progress_loaded: 'прогресът се зарежда при следващо посещение',
     },
     en: {
       // Navbar
@@ -1345,6 +1354,15 @@ const LangModule = (function() {
       criteria_points: 'points', criteria_legend_done: 'Fulfilled',
       criteria_legend_partial: 'Partially fulfilled', criteria_legend_pres: 'Depends on presentation',
       criteria_legend_no: 'Not fulfilled',
+      // UML responsibilities
+      uml_responsibilities: 'Module Responsibilities', uml_module: 'Module', uml_responsibility: 'Responsibility', uml_pattern: 'Pattern',
+      theme_desc: 'Dark/light mode toggle, localStorage persistence',
+      lang_desc: 'BG/EN translation dictionary, language switching',
+      cache_desc: 'localStorage read/write/clear for progress data',
+      state_desc: 'Centralised app state, quiz scores, lessons read',
+      nav_desc: 'Page routing, lesson list/detail, progress rendering',
+      quiz_module_desc: 'Quiz sets, question rendering, answer checking, flip logic',
+      uml_progress_loaded: 'progress loaded on next visit',
     }
   };
 
@@ -1445,7 +1463,26 @@ const LangModule = (function() {
     const srcCats = document.querySelectorAll('#sources [data-i18n-src]');
     srcCats.forEach(el => { const k = el.getAttribute('data-i18n-src'); if(k) el.textContent = t(k); });
 
-    // ── UML / API pages have static content, no translation needed ──
+    // ── UML responsibilities table ──
+    const umlResp = document.querySelector('.t-responsibilities');
+    const umlMod = document.querySelector('.t-module');
+    const umlRes = document.querySelector('.t-responsibility');
+    const umlPat = document.querySelector('.t-pattern');
+    if(umlResp) umlResp.textContent = t('uml_responsibilities');
+    if(umlMod) umlMod.textContent = t('uml_module');
+    if(umlRes) umlRes.textContent = t('uml_responsibility');
+    if(umlPat) umlPat.textContent = t('uml_pattern');
+    const descMap = {
+      't-theme-desc': 'theme_desc', 't-lang-desc': 'lang_desc',
+      't-cache-desc': 'cache_desc', 't-state-desc': 'state_desc',
+      't-nav-desc': 'nav_desc', 't-quiz-desc': 'quiz_module_desc'
+    };
+    Object.entries(descMap).forEach(([cls, key]) => {
+      const el = document.querySelector('.' + cls);
+      if(el) el.textContent = t(key);
+    });
+    const umlProgressText = document.getElementById('uml-progress-text');
+    if(umlProgressText) umlProgressText.textContent = t('uml_progress_loaded');
   }
 
   function toggle() {
@@ -1462,6 +1499,7 @@ const LangModule = (function() {
     try {
       const saved = localStorage.getItem('lang'); // Зареждане от кеш
       if(saved) current = saved;
+      applyLang();
     } catch(e) {}
   }
 
