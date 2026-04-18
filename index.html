@@ -841,7 +841,7 @@ footer {
 
 <!-- ═══ UML ═══ -->
 <div id="uml" class="page">
-  <div class="page-header"><h2>UML — Архитектура на системата</h2><p>Module Pattern диаграма на LearnEnglish</p></div>
+  <div class="page-header"><h2 id="uml-title">UML — Архитектура на системата</h2><p id="uml-sub">Module Pattern диаграма на LearnEnglish</p></div>
   <div class="page-inner-pad" style="display:flex; flex-direction:column; gap:20px;">
 
     <!-- Module diagram -->
@@ -1018,7 +1018,7 @@ footer {
 
 <!-- ═══ API SPEC ═══ -->
 <div id="api" class="page">
-  <div class="page-header"><h2>API Спецификация</h2><p>Вътрешни структури от данни и интерфейси на модулите</p></div>
+  <div class="page-header"><h2 id="api-title">API Спецификация</h2><p id="api-sub">Вътрешни структури от данни и интерфейси на модулите</p></div>
   <div class="page-inner-pad" style="display:flex; flex-direction:column; gap:16px;">
 
     <!-- Lesson object -->
@@ -1283,6 +1283,8 @@ const LangModule = (function() {
       criteria_legend_pres: 'Зависи от представянето', criteria_legend_no: 'Не е изпълнен',
       // UML responsibilities
       uml_responsibilities: 'Отговорности на модулите', uml_module: 'Модул', uml_responsibility: 'Отговорност', uml_pattern: 'Шаблон',
+      uml_title: 'UML — Архитектура на системата', uml_sub: 'Module Pattern диаграма на LearnEnglish',
+      api_title: 'API Спецификация', api_sub: 'Вътрешни структури от данни и интерфейси на модулите',
       theme_desc: 'Превключване dark/light режим, запазване в localStorage',
       lang_desc: 'Речник за BG/EN превод, превключване на езика',
       cache_desc: 'Четене/запис/изчистване на localStorage за прогрес',
@@ -1356,6 +1358,8 @@ const LangModule = (function() {
       criteria_legend_no: 'Not fulfilled',
       // UML responsibilities
       uml_responsibilities: 'Module Responsibilities', uml_module: 'Module', uml_responsibility: 'Responsibility', uml_pattern: 'Pattern',
+      uml_title: 'UML — System Architecture', uml_sub: 'Module Pattern diagram of LearnEnglish',
+      api_title: 'API Specification', api_sub: 'Internal data structures and module interfaces',
       theme_desc: 'Dark/light mode toggle, localStorage persistence',
       lang_desc: 'BG/EN translation dictionary, language switching',
       cache_desc: 'localStorage read/write/clear for progress data',
@@ -1483,6 +1487,14 @@ const LangModule = (function() {
     });
     const umlProgressText = document.getElementById('uml-progress-text');
     if(umlProgressText) umlProgressText.textContent = t('uml_progress_loaded');
+    const umlTitle = document.getElementById('uml-title');
+    const umlSub = document.getElementById('uml-sub');
+    const apiTitle = document.getElementById('api-title');
+    const apiSub = document.getElementById('api-sub');
+    if(umlTitle) umlTitle.textContent = t('uml_title');
+    if(umlSub) umlSub.textContent = t('uml_sub');
+    if(apiTitle) apiTitle.textContent = t('api_title');
+    if(apiSub) apiSub.textContent = t('api_sub');
   }
 
   function toggle() {
